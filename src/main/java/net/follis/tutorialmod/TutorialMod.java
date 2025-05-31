@@ -25,3 +25,10 @@ public class TutorialMod implements ModInitializer {
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 	}
 }
+// Step one if custom => create new class in custom, else add block/item into ModBlocks/ModItems
+// Step two Add the corresponding entry to ModItemGroups for creative tabs
+// Step three Add datagen for tags if block: mineable? etc., if new tags for items
+// Step four Add datagen for LootTable if blocks (whether dropping itself or acting as ore)
+// Step five Add datagen for Model e.g. Item models or blockstates
+// Step six Add datagen for Recipes
+// Step seven Run datagen
