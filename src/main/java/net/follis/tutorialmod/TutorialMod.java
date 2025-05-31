@@ -32,3 +32,6 @@ public class TutorialMod implements ModInitializer {
 // Step five Add datagen for Model e.g. Item models or blockstates
 // Step six Add datagen for Recipes
 // Step seven Run datagen
+
+// If you wanna make it a golem mod, you'll need a crafting station for the golems, the golems item and entity with the
+// ai and a way to order them (seals on chests or blocks under chests for instance)
