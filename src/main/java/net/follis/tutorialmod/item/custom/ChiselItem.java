@@ -1,9 +1,11 @@
 package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -48,6 +50,10 @@ public class ChiselItem extends Item {
                          item -> context.getPlayer().sendEquipmentBreakStatus(item, EquipmentSlot.MAINHAND));
 
                  world.playSound(null, context.getBlockPos(), SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS);
+
+                 // Set the DataComponent COORDINATES to BlockPos for the currentStack (still hidden at this point)
+                // (can be nulled for removal)
+                 context.getStack().set(ModDataComponentTypes.COORDINATES, context.getBlockPos());
             }
         }
 
@@ -63,6 +69,12 @@ public class ChiselItem extends Item {
         } else {
             tooltip.add(Text.translatable("tooltip.tutorialmod.chisel"));
         }
+
+        // Display the dataComponent COORDINATES of currentStack
+        if (stack.get(ModDataComponentTypes.COORDINATES) != null) {
+            tooltip.add(Text.literal("Last Block Changed at " + stack.get(ModDataComponentTypes.COORDINATES)));
+        }
+
         super.appendTooltip(stack, context, tooltip, type);
     }
 }
