@@ -7,7 +7,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
-import java.awt.*;
 import java.util.function.UnaryOperator;
 
 public class ModDataComponentTypes {
