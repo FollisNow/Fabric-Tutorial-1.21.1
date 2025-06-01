@@ -8,9 +8,11 @@ import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.*;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -51,5 +53,65 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModBlocks.RAW_PINK_GARNET_BLOCK), conditionsFromItem(ModBlocks.RAW_PINK_GARNET_BLOCK))
                 .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "raw_pink_garnet_from_magic_block"));
 
+        createToolRecipe(ModItems.PINK_GARNET_SWORD, ModItems.PINK_GARNET, exporter);
+        createToolRecipe(ModItems.PINK_GARNET_PICKAXE, ModItems.PINK_GARNET, exporter);
+        createToolRecipe(ModItems.PINK_GARNET_SHOVEL, ModItems.PINK_GARNET, exporter);
+        createToolRecipe(ModItems.PINK_GARNET_AXE, ModItems.PINK_GARNET, exporter);
+        createToolRecipe(ModItems.PINK_GARNET_HOE, ModItems.PINK_GARNET, exporter);
+
+    }
+
+    // Sub method for tool patterns
+    void createToolRecipe(Item tool, Item material, RecipeExporter exporter) {
+        if (tool instanceof SwordItem){
+            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+                    .pattern(" R ")
+                    .pattern(" R ")
+                    .pattern(" S ")
+                    .input('R', material)
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(material), conditionsFromItem(material))
+                    .offerTo(exporter);
+        }
+        if (tool instanceof PickaxeItem){
+            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+                    .pattern("RRR")
+                    .pattern(" S ")
+                    .pattern(" S ")
+                    .input('R', material)
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(material), conditionsFromItem(material))
+                    .offerTo(exporter);
+        }
+        if (tool instanceof ShovelItem){
+            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+                    .pattern(" R ")
+                    .pattern(" S ")
+                    .pattern(" S ")
+                    .input('R', material)
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(material), conditionsFromItem(material))
+                    .offerTo(exporter);
+        }
+        if (tool instanceof AxeItem){
+            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+                    .pattern(" RR")
+                    .pattern(" SR")
+                    .pattern(" S ")
+                    .input('R', material)
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(material), conditionsFromItem(material))
+                    .offerTo(exporter);
+        }
+        if (tool instanceof HoeItem){
+            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+                    .pattern(" RR")
+                    .pattern(" S ")
+                    .pattern(" S ")
+                    .input('R', material)
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(material), conditionsFromItem(material))
+                    .offerTo(exporter);
+        }
     }
 }
