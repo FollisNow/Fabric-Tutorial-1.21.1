@@ -14,7 +14,7 @@ public class ModTags {
 
 
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(TutorialMod.MOD_ID));
+            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(TutorialMod.MOD_ID, name));
         }
     }
 
