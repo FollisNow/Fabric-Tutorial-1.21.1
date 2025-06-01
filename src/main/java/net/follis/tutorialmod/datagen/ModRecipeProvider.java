@@ -61,55 +61,56 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     // Sub method for tool patterns
     void createToolRecipe(Item tool, Item material, RecipeExporter exporter) {
+        ShapedRecipeJsonBuilder recipeBuilder = null;
+
         if (tool instanceof SwordItem){
-            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
                     .pattern(" R ")
                     .pattern(" R ")
                     .pattern(" S ")
                     .input('R', material)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material))
-                    .offerTo(exporter);
+                    .criterion(hasItem(material), conditionsFromItem(material));
         }
         if (tool instanceof PickaxeItem){
-            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
                     .pattern("RRR")
                     .pattern(" S ")
                     .pattern(" S ")
                     .input('R', material)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material))
-                    .offerTo(exporter);
+                    .criterion(hasItem(material), conditionsFromItem(material));
         }
         if (tool instanceof ShovelItem){
-            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
                     .pattern(" R ")
                     .pattern(" S ")
                     .pattern(" S ")
                     .input('R', material)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material))
-                    .offerTo(exporter);
+                    .criterion(hasItem(material), conditionsFromItem(material));
         }
         if (tool instanceof AxeItem){
-            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
                     .pattern(" RR")
                     .pattern(" SR")
                     .pattern(" S ")
                     .input('R', material)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material))
-                    .offerTo(exporter);
+                    .criterion(hasItem(material), conditionsFromItem(material));
         }
         if (tool instanceof HoeItem){
-            ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
+            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
                     .pattern(" RR")
                     .pattern(" S ")
                     .pattern(" S ")
                     .input('R', material)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material))
-                    .offerTo(exporter);
+                    .criterion(hasItem(material), conditionsFromItem(material));
+
+        }
+        if (recipeBuilder != null) {
+            recipeBuilder.offerTo(exporter);
         }
     }
 }

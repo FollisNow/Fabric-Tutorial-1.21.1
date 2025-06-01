@@ -4,6 +4,15 @@
     "tutorialmod:raw_pink_garnet_block",
     "tutorialmod:pink_garnet_ore",
     "tutorialmod:pink_garnet_deepslate_ore",
-    "tutorialmod:magic_block"
+    "tutorialmod:magic_block",
+    "tutorialmod:pink_garnet_stairs",
+    "tutorialmod:pink_garnet_slab",
+    "tutorialmod:pink_garnet_button",
+    "tutorialmod:pink_garnet_pressure_plate",
+    "tutorialmod:pink_garnet_fence",
+    "tutorialmod:pink_garnet_fence_gate",
+    "tutorialmod:pink_garnet_wall",
+    "tutorialmod:pink_garnet_door",
+    "tutorialmod:pink_garnet_trapdoor"
   ]
 }
