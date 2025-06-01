@@ -51,16 +51,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModBlocks.RAW_PINK_GARNET_BLOCK), conditionsFromItem(ModBlocks.RAW_PINK_GARNET_BLOCK))
                 .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "raw_pink_garnet_from_magic_block"));
 
-        createToolRecipe(ModItems.PINK_GARNET_SWORD, ModItems.PINK_GARNET, exporter);
-        createToolRecipe(ModItems.PINK_GARNET_PICKAXE, ModItems.PINK_GARNET, exporter);
-        createToolRecipe(ModItems.PINK_GARNET_SHOVEL, ModItems.PINK_GARNET, exporter);
-        createToolRecipe(ModItems.PINK_GARNET_AXE, ModItems.PINK_GARNET, exporter);
-        createToolRecipe(ModItems.PINK_GARNET_HOE, ModItems.PINK_GARNET, exporter);
+        createBasicToolRecipe(ModItems.PINK_GARNET_SWORD, ModItems.PINK_GARNET, exporter);
+        createBasicToolRecipe(ModItems.PINK_GARNET_PICKAXE, ModItems.PINK_GARNET, exporter);
+        createBasicToolRecipe(ModItems.PINK_GARNET_SHOVEL, ModItems.PINK_GARNET, exporter);
+        createBasicToolRecipe(ModItems.PINK_GARNET_AXE, ModItems.PINK_GARNET, exporter);
+        createBasicToolRecipe(ModItems.PINK_GARNET_HOE, ModItems.PINK_GARNET, exporter);
 
     }
 
     // Sub method for tool patterns
-    void createToolRecipe(Item tool, Item material, RecipeExporter exporter) {
+    void createBasicToolRecipe(Item tool, Item material, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder recipeBuilder = null;
 
         if (tool instanceof SwordItem){

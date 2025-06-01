@@ -30,6 +30,7 @@ public class ModItemGroups {
                         entries.add(ModItems.PINK_GARNET_AXE);
                         entries.add(ModItems.PINK_GARNET_HOE);
 
+                        entries.add(ModItems.PINK_GARNET_HAMMER);
 
                     }).build());
 
