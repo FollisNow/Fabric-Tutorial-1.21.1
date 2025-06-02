@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
+                                                                            // name is the model suffix e.g. horse_armor_pink_garnet or
     public static final RegistryEntry<ArmorMaterial> PINK_GARNET_ARMOR_MATERIAL = registerArmorMaterials("pink_garnet",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 2);
@@ -25,7 +26,7 @@ public class ModArmorMaterials {
                 map.put(ArmorItem.Type.BODY, 2);
             }), 22, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.PINK_GARNET),
                     List.of(new ArmorMaterial.Layer(Identifier.of(TutorialMod.MOD_ID, "pink_garnet"))), 0, 0));
-
+                                                                            // prefix e.g. pink_garnet_layer_1 (for base armor)
 
     public static RegistryEntry<ArmorMaterial> registerArmorMaterials(String name, Supplier<ArmorMaterial> material) {
         return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(TutorialMod.MOD_ID, name), material.get());
