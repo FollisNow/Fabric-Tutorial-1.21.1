@@ -2,6 +2,7 @@ package net.follis.tutorialmod;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.follis.tutorialmod.block.ModBlocks;
@@ -9,6 +10,13 @@ import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.HammerUsageEvent;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.item.Items;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +38,18 @@ public class TutorialMod implements ModInitializer {
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
 		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
+
+		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+			if(entity instanceof SheepEntity sheepEntity && !world.isClient) {
+				if(player.getMainHandStack().getItem() == Items.END_ROD) {
+					player.sendMessage(Text.literal("The Player just hit a sheep with an END ROD?!?!"));
+					player.getMainHandStack().decrement(1);
+					sheepEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 9, 9));
+				}
+				return ActionResult.PASS;
+			}
+			return ActionResult.PASS;
+		});
 	}
 }
 // Step one if custom => create new class in custom, else add block/item into ModBlocks/ModItems
