@@ -5,7 +5,6 @@ import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 
 public class ModModelPredicates {
