@@ -1,7 +1,6 @@
 package net.follis.tutorialmod.sound;
 
 import net.follis.tutorialmod.TutorialMod;
-import net.minecraft.block.JukeboxBlock;
 import net.minecraft.block.jukebox.JukeboxSong;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
