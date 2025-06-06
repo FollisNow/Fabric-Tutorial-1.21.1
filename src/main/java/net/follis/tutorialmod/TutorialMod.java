@@ -9,6 +9,7 @@ import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.util.HammerUsageEvent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -33,6 +34,8 @@ public class TutorialMod implements ModInitializer {
 		ModBlocks.registerModBlocks();
 
 		ModDataComponentTypes.registerDataComponentTypes();
+		ModSounds.registerSounds();
+
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
@@ -61,3 +64,9 @@ public class TutorialMod implements ModInitializer {
 
 // If you wanna make it a golem mod, you'll need a crafting station for the golems, the golems item and entity with the
 // ai and a way to order them (seals on chests or blocks under chests for instance)
+
+//Ideas:
+// The very first thing you need to do is a multiblock contraption with lightning rod and copper
+// and play next to it the disc "AWKENING" whilst spraying it with magic dust and it turns into a big golem
+// The golem possesses you and unlock golem related knowledge under the shape of notes being added to a book and quill
+// when sleeping with it (e.g. gives you the mod book)
