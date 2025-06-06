@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.sound.ModSounds;
@@ -36,6 +37,7 @@ public class TutorialMod implements ModInitializer {
 		ModDataComponentTypes.registerDataComponentTypes();
 		ModSounds.registerSounds();
 
+		ModEffects.registerEffects();
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
