@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.follis.tutorialmod.datagen.*;
 import net.follis.tutorialmod.enchantment.ModEnchantments;
-import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.trim.ModTrimMaterials;
 import net.follis.tutorialmod.trim.ModTrimPatterns;
 import net.minecraft.registry.RegistryBuilder;

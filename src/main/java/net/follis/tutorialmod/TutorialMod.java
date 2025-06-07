@@ -10,7 +10,6 @@ import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
-import net.follis.tutorialmod.enchantment.ModEnchantments;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.potion.ModPotions;
