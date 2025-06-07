@@ -81,4 +81,4 @@ public class TutorialMod implements ModInitializer {
 // The very first thing you need to do is a multiblock contraption with lightning rod, carved pumpkin and blackstone
 // and play next to it the disc "AWKENING" whilst spraying it with magic dust and it turns into a big golem
 // The golem possesses you and unlock golem related knowledge under the shape of notes being added to a book and quill
-// when sleeping with it (e.g. gives you the mod book)
+// when sleeping with it (e.g. gives you the mod book) (wbt black screen into tp to your bed + book in inventory?)
