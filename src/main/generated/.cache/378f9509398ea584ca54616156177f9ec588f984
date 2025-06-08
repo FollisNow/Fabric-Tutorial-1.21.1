@@ -1,4 +1,5 @@
-// 1.21.1	2025-06-07T20:03:24.2564876	Tutorial Mod/Block Loot Tables
+// 1.21.1	2025-06-08T13:01:20.6886971	Tutorial Mod/Block Loot Tables
+aba6545b7719a6ba09923ffe9708c8687f5ce4e9 data\tutorialmod\loot_table\blocks\cauliflower_crop.json
 64c3df15b6e946537414a0cc30f320d8b8019264 data\tutorialmod\loot_table\blocks\pink_garnet_stairs.json
 f9fed56792aac989521a48d25cde5a55d5973db4 data\tutorialmod\loot_table\blocks\pink_garnet_fence_gate.json
 cbb358d78cd57da58c907a35212d486fa6f68efa data\tutorialmod\loot_table\blocks\magic_block.json
