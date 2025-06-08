@@ -3,6 +3,7 @@ package net.follis.tutorialmod.block;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
+import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.block.custom.MagicBlock;
 import net.follis.tutorialmod.block.custom.PinkGarnetLampBlock;
 import net.follis.tutorialmod.sound.ModSounds;
@@ -65,6 +66,9 @@ public class ModBlocks {
     public static final Block CAULIFLOWER_CROP = registerBlockWithoutBlockItem("cauliflower_crop",
             new CauliflowerCropBlock(AbstractBlock.Settings.create().noCollision()
                     .ticksRandomly().breakInstantly().sounds(BlockSoundGroup.CROP).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.DARK_GREEN)));
+
+    public static final Block HONEY_BERRY_BUSH = registerBlockWithoutBlockItem("honey_berry_bush",
+            new HoneyBerryBushBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)));
 
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
