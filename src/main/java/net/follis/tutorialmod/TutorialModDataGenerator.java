@@ -6,6 +6,8 @@ import net.follis.tutorialmod.datagen.*;
 import net.follis.tutorialmod.enchantment.ModEnchantments;
 import net.follis.tutorialmod.trim.ModTrimMaterials;
 import net.follis.tutorialmod.trim.ModTrimPatterns;
+import net.follis.tutorialmod.world.ModConfiguredFeatures;
+import net.follis.tutorialmod.world.ModPlacedFeatures;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 
@@ -27,5 +29,8 @@ public class TutorialModDataGenerator implements DataGeneratorEntrypoint {
 		registryBuilder.addRegistry(RegistryKeys.TRIM_MATERIAL, ModTrimMaterials::bootstrap);
 		registryBuilder.addRegistry(RegistryKeys.TRIM_PATTERN, ModTrimPatterns::bootstrap);
 		registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, ModEnchantments::bootstrap);
+
+		registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+		registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 	}
 }
