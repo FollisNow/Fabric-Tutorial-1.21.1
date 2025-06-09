@@ -15,8 +15,6 @@ import net.follis.tutorialmod.potion.ModPotions;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.util.HammerUsageEvent;
 import net.follis.tutorialmod.world.gen.ModWorldGeneration;
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.FireBlock;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.SheepEntity;
