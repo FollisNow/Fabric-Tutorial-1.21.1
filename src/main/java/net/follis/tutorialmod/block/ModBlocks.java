@@ -7,6 +7,7 @@ import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.block.custom.MagicBlock;
 import net.follis.tutorialmod.block.custom.PinkGarnetLampBlock;
 import net.follis.tutorialmod.sound.ModSounds;
+import net.follis.tutorialmod.world.tree.ModSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
@@ -95,7 +96,7 @@ public class ModBlocks {
 
 
     public static final Block DRIFTWOOD_SAPLING = registerBlock("driftwood_sapling",
-            new SaplingBlock(AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)));
+            new SaplingBlock(ModSaplingGenerators.DRIFTWOOD, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)));
 
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
