@@ -3,6 +3,7 @@ package net.follis.tutorialmod.item;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.ChiselItem;
 import net.follis.tutorialmod.item.custom.HammerItem;
 import net.follis.tutorialmod.item.custom.ModArmorItem;
@@ -90,6 +91,9 @@ public class ModItems {
 
     public static final Item KAUPEN_SMITHING_TEMPLATE = registerItem("kaupen_armor_trim_smithing_template",
             SmithingTemplateItem.of(Identifier.of(TutorialMod.MOD_ID, "kaupen"), FeatureFlags.VANILLA));
+
+    public static final Item MANTIS_SPAWN_EGG = registerItem("mantis_spawn_egg",
+            new SpawnEggItem(ModEntities.MANTIS, 0x9dc783, 0xbfaf5f, new Item.Settings()));
 
 
     private static Item registerItem(String name, Item item){

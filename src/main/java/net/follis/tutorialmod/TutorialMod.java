@@ -4,11 +4,14 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.*;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
+import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.entity.custom.MantisEntity;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.potion.ModPotions;
@@ -47,6 +50,7 @@ public class TutorialMod implements ModInitializer {
 		ModEnchantmentEffects.registerEnchantmentEffects();
 		ModWorldGeneration.generateModWorldGen();
 
+		ModEntities.registerModEntities();
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
@@ -83,6 +87,8 @@ public class TutorialMod implements ModInitializer {
 		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_DRIFTWOOD_WOOD, 5, 5);
 		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.DRIFTWOOD_PLANKS, 5, 20);
 		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.DRIFTWOOD_LEAVES, 30, 60);
+
+		FabricDefaultAttributeRegistry.register(ModEntities.MANTIS, MantisEntity.createAttributes());
 	}
 }
 // Step one if custom => create new class in custom, else add block/item into ModBlocks/ModItems

@@ -2,9 +2,15 @@ package net.follis.tutorialmod;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.entity.client.MantisModel;
+import net.follis.tutorialmod.entity.client.MantisRenderer;
 import net.follis.tutorialmod.util.ModModelPredicates;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
@@ -19,5 +25,8 @@ public class TutorialModClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DRIFTWOOD_LEAVES, RenderLayer.getCutout());
 
         ModModelPredicates.registerModelPredicates();
+
+        EntityModelLayerRegistry.registerModelLayer(MantisModel.MANTIS, MantisModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MANTIS, MantisRenderer::new);
     }
 }
