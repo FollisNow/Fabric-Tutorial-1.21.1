@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-09T23:46:14.8163405	Tutorial Mod/Model Definitions
+// 1.21.1	2025-06-10T14:21:38.5635229	Tutorial Mod/Model Definitions
 1cc6be5e04b894e83adeca617247813233d85120 assets\tutorialmod\models\block\pink_garnet_door_bottom_right_open.json
 f9ed04be9d2f4997aacfb20ab46ea7ab66f571b9 assets\tutorialmod\models\block\pink_garnet_stairs.json
 89767de1dcc820bcfe0cf07045db4d9ba2dd1755 assets\tutorialmod\models\block\cauliflower_crop_stage0.json
@@ -133,8 +133,8 @@ ace2be44ba279d782851a83721cbb60656643c2d assets\tutorialmod\models\item\pink_gar
 9259f7ad8475837988d4a226212ceaa71d674929 assets\tutorialmod\blockstates\cauliflower_crop.json
 f7956eb1acfccb309307cd40ba8d8e9a1f968b6e assets\tutorialmod\models\block\pink_garnet_pressure_plate_down.json
 730387af628e44139bdc28efe29c0cb5eb7e030b assets\tutorialmod\models\item\pink_garnet_leggings_gold_trim.json
-c5c2c9e3791629868052f3ae6a783c1fbeb77e49 assets\tutorialmod\models\block\pink_garnet_lamp.json
 37d814e2e0356a246af16618c42984b84d9e2ed9 assets\tutorialmod\models\block\pink_garnet_block.json
+c5c2c9e3791629868052f3ae6a783c1fbeb77e49 assets\tutorialmod\models\block\pink_garnet_lamp.json
 2432c923c88cdd88393f1121430a566ab1fcedae assets\tutorialmod\models\block\cauliflower_crop_stage2.json
 f6782b74c6765a7069b470aa024e7842d988830e assets\tutorialmod\models\block\pink_garnet_door_top_left_open.json
 cc8f00f1b98aecce865aca0e48ecdcebecd7670e assets\tutorialmod\models\item\pink_garnet_leggings_quartz_trim.json

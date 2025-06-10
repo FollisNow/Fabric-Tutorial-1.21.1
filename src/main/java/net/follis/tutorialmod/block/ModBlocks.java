@@ -92,7 +92,7 @@ public class ModBlocks {
     public static final Block DRIFTWOOD_PLANKS = registerBlock("driftwood_planks",
             new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
     public static final Block DRIFTWOOD_LEAVES = registerBlock("driftwood_leaves",
-            new Block(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES)));
+            new LeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES)));
 
 
     public static final Block DRIFTWOOD_SAPLING = registerBlock("driftwood_sapling",
