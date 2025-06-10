@@ -10,7 +10,6 @@ import net.follis.tutorialmod.entity.client.MantisModel;
 import net.follis.tutorialmod.entity.client.MantisRenderer;
 import net.follis.tutorialmod.util.ModModelPredicates;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
