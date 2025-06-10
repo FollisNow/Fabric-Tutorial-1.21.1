@@ -2,10 +2,7 @@ package net.follis.tutorialmod.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.follis.tutorialmod.TutorialMod;
-import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
-import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
-import net.follis.tutorialmod.block.custom.MagicBlock;
-import net.follis.tutorialmod.block.custom.PinkGarnetLampBlock;
+import net.follis.tutorialmod.block.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.world.tree.ModSaplingGenerators;
 import net.minecraft.block.*;
@@ -96,7 +93,7 @@ public class ModBlocks {
 
 
     public static final Block DRIFTWOOD_SAPLING = registerBlock("driftwood_sapling",
-            new SaplingBlock(ModSaplingGenerators.DRIFTWOOD, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)));
+            new ModSapling(ModSaplingGenerators.DRIFTWOOD, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), Blocks.STONE));
 
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {

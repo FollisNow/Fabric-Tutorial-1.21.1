@@ -53,7 +53,7 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.of(ModBlocks.DRIFTWOOD_LEAVES),
                 new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(1), 3),
 
-                new TwoLayersFeatureSize(1, 0, 2)).build());
+                new TwoLayersFeatureSize(1, 0, 2)).dirtProvider(BlockStateProvider.of(Blocks.STONE)).build()); //dirt provider transform the block below
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
