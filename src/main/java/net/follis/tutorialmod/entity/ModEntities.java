@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.custom.MantisEntity;
+import net.follis.tutorialmod.entity.custom.TomahawkProjectileEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
@@ -14,6 +15,10 @@ public class ModEntities {
             EntityType.Builder.create(MantisEntity::new, SpawnGroup.CREATURE)
                     .dimensions(1f, 2.5f).build());
 
+    public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "tomahawk"),
+            EntityType.Builder.<TomahawkProjectileEntity>create(TomahawkProjectileEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.5f, 1.15f).build());
 
     public static void registerModEntities() {
         TutorialMod.LOGGER.info("Registering Mod Entities for " + TutorialMod.MOD_ID);
