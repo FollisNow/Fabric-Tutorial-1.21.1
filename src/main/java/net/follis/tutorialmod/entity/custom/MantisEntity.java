@@ -103,7 +103,8 @@ public class MantisEntity extends AnimalEntity {
             variant = Util.getRandom(MantisVariant.values(), this.random);
         }
         MantisEntity baby = ModEntities.MANTIS.create(world);
-        baby.setVariant(variant);
+        if (baby != null)
+            baby.setVariant(variant);
         return baby;
     }
 
