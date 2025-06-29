@@ -104,6 +104,8 @@
   "trim_pattern.tutorialmod.kaupen": "Kaupen Armor Pattern",
 
   "entity.tutorialmod.mantis": "Mantis",
-  "entity.tutorialmod.tomahawk": "Tomahawk"
+  "entity.tutorialmod.tomahawk": "Tomahawk",
+
+  "entity.tutorialmod.spectre_staff": "Spectre Staff"
 
 }
