@@ -36,12 +36,12 @@ public class ChairBlock extends HorizontalFacingBlock {
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
 
         if(!world.isClient()) {
-            Entity entity = null;
+            Entity entity;
             List<ChairEntity> entities = world.getEntitiesByType(ModEntities.CHAIR, new Box(pos), chair -> true); //failsafe if entity is already present
             if (entities.isEmpty()) {
                 entity = ModEntities.CHAIR.spawn((ServerWorld) world, pos, SpawnReason.TRIGGERED);
             } else {
-                entity = entities.get(0);
+                entity = entities.getFirst();
             }
 
             player.startRiding(entity);
