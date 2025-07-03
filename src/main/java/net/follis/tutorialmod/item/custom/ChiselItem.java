@@ -2,6 +2,7 @@ package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -59,6 +60,10 @@ public class ChiselItem extends Item {
                 ((ServerWorld) world).spawnParticles(ParticleTypes.FLAME,
                         context.getBlockPos().getX() + 0.5, context.getBlockPos().getY() + 1.0, context.getBlockPos().getZ() + 0.5,
                         10, 0, 0, 0, 3);
+
+                ((ServerWorld) world).spawnParticles(ModParticles.PINK_GARNET_PARTICLE,
+                        context.getBlockPos().getX() + 0.5, context.getBlockPos().getY() + 1.0, context.getBlockPos().getZ() + 0.5,
+                        10, 0, 0, 0, 2);
 
                  // Set the DataComponent COORDINATES to BlockPos for the currentStack (still hidden at this point)
                 // (can be nulled for removal)
