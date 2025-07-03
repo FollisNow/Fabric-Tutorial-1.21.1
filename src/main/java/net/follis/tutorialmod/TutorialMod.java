@@ -19,6 +19,7 @@ import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.potion.ModPotions;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.util.HammerUsageEvent;
+import net.follis.tutorialmod.util.ModLootTableModifiers;
 import net.follis.tutorialmod.villager.ModVillagers;
 import net.follis.tutorialmod.world.gen.ModWorldGeneration;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -61,6 +62,7 @@ public class TutorialMod implements ModInitializer {
 		ModVillagers.registerVillagers();
 
 		ModParticles.registerParticles();
+		ModLootTableModifiers.modifyLootTables();
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
