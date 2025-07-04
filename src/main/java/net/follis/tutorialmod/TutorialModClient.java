@@ -12,7 +12,10 @@ import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.client.*;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.particle.PinkGarnetParticle;
+import net.follis.tutorialmod.screen.ModScreenHandlers;
+import net.follis.tutorialmod.screen.custom.PedestalScreen;
 import net.follis.tutorialmod.util.ModModelPredicates;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
@@ -41,5 +44,5 @@ public class TutorialModClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.PINK_GARNET_PARTICLE, PinkGarnetParticle.Factory::new);
 
         BlockEntityRendererFactories.register(ModBlockEntities.PEDESTAL_BE, PedestalBlockEntityRenderer::new);
-    }
+        HandledScreens.register(ModScreenHandlers.PEDESTAL_SCREEN_HANDLER, PedestalScreen::new);    }
 }
