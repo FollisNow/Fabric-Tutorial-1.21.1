@@ -95,6 +95,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.DRIFTWOOD_SAPLING);
 
                         entries.add(ModBlocks.CHAIR);
+                        entries.add(ModBlocks.PEDESTAL);
 
                     }).build());
 
