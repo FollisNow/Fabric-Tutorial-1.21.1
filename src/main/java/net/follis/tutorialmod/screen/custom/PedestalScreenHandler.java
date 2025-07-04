@@ -1,7 +1,6 @@
 package net.follis.tutorialmod.screen.custom;
 
 import net.follis.tutorialmod.screen.ModScreenHandlers;
-import net.minecraft.MinecraftVersion;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
