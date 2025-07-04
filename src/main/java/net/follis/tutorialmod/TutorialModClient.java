@@ -6,12 +6,15 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.block.entity.ModBlockEntities;
+import net.follis.tutorialmod.block.entity.renderer.PedestalBlockEntityRenderer;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.client.*;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.particle.PinkGarnetParticle;
 import net.follis.tutorialmod.util.ModModelPredicates;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
@@ -37,5 +40,6 @@ public class TutorialModClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.PINK_GARNET_PARTICLE, PinkGarnetParticle.Factory::new);
 
+        BlockEntityRendererFactories.register(ModBlockEntities.PEDESTAL_BE, PedestalBlockEntityRenderer::new);
     }
 }
