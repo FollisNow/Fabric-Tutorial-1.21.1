@@ -99,6 +99,8 @@ public class ModBlocks {
 
     public static final Block PEDESTAL = registerBlock("pedestal", new PedestalBlock(AbstractBlock.Settings.create().nonOpaque()));
 
+    public static final Block GROWTH_CHAMBER = registerBlock("growth_chamber", new GrowthChamberBlock(AbstractBlock.Settings.create()));
+
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(TutorialMod.MOD_ID, name), block);
     }
