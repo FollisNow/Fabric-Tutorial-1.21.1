@@ -23,6 +23,9 @@
 		],
 		"client": [
 			"net.follis.tutorialmod.TutorialModClient"
+		],
+		"rei_client": [
+			"net.follis.tutorialmod.compat.TutorialModREIClient"
 		]
 	},
 	"mixins": [
