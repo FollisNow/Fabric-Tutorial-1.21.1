@@ -18,6 +18,7 @@ import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.potion.ModPotions;
+import net.follis.tutorialmod.recipe.ModRecipes;
 import net.follis.tutorialmod.screen.ModScreenHandlers;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.util.HammerUsageEvent;
@@ -68,6 +69,8 @@ public class TutorialMod implements ModInitializer {
 
 		ModBlockEntities.registerBlockEntities();
 		ModScreenHandlers.registerScreenHandlers();
+
+		ModRecipes.registerRecipes();
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 

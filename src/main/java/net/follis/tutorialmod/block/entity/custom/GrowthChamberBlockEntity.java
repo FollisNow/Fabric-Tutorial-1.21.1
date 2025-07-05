@@ -4,6 +4,9 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.follis.tutorialmod.block.entity.ImplementedInventory;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.recipe.GrowthChamberRecipe;
+import net.follis.tutorialmod.recipe.GrowthChamberRecipeInput;
+import net.follis.tutorialmod.recipe.ModRecipes;
 import net.follis.tutorialmod.screen.custom.GrowthChamberScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -16,6 +19,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -25,6 +29,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
@@ -64,7 +70,7 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     @Override
-    public BlockPos getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
         return this.pos;
     }
 
@@ -78,8 +84,9 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
         return Text.translatable("block.tutorialmod.growth_chamber");
     }
 
+    @Nullable
     @Override
-    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new GrowthChamberScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
@@ -112,14 +119,16 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
             resetProgress();
         }
     }
+
     private void resetProgress() {
         this.progress = 0;
         this.maxProgress = 72;
     }
 
     private void craftItem() {
-        ItemStack output = new ItemStack(ModItems.PINK_GARNET, 6);
+        Optional<RecipeEntry<GrowthChamberRecipe>> recipe = getCurrentRecipe();
 
+        ItemStack output = recipe.get().value().output();
         this.removeStack(INPUT_SLOT, 1);
         this.setStack(OUTPUT_SLOT, new ItemStack(output.getItem(),
                 this.getStack(OUTPUT_SLOT).getCount() + output.getCount()));
@@ -134,11 +143,18 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     private boolean hasRecipe() {
-        Item input = ModItems.RAW_PINK_GARNET;
-        ItemStack output = new ItemStack(ModItems.PINK_GARNET, 6);
+        Optional<RecipeEntry<GrowthChamberRecipe>> recipe = getCurrentRecipe();
+        if(recipe.isEmpty()) {
+            return false;
+        }
 
-        return this.getStack(INPUT_SLOT).isOf(input) &&
-                canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
+        ItemStack output = recipe.get().value().output();
+        return canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
+    }
+
+    private Optional<RecipeEntry<GrowthChamberRecipe>> getCurrentRecipe() {
+        return this.getWorld().getRecipeManager()
+                .getFirstMatch(ModRecipes.GROWTH_CHAMBER_TYPE, new GrowthChamberRecipeInput(inventory.get(INPUT_SLOT)), this.getWorld());
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
@@ -151,11 +167,6 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
 
         return maxCount >= currentCount + count;
     }
-
-
-
-
-
 
     @Nullable
     @Override
