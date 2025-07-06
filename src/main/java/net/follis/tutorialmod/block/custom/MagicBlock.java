@@ -1,5 +1,6 @@
 package net.follis.tutorialmod.block.custom;
 
+import net.follis.tutorialmod.block.IMakeGolems;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.particle.ModParticles;
@@ -32,16 +33,10 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Map;
 
-public class MagicBlock extends Block {
+public class MagicBlock extends Block implements IMakeGolems {
     public MagicBlock(Settings settings) {
         super(settings);
     }
-
-    private static final Map<Block, EntityType<?>> GOLEM_MAP =
-            Map.of(
-                    ModBlocks.PINK_GARNET_BLOCK, ModEntities.MANTIS,
-                    Blocks.GOLD_BLOCK, EntityType.IRON_GOLEM
-            );
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player,
@@ -76,53 +71,15 @@ public class MagicBlock extends Block {
         super.appendTooltip(stack, context, tooltip, options);
     }
 
+
+    private static final Map<Block, EntityType<?>> GOLEM_MAP =
+            Map.of(
+                    ModBlocks.PINK_GARNET_BLOCK, ModEntities.MANTIS,
+                    Blocks.GOLD_BLOCK, EntityType.IRON_GOLEM
+            );
     protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (!oldState.isOf(state.getBlock())) {
-            this.trySpawnEntity(world, pos);
+            this.trySpawnEntity(world, pos, GOLEM_MAP);
         }
-    }
-
-    private void trySpawnEntity(World world, BlockPos pos) {
-        GOLEM_MAP.forEach((block, entityType) -> {
-            BlockPattern.Result result = this.getCorrespondingPattern(block).searchAround(world, pos);
-            if (result != null) {
-                Entity entity = entityType.create(world);
-                if (entity != null) {
-                    spawnEntity(world, result, entity, result.translate(1, 2, 0).getBlockPos());
-                }
-            }
-        });
-    }
-
-    private static void spawnEntity(World world, BlockPattern.Result patternResult, Entity entity, BlockPos pos) {
-        for(int i = 0; i < patternResult.getWidth(); ++i) {
-            for(int j = 0; j < patternResult.getHeight(); ++j) {
-                CachedBlockPosition cachedBlockPosition = patternResult.translate(i, j, 0);
-                world.setBlockState(cachedBlockPosition.getBlockPos(), Blocks.AIR.getDefaultState(), 2);
-                world.syncWorldEvent(2001, cachedBlockPosition.getBlockPos(), Block.getRawIdFromState(cachedBlockPosition.getBlockState()));
-            }
-        }
-        entity.refreshPositionAndAngles((double)pos.getX() + (double)0.5F, (double)pos.getY() + 0.05, (double)pos.getZ() + (double)0.5F, 0.0F, 0.0F);
-        world.spawnEntity(entity);
-
-        for(ServerPlayerEntity serverPlayerEntity : world.getNonSpectatingEntities(ServerPlayerEntity.class, entity.getBoundingBox().expand(5.0F))) {
-            Criteria.SUMMONED_ENTITY.trigger(serverPlayerEntity, entity);
-        }
-
-        for(int i = 0; i < patternResult.getWidth(); ++i) {
-            for(int j = 0; j < patternResult.getHeight(); ++j) {
-                CachedBlockPosition cachedBlockPosition = patternResult.translate(i, j, 0);
-                world.updateNeighbors(cachedBlockPosition.getBlockPos(), Blocks.AIR);
-            }
-        }    }
-
-    private BlockPattern getCorrespondingPattern(Block block) {
-        return BlockPatternBuilder.start().aisle(
-                "~^~",
-                        "###",
-                        "~#~").
-                where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.MAGIC_BLOCK))).
-                where('#', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(block))).
-                where('~', (pos) -> pos.getBlockState().isAir()).build();
     }
 }
