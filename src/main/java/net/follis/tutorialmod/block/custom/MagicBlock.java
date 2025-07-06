@@ -2,7 +2,6 @@ package net.follis.tutorialmod.block.custom;
 
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.entity.custom.MantisEntity;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.advancement.criterion.Criteria;
@@ -37,8 +36,6 @@ public class MagicBlock extends Block {
     public MagicBlock(Settings settings) {
         super(settings);
     }
-
-    private BlockPattern golemPattern;
 
     private static final Map<Block, EntityType<?>> GOLEM_MAP =
             Map.of(
@@ -80,7 +77,7 @@ public class MagicBlock extends Block {
     }
 
     protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (!oldState.isOf(state.getBlock())) {;
+        if (!oldState.isOf(state.getBlock())) {
             this.trySpawnEntity(world, pos);
         }
     }
@@ -110,7 +107,7 @@ public class MagicBlock extends Block {
         entity.refreshPositionAndAngles((double)pos.getX() + (double)0.5F, (double)pos.getY() + 0.05, (double)pos.getZ() + (double)0.5F, 0.0F, 0.0F);
         world.spawnEntity(entity);
 
-        for(ServerPlayerEntity serverPlayerEntity : world.getNonSpectatingEntities(ServerPlayerEntity.class, entity.getBoundingBox().expand((double)5.0F))) {
+        for(ServerPlayerEntity serverPlayerEntity : world.getNonSpectatingEntities(ServerPlayerEntity.class, entity.getBoundingBox().expand(5.0F))) {
             Criteria.SUMMONED_ENTITY.trigger(serverPlayerEntity, entity);
         }
 
@@ -123,15 +120,14 @@ public class MagicBlock extends Block {
 
 
     private BlockPattern getCorrespondingPattern(Block block) {
-        this.golemPattern = BlockPatternBuilder.start().aisle(new String[]{
-                "~^~",
-                "###",
-                "~#~"
-        }).
+
+        return BlockPatternBuilder.start().aisle(new String[]{
+                        "~^~",
+                        "###",
+                        "~#~"
+                }).
                 where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.MAGIC_BLOCK))).
                 where('#', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(block))).
                 where('~', (pos) -> pos.getBlockState().isAir()).build();
-
-        return this.golemPattern;
     }
 }
