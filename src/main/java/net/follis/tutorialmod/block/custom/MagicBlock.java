@@ -88,13 +88,11 @@ public class MagicBlock extends Block {
             if (result != null) {
                 Entity entity = entityType.create(world);
                 if (entity != null) {
-                    entity.getType().create(world);
                     spawnEntity(world, result, entity, result.translate(1, 2, 0).getBlockPos());
                 }
             }
         });
     }
-
 
     private static void spawnEntity(World world, BlockPattern.Result patternResult, Entity entity, BlockPos pos) {
         for(int i = 0; i < patternResult.getWidth(); ++i) {
@@ -117,7 +115,6 @@ public class MagicBlock extends Block {
                 world.updateNeighbors(cachedBlockPosition.getBlockPos(), Blocks.AIR);
             }
         }    }
-
 
     private BlockPattern getCorrespondingPattern(Block block) {
         return BlockPatternBuilder.start().aisle(
