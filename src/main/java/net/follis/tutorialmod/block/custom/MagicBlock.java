@@ -120,12 +120,10 @@ public class MagicBlock extends Block {
 
 
     private BlockPattern getCorrespondingPattern(Block block) {
-
-        return BlockPatternBuilder.start().aisle(new String[]{
-                        "~^~",
+        return BlockPatternBuilder.start().aisle(
+                "~^~",
                         "###",
-                        "~#~"
-                }).
+                        "~#~").
                 where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.MAGIC_BLOCK))).
                 where('#', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(block))).
                 where('~', (pos) -> pos.getBlockState().isAir()).build();
