@@ -46,7 +46,7 @@ public class HarvestBlockGoal extends Goal {
 
 
         if (this.targetPos != null) {
-            this.entity.getNavigation().startMovingTo((double)this.targetPos.getX(), (double)this.targetPos.getY(), (double)this.targetPos.getZ(), (double)1.1F);
+            this.entity.getNavigation().startMovingTo(this.targetPos.getX(), this.targetPos.getY(), this.targetPos.getZ(), 1.1F);
             System.out.println("Moving towards: " + this.targetPos);
 
             // Check if the entity is close enough to harvest
