@@ -13,6 +13,7 @@ public class HarvestBlockGoal extends Goal {
     private final Block blockToHarvest; // The block type to harvest
     private final int range;
     private int harvestCooldown;
+    private BlockPos targetPos;
 
     public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range) {
         this.entity = entity;
@@ -35,23 +36,22 @@ public class HarvestBlockGoal extends Goal {
 
     @Override
     public void tick() {
-        BlockPos targetPos;
         if (this.harvestCooldown > 0) {
             this.harvestCooldown--;
-            targetPos = null;
+            this.targetPos = null;
             return;
         } else {
-            targetPos = findHarvestableBlock(this.range);
+            this.targetPos = findHarvestableBlock(this.range);
         }
 
 
-        if (targetPos != null) {
-            this.entity.getNavigation().startMovingTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 1.1F);
-            System.out.println("Moving towards: " + targetPos);
+        if (this.targetPos != null) {
+            this.entity.getNavigation().startMovingTo((double)this.targetPos.getX(), (double)this.targetPos.getY(), (double)this.targetPos.getZ(), (double)1.1F);
+            System.out.println("Moving towards: " + this.targetPos);
 
             // Check if the entity is close enough to harvest
-            if (this.entity.squaredDistanceTo(targetPos.getX(), targetPos.getY(), targetPos.getZ()) < 2.0) {
-                harvestBlock(targetPos);
+            if (this.entity.squaredDistanceTo(this.targetPos.getX(), this.targetPos.getY(), this.targetPos.getZ()) < 2.0) {
+                harvestBlock(this.targetPos);
             }
         }
     }
