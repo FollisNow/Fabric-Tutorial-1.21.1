@@ -1,7 +1,9 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.entity.goal.HarvestBlockGoal;
 import net.follis.tutorialmod.item.ModItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -50,15 +52,13 @@ public class MantisEntity extends AnimalEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-
-        this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
-        this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.CAULIFLOWER), false));
-
-        this.goalSelector.add(3, new FollowParentGoal(this, 1.1D));
-
-        this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0D));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
-        this.goalSelector.add(6, new LookAroundGoal(this));
+        this.goalSelector.add(1, new HarvestBlockGoal(this, Blocks.WHEAT, 10)); // Specify the block to harvest
+        this.goalSelector.add(2, new AnimalMateGoal(this, 1.15D));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.CAULIFLOWER), false));
+        this.goalSelector.add(4, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.add(5, new WanderNearTargetGoal(this, 1.0D, 1.0f));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
+        this.goalSelector.add(7, new LookAroundGoal(this));
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
