@@ -5,7 +5,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
