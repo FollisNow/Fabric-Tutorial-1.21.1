@@ -52,7 +52,7 @@ public class MantisEntity extends AnimalEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new HarvestBlockGoal(this, Blocks.WHEAT, 10)); // Specify the block to harvest
+        this.goalSelector.add(1, new HarvestBlockGoal(this, Blocks.WHEAT, 10, false)); // Specify the block to harvest
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.15D));
         this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.CAULIFLOWER), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.1D));
