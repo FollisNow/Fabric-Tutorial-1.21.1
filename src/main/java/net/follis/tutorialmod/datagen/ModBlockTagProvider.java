@@ -21,20 +21,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.RAW_PINK_GARNET_BLOCK)
                 .add(ModBlocks.PINK_GARNET_ORE)
                 .add(ModBlocks.PINK_GARNET_DEEPSLATE_ORE)
-                .add(ModBlocks.MAGIC_BLOCK)
-
-                .add(ModBlocks.PINK_GARNET_STAIRS)
-                .add(ModBlocks.PINK_GARNET_SLAB)
-
-                .add(ModBlocks.PINK_GARNET_BUTTON)
-                .add(ModBlocks.PINK_GARNET_PRESSURE_PLATE)
-
-                .add(ModBlocks.PINK_GARNET_FENCE)
-                .add(ModBlocks.PINK_GARNET_FENCE_GATE)
-                .add(ModBlocks.PINK_GARNET_WALL)
-
-                .add(ModBlocks.PINK_GARNET_DOOR)
-                .add(ModBlocks.PINK_GARNET_TRAPDOOR);
+                .add(ModBlocks.MAGIC_BLOCK);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.PINK_GARNET_DEEPSLATE_ORE);
@@ -43,7 +30,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(ModBlocks.PINK_GARNET_FENCE_GATE);
         getOrCreateTagBuilder(BlockTags.WALLS).add(ModBlocks.PINK_GARNET_WALL);
 
-        //
+        getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(ModBlocks.MAGIC_BLOCK);
+
         getOrCreateTagBuilder(ModTags.Blocks.NEEDS_PINK_GARNET_TOOL)
                 .add(ModBlocks.MAGIC_BLOCK)
                 .addTag(BlockTags.NEEDS_IRON_TOOL);
@@ -53,6 +42,5 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.DRIFTWOOD_WOOD)
                 .add(ModBlocks.STRIPPED_DRIFTWOOD_LOG)
                 .add(ModBlocks.STRIPPED_DRIFTWOOD_WOOD);
-
     }
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HammerItem extends MiningToolItem {
-    public HammerItem(ToolMaterial material,  Settings settings) {
+    public HammerItem(ToolMaterial material, Settings settings) {
         super(material, BlockTags.PICKAXE_MINEABLE, settings);
     }
 
@@ -50,7 +50,4 @@ public class HammerItem extends MiningToolItem {
 
         return positions;
     }
-
-
-
 }

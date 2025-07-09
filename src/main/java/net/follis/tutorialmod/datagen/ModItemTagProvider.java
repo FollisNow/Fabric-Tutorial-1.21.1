@@ -54,7 +54,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModBlocks.STRIPPED_DRIFTWOOD_LOG.asItem())
                 .add(ModBlocks.STRIPPED_DRIFTWOOD_WOOD.asItem());
 
-        getOrCreateTagBuilder(ItemTags.PLANKS) //also adds the recipe for stick for instance
+        getOrCreateTagBuilder(ItemTags.PLANKS)
                 .add(ModBlocks.DRIFTWOOD_PLANKS.asItem());
     }
 }

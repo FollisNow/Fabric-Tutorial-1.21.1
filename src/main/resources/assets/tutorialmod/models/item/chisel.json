@@ -3,7 +3,7 @@
   "textures": {
     "layer0": "tutorialmod:item/chisel"
   },
-  "overrides" : [
+  "overrides": [
     {
       "predicate": {
         "tutorialmod:used": 1

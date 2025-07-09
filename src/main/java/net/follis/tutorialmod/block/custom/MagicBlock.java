@@ -1,15 +1,11 @@
 package net.follis.tutorialmod.block.custom;
 
-import net.follis.tutorialmod.block.IMakeGolems;
-import net.follis.tutorialmod.block.ModBlocks;
-import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -25,9 +21,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Map;
 
-public class MagicBlock extends Block implements IMakeGolems {
+public class MagicBlock extends Block {
     public MagicBlock(Settings settings) {
         super(settings);
     }
@@ -35,9 +30,8 @@ public class MagicBlock extends Block implements IMakeGolems {
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player,
                                  BlockHitResult hit) {
-        world.addParticle(ModParticles.PINK_GARNET_PARTICLE,
-                pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
-                0, 1, 0);
+        world.addParticle(ModParticles.PINK_GARNET_PARTICLE, pos.getX() + 0.5, pos.getY() + 1,
+                pos.getZ() + 0.5, 0, 1, 0);
 
         world.playSound(player, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.BLOCKS, 1f, 1f);
         return ActionResult.SUCCESS;
@@ -46,7 +40,7 @@ public class MagicBlock extends Block implements IMakeGolems {
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if(entity instanceof ItemEntity itemEntity) {
-            if(isValidItem(itemEntity.getStack())){
+            if(isValidItem(itemEntity.getStack())) {
                 itemEntity.setStack(new ItemStack(Items.DIAMOND, itemEntity.getStack().getCount()));
             }
         }
@@ -61,19 +55,6 @@ public class MagicBlock extends Block implements IMakeGolems {
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("tooltip.tutorialmod.magic_block.tooltip"));
-
         super.appendTooltip(stack, context, tooltip, options);
-    }
-
-
-    private static final Map<Block, EntityType<?>> GOLEM_MAP =
-            Map.of(
-                    ModBlocks.PINK_GARNET_BLOCK, ModEntities.MANTIS,
-                    Blocks.GOLD_BLOCK, EntityType.IRON_GOLEM
-            );
-    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (!oldState.isOf(state.getBlock())) {
-            this.trySpawnEntity(world, pos, GOLEM_MAP);
-        }
     }
 }

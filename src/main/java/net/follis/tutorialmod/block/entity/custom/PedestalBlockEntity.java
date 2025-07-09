@@ -56,7 +56,7 @@ public class PedestalBlockEntity extends BlockEntity implements ImplementedInven
     }
 
     @Override
-    public BlockPos getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
         return this.pos;
     }
 
@@ -65,15 +65,16 @@ public class PedestalBlockEntity extends BlockEntity implements ImplementedInven
         return Text.literal("Pedestal");
     }
 
+    @Nullable
     @Override
-    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new PedestalScreenHandler(syncId, playerInventory, this.pos);
     }
 
 
-    /*Sync methods*/
+    @Nullable
     @Override
-    public @Nullable Packet<ClientPlayPacketListener> toUpdatePacket() {
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
     }
 

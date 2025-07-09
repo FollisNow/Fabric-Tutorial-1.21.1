@@ -70,11 +70,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_PINK_GARNET, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.CAULIFLOWER, Models.GENERATED);
-        //Model predicates need to be done manually
-        // (e.g. you can run datagen but need to move to the resources files after and create the predicate manually)
         // itemModelGenerator.register(ModItems.CHISEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.STARLIGHT_ASHES, Models.GENERATED);
-
 
         itemModelGenerator.register(ModItems.PINK_GARNET_SWORD, Models.HANDHELD);
         itemModelGenerator.register(ModItems.PINK_GARNET_PICKAXE, Models.HANDHELD);
@@ -84,13 +81,12 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.PINK_GARNET_HAMMER, Models.HANDHELD);
 
-        itemModelGenerator.registerArmor((ArmorItem) ModItems.PINK_GARNET_HELMET);
-        itemModelGenerator.registerArmor((ArmorItem) ModItems.PINK_GARNET_CHESTPLATE);
-        itemModelGenerator.registerArmor((ArmorItem) ModItems.PINK_GARNET_LEGGINGS);
-        itemModelGenerator.registerArmor((ArmorItem) ModItems.PINK_GARNET_BOOTS);
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.PINK_GARNET_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.PINK_GARNET_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.PINK_GARNET_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.PINK_GARNET_BOOTS));
 
         itemModelGenerator.register(ModItems.PINK_GARNET_HORSE_ARMOR, Models.GENERATED);
-
         itemModelGenerator.register(ModItems.KAUPEN_SMITHING_TEMPLATE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.BAR_BRAWL_MUSIC_DISC, Models.GENERATED);
@@ -98,6 +94,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModBlocks.DRIFTWOOD_SAPLING.asItem(), Models.GENERATED);
 
         itemModelGenerator.register(ModItems.MANTIS_SPAWN_EGG,
-        new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
     }
 }

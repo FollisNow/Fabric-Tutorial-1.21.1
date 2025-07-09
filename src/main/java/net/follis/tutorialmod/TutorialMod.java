@@ -12,6 +12,7 @@ import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
+import net.follis.tutorialmod.enchantment.ModEnchantments;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.MantisEntity;
 import net.follis.tutorialmod.item.ModItemGroups;
@@ -42,8 +43,7 @@ import org.slf4j.LoggerFactory;
 // Very important comment
 public class TutorialMod implements ModInitializer {
 	public static final String MOD_ID = "tutorialmod";
-
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
@@ -75,28 +75,28 @@ public class TutorialMod implements ModInitializer {
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
 		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
-
 		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-			if(entity instanceof SheepEntity sheepEntity && !world.isClient) {
+			if(entity instanceof SheepEntity sheepEntity) {
 				if(player.getMainHandStack().getItem() == Items.END_ROD) {
-					player.sendMessage(Text.literal("The Player just hit a sheep with an END ROD?!?!"));
+					player.sendMessage(Text.literal("The Player just hit a sheep with an END ROD! YOU SICK FRICK!"));
 					player.getMainHandStack().decrement(1);
-					sheepEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 9, 9));
+					sheepEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 600, 6));
 				}
+
 				return ActionResult.PASS;
 			}
-			return ActionResult.PASS;
-		});
 
-		//Potion recipes
+            return ActionResult.PASS;
+        });
+
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION);
 		});
 
-
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER, 0.5f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER_SEEDS, 0.25f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.HONEY_BERRIES, 0.15f);
+
 
 		StrippableBlockRegistry.register(ModBlocks.DRIFTWOOD_LOG, ModBlocks.STRIPPED_DRIFTWOOD_LOG);
 		StrippableBlockRegistry.register(ModBlocks.DRIFTWOOD_WOOD, ModBlocks.STRIPPED_DRIFTWOOD_WOOD);
@@ -132,9 +132,18 @@ public class TutorialMod implements ModInitializer {
 					new ItemStack(ModItems.CHISEL, 1), 4, 7, 0.04f));
 
 			factories.add((entity, random) -> new TradeOffer(
-					new TradedItem(ModItems.PINK_GARNET, 16),
-					new ItemStack(ModItems.TOMAHAWK, 1), 3, 12, 0.01f));
+					new TradedItem(Items.EMERALD, 16),
+					new ItemStack(ModItems.RAW_PINK_GARNET, 1), 4, 7, 0.04f));
+		});
 
+		TradeOfferHelper.registerVillagerOffers(ModVillagers.KAUPENGER, 2, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(Items.EMERALD, 10),
+					new ItemStack(ModItems.CHISEL, 1), 4, 7, 0.04f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.PINK_GARNET, 16),
+					new ItemStack(ModItems.TOMAHAWK, 1), 3, 12, 0.09f));
 		});
 
 		TradeOfferHelper.registerWanderingTraderOffers(1, factories -> {
@@ -144,24 +153,7 @@ public class TutorialMod implements ModInitializer {
 
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(ModItems.PINK_GARNET, 16),
-					new ItemStack(ModItems.TOMAHAWK, 1), 3, 12, 0.01f));
-
+					new ItemStack(ModItems.TOMAHAWK, 1), 3, 12, 0.09f));
 		});
 	}
 }
-// Step one if custom => create new class in custom, else add block/item into ModBlocks/ModItems
-// Step two Add the corresponding entry to ModItemGroups for creative tabs
-// Step three Add datagen for tags if block: mineable? etc., if new tags for items
-// Step four Add datagen for LootTable if blocks (whether dropping itself or acting as ore)
-// Step five Add datagen for Model e.g. Item models or blockstates
-// Step six Add datagen for Recipes
-// Step seven Run datagen
-
-// If you wanna make it a golem mod, you'll need a crafting station for the golems, the golems item and entity with the
-// ai and a way to order them (seals on chests or blocks under chests for instance)
-
-//Ideas: I want it to be dramatic
-// The very first thing you need to do is a multiblock contraption with lightning rod, carved pumpkin and blackstone
-// and play next to it the disc "AWKENING" whilst spraying it with magic dust and it turns into a big golem
-// The golem possesses you and unlock golem related knowledge under the shape of notes being added to a book and quill
-// when sleeping with it (e.g. gives you the mod book) (wbt black screen into tp to your bed + book in inventory?)

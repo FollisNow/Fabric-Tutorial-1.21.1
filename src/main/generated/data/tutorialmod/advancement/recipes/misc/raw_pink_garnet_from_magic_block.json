@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_pink_garnet_block": {
+    "has_magic_block": {
       "conditions": {
         "items": [
           {
-            "items": "tutorialmod:raw_pink_garnet_block"
+            "items": "tutorialmod:magic_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_raw_pink_garnet_block"
+      "has_magic_block"
     ]
   ],
   "rewards": {

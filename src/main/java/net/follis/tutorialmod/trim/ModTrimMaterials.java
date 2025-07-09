@@ -24,9 +24,8 @@ public class ModTrimMaterials {
     public static void bootstrap(Registerable<ArmorTrimMaterial> registerable) {
         register(registerable, PINK_GARNET, Registries.ITEM.getEntry(ModItems.PINK_GARNET),
                 Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+
     }
-
-
 
     private static void register(Registerable<ArmorTrimMaterial> registerable, RegistryKey<ArmorTrimMaterial> armorTrimKey,
                                  RegistryEntry<Item> item, Style style, float itemModelIndex) {

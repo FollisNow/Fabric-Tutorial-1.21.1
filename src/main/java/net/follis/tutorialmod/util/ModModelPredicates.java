@@ -15,12 +15,12 @@ public class ModModelPredicates {
         registerCustomBow(ModItems.KAUPEN_BOW);
     }
 
-    private static void registerCustomBow (Item item){
+    private static void registerCustomBow(Item item) {
         ModelPredicateProviderRegistry.register(item, Identifier.ofVanilla("pull"), (stack, world, entity, seed) -> {
             if (entity == null) {
                 return 0.0F;
             } else {
-                return entity.getActiveItem() != stack ? 0.0F : (stack.getMaxUseTime(entity) - entity.getItemUseTimeLeft()) / 20.0F;
+                return entity.getActiveItem() != stack ? 0.0F : (float)(stack.getMaxUseTime(entity) - entity.getItemUseTimeLeft()) / 20.0F;
             }
         });
         ModelPredicateProviderRegistry.register(

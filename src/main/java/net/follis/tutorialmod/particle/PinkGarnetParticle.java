@@ -11,6 +11,7 @@ public class PinkGarnetParticle extends SpriteBillboardParticle {
         super(clientWorld, x, y, z, xSpeed, ySpeed, zSpeed);
 
         this.velocityMultiplier = 0.8f;
+
         this.maxAge = 40;
         this.setSpriteForAge(spriteProvider);
 
@@ -27,13 +28,14 @@ public class PinkGarnetParticle extends SpriteBillboardParticle {
     public static class Factory implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
-        public Factory(SpriteProvider spriteProvider){
+        public Factory(SpriteProvider spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
+        @Nullable
         @Override
-        public @Nullable Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z,
-                                                 double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z,
+                                       double velocityX, double velocityY, double velocityZ) {
             return new PinkGarnetParticle(world, x, y, z, this.spriteProvider, velocityX, velocityY, velocityZ);
         }
     }

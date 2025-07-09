@@ -3,6 +3,6 @@
     "#minecraft:incorrect_for_iron_tool"
   ],
   "remove": [
-    "tutorialmod:needs_pink_garnet_tool"
+    "#tutorialmod:needs_pink_garnet_tool"
   ]
 }

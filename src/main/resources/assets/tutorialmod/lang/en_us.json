@@ -3,7 +3,7 @@
   "item.tutorialmod.raw_pink_garnet": "Raw Pink Garnet",
   "item.tutorialmod.chisel": "Chisel",
   "item.tutorialmod.cauliflower": "Cauliflower",
-  "item.tutorialmod.starlight_ashes": "Startlight Ashes",
+  "item.tutorialmod.starlight_ashes": "Starlight Ashes",
 
   "item.tutorialmod.pink_garnet_sword": "Pink Garnet Sword",
   "item.tutorialmod.pink_garnet_pickaxe": "Pink Garnet Pickaxe",
@@ -26,6 +26,10 @@
   "item.tutorialmod.bar_brawl_music_disc": "Bar Brawl Music Disc",
   "item.tutorialmod.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
 
+  "item.tutorialmod.cauliflower_seeds": "Cauliflower Seeds",
+  "item.tutorialmod.honey_berries": "Honey Berries",
+
+
   "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
@@ -33,17 +37,18 @@
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
 
   "item.tutorialmod.tomahawk": "Tomahawk",
+  "item.tutorialmod.spectre_staff": "Spectre Staff",
 
 
   "block.tutorialmod.pink_garnet_block": "Block of Pink Garnet",
   "block.tutorialmod.raw_pink_garnet_block": "Block of Raw Pink Garnet",
 
-
   "block.tutorialmod.pink_garnet_ore": "Pink Garnet Ore",
   "block.tutorialmod.pink_garnet_deepslate_ore": "Pink Garnet Deepslate Ore",
 
-  "block.tutorialmod.pink_garnet_nether_ore": "Pink Garnet Nether Ore",
   "block.tutorialmod.pink_garnet_end_ore": "Pink Garnet End Ore",
+  "block.tutorialmod.pink_garnet_nether_ore": "Pink Garnet Nether Ore",
+
 
   "block.tutorialmod.magic_block": "Magic Block",
 
@@ -62,10 +67,7 @@
 
   "block.tutorialmod.pink_garnet_lamp": "Pink Garnet Lamp",
 
-  "item.tutorialmod.cauliflower_seeds": "Cauliflower Seeds",
   "block.tutorialmod.cauliflower_crop": "Cauliflower Crop",
-
-  "item.tutorialmod.honey_berries": "Honey Berries",
   "block.tutorialmod.honey_berry_bush": "Honey Berry Bush",
 
   "block.tutorialmod.driftwood_log": "Driftwood Log",
@@ -80,7 +82,9 @@
   "block.tutorialmod.pedestal": "Pedestal",
   "block.tutorialmod.growth_chamber": "Growth Chamber",
 
+
   "entity.minecraft.villager.tutorialmod.kaupenger": "Kaupenger",
+
 
   "effect.tutorialmod.slimey": "Slimey",
 
@@ -99,17 +103,14 @@
 
   "tooltip.tutorialmod.magic_block.tooltip": "This block is very, very §9MAGICAL§r",
 
-  "tooltip.tutorialmod.chisel.shift_down": "§7This item chisels blocks into Bricks§r",
-  "tooltip.tutorialmod.chisel": "§7Press §r§eShift§r§7 for more information!§r",
+  "tooltip.tutorialmod.chisel.shift_down": "This item chisels blocks into Bricks!",
+  "tooltip.tutorialmod.chisel": "Press §eShift§r for more Information!",
 
-  "tooltip.tutorialmod.cauliflower.tooltip": "§7This is delicious?..§r",
+  "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
 
   "trim_material.tutorialmod.pink_garnet": "Pink Garnet Material",
   "trim_pattern.tutorialmod.kaupen": "Kaupen Armor Pattern",
 
   "entity.tutorialmod.mantis": "Mantis",
-  "entity.tutorialmod.tomahawk": "Tomahawk",
-
-  "item.tutorialmod.spectre_staff": "Spectre Staff"
-
+  "entity.tutorialmod.tomahawk": "Tomahawk"
 }

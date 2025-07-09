@@ -7,15 +7,13 @@ import net.minecraft.block.SaplingGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
-public class ModSapling extends SaplingBlock {
+public class ModSaplingBlock extends SaplingBlock {
     private final Block blockToPlaceOn;
 
-
-    public ModSapling(SaplingGenerator generator, Settings settings, Block block) {
+    public ModSaplingBlock(SaplingGenerator generator, Settings settings, Block block) {
         super(generator, settings);
         this.blockToPlaceOn = block;
     }
-
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {

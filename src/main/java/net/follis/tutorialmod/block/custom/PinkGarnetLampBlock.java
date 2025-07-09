@@ -20,9 +20,10 @@ public class PinkGarnetLampBlock extends Block {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if(!world.isClient()){
+        if(!world.isClient()) {
             world.setBlockState(pos, state.cycle(CLICKED));
         }
+
         return ActionResult.SUCCESS;
     }
 

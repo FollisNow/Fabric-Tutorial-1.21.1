@@ -37,7 +37,6 @@ public class ModItemGroups {
                         entries.add(ModItems.PINK_GARNET_LEGGINGS);
                         entries.add(ModItems.PINK_GARNET_BOOTS);
 
-
                         entries.add(ModItems.PINK_GARNET_HORSE_ARMOR);
                         entries.add(ModItems.KAUPEN_SMITHING_TEMPLATE);
 
@@ -51,6 +50,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SPECTRE_STAFF);
 
                         entries.add(ModItems.MANTIS_SPAWN_EGG);
+
                     }).build());
 
     public static final ItemGroup PINK_GARNET_BLOCKS_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -63,9 +63,6 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.PINK_GARNET_ORE);
                         entries.add(ModBlocks.PINK_GARNET_DEEPSLATE_ORE);
-
-                        entries.add(ModBlocks.PINK_GARNET_NETHER_ORE);
-                        entries.add(ModBlocks.PINK_GARNET_END_ORE);
 
                         entries.add(ModBlocks.MAGIC_BLOCK);
 
@@ -97,6 +94,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CHAIR);
                         entries.add(ModBlocks.PEDESTAL);
                         entries.add(ModBlocks.GROWTH_CHAMBER);
+
 
                     }).build());
 

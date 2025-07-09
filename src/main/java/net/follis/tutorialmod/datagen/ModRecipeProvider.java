@@ -8,7 +8,7 @@ import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
@@ -23,9 +23,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
-        List<ItemConvertible> PINK_GARNET_SMELTABLES = List.of(
-                ModItems.RAW_PINK_GARNET,
-                ModBlocks.PINK_GARNET_ORE,
+        List<ItemConvertible> PINK_GARNET_SMELTABLES = List.of(ModItems.RAW_PINK_GARNET, ModBlocks.PINK_GARNET_ORE,
                 ModBlocks.PINK_GARNET_DEEPSLATE_ORE);
 
         offerSmelting(exporter, PINK_GARNET_SMELTABLES, RecipeCategory.MISC, ModItems.PINK_GARNET, 0.25f, 200, "pink_garnet");
@@ -48,71 +46,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RAW_PINK_GARNET, 32)
                 .input(ModBlocks.MAGIC_BLOCK)
-                .criterion(hasItem(ModBlocks.RAW_PINK_GARNET_BLOCK), conditionsFromItem(ModBlocks.RAW_PINK_GARNET_BLOCK))
+                .criterion(hasItem(ModBlocks.MAGIC_BLOCK), conditionsFromItem(ModBlocks.MAGIC_BLOCK))
                 .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "raw_pink_garnet_from_magic_block"));
 
         offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(TutorialMod.MOD_ID, "kaupen"));
-
-        createBasicToolRecipe(ModItems.PINK_GARNET_SWORD, ModItems.PINK_GARNET, exporter);
-        createBasicToolRecipe(ModItems.PINK_GARNET_PICKAXE, ModItems.PINK_GARNET, exporter);
-        createBasicToolRecipe(ModItems.PINK_GARNET_SHOVEL, ModItems.PINK_GARNET, exporter);
-        createBasicToolRecipe(ModItems.PINK_GARNET_AXE, ModItems.PINK_GARNET, exporter);
-        createBasicToolRecipe(ModItems.PINK_GARNET_HOE, ModItems.PINK_GARNET, exporter);
-
-    }
-
-    // Sub method for tool patterns
-    void createBasicToolRecipe(Item tool, Item material, RecipeExporter exporter) {
-        ShapedRecipeJsonBuilder recipeBuilder = null;
-
-        if (tool instanceof SwordItem){
-            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
-                    .pattern(" R ")
-                    .pattern(" R ")
-                    .pattern(" S ")
-                    .input('R', material)
-                    .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material));
-        }
-        if (tool instanceof PickaxeItem){
-            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
-                    .pattern("RRR")
-                    .pattern(" S ")
-                    .pattern(" S ")
-                    .input('R', material)
-                    .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material));
-        }
-        if (tool instanceof ShovelItem){
-            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
-                    .pattern(" R ")
-                    .pattern(" S ")
-                    .pattern(" S ")
-                    .input('R', material)
-                    .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material));
-        }
-        if (tool instanceof AxeItem){
-            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
-                    .pattern(" RR")
-                    .pattern(" SR")
-                    .pattern(" S ")
-                    .input('R', material)
-                    .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material));
-        }
-        if (tool instanceof HoeItem){
-            recipeBuilder = ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, tool)
-                    .pattern(" RR")
-                    .pattern(" S ")
-                    .pattern(" S ")
-                    .input('R', material)
-                    .input('S', Items.STICK)
-                    .criterion(hasItem(material), conditionsFromItem(material));
-
-        }
-        if (recipeBuilder != null) {
-            recipeBuilder.offerTo(exporter);
-        }
     }
 }

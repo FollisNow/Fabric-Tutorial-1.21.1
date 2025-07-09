@@ -18,12 +18,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GrowthChamberCategory implements DisplayCategory<BasicDisplay> {
-
     public static final Identifier TEXTURE = Identifier.of(TutorialMod.MOD_ID,
             "textures/gui/growth_chamber/growth_chamber_gui.png");
-
     public static final CategoryIdentifier<GrowthChamberDisplay> GROWTH_CHAMBER =
             CategoryIdentifier.of(TutorialMod.MOD_ID, "growth_chamber");
+
     @Override
     public CategoryIdentifier<? extends BasicDisplay> getCategoryIdentifier() {
         return GROWTH_CHAMBER;

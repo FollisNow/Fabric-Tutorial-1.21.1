@@ -37,9 +37,10 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
         return CODEC;
     }
 
+    @Nullable
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new PedestalBlockEntity(pos,state);
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new PedestalBlockEntity(pos, state);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
 
                 pedestalBlockEntity.markDirty();
                 world.updateListeners(pos, state, state, 0);
-            } else if(stack.isEmpty() && !player.isSneaking() && !pedestalBlockEntity.isEmpty()) {
+            } else if(stack.isEmpty() && !player.isSneaking()) {
                 ItemStack stackOnPedestal = pedestalBlockEntity.getStack(0);
                 player.setStackInHand(Hand.MAIN_HAND, stackOnPedestal);
                 world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 1f);
@@ -78,12 +79,11 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
 
                 pedestalBlockEntity.markDirty();
                 world.updateListeners(pos, state, state, 0);
-            } else if (player.isSneaking() && !world.isClient){
+            } else if(player.isSneaking() && !world.isClient()) {
                 player.openHandledScreen(pedestalBlockEntity);
             }
         }
 
         return ItemActionResult.SUCCESS;
     }
-
 }

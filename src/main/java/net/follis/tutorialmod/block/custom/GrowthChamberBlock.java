@@ -33,8 +33,9 @@ public class GrowthChamberBlock extends BlockWithEntity implements BlockEntityPr
         return CODEC;
     }
 
+    @Nullable
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new GrowthChamberBlockEntity(pos, state);
     }
 

@@ -17,7 +17,7 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
 public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
-    public  PedestalBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+    public PedestalBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
 
     }
 

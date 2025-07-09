@@ -18,6 +18,7 @@ public class ModBlockEntities {
             Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(TutorialMod.MOD_ID, "growth_chamber_be"),
                     BlockEntityType.Builder.create(GrowthChamberBlockEntity::new, ModBlocks.GROWTH_CHAMBER).build(null));
 
+
     public static void registerBlockEntities() {
         TutorialMod.LOGGER.info("Registering Block Entities for " + TutorialMod.MOD_ID);
     }

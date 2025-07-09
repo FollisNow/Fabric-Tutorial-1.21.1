@@ -19,7 +19,7 @@ public class ModVillagers {
     public static final PointOfInterestType KAUPEN_POI = registerPOI("kaupen_poi", ModBlocks.CHAIR);
 
     public static final VillagerProfession KAUPENGER = registerProfession("kaupenger", KAUPEN_POI_KEY);
-
+    
 
     private static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type) {
         return Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(TutorialMod.MOD_ID, name),
@@ -36,9 +36,7 @@ public class ModVillagers {
         return RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.of(TutorialMod.MOD_ID, name));
     }
 
-
-
     public static void registerVillagers() {
-        TutorialMod.LOGGER.info("Registering Villager for " + TutorialMod.MOD_ID);
+        TutorialMod.LOGGER.info("Registering Villagers for " + TutorialMod.MOD_ID);
     }
 }

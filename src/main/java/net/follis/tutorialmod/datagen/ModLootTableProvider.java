@@ -7,9 +7,12 @@ import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
@@ -31,25 +34,14 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
+        RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+
         addDrop(ModBlocks.PINK_GARNET_BLOCK);
         addDrop(ModBlocks.RAW_PINK_GARNET_BLOCK);
         addDrop(ModBlocks.MAGIC_BLOCK);
 
         addDrop(ModBlocks.PINK_GARNET_ORE, oreDrops(ModBlocks.PINK_GARNET_ORE, ModItems.RAW_PINK_GARNET));
         addDrop(ModBlocks.PINK_GARNET_DEEPSLATE_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_DEEPSLATE_ORE, ModItems.RAW_PINK_GARNET, 3, 7));
-
-        addDrop(ModBlocks.PINK_GARNET_END_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_END_ORE, ModItems.RAW_PINK_GARNET, 4, 8));
-        addDrop(ModBlocks.PINK_GARNET_NETHER_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_NETHER_ORE, ModItems.RAW_PINK_GARNET, 3, 8));
-
-        addDrop(ModBlocks.DRIFTWOOD_LOG);
-        addDrop(ModBlocks.DRIFTWOOD_WOOD);
-        addDrop(ModBlocks.STRIPPED_DRIFTWOOD_LOG);
-        addDrop(ModBlocks.STRIPPED_DRIFTWOOD_WOOD);
-        addDrop(ModBlocks.DRIFTWOOD_PLANKS);
-        addDrop(ModBlocks.DRIFTWOOD_SAPLING);
-
-        addDrop(ModBlocks.DRIFTWOOD_LEAVES, leavesDrops(ModBlocks.DRIFTWOOD_LEAVES, ModBlocks.DRIFTWOOD_SAPLING, 0.0625f));
-
 
         addDrop(ModBlocks.PINK_GARNET_STAIRS);
         addDrop(ModBlocks.PINK_GARNET_SLAB, slabDrops(ModBlocks.PINK_GARNET_SLAB));
@@ -68,11 +60,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                 .properties(StatePredicate.Builder.create().exactMatch(CauliflowerCropBlock.AGE, CauliflowerCropBlock.MAX_AGE));
         this.addDrop(ModBlocks.CAULIFLOWER_CROP, this.cropDrops(ModBlocks.CAULIFLOWER_CROP, ModItems.CAULIFLOWER, ModItems.CAULIFLOWER_SEEDS, builder2));
 
-
-        RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
         this.addDrop(ModBlocks.HONEY_BERRY_BUSH,
                 block -> this.applyExplosionDecay(
-                        block, LootTable.builder().pool(LootPool.builder().conditionally(
+                        block,LootTable.builder().pool(LootPool.builder().conditionally(
                                                         BlockStatePropertyLootCondition.builder(ModBlocks.HONEY_BERRY_BUSH).properties(StatePredicate.Builder.create().exactMatch(HoneyBerryBushBlock.AGE, 3))
                                                 )
                                                 .with(ItemEntry.builder(ModItems.HONEY_BERRIES))
@@ -82,12 +72,20 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                                                         BlockStatePropertyLootCondition.builder(ModBlocks.HONEY_BERRY_BUSH).properties(StatePredicate.Builder.create().exactMatch(HoneyBerryBushBlock.AGE, 2))
                                                 ).with(ItemEntry.builder(ModItems.HONEY_BERRIES))
                                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
-                                                .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE)))
-                                )
-                )
-        );
+                                                .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE))))));
 
 
+        addDrop(ModBlocks.PINK_GARNET_END_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_END_ORE, ModItems.RAW_PINK_GARNET, 4, 9));
+        addDrop(ModBlocks.PINK_GARNET_NETHER_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_NETHER_ORE, ModItems.RAW_PINK_GARNET, 3, 8));
+
+        addDrop(ModBlocks.DRIFTWOOD_LOG);
+        addDrop(ModBlocks.DRIFTWOOD_WOOD);
+        addDrop(ModBlocks.STRIPPED_DRIFTWOOD_LOG);
+        addDrop(ModBlocks.STRIPPED_DRIFTWOOD_WOOD);
+        addDrop(ModBlocks.DRIFTWOOD_PLANKS);
+        addDrop(ModBlocks.DRIFTWOOD_SAPLING);
+
+        addDrop(ModBlocks.DRIFTWOOD_LEAVES, leavesDrops(ModBlocks.DRIFTWOOD_LEAVES, ModBlocks.DRIFTWOOD_SAPLING, 0.0625f));
     }
 
     public LootTable.Builder multipleOreDrops(Block drop, Item item, float minDrops, float maxDrops) {

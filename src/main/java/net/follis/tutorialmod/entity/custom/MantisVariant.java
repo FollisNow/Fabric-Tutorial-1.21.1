@@ -22,5 +22,4 @@ public enum MantisVariant {
     public static MantisVariant byId(int id) {
         return BY_ID[id % BY_ID.length];
     }
-
 }

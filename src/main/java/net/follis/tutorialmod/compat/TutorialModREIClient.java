@@ -28,7 +28,7 @@ public class TutorialModREIClient implements REIClientPlugin {
     @Override
     public void registerScreens(ScreenRegistry registry) {
         registry.registerClickArea(screen -> new Rectangle(((screen.width - 176) / 2) + 78,
-                        ((screen.height - 166) / 2) + 30, 20, 25), GrowthChamberScreen.class,
+                ((screen.height - 166) / 2) + 30, 20, 25), GrowthChamberScreen.class,
                 GrowthChamberCategory.GROWTH_CHAMBER);
     }
 }

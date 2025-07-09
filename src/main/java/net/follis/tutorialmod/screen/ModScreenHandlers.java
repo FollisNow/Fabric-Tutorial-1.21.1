@@ -19,6 +19,7 @@ public class ModScreenHandlers {
             Registry.register(Registries.SCREEN_HANDLER, Identifier.of(TutorialMod.MOD_ID, "growth_chamber_screen_handler"),
                     new ExtendedScreenHandlerType<>(GrowthChamberScreenHandler::new, BlockPos.PACKET_CODEC));
 
+
     public static void registerScreenHandlers() {
         TutorialMod.LOGGER.info("Registering Screen Handlers for " + TutorialMod.MOD_ID);
     }

@@ -7,7 +7,6 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
 public class TomahawkProjectileModel extends EntityModel<TomahawkProjectileEntity> {
@@ -35,7 +34,7 @@ public class TomahawkProjectileModel extends EntityModel<TomahawkProjectileEntit
     }
 
     @Override
-    public void setAngles(TomahawkProjectileEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setAngles(TomahawkProjectileEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 
@@ -43,8 +42,4 @@ public class TomahawkProjectileModel extends EntityModel<TomahawkProjectileEntit
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
         tomahawk.render(matrices, vertexConsumer, light, overlay, color);
     }
-
-
-
-
 }

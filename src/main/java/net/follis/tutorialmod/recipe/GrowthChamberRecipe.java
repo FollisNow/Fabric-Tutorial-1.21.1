@@ -14,7 +14,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
 public record GrowthChamberRecipe(Ingredient inputItem, ItemStack output) implements Recipe<GrowthChamberRecipeInput> {
-
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> list = DefaultedList.of();
@@ -26,9 +25,10 @@ public record GrowthChamberRecipe(Ingredient inputItem, ItemStack output) implem
 
     @Override
     public boolean matches(GrowthChamberRecipeInput input, World world) {
-        if(world.isClient){
+        if(world.isClient()) {
             return false;
         }
+
         return inputItem.test(input.getStackInSlot(0));
     }
 

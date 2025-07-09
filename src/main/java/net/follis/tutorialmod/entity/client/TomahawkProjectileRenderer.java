@@ -16,7 +16,6 @@ import net.minecraft.util.math.RotationAxis;
 public class TomahawkProjectileRenderer extends EntityRenderer<TomahawkProjectileEntity> {
     protected TomahawkProjectileModel model;
 
-
     public TomahawkProjectileRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
         this.model = new TomahawkProjectileModel(ctx.getPart(TomahawkProjectileModel.TOMAHAWK));

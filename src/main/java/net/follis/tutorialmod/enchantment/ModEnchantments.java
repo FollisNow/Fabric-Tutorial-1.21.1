@@ -22,7 +22,7 @@ public class ModEnchantments {
         var items = registerable.getRegistryLookup(RegistryKeys.ITEM);
 
         register(registerable, LIGHTNING_STRIKER, Enchantment.builder(Enchantment.definition(
-            items.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
+                items.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
                 items.getOrThrow(ItemTags.SWORD_ENCHANTABLE),
                 5,
                 2,

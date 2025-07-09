@@ -33,19 +33,19 @@ public class ChairBlock extends HorizontalFacingBlock {
     }
 
     @Override
-    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(!world.isClient()) {
-            Entity entity;
-            List<ChairEntity> entities = world.getEntitiesByType(ModEntities.CHAIR, new Box(pos), chair -> true); //failsafe if entity is already present
-            if (entities.isEmpty()) {
+            Entity entity = null;
+            List<ChairEntity> entities = world.getEntitiesByType(ModEntities.CHAIR, new Box(pos), chair -> true);
+            if(entities.isEmpty()) {
                 entity = ModEntities.CHAIR.spawn((ServerWorld) world, pos, SpawnReason.TRIGGERED);
             } else {
-                entity = entities.getFirst();
+                entity = entities.get(0);
             }
 
             player.startRiding(entity);
         }
+
         return ActionResult.SUCCESS;
     }
 
@@ -59,8 +59,9 @@ public class ChairBlock extends HorizontalFacingBlock {
         return CODEC;
     }
 
+    @Nullable
     @Override
-    public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 

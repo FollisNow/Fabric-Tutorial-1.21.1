@@ -30,13 +30,13 @@ public class ModBlocks {
     public static final Block PINK_GARNET_DEEPSLATE_ORE = registerBlock("pink_garnet_deepslate_ore",
             new ExperienceDroppingBlock(UniformIntProvider.create(3, 6),
                     AbstractBlock.Settings.create().strength(4f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
+
     public static final Block PINK_GARNET_END_ORE = registerBlock("pink_garnet_end_ore",
             new ExperienceDroppingBlock(UniformIntProvider.create(4, 8),
                     AbstractBlock.Settings.create().strength(7f).requiresTool()));
     public static final Block PINK_GARNET_NETHER_ORE = registerBlock("pink_garnet_nether_ore",
             new ExperienceDroppingBlock(UniformIntProvider.create(1, 5),
                     AbstractBlock.Settings.create().strength(3f).requiresTool()));
-
 
     public static final Block MAGIC_BLOCK = registerBlock("magic_block",
             new MagicBlock(AbstractBlock.Settings.create().strength(1f).requiresTool().sounds(ModSounds.MAGIC_BLOCK_SOUNDS)));
@@ -50,7 +50,7 @@ public class ModBlocks {
     public static final Block PINK_GARNET_BUTTON = registerBlock("pink_garnet_button",
             new ButtonBlock(BlockSetType.IRON, 2, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
     public static final Block PINK_GARNET_PRESSURE_PLATE = registerBlock("pink_garnet_pressure_plate",
-            new PressurePlateBlock(BlockSetType.IRON, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
+            new PressurePlateBlock(BlockSetType.IRON, AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
     public static final Block PINK_GARNET_FENCE = registerBlock("pink_garnet_fence",
             new FenceBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
@@ -85,21 +85,24 @@ public class ModBlocks {
     public static final Block STRIPPED_DRIFTWOOD_WOOD = registerBlock("stripped_driftwood_wood",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD)));
 
-
     public static final Block DRIFTWOOD_PLANKS = registerBlock("driftwood_planks",
             new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
     public static final Block DRIFTWOOD_LEAVES = registerBlock("driftwood_leaves",
             new LeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES)));
 
-
     public static final Block DRIFTWOOD_SAPLING = registerBlock("driftwood_sapling",
-            new ModSapling(ModSaplingGenerators.DRIFTWOOD, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), Blocks.STONE));
+            new ModSaplingBlock(ModSaplingGenerators.DRIFTWOOD, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), Blocks.STONE));
 
-    public static final Block CHAIR = registerBlock("chair", new ChairBlock(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block CHAIR = registerBlock("chair",
+            new ChairBlock(AbstractBlock.Settings.create().nonOpaque()));
 
-    public static final Block PEDESTAL = registerBlock("pedestal", new PedestalBlock(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block PEDESTAL = registerBlock("pedestal",
+            new PedestalBlock(AbstractBlock.Settings.create().nonOpaque()));
 
-    public static final Block GROWTH_CHAMBER = registerBlock("growth_chamber", new GrowthChamberBlock(AbstractBlock.Settings.create()));
+    public static final Block GROWTH_CHAMBER = registerBlock("growth_chamber",
+            new GrowthChamberBlock(AbstractBlock.Settings.create()));
+
+
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(TutorialMod.MOD_ID, name), block);
@@ -121,9 +124,6 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.add(ModBlocks.PINK_GARNET_BLOCK);
             entries.add(ModBlocks.RAW_PINK_GARNET_BLOCK);
-            entries.add(ModBlocks.PINK_GARNET_ORE);
-            entries.add(ModBlocks.PINK_GARNET_DEEPSLATE_ORE);
-            entries.add(ModBlocks.MAGIC_BLOCK);
         });
     }
 }
