@@ -1,11 +1,16 @@
 package net.follis.tutorialmod.block.custom;
 
+import net.follis.tutorialmod.block.IMakeGolems;
+import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -21,8 +26,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Map;
 
-public class MagicBlock extends Block {
+public class MagicBlock extends Block implements IMakeGolems {
     public MagicBlock(Settings settings) {
         super(settings);
     }
@@ -56,5 +62,16 @@ public class MagicBlock extends Block {
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("tooltip.tutorialmod.magic_block.tooltip"));
         super.appendTooltip(stack, context, tooltip, options);
+    }
+
+    private static final Map<Block, EntityType<?>> GOLEM_MAP =
+            Map.of(
+                    ModBlocks.PINK_GARNET_BLOCK, ModEntities.MANTIS,
+                    Blocks.GOLD_BLOCK, EntityType.IRON_GOLEM
+            );
+    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (!oldState.isOf(state.getBlock())) {
+            this.trySpawnEntity(world, pos, GOLEM_MAP);
+        }
     }
 }
