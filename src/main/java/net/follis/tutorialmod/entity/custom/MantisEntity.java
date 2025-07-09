@@ -100,7 +100,9 @@ public class MantisEntity extends AnimalEntity {
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         MantisEntity baby = ModEntities.MANTIS.create(world);
         MantisVariant variant = Util.getRandom(MantisVariant.values(), this.random);
-        baby.setVariant(variant);
+        if (baby != null) {
+            baby.setVariant(variant);
+        }
         return baby;
     }
 
