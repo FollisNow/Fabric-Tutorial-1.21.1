@@ -3,7 +3,6 @@ package net.follis.tutorialmod.block.custom;
 import net.follis.tutorialmod.block.IMakeGolems;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
