@@ -63,7 +63,11 @@ public class HarvestBlockGoal extends Goal {
     @Override
     public void start() {
         this.searchCooldown = 0;
-        this.harvestableBlocks = new ArrayList<>();
+        if (this.harvestableBlocks == null){
+            this.harvestableBlocks = new ArrayList<>();
+        } else {
+            this.harvestableBlocks.clear();
+        }
     }
 
     @Override
@@ -87,7 +91,7 @@ public class HarvestBlockGoal extends Goal {
 
 
         if (this.targetPos != null) {
-            this.entity.getNavigation().startMovingTo(this.targetPos.getX(), this.targetPos.getY(), this.targetPos.getZ(), 1.1F);
+            this.entity.getNavigation().startMovingTo(this.targetPos.up().getX(), this.targetPos.up().getY(), this.targetPos.up().getZ(), 1.1F);
 
             // Check if the entity is close enough to harvest
             if (this.targetPos.isWithinDistance(this.entity.getBlockPos(), 2)) {
