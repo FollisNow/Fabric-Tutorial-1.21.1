@@ -76,8 +76,8 @@ public class LocustEntity extends AnimalEntity {
 
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        PassiveEntity offspring = ModEntities.LOCUST.create(world);
         for (int i = 0; i < 2; i++) { // Create 2 additional offspring
+        PassiveEntity offspring = ModEntities.LOCUST.create(world);
             if (offspring != null) {
                 // Set the position and any other attributes for the offspring
                 offspring.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
@@ -85,7 +85,7 @@ public class LocustEntity extends AnimalEntity {
                 world.spawnEntity(offspring);
             }
         }
-        return offspring;
+        return ModEntities.LOCUST.create(world);
     }
 
     /* SOUNDS */
