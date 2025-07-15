@@ -39,6 +39,13 @@ public class ModItems {
             super.appendTooltip(stack, context, tooltip, type);
         }
     });
+    public static final Item GRILLED_LOCUST = registerItem("grilled_locust", new Item(new Item.Settings().food(ModFoodComponents.GRILLED_LOCUST)) {
+        @Override
+        public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+            tooltip.add(Text.translatable("tooltip.tutorialmod.grilled_locust.tooltip"));
+            super.appendTooltip(stack, context, tooltip, type);
+        }
+    });
 
     public static final Item STARLIGHT_ASHES = registerItem("starlight_ashes", new Item(new Item.Settings()));
 

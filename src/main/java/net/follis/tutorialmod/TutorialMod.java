@@ -96,6 +96,8 @@ public class TutorialMod implements ModInitializer {
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER, 0.5f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER_SEEDS, 0.25f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.HONEY_BERRIES, 0.15f);
+		CompostingChanceRegistry.INSTANCE.add(ModItems.LOCUST, 0.25f);
+		CompostingChanceRegistry.INSTANCE.add(ModItems.GRILLED_LOCUST, 0.15f);
 
 
 		StrippableBlockRegistry.register(ModBlocks.DRIFTWOOD_LOG, ModBlocks.STRIPPED_DRIFTWOOD_LOG);

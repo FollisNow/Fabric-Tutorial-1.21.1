@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.2,
+  "ingredient": {
+    "item": "tutorialmod:locust"
+  },
+  "result": {
+    "id": "tutorialmod:grilled_locust"
+  }
+}

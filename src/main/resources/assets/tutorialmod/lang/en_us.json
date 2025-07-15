@@ -29,6 +29,7 @@
   "item.tutorialmod.cauliflower_seeds": "Cauliflower Seeds",
   "item.tutorialmod.honey_berries": "Honey Berries",
   "item.tutorialmod.locust": "Locust",
+  "item.tutorialmod.grilled_locust": "Grilled Locust",
 
   "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
@@ -109,6 +110,7 @@
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
   "tooltip.tutorialmod.locust.tooltip": "Taste better than it looks",
+  "tooltip.tutorialmod.grilled_locust.tooltip": "Taste even better than it looks",
 
   "trim_material.tutorialmod.pink_garnet": "Pink Garnet Material",
   "trim_pattern.tutorialmod.kaupen": "Kaupen Armor Pattern",
