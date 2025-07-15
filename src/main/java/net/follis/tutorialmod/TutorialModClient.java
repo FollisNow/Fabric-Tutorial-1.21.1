@@ -16,11 +16,9 @@ import net.follis.tutorialmod.screen.ModScreenHandlers;
 import net.follis.tutorialmod.screen.custom.GrowthChamberScreen;
 import net.follis.tutorialmod.screen.custom.PedestalScreen;
 import net.follis.tutorialmod.util.ModModelPredicates;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
@@ -37,6 +35,9 @@ public class TutorialModClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(MantisModel.MANTIS, MantisModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MANTIS, MantisRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(LocustModel.LOCUST, LocustModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.LOCUST, LocustRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(TomahawkProjectileModel.TOMAHAWK, TomahawkProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TOMAHAWK, TomahawkProjectileRenderer::new);

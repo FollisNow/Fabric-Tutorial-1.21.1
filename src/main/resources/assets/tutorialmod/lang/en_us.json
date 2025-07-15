@@ -35,6 +35,7 @@
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
 
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
+  "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
 
   "item.tutorialmod.tomahawk": "Tomahawk",
   "item.tutorialmod.spectre_staff": "Spectre Staff",
@@ -112,5 +113,6 @@
   "trim_pattern.tutorialmod.kaupen": "Kaupen Armor Pattern",
 
   "entity.tutorialmod.mantis": "Mantis",
+  "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.tomahawk": "Tomahawk"
 }
