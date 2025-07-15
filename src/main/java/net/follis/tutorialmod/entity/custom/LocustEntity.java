@@ -93,7 +93,7 @@ public class LocustEntity extends AnimalEntity {
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
         if (!this.isBaby()){
-            this.dropItem(ModItems.PINK_GARNET);
+            this.dropItem(ModItems.LOCUST);
         }
     }
 
