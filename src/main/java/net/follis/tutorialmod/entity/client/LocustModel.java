@@ -19,8 +19,6 @@ public class LocustModel<T extends LocustEntity> extends SinglePartEntityModel<T
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData hitbox = modelPartData.addChild("hitbox", ModelPartBuilder.create().uv(34, 0).cuboid(-2.0F, -3.0F, -5.0F, 4.0F, 3.0F, 11.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
-
         ModelPartData Locust = modelPartData.addChild("Locust", ModelPartBuilder.create(), ModelTransform.of(0.0F, 24.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
 
         ModelPartData body = Locust.addChild("body", ModelPartBuilder.create().uv(18, 16).cuboid(-1.0F, -1.5F, 1.45F, 2.0F, 3.0F, 4.0F, new Dilation(0.0F))

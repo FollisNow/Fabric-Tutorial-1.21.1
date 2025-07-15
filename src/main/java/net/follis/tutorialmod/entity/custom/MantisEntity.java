@@ -1,9 +1,7 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.entity.goal.HarvestBlockGoal;
 import net.follis.tutorialmod.item.ModItems;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;

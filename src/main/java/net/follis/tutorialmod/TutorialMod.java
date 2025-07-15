@@ -12,7 +12,6 @@ import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
-import net.follis.tutorialmod.enchantment.ModEnchantments;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.LocustEntity;
 import net.follis.tutorialmod.entity.custom.MantisEntity;
