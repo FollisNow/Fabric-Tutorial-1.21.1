@@ -137,13 +137,13 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
     }
 
     protected void initGoals() {
-        this.goalSelector.add(0, new StingGoal(this, (double)1.4F, true));
+        this.goalSelector.add(0, new StingGoal(this, 1.4F, true));
         this.goalSelector.add(1, new EnterHiveGoal());
         this.goalSelector.add(2, new AnimalMateGoal(this, (double)1.0F));
-        this.goalSelector.add(3, new TemptGoal(this, (double)1.25F, (stack) -> stack.isIn(ItemTags.BEE_FOOD), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25F, (stack) -> stack.isIn(ItemTags.BEE_FOOD), false));
         this.pollinateGoal = new PollinateGoal();
         this.goalSelector.add(4, this.pollinateGoal);
-        this.goalSelector.add(5, new FollowParentGoal(this, (double)1.25F));
+        this.goalSelector.add(5, new FollowParentGoal(this, 1.25F));
         this.goalSelector.add(5, new FindHiveGoal());
         this.moveToHiveGoal = new MoveToHiveGoal();
         this.goalSelector.add(5, this.moveToHiveGoal);
@@ -152,7 +152,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         this.goalSelector.add(7, new GrowCropsGoal());
         this.goalSelector.add(8, new BeeWanderAroundGoal());
         this.goalSelector.add(9, new SwimGoal(this));
-        this.targetSelector.add(1, (new BeeRevengeGoal(this)).setGroupRevenge(new Class[0]));
+        this.targetSelector.add(1, (new BeeRevengeGoal(this)).setGroupRevenge());
         this.targetSelector.add(2, new StingTargetGoal(this));
         this.targetSelector.add(3, new UniversalAngerGoal<>(this, true));
     }
@@ -187,8 +187,8 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
     }
 
     public void readCustomDataFromNbt(NbtCompound nbt) {
-        this.hivePos = (BlockPos)NbtHelper.toBlockPos(nbt, "hive_pos").orElse((BlockPos) null);
-        this.flowerPos = (BlockPos)NbtHelper.toBlockPos(nbt, "flower_pos").orElse((BlockPos) null);
+        this.hivePos = NbtHelper.toBlockPos(nbt, "hive_pos").orElse(null);
+        this.flowerPos = NbtHelper.toBlockPos(nbt, "flower_pos").orElse(null);
         super.readCustomDataFromNbt(nbt);
         this.setHasNectar(nbt.getBoolean("HasNectar"));
         this.setHasStung(nbt.getBoolean("HasStung"));
@@ -233,7 +233,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         super.tick();
         if (this.hasNectar() && this.getCropsGrownSincePollination() < 10 && this.random.nextFloat() < 0.05F) {
             for(int i = 0; i < this.random.nextInt(2) + 1; ++i) {
-                this.addParticle(this.getWorld(), this.getX() - (double)0.3F, this.getX() + (double)0.3F, this.getZ() - (double)0.3F, this.getZ() + (double)0.3F, this.getBodyY((double)0.5F));
+                this.addParticle(this.getWorld(), this.getX() - (double)0.3F, this.getX() + (double)0.3F, this.getZ() - (double)0.3F, this.getZ() + (double)0.3F, this.getBodyY(0.5F));
             }
         }
 
@@ -241,7 +241,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
     }
 
     private void addParticle(World world, double lastX, double x, double lastZ, double z, double y) {
-        world.addParticle(ParticleTypes.FALLING_NECTAR, MathHelper.lerp(world.random.nextDouble(), lastX, x), y, MathHelper.lerp(world.random.nextDouble(), lastZ, z), (double)0.0F, (double)0.0F, (double)0.0F);
+        world.addParticle(ParticleTypes.FALLING_NECTAR, MathHelper.lerp(world.random.nextDouble(), lastX, x), y, MathHelper.lerp(world.random.nextDouble(), lastZ, z), 0.0F, 0.0F, 0.0F);
     }
 
     void startMovingTo(BlockPos pos) {
