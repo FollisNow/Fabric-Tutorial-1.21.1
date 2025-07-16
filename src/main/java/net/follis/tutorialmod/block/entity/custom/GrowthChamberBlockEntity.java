@@ -3,7 +3,6 @@ package net.follis.tutorialmod.block.entity.custom;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.follis.tutorialmod.block.entity.ImplementedInventory;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
-import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.recipe.GrowthChamberRecipe;
 import net.follis.tutorialmod.recipe.GrowthChamberRecipeInput;
 import net.follis.tutorialmod.recipe.ModRecipes;
@@ -13,7 +12,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -107,7 +106,7 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if(hasRecipe()) {
+        if(hasRecipe(inventory.get(INPUT_SLOT))) {
             increaseCraftingProgress();
             markDirty(world, pos, state);
 
@@ -126,7 +125,7 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     private void craftItem() {
-        Optional<RecipeEntry<GrowthChamberRecipe>> recipe = getCurrentRecipe();
+        Optional<RecipeEntry<GrowthChamberRecipe>> recipe = getCurrentRecipe(inventory.get(INPUT_SLOT));
 
         ItemStack output = recipe.get().value().output();
         this.removeStack(INPUT_SLOT, 1);
@@ -142,8 +141,8 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
         this.progress++;
     }
 
-    private boolean hasRecipe() {
-        Optional<RecipeEntry<GrowthChamberRecipe>> recipe = getCurrentRecipe();
+    private boolean hasRecipe(ItemStack input) {
+        Optional<RecipeEntry<GrowthChamberRecipe>> recipe = getCurrentRecipe(input);
         if(recipe.isEmpty()) {
             return false;
         }
@@ -151,10 +150,21 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
         ItemStack output = recipe.get().value().output();
         return canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
     }
-
-    private Optional<RecipeEntry<GrowthChamberRecipe>> getCurrentRecipe() {
+    private Optional<RecipeEntry<GrowthChamberRecipe>> getCurrentRecipe(ItemStack input) {
         return this.getWorld().getRecipeManager()
-                .getFirstMatch(ModRecipes.GROWTH_CHAMBER_TYPE, new GrowthChamberRecipeInput(inventory.get(INPUT_SLOT)), this.getWorld());
+                .getFirstMatch(ModRecipes.GROWTH_CHAMBER_TYPE, new GrowthChamberRecipeInput(input), this.getWorld());
+    }
+
+    //so the hopper doesn't push in output
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+        return slot == INPUT_SLOT && hasRecipe(stack);
+    }
+
+    //so the hopper doesn't pull from input
+    @Override
+    public boolean canTransferTo(Inventory hopperInventory, int slot, ItemStack stack) {
+        return slot != INPUT_SLOT;
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {

@@ -29,8 +29,20 @@ public class GrowthChamberScreenHandler extends ScreenHandler {
         this.blockEntity = ((GrowthChamberBlockEntity) blockEntity);
         this.propertyDelegate = arrayPropertyDelegate;
 
-        this.addSlot(new Slot(inventory, 0, 54, 34));
-        this.addSlot(new Slot(inventory, 1, 104, 34));
+        this.addSlot(new Slot(inventory, 0, 54, 34) {
+            //so the player doesn't insert in output
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return ((GrowthChamberBlockEntity) blockEntity).isValid(0, stack);
+            }
+        });
+        this.addSlot(new Slot(inventory, 1, 104, 34){
+            //so the player doesn't insert in output
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return ((GrowthChamberBlockEntity) blockEntity).isValid(1, stack);
+            }
+        });
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
