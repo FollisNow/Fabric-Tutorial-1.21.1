@@ -105,6 +105,9 @@ public class ModItems {
     public static final Item LOCUST_SPAWN_EGG = registerItem("locust_spawn_egg",
             new SpawnEggItem(ModEntities.LOCUST, 0x58f0b5, 0x4fd5a3, new Item.Settings()));
 
+    public static final Item AMETHYST_BEE_SPAWN_EGG = registerItem("amethyst_bee_spawn_egg",
+            new SpawnEggItem(ModEntities.AMETHYST_BEE, 0xc844be, 0x97278e, new Item.Settings()));
+
     public static final Item TOMAHAWK = registerItem("tomahawk",
             new TomahawkItem(new Item.Settings().maxCount(16)));
 

@@ -13,6 +13,7 @@ import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.entity.custom.AmethystBeeEntity;
 import net.follis.tutorialmod.entity.custom.LocustEntity;
 import net.follis.tutorialmod.entity.custom.MantisEntity;
 import net.follis.tutorialmod.item.ModItemGroups;
@@ -112,6 +113,7 @@ public class TutorialMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(ModEntities.MANTIS, MantisEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());
 
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {
 			factories.add((entity, random) -> new TradeOffer(

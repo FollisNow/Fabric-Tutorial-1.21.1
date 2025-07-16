@@ -53,6 +53,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.MANTIS_SPAWN_EGG);
                         entries.add(ModItems.LOCUST_SPAWN_EGG);
+                        entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
 
                     }).build());
 

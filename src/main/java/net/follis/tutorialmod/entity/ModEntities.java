@@ -1,10 +1,7 @@
 package net.follis.tutorialmod.entity;
 
 import net.follis.tutorialmod.TutorialMod;
-import net.follis.tutorialmod.entity.custom.ChairEntity;
-import net.follis.tutorialmod.entity.custom.LocustEntity;
-import net.follis.tutorialmod.entity.custom.MantisEntity;
-import net.follis.tutorialmod.entity.custom.TomahawkProjectileEntity;
+import net.follis.tutorialmod.entity.custom.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
@@ -20,6 +17,11 @@ public class ModEntities {
     public static final EntityType<LocustEntity> LOCUST = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "locust"),
             EntityType.Builder.create(LocustEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.5f, 0.5f).build());
+
+    public static final EntityType<AmethystBeeEntity> AMETHYST_BEE = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "amethyst_bee"),
+            EntityType.Builder.create(AmethystBeeEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.5f, 0.5f).build());
 
     public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,
