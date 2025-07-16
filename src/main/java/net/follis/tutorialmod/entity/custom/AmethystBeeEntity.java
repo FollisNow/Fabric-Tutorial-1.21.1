@@ -139,7 +139,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
     protected void initGoals() {
         this.goalSelector.add(0, new StingGoal(this, 1.4F, true));
         this.goalSelector.add(1, new EnterHiveGoal());
-        this.goalSelector.add(2, new AnimalMateGoal(this, (double)1.0F));
+        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0F));
         this.goalSelector.add(3, new TemptGoal(this, 1.25F, (stack) -> stack.isIn(ItemTags.BEE_FOOD), false));
         this.pollinateGoal = new PollinateGoal();
         this.goalSelector.add(4, this.pollinateGoal);
@@ -696,7 +696,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
             int i = 8;
             Vec3d vec3d3 = AboveGroundTargeting.find(AmethystBeeEntity.this, 8, 7, vec3d2.x, vec3d2.z, ((float)Math.PI / 2F), 3, 1);
-            return vec3d3 != null ? vec3d3 : NoPenaltySolidTargeting.find(AmethystBeeEntity.this, 8, 4, -2, vec3d2.x, vec3d2.z, (double)((float)Math.PI / 2F));
+            return vec3d3 != null ? vec3d3 : NoPenaltySolidTargeting.find(AmethystBeeEntity.this, 8, 4, -2, vec3d2.x, vec3d2.z, (float)Math.PI / 2F);
         }
     }
 
@@ -932,7 +932,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
                     AmethystBeeEntity.this.navigation.startMovingTo(
                             (double)AmethystBeeEntity.this.flowerPos.getX() + (double)0.5F,
                             (double)AmethystBeeEntity.this.flowerPos.getY() + (double)0.5F,
-                            (double)AmethystBeeEntity.this.flowerPos.getZ() + (double)0.5F, (double)1.2F);
+                            (double)AmethystBeeEntity.this.flowerPos.getZ() + (double)0.5F, 1.2F);
                     return true;
                 } else {
                     AmethystBeeEntity.this.ticksUntilCanPollinate = MathHelper.nextInt(AmethystBeeEntity.this.random, 20, 60);
@@ -998,7 +998,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
                 AmethystBeeEntity.this.flowerPos = null;
             } else {
                 assert AmethystBeeEntity.this.flowerPos != null;
-                Vec3d vec3d = Vec3d.ofBottomCenter(AmethystBeeEntity.this.flowerPos).add((double)0.0F, (double)0.6F, (double)0.0F);
+                Vec3d vec3d = Vec3d.ofBottomCenter(AmethystBeeEntity.this.flowerPos).add(0.0F, 0.6F, 0.0F);
                 if (vec3d.distanceTo(AmethystBeeEntity.this.getPos()) > (double)1.0F) {
                     this.nextTarget = vec3d;
                     this.moveToNextTarget();
@@ -1041,7 +1041,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
         private void moveToNextTarget() {
             assert this.nextTarget != null;
-            AmethystBeeEntity.this.getMoveControl().moveTo(this.nextTarget.getX(), this.nextTarget.getY(), this.nextTarget.getZ(), (double)0.35F);
+            AmethystBeeEntity.this.getMoveControl().moveTo(this.nextTarget.getX(), this.nextTarget.getY(), this.nextTarget.getZ(), 0.35F);
         }
 
         private float getRandomOffset() {
