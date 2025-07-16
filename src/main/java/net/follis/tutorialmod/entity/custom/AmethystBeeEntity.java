@@ -159,11 +159,11 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.75)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.75)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0F)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.6F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -263,10 +263,10 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
             l = m / 2;
         }
 
-        Vec3d vec3d2 = NoWaterTargeting.find(this, k, l, i, vec3d, (double)((float)Math.PI / 10F));
+        Vec3d vec3d2 = NoWaterTargeting.find(this, k, l, i, vec3d, (float)Math.PI / 10F);
         if (vec3d2 != null) {
             this.navigation.setRangeMultiplier(0.5F);
-            this.navigation.startMovingTo(vec3d2.x, vec3d2.y, vec3d2.z, (double)1.0F);
+            this.navigation.startMovingTo(vec3d2.x, vec3d2.y, vec3d2.z, 1.0F);
         }
     }
 
@@ -493,20 +493,17 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
     private void setBeeFlag(int bit, boolean value) {
         if (value) {
-            this.dataTracker.set(BEE_FLAGS, (byte)((Byte)this.dataTracker.get(BEE_FLAGS) | bit));
+            this.dataTracker.set(BEE_FLAGS, (byte)(this.dataTracker.get(BEE_FLAGS) | bit));
         } else {
-            this.dataTracker.set(BEE_FLAGS, (byte)((Byte)this.dataTracker.get(BEE_FLAGS) & ~bit));
+            this.dataTracker.set(BEE_FLAGS, (byte)(this.dataTracker.get(BEE_FLAGS) & ~bit));
         }
 
     }
 
     private boolean getBeeFlag(int location) {
-        return ((Byte)this.dataTracker.get(BEE_FLAGS) & location) != 0;
+        return (this.dataTracker.get(BEE_FLAGS) & location) != 0;
     }
 
-    public static DefaultAttributeContainer.Builder createBeeAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, (double)10.0F).add(EntityAttributes.GENERIC_FLYING_SPEED, (double)0.6F).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.3F).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double)2.0F).add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)48.0F);
-    }
 
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation birdNavigation = new BirdNavigation(this, world) {
@@ -587,15 +584,15 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
     }
 
     protected void swimUpward(TagKey<Fluid> fluid) {
-        this.setVelocity(this.getVelocity().add((double)0.0F, 0.01, (double)0.0F));
+        this.setVelocity(this.getVelocity().add(0.0F, 0.01, 0.0F));
     }
 
     public Vec3d getLeashOffset() {
-        return new Vec3d((double)0.0F, (double)(0.5F * this.getStandingEyeHeight()), (double)(this.getWidth() * 0.2F));
+        return new Vec3d(0.0F, 0.5F * this.getStandingEyeHeight(), this.getWidth() * 0.2F);
     }
 
     boolean isWithinDistance(BlockPos pos, int distance) {
-        return pos.isWithinDistance(this.getBlockPos(), (double)distance);
+        return pos.isWithinDistance(this.getBlockPos(), distance);
     }
 
     public void setHivePos(@Nullable BlockPos pos) {
@@ -777,7 +774,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
         private boolean startMovingToFar(BlockPos pos) {
             AmethystBeeEntity.this.navigation.setRangeMultiplier(10.0F);
-            AmethystBeeEntity.this.navigation.startMovingTo((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), 2, (double)1.0F);
+            AmethystBeeEntity.this.navigation.startMovingTo(pos.getX(), pos.getY(), pos.getZ(), 2, 1.0F);
             return AmethystBeeEntity.this.navigation.getCurrentPath() != null && AmethystBeeEntity.this.navigation.getCurrentPath().reachesTarget();
         }
 
@@ -892,7 +889,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         private static final int field_30301 = 20;
         private static final int field_30302 = 60;
         private final Predicate<BlockState> flowerPredicate = (state) -> {
-            if (state.contains(Properties.WATERLOGGED) && (Boolean)state.get(Properties.WATERLOGGED)) {
+            if (state.contains(Properties.WATERLOGGED) && state.get(Properties.WATERLOGGED)) {
                 return false;
             } else if (state.isIn(BlockTags.FLOWERS)) {
                 if (state.isOf(Blocks.SUNFLOWER)) {
@@ -1097,7 +1094,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
                 }
 
                 AmethystBeeEntity.this.moveToHiveGoal.clearPossibleHives();
-                AmethystBeeEntity.this.hivePos = (BlockPos)list.getFirst();
+                AmethystBeeEntity.this.hivePos = list.getFirst();
             }
         }
 
@@ -1139,14 +1136,14 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
                                 blockState2 = cropBlock.withAge(cropBlock.getAge(blockState) + 1);
                             }
                         } else if (block instanceof StemBlock) {
-                            int j = (Integer)blockState.get(StemBlock.AGE);
+                            int j = blockState.get(StemBlock.AGE);
                             if (j < 7) {
-                                blockState2 = (BlockState)blockState.with(StemBlock.AGE, j + 1);
+                                blockState2 = blockState.with(StemBlock.AGE, j + 1);
                             }
                         } else if (blockState.isOf(Blocks.SWEET_BERRY_BUSH)) {
-                            int j = (Integer)blockState.get(SweetBerryBushBlock.AGE);
+                            int j = blockState.get(SweetBerryBushBlock.AGE);
                             if (j < 3) {
-                                blockState2 = (BlockState)blockState.with(SweetBerryBushBlock.AGE, j + 1);
+                                blockState2 = blockState.with(SweetBerryBushBlock.AGE, j + 1);
                             }
                         } else if (blockState.isOf(Blocks.CAVE_VINES) || blockState.isOf(Blocks.CAVE_VINES_PLANT)) {
                             ((Fertilizable)blockState.getBlock()).grow((ServerWorld)AmethystBeeEntity.this.getWorld(), AmethystBeeEntity.this.random, blockPos, blockState);
@@ -1182,7 +1179,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         public boolean canBeeStart() {
             if (AmethystBeeEntity.this.hasHive() && AmethystBeeEntity.this.canEnterHive()) {
                 assert AmethystBeeEntity.this.hivePos != null;
-                if (AmethystBeeEntity.this.hivePos.isWithinDistance(AmethystBeeEntity.this.getPos(), (double)2.0F)) {
+                if (AmethystBeeEntity.this.hivePos.isWithinDistance(AmethystBeeEntity.this.getPos(), 2.0F)) {
                     BlockEntity blockEntity = AmethystBeeEntity.this.getWorld().getBlockEntity(AmethystBeeEntity.this.hivePos);
                     if (blockEntity instanceof BeehiveBlockEntity beehiveBlockEntity) {
                         if (!beehiveBlockEntity.isFullOfBees()) {

@@ -2,7 +2,6 @@ package net.follis.tutorialmod.entity.client;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.custom.AmethystBeeEntity;
-import net.follis.tutorialmod.entity.custom.LocustEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
