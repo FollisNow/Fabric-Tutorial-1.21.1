@@ -97,10 +97,13 @@ public class ModBlocks {
             new ChairBlock(AbstractBlock.Settings.create().nonOpaque()));
 
     public static final Block PEDESTAL = registerBlock("pedestal",
-            new PedestalBlock(AbstractBlock.Settings.create().nonOpaque()));
+            new PedestalBlock(AbstractBlock.Settings.create().nonOpaque().strength(3f).requiresTool()));
 
     public static final Block GROWTH_CHAMBER = registerBlock("growth_chamber",
-            new GrowthChamberBlock(AbstractBlock.Settings.create()));
+            new GrowthChamberBlock(AbstractBlock.Settings.create().strength(3f).requiresTool()));
+
+    public static final Block AMETHYST_BEE_HIVE = registerBlock("amethyst_bee_hive",
+            new AmethystBeeHiveBlock(AbstractBlock.Settings.create().strength(4f).requiresTool()));
 
 
 
