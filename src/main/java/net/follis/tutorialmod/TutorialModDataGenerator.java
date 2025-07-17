@@ -2,6 +2,7 @@ package net.follis.tutorialmod;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.follis.tutorialmod.datagen.*;
 import net.follis.tutorialmod.enchantment.ModEnchantments;
 import net.follis.tutorialmod.trim.ModTrimMaterials;
@@ -22,6 +23,10 @@ public class TutorialModDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
 		pack.addProvider(ModRegistryDataGenerator::new);
+
+		pack.addProvider(ModEntityTypeTagProvider::new);
+
+		pack.addProvider((FabricDataOutput output) -> new ModPointOfInterestTypeTagProvider(output, RegistryKeys.POINT_OF_INTEREST_TYPE, fabricDataGenerator.getRegistries()));
 	}
 
 	@Override

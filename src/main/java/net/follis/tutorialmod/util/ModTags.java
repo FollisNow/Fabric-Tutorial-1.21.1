@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.poi.PointOfInterestType;
 
 public class ModTags {
     public static class Blocks {
@@ -22,6 +23,14 @@ public class ModTags {
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(TutorialMod.MOD_ID, name));
+        }
+    }
+
+    public static class PointOfInterestTypes {
+        public static final TagKey<PointOfInterestType> AMETHYST_BEE_HOME = createTag("amethyst_bee_home");
+
+        private static TagKey<PointOfInterestType> createTag(String name) {
+            return TagKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.of(TutorialMod.MOD_ID, name));
         }
     }
 }

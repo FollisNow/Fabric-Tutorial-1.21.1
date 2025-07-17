@@ -1,11 +1,16 @@
 package net.follis.tutorialmod.entity.custom;
 
 import com.google.common.collect.Lists;
+import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.block.entity.ModBlockEntities;
+import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
+import net.follis.tutorialmod.datagen.ModPointOfInterestTypeTagProvider;
+import net.follis.tutorialmod.datagen.ModPointOfInterestTypes;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.util.ModTags;
+import net.follis.tutorialmod.villager.ModVillagers;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
@@ -30,7 +35,6 @@ import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -361,7 +365,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
             return false;
         } else {
             BlockEntity blockEntity = this.getWorld().getBlockEntity(this.hivePos);
-            return blockEntity instanceof BeehiveBlockEntity && ((BeehiveBlockEntity)blockEntity).isNearFire();
+            return blockEntity instanceof AmethystBeeHiveBlockEntity && ((AmethystBeeHiveBlockEntity)blockEntity).isNearFire();
         }
     }
 
@@ -388,8 +392,8 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
     private boolean doesHiveHaveSpace(BlockPos pos) {
         BlockEntity blockEntity = this.getWorld().getBlockEntity(pos);
-        if (blockEntity instanceof BeehiveBlockEntity) {
-            return !((BeehiveBlockEntity)blockEntity).isFullOfBees();
+        if (blockEntity instanceof AmethystBeeHiveBlockEntity) {
+            return !((AmethystBeeHiveBlockEntity)blockEntity).isFullOfBees();
         } else {
             return false;
         }
@@ -454,7 +458,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
             return false;
         } else {
             BlockEntity blockEntity = this.getWorld().getBlockEntity(this.hivePos);
-            return blockEntity != null && blockEntity.getType() == BlockEntityType.BEEHIVE;
+            return blockEntity != null && blockEntity.getType() == ModBlockEntities.AMETHYST_BEE_HIVE_BE;
         }
     }
 
@@ -618,7 +622,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         }
 
         protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
-            if (mob instanceof BeeEntity && this.mob.canSee(target)) {
+            if (mob instanceof AmethystBeeEntity && this.mob.canSee(target)) {
                 mob.setTarget(target);
             }
 
@@ -645,8 +649,8 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         }
 
         private boolean canSting() {
-            AmethystBeeEntity beeEntity = (AmethystBeeEntity)this.mob;
-            return beeEntity.hasAngerTime() && !beeEntity.hasStung();
+            AmethystBeeEntity amethystBeeEntity = (AmethystBeeEntity)this.mob;
+            return amethystBeeEntity.hasAngerTime() && !amethystBeeEntity.hasStung();
         }
     }
 
@@ -1099,7 +1103,8 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         private List<BlockPos> getNearbyFreeHives() {
             BlockPos blockPos = AmethystBeeEntity.this.getBlockPos();
             PointOfInterestStorage pointOfInterestStorage = ((ServerWorld)AmethystBeeEntity.this.getWorld()).getPointOfInterestStorage();
-            Stream<PointOfInterest> stream = pointOfInterestStorage.getInCircle((poiType) -> poiType.isIn(PointOfInterestTypeTags.BEE_HOME), blockPos, 20, PointOfInterestStorage.OccupationStatus.ANY);
+            Stream<PointOfInterest> stream = pointOfInterestStorage.getInCircle((poiType) -> poiType.isIn(ModTags.PointOfInterestTypes.AMETHYST_BEE_HOME), blockPos, 20, PointOfInterestStorage.OccupationStatus.ANY);
+
             return stream.map(PointOfInterest::getPos).filter(AmethystBeeEntity.this::doesHiveHaveSpace).sorted(Comparator.comparingDouble((blockPos2) -> blockPos2.getSquaredDistance(blockPos))).collect(Collectors.toList());
         }
     }
@@ -1179,8 +1184,8 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
                 assert AmethystBeeEntity.this.hivePos != null;
                 if (AmethystBeeEntity.this.hivePos.isWithinDistance(AmethystBeeEntity.this.getPos(), 2.0F)) {
                     BlockEntity blockEntity = AmethystBeeEntity.this.getWorld().getBlockEntity(AmethystBeeEntity.this.hivePos);
-                    if (blockEntity instanceof BeehiveBlockEntity beehiveBlockEntity) {
-                        if (!beehiveBlockEntity.isFullOfBees()) {
+                    if (blockEntity instanceof AmethystBeeHiveBlockEntity amethystBeeHiveBlockEntity) {
+                        if (!amethystBeeHiveBlockEntity.isFullOfBees()) {
                             return true;
                         }
 
@@ -1198,8 +1203,8 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
         public void start() {
             BlockEntity blockEntity = AmethystBeeEntity.this.getWorld().getBlockEntity(AmethystBeeEntity.this.hivePos);
-            if (blockEntity instanceof BeehiveBlockEntity beehiveBlockEntity) {
-                beehiveBlockEntity.tryEnterHive(AmethystBeeEntity.this);
+            if (blockEntity instanceof AmethystBeeHiveBlockEntity amethystBeeHiveBlockEntity) {
+                amethystBeeHiveBlockEntity.tryEnterHive(AmethystBeeEntity.this);
             }
 
         }

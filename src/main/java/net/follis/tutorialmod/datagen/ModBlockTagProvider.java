@@ -26,6 +26,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PEDESTAL)
                 .add(ModBlocks.AMETHYST_BEE_HIVE);
 
+        getOrCreateTagBuilder(BlockTags.BEEHIVES)
+                .add(ModBlocks.AMETHYST_BEE_HIVE);
+
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.PINK_GARNET_DEEPSLATE_ORE);
 
