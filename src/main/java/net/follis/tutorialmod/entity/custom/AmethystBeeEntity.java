@@ -36,6 +36,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.particle.ParticleTypes;
@@ -140,7 +141,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         this.goalSelector.add(0, new StingGoal(this, 1.4F, true));
         this.goalSelector.add(1, new EnterHiveGoal());
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0F));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25F, (stack) -> stack.isIn(ItemTags.BEE_FOOD), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25F, (stack) -> stack.isOf(Items.AMETHYST_SHARD), false));
         this.pollinateGoal = new PollinateGoal();
         this.goalSelector.add(4, this.pollinateGoal);
         this.goalSelector.add(5, new FollowParentGoal(this, 1.25F));
@@ -524,11 +525,15 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
     }
 
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isIn(ItemTags.BEE_FOOD);
+        return stack.isOf(Items.AMETHYST_SHARD);
     }
 
     boolean isFlowers(BlockPos pos) {
-        return this.getWorld().canSetBlock(pos) && this.getWorld().getBlockState(pos).isIn(BlockTags.FLOWERS);
+        return this.getWorld().canSetBlock(pos) && (
+                this.getWorld().getBlockState(pos).isOf(Blocks.SMALL_AMETHYST_BUD) ||
+                this.getWorld().getBlockState(pos).isOf(Blocks.MEDIUM_AMETHYST_BUD) ||
+                this.getWorld().getBlockState(pos).isOf(Blocks.LARGE_AMETHYST_BUD) ||
+                this.getWorld().getBlockState(pos).isOf(Blocks.AMETHYST_CLUSTER));
     }
 
     protected void playStepSound(BlockPos pos, BlockState state) {
@@ -550,7 +555,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         return 0.4F;
     }
 
-    @Nullable
+    @Override
     public AmethystBeeEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
         return ModEntities.AMETHYST_BEE.create(serverWorld);
     }
@@ -891,15 +896,10 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
         private final Predicate<BlockState> flowerPredicate = (state) -> {
             if (state.contains(Properties.WATERLOGGED) && state.get(Properties.WATERLOGGED)) {
                 return false;
-            } else if (state.isIn(BlockTags.FLOWERS)) {
-                if (state.isOf(Blocks.SUNFLOWER)) {
-                    return state.get(TallPlantBlock.HALF) == DoubleBlockHalf.UPPER;
-                } else {
-                    return true;
-                }
-            } else {
-                return false;
-            }
+            } else return state.isOf(Blocks.SMALL_AMETHYST_BUD) ||
+                    state.isOf(Blocks.MEDIUM_AMETHYST_BUD) ||
+                    state.isOf(Blocks.LARGE_AMETHYST_BUD) ||
+                    state.isOf(Blocks.AMETHYST_CLUSTER);
         };
         private static final double field_30303 = 0.1;
         private static final int field_30304 = 25;
