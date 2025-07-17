@@ -225,7 +225,7 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
     }
 
     private void addHoneyParticle(World world, double minX, double maxX, double minZ, double maxZ, double height) {
-        world.addParticle(ParticleTypes.DRIPPING_HONEY, MathHelper.lerp(world.random.nextDouble(), minX, maxX), height, MathHelper.lerp(world.random.nextDouble(), minZ, maxZ), (double)0.0F, (double)0.0F, (double)0.0F);
+        world.addParticle(ParticleTypes.DRIPPING_HONEY, MathHelper.lerp(world.random.nextDouble(), minX, maxX), height, MathHelper.lerp(world.random.nextDouble(), minZ, maxZ), 0.0F, 0.0F, 0.0F);
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {

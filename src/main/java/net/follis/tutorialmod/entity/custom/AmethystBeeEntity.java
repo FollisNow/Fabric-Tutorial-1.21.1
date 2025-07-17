@@ -1,14 +1,10 @@
 package net.follis.tutorialmod.entity.custom;
 
 import com.google.common.collect.Lists;
-import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
-import net.follis.tutorialmod.datagen.ModPointOfInterestTypeTagProvider;
-import net.follis.tutorialmod.datagen.ModPointOfInterestTypes;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.util.ModTags;
-import net.follis.tutorialmod.villager.ModVillagers;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -44,7 +40,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.PointOfInterestTypeTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
