@@ -191,7 +191,7 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
             if(blockOnTop.contains(CANDLES) && amethystBeeHiveBlockEntity.getBeeCount() <= blockOnTop.get(CANDLES)) {
                 return blockOnTop.contains(LIT) && blockOnTop.isIn(BlockTags.CANDLES) && blockOnTop.get(LIT);
 
-            };
+            }
         }
         return false;
     }
