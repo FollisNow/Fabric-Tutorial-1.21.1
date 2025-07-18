@@ -49,7 +49,7 @@ public class AmethystBeeHiveBlockEntity extends BlockEntity {
     private static final String FLOWER_POS_KEY = "flower_pos";
     private static final String BEES_KEY = "bees";
     static final List<String> IRRELEVANT_BEE_NBT_KEYS = Arrays.asList("Air", "ArmorDropChances", "ArmorItems", "Brain", "CanPickUpLoot", "DeathTime", "FallDistance", "FallFlying", "Fire", "HandDropChances", "HandItems", "HurtByTimestamp", "HurtTime", "LeftHanded", "Motion", "NoGravity", "OnGround", "PortalCooldown", "Pos", "Rotation", "SleepingX", "SleepingY", "SleepingZ", "CannotEnterHiveTicks", "TicksSincePollination", "CropsGrownSincePollination", "hive_pos", "Passengers", "leash", "UUID");
-    public static final int MAX_BEE_COUNT = 5;
+    public static final int MAX_BEE_COUNT = 4;
     private static final int ANGERED_CANNOT_ENTER_HIVE_TICKS = 400;
     private static final int MIN_OCCUPATION_TICKS_WITH_NECTAR = 2400;
     public static final int MIN_OCCUPATION_TICKS_WITHOUT_NECTAR = 600;
@@ -89,7 +89,7 @@ public class AmethystBeeHiveBlockEntity extends BlockEntity {
     }
 
     public boolean isFullOfBees() {
-        return this.bees.size() == 5;
+        return this.bees.size() == 4;
     }
 
     public void angerBees(@Nullable PlayerEntity player, BlockState state, AmethystBeeState amethystBeeState) {
@@ -138,7 +138,7 @@ public class AmethystBeeHiveBlockEntity extends BlockEntity {
     }
 
     public void tryEnterHive(Entity entity) {
-        if (this.bees.size() < 5) {
+        if (this.bees.size() < 4) {
             entity.stopRiding();
             entity.removeAllPassengers();
             this.addBee(AmethystBeeData.of(entity));

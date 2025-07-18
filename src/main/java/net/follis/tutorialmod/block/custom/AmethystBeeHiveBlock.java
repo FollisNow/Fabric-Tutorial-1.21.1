@@ -55,6 +55,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static net.minecraft.block.CandleBlock.CANDLES;
 import static net.minecraft.block.CandleBlock.LIT;
 
 public class AmethystBeeHiveBlock extends BlockWithEntity {
@@ -165,7 +166,7 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
         }
 
         if (bl) {
-            if (!hasCandles(world, pos)) {
+            if (!hasEnoughCandlesAndLit(world, pos)) {
                 if (this.hasBees(world, pos)) {
                     this.angerNearbyBees(world, pos);
                 }
@@ -181,10 +182,18 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
         }
     }
 
-    protected boolean hasCandles(World world, BlockPos pos) {
+    protected boolean hasEnoughCandlesAndLit(World world, BlockPos pos) {
         BlockPos onTop = pos.up();
+        BlockEntity blockEntity = world.getBlockEntity(pos);
         BlockState blockOnTop = world.getBlockState(onTop);
-        return blockOnTop.contains(LIT) && blockOnTop.isIn(BlockTags.CANDLES) && blockOnTop.get(LIT);
+
+        if (blockEntity instanceof AmethystBeeHiveBlockEntity amethystBeeHiveBlockEntity && blockOnTop.isIn(BlockTags.CANDLES)) {
+            if(blockOnTop.contains(CANDLES) && amethystBeeHiveBlockEntity.getBeeCount() <= blockOnTop.get(CANDLES)) {
+                return blockOnTop.contains(LIT) && blockOnTop.isIn(BlockTags.CANDLES) && blockOnTop.get(LIT);
+
+            };
+        }
+        return false;
     }
 
     public void takeHoney(World world, BlockState state, BlockPos pos, @Nullable PlayerEntity player, AmethystBeeHiveBlockEntity.AmethystBeeState amethystBeeState) {

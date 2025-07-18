@@ -14,7 +14,7 @@ public class ModPointOfInterestTypes {
 
     private static PointOfInterestType registerPOI(String name, Block block) {
         return PointOfInterestHelper.register(Identifier.of(TutorialMod.MOD_ID, name),
-                5, 16, block);
+                4, 16, block);
     }
     public static void registerPointOfInterestTypes() {
         TutorialMod.LOGGER.info("Registering POI types for " + TutorialMod.MOD_ID);
