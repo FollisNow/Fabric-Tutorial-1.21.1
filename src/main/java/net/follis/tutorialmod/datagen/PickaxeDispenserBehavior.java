@@ -2,26 +2,16 @@ package net.follis.tutorialmod.datagen;
 
 import net.follis.tutorialmod.block.custom.AmethystBeeHiveBlock;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
-import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
-import net.minecraft.block.entity.BeehiveBlockEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Shearable;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.event.GameEvent;
 
 public class PickaxeDispenserBehavior extends FallibleItemDispenserBehavior {
