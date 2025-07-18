@@ -65,7 +65,7 @@ public class TutorialMod implements ModInitializer {
 
 		ModEntities.registerModEntities();
 		ModVillagers.registerVillagers();
-		ModPointOfInterestTypes.register();
+		ModPointOfInterestTypes.registerPointOfInterestTypes();
 
 		ModParticles.registerParticles();
 		ModLootTableModifiers.modifyLootTables();

@@ -16,10 +16,7 @@ public class ModPointOfInterestTypes {
         return PointOfInterestHelper.register(Identifier.of(TutorialMod.MOD_ID, name),
                 5, 16, block);
     }
-    public static void register() {
-        // This method will be called during the initialization phase
-        // Ensure this method is called before the registry is frozen
-        // Registration logic here
+    public static void registerPointOfInterestTypes() {
+        TutorialMod.LOGGER.info("Registering POI types for " + TutorialMod.MOD_ID);
     }
-
 }
