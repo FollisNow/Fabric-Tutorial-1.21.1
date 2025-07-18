@@ -55,6 +55,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AmethystBeeHiveBlock extends BlockWithEntity {
+    public static final DirectionProperty FACING;
+    public static final IntProperty HONEY_LEVEL;
+    public static final int FULL_HONEY_LEVEL = 5;
+    private static final int DROPPED_HONEYCOMB_COUNT = 3;
+
     public static final MapCodec<AmethystBeeHiveBlock> CODEC = AmethystBeeHiveBlock.createCodec(AmethystBeeHiveBlock::new);
 
     public AmethystBeeHiveBlock(Settings settings) {
@@ -71,10 +76,7 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new AmethystBeeHiveBlockEntity(pos, state);
     }
-    public static final DirectionProperty FACING;
-    public static final IntProperty HONEY_LEVEL;
-    public static final int FULL_HONEY_LEVEL = 5;
-    private static final int DROPPED_HONEYCOMB_COUNT = 3;
+
 
     protected boolean hasComparatorOutput(BlockState state) {
         return true;

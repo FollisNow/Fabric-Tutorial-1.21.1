@@ -1,17 +1,26 @@
 package net.follis.tutorialmod.datagen;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.block.custom.AmethystBeeHiveBlock;
 import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.block.custom.PinkGarnetLampBlock;
 import net.follis.tutorialmod.item.ModItems;
+import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.registry.Registries;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -63,7 +72,9 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GROWTH_CHAMBER);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.AMETHYST_BEE_HIVE);
+        blockStateModelGenerator.registerBeehive(ModBlocks.AMETHYST_BEE_HIVE, TextureMap::sideFrontEnd);
+
+
     }
 
     @Override

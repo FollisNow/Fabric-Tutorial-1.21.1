@@ -2,7 +2,7 @@
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
     "bottom": "tutorialmod:block/amethyst_bee_hive_end",
-    "front": "tutorialmod:block/amethyst_bee_hive_front",
+    "front": "tutorialmod:block/amethyst_bee_hive_front_honey",
     "particle": "tutorialmod:block/amethyst_bee_hive_side",
     "side": "tutorialmod:block/amethyst_bee_hive_side",
     "top": "tutorialmod:block/amethyst_bee_hive_end"

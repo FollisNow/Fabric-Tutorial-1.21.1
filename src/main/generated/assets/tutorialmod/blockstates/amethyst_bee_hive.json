@@ -1,7 +1,94 @@
 {
   "variants": {
-    "": {
+    "facing=east,honey_level=0": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 90
+    },
+    "facing=east,honey_level=1": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 90
+    },
+    "facing=east,honey_level=2": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 90
+    },
+    "facing=east,honey_level=3": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 90
+    },
+    "facing=east,honey_level=4": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 90
+    },
+    "facing=east,honey_level=5": {
+      "model": "tutorialmod:block/amethyst_bee_hive_honey",
+      "y": 90
+    },
+    "facing=north,honey_level=0": {
       "model": "tutorialmod:block/amethyst_bee_hive"
+    },
+    "facing=north,honey_level=1": {
+      "model": "tutorialmod:block/amethyst_bee_hive"
+    },
+    "facing=north,honey_level=2": {
+      "model": "tutorialmod:block/amethyst_bee_hive"
+    },
+    "facing=north,honey_level=3": {
+      "model": "tutorialmod:block/amethyst_bee_hive"
+    },
+    "facing=north,honey_level=4": {
+      "model": "tutorialmod:block/amethyst_bee_hive"
+    },
+    "facing=north,honey_level=5": {
+      "model": "tutorialmod:block/amethyst_bee_hive_honey"
+    },
+    "facing=south,honey_level=0": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 180
+    },
+    "facing=south,honey_level=1": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 180
+    },
+    "facing=south,honey_level=2": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 180
+    },
+    "facing=south,honey_level=3": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 180
+    },
+    "facing=south,honey_level=4": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 180
+    },
+    "facing=south,honey_level=5": {
+      "model": "tutorialmod:block/amethyst_bee_hive_honey",
+      "y": 180
+    },
+    "facing=west,honey_level=0": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 270
+    },
+    "facing=west,honey_level=1": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 270
+    },
+    "facing=west,honey_level=2": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 270
+    },
+    "facing=west,honey_level=3": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 270
+    },
+    "facing=west,honey_level=4": {
+      "model": "tutorialmod:block/amethyst_bee_hive",
+      "y": 270
+    },
+    "facing=west,honey_level=5": {
+      "model": "tutorialmod:block/amethyst_bee_hive_honey",
+      "y": 270
     }
   }
 }
