@@ -35,17 +35,13 @@ import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
-import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.village.TradeOffer;
-import net.minecraft.village.TradeOffers;
 import net.minecraft.village.TradedItem;
 import net.minecraft.village.VillagerProfession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 // Very important comment
 public class TutorialMod implements ModInitializer {
@@ -98,7 +94,7 @@ public class TutorialMod implements ModInitializer {
             return ActionResult.PASS;
         });
 
-		FabricBrewingRecipeRegistryBuilder.BUILD.register((BrewingRecipeRegistry.Builder builder) -> {
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION);
 		});
 
@@ -133,7 +129,7 @@ public class TutorialMod implements ModInitializer {
 					new ItemStack(ModItems.CAULIFLOWER_SEEDS, 2), 3, 4, 0.04f));
 		});
 
-		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, (List<TradeOffers.Factory> factories) -> {
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 12),
 					new ItemStack(ModItems.HONEY_BERRIES, 5), 4, 7, 0.04f));
