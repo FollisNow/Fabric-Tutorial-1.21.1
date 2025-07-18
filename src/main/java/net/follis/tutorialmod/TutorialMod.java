@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.registry.*;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.follis.tutorialmod.datagen.ModDispenserBehaviourProvider;
 import net.follis.tutorialmod.datagen.ModPointOfInterestTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
@@ -74,6 +75,7 @@ public class TutorialMod implements ModInitializer {
 		ModScreenHandlers.registerScreenHandlers();
 
 		ModRecipes.registerRecipes();
+		ModDispenserBehaviourProvider.registerDispenserBehaviour();
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
