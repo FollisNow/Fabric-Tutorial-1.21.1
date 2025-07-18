@@ -288,8 +288,7 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
     protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (world.getBlockState(neighborPos).getBlock() instanceof FireBlock) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof AmethystBeeHiveBlockEntity) {
-                AmethystBeeHiveBlockEntity amethystBeeHiveBlockEntity = (AmethystBeeHiveBlockEntity)blockEntity;
+            if (blockEntity instanceof AmethystBeeHiveBlockEntity amethystBeeHiveBlockEntity) {
                 amethystBeeHiveBlockEntity.angerBees(null, state, AmethystBeeHiveBlockEntity.AmethystBeeState.EMERGENCY);
             }
         }
