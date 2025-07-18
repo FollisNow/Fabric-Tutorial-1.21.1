@@ -297,7 +297,7 @@ public class AmethystBeeEntity extends AnimalEntity implements Angerable, Flutte
 
     boolean canEnterHive() {
         if (this.cannotEnterHiveTicks <= 0 && this.pollinateGoal.isRunning() && !this.hasStung() && this.getTarget() == null) {
-            boolean bl = this.failedPollinatingTooLong() || this.getWorld().isRaining() || this.getWorld().isNight() || this.hasNectar();
+            boolean bl = this.failedPollinatingTooLong() || this.getWorld().isRaining() || this.hasNectar();
             return bl && !this.isHiveNearFire();
         } else {
             return false;
