@@ -30,6 +30,7 @@ import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.EnchantmentTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -53,6 +54,8 @@ import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import static net.minecraft.block.CandleBlock.LIT;
 
 public class AmethystBeeHiveBlock extends BlockWithEntity {
     public static final DirectionProperty FACING;
@@ -119,8 +122,17 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
 
     }
 
-    public static void dropHoneycomb(World world, BlockPos pos) {
-        dropStack(world, pos, new ItemStack(Items.HONEYCOMB, 3));
+    private boolean hasBees(World world, BlockPos pos) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof AmethystBeeHiveBlockEntity amethystBeeHiveBlockEntity) {
+            return !amethystBeeHiveBlockEntity.hasNoBees();
+        } else {
+            return false;
+        }
+    }
+
+    public static void dropAmethystShard(World world, BlockPos pos) {
+        dropStack(world, pos, new ItemStack(Items.AMETHYST_SHARD, 3));
     }
 
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -128,9 +140,9 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
         boolean bl = false;
         if (i >= 5) {
             Item item = stack.getItem();
-            if (stack.isOf(Items.SHEARS)) {
-                world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_BEEHIVE_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                dropHoneycomb(world, pos);
+            if (stack.isIn(ItemTags.PICKAXES)) {
+                world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                dropAmethystShard(world, pos);
                 stack.damage(1, player, LivingEntity.getSlotForHand(hand));
                 bl = true;
                 world.emitGameEvent(player, GameEvent.SHEAR, pos);
@@ -153,7 +165,7 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
         }
 
         if (bl) {
-            if (!CampfireBlock.isLitCampfireInRange(world, pos)) {
+            if (!hasCandles(world, pos)) {
                 if (this.hasBees(world, pos)) {
                     this.angerNearbyBees(world, pos);
                 }
@@ -169,13 +181,10 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
         }
     }
 
-    private boolean hasBees(World world, BlockPos pos) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof AmethystBeeHiveBlockEntity amethystBeeHiveBlockEntity) {
-            return !amethystBeeHiveBlockEntity.hasNoBees();
-        } else {
-            return false;
-        }
+    protected boolean hasCandles(World world, BlockPos pos) {
+        BlockPos onTop = pos.up();
+        BlockState blockOnTop = world.getBlockState(onTop);
+        return blockOnTop.contains(LIT) && blockOnTop.isIn(BlockTags.CANDLES) && blockOnTop.get(LIT);
     }
 
     public void takeHoney(World world, BlockState state, BlockPos pos, @Nullable PlayerEntity player, AmethystBeeHiveBlockEntity.AmethystBeeState amethystBeeState) {
