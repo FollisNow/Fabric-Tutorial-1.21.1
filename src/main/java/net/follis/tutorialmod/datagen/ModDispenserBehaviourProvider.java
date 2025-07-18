@@ -1,22 +1,10 @@
 package net.follis.tutorialmod.datagen;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.item.*;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPointer;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class ModDispenserBehaviourProvider implements DispenserBehavior {
 
