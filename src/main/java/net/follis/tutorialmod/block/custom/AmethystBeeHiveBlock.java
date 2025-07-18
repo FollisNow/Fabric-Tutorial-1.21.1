@@ -6,6 +6,7 @@ import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.entity.custom.AmethystBeeEntity;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -243,14 +244,8 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
     }
 
     @Nullable
-    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        if(world.isClient()) {
-            return null;
-        }
-
-        return validateTicker(type, ModBlockEntities.AMETHYST_BEE_HIVE_BE,
-                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1, blockEntity));
+        return world.isClient ? null : validateTicker(type, ModBlockEntities.AMETHYST_BEE_HIVE_BE, AmethystBeeHiveBlockEntity::serverTick);
     }
 
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {

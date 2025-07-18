@@ -242,7 +242,7 @@ public class AmethystBeeHiveBlockEntity extends BlockEntity {
 
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, AmethystBeeHiveBlockEntity blockEntity) {
+    public static void serverTick(World world, BlockPos pos, BlockState state, AmethystBeeHiveBlockEntity blockEntity) {
         tickBees(world, pos, state, blockEntity.bees, blockEntity.flowerPos);
         if (!blockEntity.bees.isEmpty() && world.getRandom().nextDouble() < 0.005) {
             double d = (double)pos.getX() + (double)0.5F;
