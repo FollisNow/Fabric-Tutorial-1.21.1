@@ -17,6 +17,12 @@ public class ModEffects {
                             Identifier.of(TutorialMod.MOD_ID, "slimey"), -0.25f,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
+    public static final RegistryEntry<StatusEffect> STRANGE_ATTRACTOR = registerStatusEffect("strange_attractor",
+            new StrangeAttractorEffect(StatusEffectCategory.NEUTRAL, 0x06baf9)
+                    .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                            Identifier.of(TutorialMod.MOD_ID, "strange_attractor"), 0.05f,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+
 
     private static RegistryEntry<StatusEffect> registerStatusEffect(String name, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(TutorialMod.MOD_ID, name), statusEffect);

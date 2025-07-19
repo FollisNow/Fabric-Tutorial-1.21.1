@@ -35,6 +35,10 @@
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
 
+  "item.minecraft.potion.effect.attraction_potion": "Attraction Potion",
+  "item.minecraft.splash_potion.effect.attraction_potion": "Attraction Splash Potion",
+  "item.minecraft.lingering_potion.effect.attraction_potion": "Attraction Lingering Potion",
+
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
   "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
   "item.tutorialmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
@@ -91,6 +95,7 @@
 
 
   "effect.tutorialmod.slimey": "Slimey",
+  "effect.tutorialmod.strange_attractor": "Strange Attractor",
 
   "painting.tutorialmod.world.title": "World",
   "painting.tutorialmod.world.author": "NanoAttack",
