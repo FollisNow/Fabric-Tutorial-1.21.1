@@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.entity.custom.AmethystBeeEntity;
+import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.potion.ModPotions;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -11,6 +13,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlockStateComponent;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -153,9 +156,9 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
                 stack.decrement(1);
                 world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 if (stack.isEmpty()) {
-                    player.setStackInHand(hand, new ItemStack(Items.HONEY_BOTTLE));
-                } else if (!player.getInventory().insertStack(new ItemStack(Items.HONEY_BOTTLE))) {
-                    player.dropItem(new ItemStack(Items.HONEY_BOTTLE), false);
+                    player.setStackInHand(hand, PotionContentsComponent.createStack(Items.POTION, ModPotions.SLIMEY_POTION));
+                } else if (!player.getInventory().insertStack(PotionContentsComponent.createStack(Items.POTION, ModPotions.SLIMEY_POTION))) {
+                    player.dropItem(PotionContentsComponent.createStack(Items.POTION, ModPotions.SLIMEY_POTION), false);
                 }
 
                 bl = true;
