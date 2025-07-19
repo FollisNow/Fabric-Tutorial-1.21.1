@@ -21,6 +21,7 @@ import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.entity.vehicle.TntMinecartEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -32,6 +33,7 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -215,7 +217,6 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
                 this.spawnHoneyParticles(world, pos, state);
             }
         }
-
     }
 
     private void spawnHoneyParticles(World world, BlockPos pos, BlockState state) {
@@ -285,6 +286,37 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
         return super.onBreak(world, pos, state, player);
     }
 
+    protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (state.get(HONEY_LEVEL) >= 5 && random.nextInt(2) == 0) {
+            Direction direction = Direction.DOWN;
+            BlockPos blockPos = pos.offset(direction);
+            BlockState blockState = world.getBlockState(blockPos);
+            Block block = null;
+            if (canGrowIn(blockState)) {
+                block = Blocks.SMALL_AMETHYST_BUD;
+            } else if (blockState.isOf(Blocks.SMALL_AMETHYST_BUD) && blockState.get(AmethystClusterBlock.FACING) == direction) {
+                block = Blocks.MEDIUM_AMETHYST_BUD;
+            } else if (blockState.isOf(Blocks.MEDIUM_AMETHYST_BUD) && blockState.get(AmethystClusterBlock.FACING) == direction) {
+                block = Blocks.LARGE_AMETHYST_BUD;
+            } else if (blockState.isOf(Blocks.LARGE_AMETHYST_BUD) && blockState.get(AmethystClusterBlock.FACING) == direction) {
+                block = Blocks.AMETHYST_CLUSTER;
+            }
+
+            if (block != null) {
+                BlockState blockState2 = block.getDefaultState().with(AmethystClusterBlock.FACING, direction).with(AmethystClusterBlock.WATERLOGGED, blockState.getFluidState().getFluid() == Fluids.WATER);
+                world.setBlockState(blockPos, blockState2);
+            }
+
+        }
+    }
+
+    protected static boolean canGrowIn(BlockState state) {
+        return state.isAir() || state.isOf(Blocks.WATER) && state.getFluidState().getLevel() == 8;
+    }
+
+    protected boolean hasRandomTicks(BlockState state) {
+        return true;
+    }
     protected List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
         Entity entity = builder.getOptional(LootContextParameters.THIS_ENTITY);
         if (entity instanceof TntEntity || entity instanceof CreeperEntity || entity instanceof WitherSkullEntity || entity instanceof WitherEntity || entity instanceof TntMinecartEntity) {
@@ -296,7 +328,6 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
 
         return super.getDroppedStacks(state, builder);
     }
-
     protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (world.getBlockState(neighborPos).getBlock() instanceof FireBlock) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -307,15 +338,12 @@ public class AmethystBeeHiveBlock extends BlockWithEntity {
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
-
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
-
     public BlockState mirror(BlockState state, BlockMirror mirror) {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
-
     static {
         FACING = HorizontalFacingBlock.FACING;
         HONEY_LEVEL = Properties.HONEY_LEVEL;
