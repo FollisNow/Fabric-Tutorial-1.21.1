@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.entity.custom.AmethystBeeEntity;
-import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.potion.ModPotions;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
