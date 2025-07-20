@@ -1,13 +1,9 @@
 package net.follis.tutorialmod.effect;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.util.math.Box;
-
-import java.util.List;
 
 public class LoveEffect extends StatusEffect {
     public LoveEffect(StatusEffectCategory category, int color) {
