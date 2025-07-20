@@ -19,16 +19,12 @@ public class RejuvenationEffect extends StatusEffect {
             mobEntity.setBaby(true);
             mobEntity.getWorld().playSound(mobEntity.getX(), mobEntity.getEyeY(), mobEntity.getZ(), SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, mobEntity.getSoundCategory(), 1.0F + mobEntity.getRandom().nextFloat(), mobEntity.getRandom().nextFloat() * 0.7F + 0.3F, false);
             switch (mobEntity) {
-                case AbstractSkeletonEntity skelly -> {
-                    skelly.convertTo(EntityType.ZOMBIE, true);
-                }
+                case AbstractSkeletonEntity skelly -> skelly.convertTo(EntityType.ZOMBIE, true);
                 case WitchEntity witchy -> {
                     witchy.dropAllEquipment();
                     witchy.convertTo(EntityType.VILLAGER, false);
                 }
-                case ZombifiedPiglinEntity piggy -> {
-                    piggy.convertTo(EntityType.PIGLIN, true);
-                }
+                case ZombifiedPiglinEntity piggy -> piggy.convertTo(EntityType.PIGLIN, true);
                 default -> {
                 }
             }
