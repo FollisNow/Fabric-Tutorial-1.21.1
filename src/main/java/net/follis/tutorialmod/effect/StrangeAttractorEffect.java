@@ -26,7 +26,7 @@ public class StrangeAttractorEffect extends StatusEffect {
         List<Entity> neighbours = entity.getWorld().getOtherEntities(entity, box);
 
         switch (entity) {
-            case PlayerEntity playerEntity -> {
+            case PlayerEntity ignored -> {
                 for (Entity neighbour : neighbours) {
                     if (neighbour instanceof ItemEntity itemEntity) {
                         Vec3d diff = entity.getPos().add(0, 1, 0).subtract(itemEntity.getPos()).normalize();
