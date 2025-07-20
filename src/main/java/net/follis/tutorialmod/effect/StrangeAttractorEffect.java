@@ -1,12 +1,24 @@
 package net.follis.tutorialmod.effect;
 
+import net.follis.tutorialmod.entity.ModEntities;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.WardenEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -21,12 +33,23 @@ public class StrangeAttractorEffect extends StatusEffect {
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         Box box = new Box(entity.getBlockPos()).expand(10);
         List<Entity> neighbours = entity.getWorld().getOtherEntities(entity, box);
-        for (Entity neighbour : neighbours){
-            if(neighbour instanceof ItemEntity itemEntity) {
-                Vec3d diff = entity.getPos().add(0, 1, 0).subtract(itemEntity.getPos()).normalize();
-                itemEntity.setVelocity(diff.multiply(0.5));
+
+        switch (entity) {
+            case PlayerEntity playerEntity -> {
+                for (Entity neighbour : neighbours) {
+                    if (neighbour instanceof ItemEntity itemEntity) {
+                        Vec3d diff = entity.getPos().add(0, 1, 0).subtract(itemEntity.getPos()).normalize();
+                        itemEntity.setVelocity(diff.multiply(0.5));
+                    }
+                }
+            }
+            case AnimalEntity animal when !animal.isBaby() -> animal.setLoveTicks(600);
+            case HostileEntity hostileMob when neighbours.getFirst() instanceof HostileEntity hostile ->
+                    hostileMob.setTarget(hostile);
+            default -> {
             }
         }
+
         return super.applyUpdateEffect(entity, amplifier);
     }
 
