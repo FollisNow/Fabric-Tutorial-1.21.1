@@ -16,9 +16,6 @@ public class LoveEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        Box box = new Box(entity.getBlockPos()).expand(10);
-        List<Entity> neighbours = entity.getWorld().getOtherEntities(entity, box);
-
         if (entity instanceof AnimalEntity animal && !animal.isBaby()) {
             animal.setLoveTicks(600);
         }
