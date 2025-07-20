@@ -35,9 +35,21 @@
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
 
-  "item.minecraft.potion.effect.attraction_potion": "Attraction Potion",
-  "item.minecraft.splash_potion.effect.attraction_potion": "Attraction Splash Potion",
-  "item.minecraft.lingering_potion.effect.attraction_potion": "Attraction Lingering Potion",
+  "item.minecraft.potion.effect.attraction_potion": "Potion of Attraction",
+  "item.minecraft.splash_potion.effect.attraction_potion": "Splash Potion of Attraction",
+  "item.minecraft.lingering_potion.effect.attraction_potion": "Lingering Potion of Attraction",
+
+  "item.minecraft.potion.effect.rejuvenation_potion": "Potion of Rejuvenation",
+  "item.minecraft.splash_potion.effect.rejuvenation_potion": "Splash Potion of Rejuvenation",
+  "item.minecraft.lingering_potion.effect.rejuvenation_potion": "Lingering Potion of Rejuvenation",
+
+  "item.minecraft.potion.effect.hatred_potion": "Potion of Hatred",
+  "item.minecraft.splash_potion.effect.hatred_potion": "Splash Potion of Hatred",
+  "item.minecraft.lingering_potion.effect.hatred_potion": "Lingering Potion of Hatred",
+
+  "item.minecraft.potion.effect.love_potion": "Potion of Love",
+  "item.minecraft.splash_potion.effect.love_potion": "Splash Potion of Love",
+  "item.minecraft.lingering_potion.effect.love_potion": "Lingering Potion of Love",
 
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
   "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
@@ -96,6 +108,9 @@
 
   "effect.tutorialmod.slimey": "Slimey",
   "effect.tutorialmod.strange_attractor": "Strange Attractor",
+  "effect.tutorialmod.rejuvenation": "Rejuvenation",
+  "effect.tutorialmod.hatred": "Hatred",
+  "effect.tutorialmod.love": "Love",
 
   "painting.tutorialmod.world.title": "World",
   "painting.tutorialmod.world.author": "NanoAttack",

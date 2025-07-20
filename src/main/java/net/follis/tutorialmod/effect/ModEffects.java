@@ -24,6 +24,16 @@ public class ModEffects {
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
 
+    public static final RegistryEntry<StatusEffect> REJUNEVATION = registerStatusEffect("rejuvenation",
+            new RejuvenationEffect(StatusEffectCategory.NEUTRAL, 0xd2d03c));
+
+    public static final RegistryEntry<StatusEffect> HATRED = registerStatusEffect("hatred",
+            new HatredEffect(StatusEffectCategory.HARMFUL, 0xbf2c2c));
+
+    public static final RegistryEntry<StatusEffect> LOVE = registerStatusEffect("love",
+            new LoveEffect(StatusEffectCategory.BENEFICIAL, 0xff94cc));
+
+
     private static RegistryEntry<StatusEffect> registerStatusEffect(String name, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(TutorialMod.MOD_ID, name), statusEffect);
     }

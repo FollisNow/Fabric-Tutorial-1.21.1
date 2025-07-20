@@ -16,6 +16,15 @@ public class ModPotions {
     public static final RegistryEntry<Potion> ATTRACTION_POTION = registerPotion("attraction_potion",
             new Potion(new StatusEffectInstance(ModEffects.STRANGE_ATTRACTOR, 18000, 0)));
 
+    public static final RegistryEntry<Potion> REJUVENATION_POTION = registerPotion("rejuvenation_potion",
+            new Potion(new StatusEffectInstance(ModEffects.REJUNEVATION, 100, 0)));
+
+    public static final RegistryEntry<Potion> HATRED_POTION = registerPotion("hatred_potion",
+            new Potion(new StatusEffectInstance(ModEffects.HATRED, 4800, 0)));
+
+    public static final RegistryEntry<Potion> LOVE_POTION = registerPotion("love_potion",
+            new Potion(new StatusEffectInstance(ModEffects.LOVE, 1200, 0)));
+
 
     private static RegistryEntry<Potion> registerPotion(String name, Potion potion) {
         return Registry.registerReference(Registries.POTION, Identifier.of(TutorialMod.MOD_ID, name), potion);

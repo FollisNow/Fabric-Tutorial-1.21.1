@@ -95,11 +95,19 @@ public class TutorialMod implements ModInitializer {
         });
 
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
-			builder.registerPotionRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION);
+			builder.registerPotionRecipe(Potions.MUNDANE, Items.SLIME_BALL, ModPotions.SLIMEY_POTION);
 		});
-
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.MUNDANE, Items.AMETHYST_SHARD, ModPotions.ATTRACTION_POTION);
+		});
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+			builder.registerPotionRecipe(Potions.MUNDANE, Items.MANGROVE_ROOTS, ModPotions.REJUVENATION_POTION);
+		});
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+			builder.registerPotionRecipe(Potions.MUNDANE, Items.AMETHYST_SHARD, ModPotions.HATRED_POTION);
+		});
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+			builder.registerPotionRecipe(Potions.MUNDANE, Items.MANGROVE_ROOTS, ModPotions.LOVE_POTION);
 		});
 
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER, 0.5f);

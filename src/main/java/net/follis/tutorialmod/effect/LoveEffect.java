@@ -13,8 +13,8 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 
-public class StrangeAttractorEffect extends StatusEffect {
-    public StrangeAttractorEffect(StatusEffectCategory category, int color) {
+public class LoveEffect extends StatusEffect {
+    public LoveEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
 
@@ -23,14 +23,10 @@ public class StrangeAttractorEffect extends StatusEffect {
         Box box = new Box(entity.getBlockPos()).expand(10);
         List<Entity> neighbours = entity.getWorld().getOtherEntities(entity, box);
 
-        if (entity instanceof PlayerEntity) {
-            for (Entity neighbour : neighbours) {
-                if (neighbour instanceof ItemEntity itemEntity) {
-                    Vec3d diff = entity.getPos().add(0, 1, 0).subtract(itemEntity.getPos()).normalize();
-                    itemEntity.setVelocity(diff.multiply(0.5));
-                }
-            }
+        if (entity instanceof AnimalEntity animal && !animal.isBaby()) {
+            animal.setLoveTicks(600);
         }
+
         return super.applyUpdateEffect(entity, amplifier);
     }
 

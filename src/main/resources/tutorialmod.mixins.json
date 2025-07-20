@@ -3,7 +3,8 @@
 	"package": "net.follis.tutorialmod.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"WardenEntityMixin"
 	],
 	"client": [
 		"AbstractClientPlayerEntityMixin",
