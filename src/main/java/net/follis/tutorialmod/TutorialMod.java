@@ -109,6 +109,9 @@ public class TutorialMod implements ModInitializer {
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.MUNDANE, Items.MANGROVE_ROOTS, ModPotions.LOVE_POTION);
 		});
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+			builder.registerPotionRecipe(Potions.MUNDANE, Items.BROWN_MUSHROOM, ModPotions.SPORULATION_POTION);
+		});
 
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER, 0.5f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER_SEEDS, 0.25f);
