@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.mob.*;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 
 public class RejuvenationEffect extends StatusEffect {
@@ -15,21 +16,28 @@ public class RejuvenationEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (entity instanceof MobEntity mobEntity && !mobEntity.isBaby()) {
-            mobEntity.setBaby(true);
-            mobEntity.getWorld().playSound(mobEntity.getX(), mobEntity.getEyeY(), mobEntity.getZ(), SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, mobEntity.getSoundCategory(), 1.0F + mobEntity.getRandom().nextFloat(), mobEntity.getRandom().nextFloat() * 0.7F + 0.3F, false);
-            switch (mobEntity) {
-                case AbstractSkeletonEntity skelly -> skelly.convertTo(EntityType.ZOMBIE, true);
-                case WitchEntity witchy -> {
-                    witchy.dropAllEquipment();
-                    witchy.convertTo(EntityType.VILLAGER, false);
+        if(entity.getRandom().nextInt(20) == 0) {
+            if (entity instanceof MobEntity mobEntity && !mobEntity.isBaby()) {
+                mobEntity.setBaby(true);
+
+                if (!mobEntity.getWorld().isClient()) {
+                    mobEntity.getWorld().playSound(mobEntity, mobEntity.getBlockPos(),SoundEvents.ENTITY_ZOMBIE_VILLAGER_CONVERTED, SoundCategory.NEUTRAL, 1f, 0.7f);
                 }
-                case ZombifiedPiglinEntity piggy -> piggy.convertTo(EntityType.PIGLIN, true);
-                default -> {
+
+                switch (mobEntity) {
+                    case AbstractSkeletonEntity skelly -> skelly.convertTo(EntityType.ZOMBIE, true);
+                    case WitchEntity witchy -> {
+                        witchy.dropAllEquipment();
+                        witchy.convertTo(EntityType.VILLAGER, false);
+                    }
+                    case ZombifiedPiglinEntity piggy -> piggy.convertTo(EntityType.PIGLIN, true);
+                    default -> {
+                    }
                 }
+                mobEntity.removeStatusEffect(ModEffects.REJUNEVATION);
             }
-            mobEntity.removeStatusEffect(ModEffects.REJUNEVATION);
         }
+
         return super.applyUpdateEffect(entity, amplifier);
     }
 

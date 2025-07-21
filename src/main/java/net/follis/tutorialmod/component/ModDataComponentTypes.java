@@ -19,7 +19,6 @@ public class ModDataComponentTypes {
             register("bees", (builder) -> builder.codec(AmethystBeeHiveBlockEntity.AmethystBeeData.LIST_CODEC)
                     .packetCodec(AmethystBeeHiveBlockEntity.AmethystBeeData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
 
-
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(TutorialMod.MOD_ID, name),
                 builderOperator.apply(ComponentType.builder()).build());

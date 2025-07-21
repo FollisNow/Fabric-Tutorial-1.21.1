@@ -33,6 +33,9 @@ public class ModEffects {
     public static final RegistryEntry<StatusEffect> LOVE = registerStatusEffect("love",
             new LoveEffect(StatusEffectCategory.BENEFICIAL, 0xff94cc));
 
+    public static final RegistryEntry<StatusEffect> SPORULATION = registerStatusEffect("sporulation",
+            new SporulationEffect(StatusEffectCategory.NEUTRAL, 0xb36d0b));
+
 
     private static RegistryEntry<StatusEffect> registerStatusEffect(String name, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(TutorialMod.MOD_ID, name), statusEffect);

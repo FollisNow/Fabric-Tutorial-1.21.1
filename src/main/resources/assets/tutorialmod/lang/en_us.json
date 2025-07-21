@@ -51,6 +51,10 @@
   "item.minecraft.splash_potion.effect.love_potion": "Splash Potion of Love",
   "item.minecraft.lingering_potion.effect.love_potion": "Lingering Potion of Love",
 
+  "item.minecraft.potion.effect.sporulation_potion": "Potion of Sporulation",
+  "item.minecraft.splash_potion.effect.sporulation_potion": "Splash Potion of Sporulation",
+  "item.minecraft.lingering_potion.effect.sporulation_potion": "Lingering Potion of Sporulation",
+
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
   "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
   "item.tutorialmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
@@ -111,6 +115,7 @@
   "effect.tutorialmod.rejuvenation": "Rejuvenation",
   "effect.tutorialmod.hatred": "Hatred",
   "effect.tutorialmod.love": "Love",
+  "effect.tutorialmod.sporulation": "Sporulation",
 
   "painting.tutorialmod.world.title": "World",
   "painting.tutorialmod.world.author": "NanoAttack",

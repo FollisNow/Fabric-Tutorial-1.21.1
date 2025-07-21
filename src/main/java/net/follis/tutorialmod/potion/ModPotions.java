@@ -25,6 +25,9 @@ public class ModPotions {
     public static final RegistryEntry<Potion> LOVE_POTION = registerPotion("love_potion",
             new Potion(new StatusEffectInstance(ModEffects.LOVE, 1200, 0)));
 
+    public static final RegistryEntry<Potion> SPORULATION_POTION = registerPotion("sporulation_potion",
+            new Potion(new StatusEffectInstance(ModEffects.SPORULATION, 4800, 2)));
+
 
     private static RegistryEntry<Potion> registerPotion(String name, Potion potion) {
         return Registry.registerReference(Registries.POTION, Identifier.of(TutorialMod.MOD_ID, name), potion);
