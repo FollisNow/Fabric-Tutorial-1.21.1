@@ -85,7 +85,7 @@ public class BugNetItem extends Item {
                 }
                 bugDataList.clear();
             } else {
-                BugData lastBug = bugDataList.remove(bugDataList.size() - 1);
+                BugData lastBug = bugDataList.removeLast();
                 releaseBug(pos, lastBug, player);
             }
             player.getMainHandStack().set(ModDataComponentTypes.BUGS, bugDataList);
@@ -95,7 +95,7 @@ public class BugNetItem extends Item {
     }
 
     private void releaseBug(BlockPos pos, BugData bugData, PlayerEntity player) {
-        Entity entity = bugData.loadEntity(player.getWorld(), pos);
+        Entity entity = bugData.loadEntity(player.getWorld());
         if (entity != null) {
             positionEntity(entity, pos);
             world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_EXIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -127,7 +127,7 @@ public class BugNetItem extends Item {
         }
 
         @Nullable
-        public Entity loadEntity(World world, BlockPos pos) {
+        public Entity loadEntity(World world) {
             NbtCompound nbtCompound = entityData.copyNbt();
             return EntityType.loadEntityWithPassengers(nbtCompound, world, entityx -> entityx);
         }
