@@ -1,6 +1,5 @@
 package net.follis.tutorialmod.item.custom;
 
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
@@ -28,13 +27,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BugNetItem extends Item {
-    private static final Logger LOGGER = LogUtils.getLogger();
     private World world;
 
     public BugNetItem(Settings settings) {
@@ -79,8 +76,6 @@ public class BugNetItem extends Item {
         if (context.getPlayer() != null && !context.getWorld().isClient) {
             if (tryReleaseBugs(context.getBlockPos(), context.getPlayer())) {
                 return ActionResult.SUCCESS;
-            } else {
-                LOGGER.info("Failed to release any bug");
             }
         }
         return ActionResult.PASS;
@@ -96,13 +91,11 @@ public class BugNetItem extends Item {
         player.getMainHandStack().set(ModDataComponentTypes.BUGS, bugDataList);
 
         world.playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_BEEHIVE_ENTER, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        LOGGER.info("Added {} to bug list", bugDataList);
         entity.discard();
     }
 
     private boolean tryReleaseBugs(BlockPos pos, PlayerEntity player) {
         List<BugData> bugDataList = getMutableBugDataList(player);
-        LOGGER.info("Retrieved {} as bug list", bugDataList);
 
         if (!bugDataList.isEmpty()) {
             if (player.isSneaking()) {
