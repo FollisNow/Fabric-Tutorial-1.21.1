@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -13,12 +14,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -38,6 +42,28 @@ public class BugNetItem extends Item {
     }
 
     @Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+
+        if(Screen.hasShiftDown()) {
+            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_net.shift_down"));
+
+            List<BugData> bugDataList = new ArrayList<>(stack.getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
+            if(!bugDataList.isEmpty()) {
+                Formatting[] formatting = new Formatting[]{Formatting.GRAY};
+                tooltip.add(Text.literal(Text.translatable("tooltip.tutorialmod.bug_net.last_caught").getString() + bugDataList.getLast().entityData.copyNbt().get("id")).formatted(formatting));
+                List<BugData> reversedList = bugDataList.reversed();
+                for (BugData bugData: reversedList) {
+                    if (bugData != reversedList.getFirst())
+                        tooltip.add(Text.literal(Text.translatable("tooltip.tutorialmod.bug_net.caught").getString() + bugData.entityData.copyNbt().get("id")).formatted(formatting));
+                }
+            }
+        } else {
+            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_net"));
+        }
+        super.appendTooltip(stack, context, tooltip, type);
+    }
+
+    @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         this.world = user.getWorld();
         if (world instanceof ServerWorld) {
@@ -51,7 +77,7 @@ public class BugNetItem extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
         this.world = context.getWorld();
         if (context.getPlayer() != null && !context.getWorld().isClient) {
-            if (tryReleaseBugs(context.getBlockPos().up(), context.getPlayer())) {
+            if (tryReleaseBugs(context.getBlockPos(), context.getPlayer())) {
                 return ActionResult.SUCCESS;
             } else {
                 LOGGER.info("Failed to release any bug");
@@ -106,7 +132,7 @@ public class BugNetItem extends Item {
 
     private void positionEntity(Entity entity, BlockPos pos) {
         double x = pos.getX() + 0.5 + (double) entity.getRandom().nextInt(5) / 10;
-        double y = pos.getY() + 0.5 - (entity.getHeight() / 2.0);
+        double y = pos.getY() + 1.1;
         double z = pos.getZ() + 0.5 + (double) entity.getRandom().nextInt(5) / 10;
         entity.refreshPositionAndAngles(x, y, z, entity.getYaw(), entity.getPitch());
     }
