@@ -76,6 +76,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.CAULIFLOWER, Models.GENERATED);
         itemModelGenerator.register(ModItems.LOCUST, Models.GENERATED);
         itemModelGenerator.register(ModItems.GRILLED_LOCUST, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BUG_NET, Models.GENERATED);
         // itemModelGenerator.register(ModItems.CHISEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.STARLIGHT_ASHES, Models.GENERATED);
 
