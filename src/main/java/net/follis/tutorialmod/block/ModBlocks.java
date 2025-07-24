@@ -15,6 +15,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 
 public class ModBlocks {
     public static final Block PINK_GARNET_BLOCK = registerBlock("pink_garnet_block",
@@ -75,6 +76,7 @@ public class ModBlocks {
     public static final Block HONEY_BERRY_BUSH = registerBlockWithoutBlockItem("honey_berry_bush",
             new HoneyBerryBushBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)));
 
+    public static final Block CRYSTAL_MUSHROOM = registerBlock("crystal_mushroom", new MushroomPlantBlock(TreeConfiguredFeatures.HUGE_BROWN_MUSHROOM, AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance((state) -> 1).postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY)));
 
     public static final Block DRIFTWOOD_LOG = registerBlock("driftwood_log",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG)));

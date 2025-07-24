@@ -95,6 +95,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.DRIFTWOOD_LEAVES);
 
                         entries.add(ModBlocks.DRIFTWOOD_SAPLING);
+                        entries.add(ModBlocks.CRYSTAL_MUSHROOM);
 
                         entries.add(ModBlocks.CHAIR);
                         entries.add(ModBlocks.PEDESTAL);

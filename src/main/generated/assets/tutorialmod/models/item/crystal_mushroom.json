@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "tutorialmod:block/driftwood_sapling"
+    "layer0": "tutorialmod:block/crystal_mushroom"
   }
 }

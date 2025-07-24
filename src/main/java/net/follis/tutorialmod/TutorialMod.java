@@ -104,14 +104,23 @@ public class TutorialMod implements ModInitializer {
 			builder.registerPotionRecipe(Potions.MUNDANE, Items.MANGROVE_ROOTS, ModPotions.REJUVENATION_POTION);
 		});
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
-			builder.registerPotionRecipe(Potions.MUNDANE, Items.AMETHYST_SHARD, ModPotions.HATRED_POTION);
+			builder.registerPotionRecipe(Potions.MUNDANE, Items.CRIMSON_FUNGUS, ModPotions.HATRED_POTION);
 		});
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
-			builder.registerPotionRecipe(Potions.MUNDANE, Items.MANGROVE_ROOTS, ModPotions.LOVE_POTION);
+			builder.registerPotionRecipe(Potions.MUNDANE, Items.WARPED_FUNGUS, ModPotions.LOVE_POTION);
 		});
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.MUNDANE, Items.BROWN_MUSHROOM, ModPotions.SPORULATION_POTION);
 		});
+
+		// Reversed Potion recipes
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+			builder.registerPotionRecipe(ModPotions.HATRED_POTION, Items.FERMENTED_SPIDER_EYE, ModPotions.LOVE_POTION);
+		});
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+			builder.registerPotionRecipe(ModPotions.LOVE_POTION, Items.FERMENTED_SPIDER_EYE, ModPotions.HATRED_POTION);
+		});
+
 
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER, 0.5f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER_SEEDS, 0.25f);
@@ -178,6 +187,10 @@ public class TutorialMod implements ModInitializer {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(ModItems.PINK_GARNET, 16),
 					new ItemStack(ModItems.TOMAHAWK, 1), 3, 12, 0.09f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(Items.EMERALD, 4),
+					new ItemStack(ModItems.BUG_NET, 1), 3, 12, 0.09f));
 		});
 	}
 	//Les fourmies attrapents les objets par terre et peuvent construire des structures

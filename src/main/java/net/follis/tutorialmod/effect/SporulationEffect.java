@@ -1,9 +1,11 @@
 package net.follis.tutorialmod.effect;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
@@ -16,18 +18,14 @@ public class SporulationEffect extends StatusEffect {
     public SporulationEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
-    List<BlockPos> positions = new ArrayList<>();
+    private final List<BlockPos> positions = new ArrayList<>();
 
     @Override
-    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (entity.isDead()){
-            summonMushroomPatch(entity.getBlockPos(), entity.getWorld(), 10);
+    public void onEntityRemoval(LivingEntity entity, int amplifier, Entity.RemovalReason reason) {
+        if (reason == Entity.RemovalReason.KILLED) {
+            this.summonMushroomPatch(entity.getBlockPos(), entity.getWorld(), 10);
             entity.removeStatusEffect(ModEffects.SPORULATION);
         }
-
-
-
-        return super.applyUpdateEffect(entity, amplifier);
     }
 
     private void summonMushroomPatch(BlockPos pos, World world, int range) {
