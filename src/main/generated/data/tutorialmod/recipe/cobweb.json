@@ -3,16 +3,16 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "tutorialmod:raw_pink_garnet"
+      "item": "minecraft:string"
     }
   },
   "pattern": [
-    "###",
-    "###",
-    "###"
+    "# #",
+    " # ",
+    "# #"
   ],
   "result": {
     "count": 1,
-    "id": "tutorialmod:raw_pink_garnet_block"
+    "id": "minecraft:cobweb"
   }
 }

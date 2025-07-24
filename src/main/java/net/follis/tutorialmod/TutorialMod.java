@@ -180,4 +180,5 @@ public class TutorialMod implements ModInitializer {
 					new ItemStack(ModItems.TOMAHAWK, 1), 3, 12, 0.09f));
 		});
 	}
+	//Les fourmies attrapents les objets par terre et peuvent construire des structures
 }

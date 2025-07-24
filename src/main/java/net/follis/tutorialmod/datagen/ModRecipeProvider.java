@@ -5,10 +5,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.item.ModItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SmokingRecipe;
@@ -39,23 +41,43 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PINK_GARNET, RecipeCategory.DECORATIONS, ModBlocks.PINK_GARNET_BLOCK);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.RAW_PINK_GARNET_BLOCK)
-                .pattern("RRR")
-                .pattern("RRR")
-                .pattern("RRR")
-                .input('R', ModItems.RAW_PINK_GARNET)
-                .criterion(hasItem(ModItems.RAW_PINK_GARNET), conditionsFromItem(ModItems.RAW_PINK_GARNET))
-                .offerTo(exporter);
-
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RAW_PINK_GARNET, 9)
-                .input(ModBlocks.RAW_PINK_GARNET_BLOCK)
-                .criterion(hasItem(ModBlocks.RAW_PINK_GARNET_BLOCK), conditionsFromItem(ModBlocks.RAW_PINK_GARNET_BLOCK))
-                .offerTo(exporter);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.RAW_PINK_GARNET, RecipeCategory.DECORATIONS, ModBlocks.RAW_PINK_GARNET_BLOCK);
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RAW_PINK_GARNET, 32)
                 .input(ModBlocks.MAGIC_BLOCK)
                 .criterion(hasItem(ModBlocks.MAGIC_BLOCK), conditionsFromItem(ModBlocks.MAGIC_BLOCK))
                 .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "raw_pink_garnet_from_magic_block"));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Blocks.COBWEB)
+                .pattern("# #")
+                .pattern(" # ")
+                .pattern("# #")
+                .input('#', Items.STRING)
+                .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Items.STRING, 5)
+                .input(Blocks.COBWEB)
+                .criterion(hasItem(Blocks.COBWEB), conditionsFromItem(Blocks.COBWEB))
+                .offerTo(exporter);
+
+
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUG_NET)
+                .pattern(" #^")
+                .pattern(" ##")
+                .pattern("#  ")
+                .input('#', Items.STICK)
+                .input('^', Blocks.COBWEB)
+                .criterion(hasItem(Blocks.COBWEB), conditionsFromItem(Blocks.COBWEB))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.SLIME_BALL, 1)
+                .input(ModItems.LOCUST)
+                .criterion(hasItem(ModItems.LOCUST), conditionsFromItem(ModItems.LOCUST))
+                .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "slime_ball_from_locust"));
+
+
 
         offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(TutorialMod.MOD_ID, "kaupen"));
     }
