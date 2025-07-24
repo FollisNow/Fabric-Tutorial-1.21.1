@@ -7,9 +7,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -17,7 +15,6 @@ public class HarvestBlockGoal extends Goal {
     private final AnimalEntity entity;
     private final Block blockToHarvest; // The block type to harvest
     private final int range;
-    private final int height;
     private final boolean isRandomized;
     private int searchCooldown;
     private BlockPos targetPos;
@@ -26,7 +23,6 @@ public class HarvestBlockGoal extends Goal {
         this.entity = entity;
         this.blockToHarvest = blockToHarvest;
         this.range = range;
-        this.height = 2;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         this.isRandomized = false;
     }
@@ -35,14 +31,12 @@ public class HarvestBlockGoal extends Goal {
         this.blockToHarvest = blockToHarvest;
         this.range = range;
         this.isRandomized = isRandomized;
-        this.height = 2;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
     public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range, int height) {
         this.entity = entity;
         this.blockToHarvest = blockToHarvest;
         this.range = range;
-        this.height = height;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         this.isRandomized = false;
     }
@@ -50,7 +44,6 @@ public class HarvestBlockGoal extends Goal {
         this.entity = entity;
         this.blockToHarvest = blockToHarvest;
         this.range = range;
-        this.height = height;
         this.isRandomized = isRandomized;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
