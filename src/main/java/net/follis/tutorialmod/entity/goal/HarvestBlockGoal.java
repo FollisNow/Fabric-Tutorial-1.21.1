@@ -10,6 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class HarvestBlockGoal extends Goal {
     private final AnimalEntity entity;
@@ -19,14 +21,13 @@ public class HarvestBlockGoal extends Goal {
     private final boolean isRandomized;
     private int searchCooldown;
     private BlockPos targetPos;
-    private List<BlockPos> harvestableBlocks;
 
     public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range) {
         this.entity = entity;
         this.blockToHarvest = blockToHarvest;
         this.range = range;
         this.height = 2;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         this.isRandomized = false;
     }
     public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range, boolean isRandomized) {
@@ -35,14 +36,14 @@ public class HarvestBlockGoal extends Goal {
         this.range = range;
         this.isRandomized = isRandomized;
         this.height = 2;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
     public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range, int height) {
         this.entity = entity;
         this.blockToHarvest = blockToHarvest;
         this.range = range;
         this.height = height;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         this.isRandomized = false;
     }
     public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range, int height,  boolean isRandomized) {
@@ -51,7 +52,7 @@ public class HarvestBlockGoal extends Goal {
         this.range = range;
         this.height = height;
         this.isRandomized = isRandomized;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
 
     @Override
@@ -63,11 +64,6 @@ public class HarvestBlockGoal extends Goal {
     @Override
     public void start() {
         this.searchCooldown = 0;
-        if (this.harvestableBlocks == null){
-            this.harvestableBlocks = new ArrayList<>();
-        } else {
-            this.harvestableBlocks.clear();
-        }
     }
 
     @Override
@@ -77,18 +73,7 @@ public class HarvestBlockGoal extends Goal {
 
     @Override
     public void tick() {
-        if (this.searchCooldown > 0) {
-            this.searchCooldown--;
-            //return;
-        } else {
-            this.targetPos = findHarvestableBlock(this.range, this.height);
-            if (this.targetPos != null){
-                this.searchCooldown = 80;
-            } else {
-                this.searchCooldown = 800;
-            }
-        }
-
+        searchRoutine(40, 800);
 
         if (this.targetPos != null) {
             this.entity.getNavigation().startMovingTo(this.targetPos.up().getX(), this.targetPos.up().getY(), this.targetPos.up().getZ(), 1.1F);
@@ -100,38 +85,33 @@ public class HarvestBlockGoal extends Goal {
         }
     }
 
+    private void searchRoutine(int minCooldown, int maxCooldown) {
+        if (this.searchCooldown > 0) {
+            this.searchCooldown--;
+        } else {
 
-    private BlockPos findHarvestableBlock(int radius, int vertical) {
-        BlockPos entityPos = this.entity.getBlockPos();
-        if (this.harvestableBlocks != null ){
-            this.harvestableBlocks.clear();
-            for (int x = -radius; x <= radius; x++) {
-                for (int y = -vertical; y <= vertical; y++) { // Check the block directly below and above
-                    for (int z = -radius; z <= radius; z++) {
-                        BlockPos pos = entityPos.add(x, y, z);
-                        BlockState blockState = this.entity.getWorld().getBlockState(pos);
+            Predicate<BlockPos> condition = blockPos -> {
+                BlockState state = this.entity.getWorld().getBlockState(blockPos);
+                Block block = state.getBlock();
 
-                        if (blockState.isOf(this.blockToHarvest) && canHarvest(blockState)) {
-                            this.harvestableBlocks.add(pos);
-                        }
+                if (!(this.blockToHarvest instanceof CropBlock)){
+                    return block == this.blockToHarvest;
+                } else {
+                    if (block == this.blockToHarvest) {
+                        return ((CropBlock) block).isMature(state);
                     }
                 }
-            }
-            if (!this.harvestableBlocks.isEmpty()) {
-                if (this.isRandomized) {
-                    return this.harvestableBlocks.get(this.entity.getRandom().nextInt(this.harvestableBlocks.size()));
-                }
-                return this.harvestableBlocks.getFirst();
-            }
-        }
-        return null; // No harvestable block found
-    }
+                return false;
+            };
 
-    private boolean canHarvest(BlockState blockState) {
-        if (this.blockToHarvest instanceof CropBlock cropBlock) {
-            return cropBlock.isMature(blockState);
+            Optional<BlockPos> closestCropOrBlock = BlockPos.findClosest(this.entity.getBlockPos(), this.range, this.range, condition);
+            this.targetPos = closestCropOrBlock.orElse(null);
+            if (this.targetPos != null){
+                this.searchCooldown = minCooldown;
+            } else {
+                this.searchCooldown = maxCooldown;
+            }
         }
-        return true; // Allow harvesting for non-CropBlocks
     }
 
     private void harvestBlock(BlockPos pos) {
