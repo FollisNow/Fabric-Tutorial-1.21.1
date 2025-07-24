@@ -33,20 +33,6 @@ public class HarvestBlockGoal extends Goal {
         this.isRandomized = isRandomized;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
-    public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range, int height) {
-        this.entity = entity;
-        this.blockToHarvest = blockToHarvest;
-        this.range = range;
-        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
-        this.isRandomized = false;
-    }
-    public HarvestBlockGoal(AnimalEntity entity, Block blockToHarvest, int range, int height,  boolean isRandomized) {
-        this.entity = entity;
-        this.blockToHarvest = blockToHarvest;
-        this.range = range;
-        this.isRandomized = isRandomized;
-        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
-    }
 
     @Override
     public boolean canStart() {
