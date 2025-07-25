@@ -78,22 +78,31 @@ public class ModBlocks {
 
     public static final Block CRYSTAL_MUSHROOM = registerBlock("crystal_mushroom", new MushroomPlantBlock(TreeConfiguredFeatures.HUGE_BROWN_MUSHROOM, AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance((state) -> 1).postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY)));
 
-    public static final Block DRIFTWOOD_LOG = registerBlock("driftwood_log",
+
+    // The Goldening
+
+    public static final Block GOLDEN_DIRT = registerBlock("golden_dirt",
+            new Block(AbstractBlock.Settings.copy(Blocks.DIRT)));
+
+    public static final Block GOLDEN_LOG = registerBlock("golden_log",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG)));
-    public static final Block DRIFTWOOD_WOOD = registerBlock("driftwood_wood",
+    public static final Block GOLDEN_WOOD = registerBlock("golden_wood",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD)));
-    public static final Block STRIPPED_DRIFTWOOD_LOG = registerBlock("stripped_driftwood_log",
+    public static final Block STRIPPED_GOLDEN_LOG = registerBlock("stripped_golden_log",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG)));
-    public static final Block STRIPPED_DRIFTWOOD_WOOD = registerBlock("stripped_driftwood_wood",
+    public static final Block STRIPPED_GOLDEN_WOOD = registerBlock("stripped_golden_wood",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD)));
 
-    public static final Block DRIFTWOOD_PLANKS = registerBlock("driftwood_planks",
+    public static final Block GOLDEN_PLANKS = registerBlock("golden_planks",
             new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
-    public static final Block DRIFTWOOD_LEAVES = registerBlock("driftwood_leaves",
+    public static final Block GOLDEN_LEAVES = registerBlock("golden_leaves",
             new LeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES)));
 
-    public static final Block DRIFTWOOD_SAPLING = registerBlock("driftwood_sapling",
-            new ModSaplingBlock(ModSaplingGenerators.DRIFTWOOD, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), Blocks.STONE));
+    public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
+            new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
+
+
+
 
     public static final Block CHAIR = registerBlock("chair",
             new ChairBlock(AbstractBlock.Settings.create().nonOpaque()));

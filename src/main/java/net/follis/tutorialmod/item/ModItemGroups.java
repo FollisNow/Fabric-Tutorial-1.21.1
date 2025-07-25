@@ -86,15 +86,16 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.PINK_GARNET_LAMP);
 
-                        entries.add(ModBlocks.DRIFTWOOD_LOG);
-                        entries.add(ModBlocks.DRIFTWOOD_WOOD);
-                        entries.add(ModBlocks.STRIPPED_DRIFTWOOD_LOG);
-                        entries.add(ModBlocks.STRIPPED_DRIFTWOOD_WOOD);
+                        entries.add(ModBlocks.GOLDEN_DIRT);
+                        entries.add(ModBlocks.GOLDEN_LOG);
+                        entries.add(ModBlocks.GOLDEN_WOOD);
+                        entries.add(ModBlocks.STRIPPED_GOLDEN_LOG);
+                        entries.add(ModBlocks.STRIPPED_GOLDEN_WOOD);
 
-                        entries.add(ModBlocks.DRIFTWOOD_PLANKS);
-                        entries.add(ModBlocks.DRIFTWOOD_LEAVES);
+                        entries.add(ModBlocks.GOLDEN_PLANKS);
+                        entries.add(ModBlocks.GOLDEN_LEAVES);
 
-                        entries.add(ModBlocks.DRIFTWOOD_SAPLING);
+                        entries.add(ModBlocks.GOLDEN_SAPLING);
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);
 
                         entries.add(ModBlocks.CHAIR);

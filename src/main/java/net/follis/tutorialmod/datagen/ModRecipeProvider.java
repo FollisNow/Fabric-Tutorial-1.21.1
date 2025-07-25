@@ -9,6 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.datafixer.mapping.WoodRecipeMapping;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.CampfireCookingRecipe;
@@ -61,8 +62,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Blocks.COBWEB), conditionsFromItem(Blocks.COBWEB))
                 .offerTo(exporter);
 
-
-
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUG_NET)
                 .pattern(" #^")
                 .pattern(" ##")
@@ -76,6 +75,27 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input(ModItems.LOCUST)
                 .criterion(hasItem(ModItems.LOCUST), conditionsFromItem(ModItems.LOCUST))
                 .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "slime_ball_from_locust"));
+
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.GOLDEN_LOG)
+                .criterion(hasItem(ModBlocks.GOLDEN_LOG), conditionsFromItem(ModBlocks.GOLDEN_LOG))
+                .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "golden_planks_from_golden_log"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.GOLDEN_WOOD)
+                .criterion(hasItem(ModBlocks.GOLDEN_WOOD), conditionsFromItem(ModBlocks.GOLDEN_WOOD))
+                .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "golden_planks_from_golden_wood"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.STRIPPED_GOLDEN_LOG)
+                .criterion(hasItem(ModBlocks.STRIPPED_GOLDEN_LOG), conditionsFromItem(ModBlocks.STRIPPED_GOLDEN_LOG))
+                .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "golden_planks_from_stripped_golden_log"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.STRIPPED_GOLDEN_WOOD)
+                .criterion(hasItem(ModBlocks.STRIPPED_GOLDEN_WOOD), conditionsFromItem(ModBlocks.STRIPPED_GOLDEN_WOOD))
+                .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "golden_planks_from_stripped_golden_wood"));
+
+        offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_GOLDEN_WOOD, ModBlocks.STRIPPED_GOLDEN_LOG);
+        offerBarkBlockRecipe(exporter, ModBlocks.GOLDEN_WOOD, ModBlocks.GOLDEN_LOG);
 
 
 

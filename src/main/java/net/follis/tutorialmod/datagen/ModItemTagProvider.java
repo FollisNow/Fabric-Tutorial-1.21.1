@@ -49,12 +49,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.KAUPEN_SMITHING_TEMPLATE);
 
         getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
-                .add(ModBlocks.DRIFTWOOD_LOG.asItem())
-                .add(ModBlocks.DRIFTWOOD_WOOD.asItem())
-                .add(ModBlocks.STRIPPED_DRIFTWOOD_LOG.asItem())
-                .add(ModBlocks.STRIPPED_DRIFTWOOD_WOOD.asItem());
+                .add(ModBlocks.GOLDEN_LOG.asItem())
+                .add(ModBlocks.GOLDEN_WOOD.asItem())
+                .add(ModBlocks.STRIPPED_GOLDEN_LOG.asItem())
+                .add(ModBlocks.STRIPPED_GOLDEN_WOOD.asItem());
 
         getOrCreateTagBuilder(ItemTags.PLANKS)
-                .add(ModBlocks.DRIFTWOOD_PLANKS.asItem());
+                .add(ModBlocks.GOLDEN_PLANKS.asItem());
     }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_golden_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tutorialmod:stripped_golden_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tutorialmod:golden_planks_from_stripped_golden_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stripped_golden_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tutorialmod:golden_planks_from_stripped_golden_wood"
+    ]
+  }
+}

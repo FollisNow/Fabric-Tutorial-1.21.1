@@ -44,9 +44,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .addTag(BlockTags.NEEDS_IRON_TOOL);
 
         getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-                .add(ModBlocks.DRIFTWOOD_LOG)
-                .add(ModBlocks.DRIFTWOOD_WOOD)
-                .add(ModBlocks.STRIPPED_DRIFTWOOD_LOG)
-                .add(ModBlocks.STRIPPED_DRIFTWOOD_WOOD);
+                .add(ModBlocks.GOLDEN_LOG)
+                .add(ModBlocks.GOLDEN_WOOD)
+                .add(ModBlocks.STRIPPED_GOLDEN_LOG)
+                .add(ModBlocks.STRIPPED_GOLDEN_WOOD);
     }
 }
