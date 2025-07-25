@@ -96,7 +96,7 @@ public class ModBlocks {
     public static final Block GOLDEN_PLANKS = registerBlock("golden_planks",
             new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
     public static final Block GOLDEN_LEAVES = registerBlock("golden_leaves",
-            new LeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES)));
+            new GoldenLeavesBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_LEAVES)));
 
     public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
             new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
