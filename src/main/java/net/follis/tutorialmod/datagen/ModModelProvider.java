@@ -2,6 +2,7 @@ package net.follis.tutorialmod.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;

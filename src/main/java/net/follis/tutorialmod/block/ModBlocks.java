@@ -129,10 +129,10 @@ public class ModBlocks {
             new ColoredFallingBlock(new ColorCode(14406560),AbstractBlock.Settings.copy(Blocks.SAND)));
 
     public static final Block GOLD_STAIRS = registerBlock("gold_stairs",
-            new StairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
+            new SittableStairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_SLAB = registerBlock("gold_slab",
-            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
     public static final Block GOLD_BUTTON = registerBlock("gold_button",
             new ButtonBlock(BlockSetType.IRON, 2, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
