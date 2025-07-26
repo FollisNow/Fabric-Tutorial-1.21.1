@@ -13,6 +13,7 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.ColorCode;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
@@ -100,6 +101,51 @@ public class ModBlocks {
 
     public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
             new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
+
+    public static final Block GOLD_BRICKS = registerBlock("gold_bricks",
+            new Block(AbstractBlock.Settings.copy(Blocks.BRICKS).strength(4).requiresTool()));
+    public static final Block COBBLED_GOLD = registerBlock("cobbled_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.COBBLESTONE).strength(4).requiresTool()));
+    public static final Block CRUMBLED_GOLD = registerBlock("crumbled_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.COBBLED_DEEPSLATE).strength(4).requiresTool()));
+    public static final Block CHISELED_GOLD = registerBlock("chiseled_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF).strength(4).requiresTool()));
+    public static final Block CHISELED_GOLD_BRICKS = registerBlock("chiseled_gold_bricks",
+            new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF_BRICKS).strength(4).requiresTool()));
+    public static final Block CUT_GOLD = registerBlock("cut_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.CUT_COPPER).strength(4).requiresTool()));
+    public static final Block GOLDEN_BRICKS = registerBlock("golden_bricks",
+            new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
+    public static final Block SHAPED_GOLD = registerBlock("shaped_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.SANDSTONE).strength(4).requiresTool()));
+    public static final Block ENGRAVED_GOLD = registerBlock("engraved_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_SANDSTONE).strength(4).requiresTool()));
+    public static final Block SCULPTED_GOLD = registerBlock("sculpted_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.CUT_SANDSTONE).strength(4).requiresTool()));
+    public static final Block GOLD_LARGE_BRICKS = registerBlock("gold_large_bricks",
+            new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
+
+    public static final Block GOLD_SAND = registerBlock("gold_sand",
+            new ColoredFallingBlock(new ColorCode(14406560),AbstractBlock.Settings.copy(Blocks.SAND)));
+
+    public static final Block GOLD_STAIRS = registerBlock("gold_stairs",
+            new StairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_SLAB = registerBlock("gold_slab",
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
+    public static final Block GOLD_BUTTON = registerBlock("gold_button",
+            new ButtonBlock(BlockSetType.IRON, 2, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
+
+    public static final Block GOLD_FENCE = registerBlock("gold_fence",
+            new FenceBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_FENCE_GATE = registerBlock("gold_fence_gate",
+            new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_WALL = registerBlock("gold_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_CHAIN = registerBlock("gold_chain",
+            new ChainBlock(AbstractBlock.Settings.copy(Blocks.CHAIN).nonOpaque()));
+
 
 
 

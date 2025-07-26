@@ -96,7 +96,32 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_GOLDEN_WOOD, ModBlocks.STRIPPED_GOLDEN_LOG);
         offerBarkBlockRecipe(exporter, ModBlocks.GOLDEN_WOOD, ModBlocks.GOLDEN_LOG);
 
+        offer2x2CompactingRecipe(exporter,RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICKS, Items.GOLD_INGOT);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRUMBLED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_GOLD_BRICKS, Items.GOLD_BLOCK);
+        offerCutCopperRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Blocks.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Items.GOLD_BLOCK, 4);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.GOLDEN_BRICKS)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.STONE_BRICKS)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHAPED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ENGRAVED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCULPTED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_LARGE_BRICKS, Items.GOLD_BLOCK);
 
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_STAIRS, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_SLAB, Items.GOLD_BLOCK, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BUTTON, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE_GATE, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
 
         offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(TutorialMod.MOD_ID, "kaupen"));
     }

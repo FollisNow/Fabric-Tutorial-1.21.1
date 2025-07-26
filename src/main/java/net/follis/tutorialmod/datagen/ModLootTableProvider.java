@@ -7,6 +7,7 @@ import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
@@ -89,8 +90,29 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.STRIPPED_GOLDEN_WOOD);
         addDrop(ModBlocks.GOLDEN_PLANKS);
         addDrop(ModBlocks.GOLDEN_SAPLING);
-
         addDrop(ModBlocks.GOLDEN_LEAVES, leavesDrops(ModBlocks.GOLDEN_LEAVES, ModBlocks.GOLDEN_SAPLING, 0.0625f));
+        addDrop(ModBlocks.GOLD_BRICKS);
+        addDrop(ModBlocks.COBBLED_GOLD);
+        addDrop(ModBlocks.CRUMBLED_GOLD);
+        addDrop(ModBlocks.CHISELED_GOLD);
+        addDrop(ModBlocks.CHISELED_GOLD_BRICKS);
+        addDrop(ModBlocks.CUT_GOLD);
+        addDrop(ModBlocks.GOLDEN_BRICKS, Blocks.STONE_BRICKS);
+        addDrop(ModBlocks.SHAPED_GOLD);
+        addDrop(ModBlocks.ENGRAVED_GOLD);
+        addDrop(ModBlocks.SCULPTED_GOLD);
+        addDrop(ModBlocks.GOLD_LARGE_BRICKS);
+
+        addDrop(ModBlocks.GOLD_STAIRS);
+        addDrop(ModBlocks.GOLD_SLAB, slabDrops(ModBlocks.GOLD_SLAB));
+        addDrop(ModBlocks.GOLD_BUTTON);
+        addDrop(ModBlocks.GOLD_WALL);
+        addDrop(ModBlocks.GOLD_FENCE);
+        addDrop(ModBlocks.GOLD_FENCE_GATE);
+        addDrop(ModBlocks.GOLD_CHAIN, ModItems.GOLD_CHAIN);
+
+        addDrop(ModBlocks.GOLD_SAND);
+
     }
 
     public LootTable.Builder multipleOreDrops(Block drop, Item item, float minDrops, float maxDrops) {

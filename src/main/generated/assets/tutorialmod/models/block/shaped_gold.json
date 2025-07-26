@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "tutorialmod:block/shaped_gold_bottom",
+    "side": "tutorialmod:block/shaped_gold_side",
+    "top": "tutorialmod:block/shaped_gold_top"
+  }
+}

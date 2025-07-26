@@ -92,6 +92,28 @@ public class ModItemGroups {
                         entries.add(ModBlocks.STRIPPED_GOLDEN_LOG);
                         entries.add(ModBlocks.STRIPPED_GOLDEN_WOOD);
 
+                        entries.add(ModBlocks.GOLD_BRICKS);
+                        entries.add(ModBlocks.COBBLED_GOLD);
+                        entries.add(ModBlocks.CRUMBLED_GOLD);
+                        entries.add(ModBlocks.CHISELED_GOLD);
+                        entries.add(ModBlocks.CHISELED_GOLD_BRICKS);
+                        entries.add(ModBlocks.CUT_GOLD);
+                        entries.add(ModBlocks.GOLDEN_BRICKS);
+                        entries.add(ModBlocks.SHAPED_GOLD);
+                        entries.add(ModBlocks.ENGRAVED_GOLD);
+                        entries.add(ModBlocks.SCULPTED_GOLD);
+                        entries.add(ModBlocks.GOLD_LARGE_BRICKS);
+
+                        entries.add(ModBlocks.GOLD_STAIRS);
+                        entries.add(ModBlocks.GOLD_SLAB);
+                        entries.add(ModBlocks.GOLD_BUTTON);
+                        entries.add(ModBlocks.GOLD_FENCE);
+                        entries.add(ModBlocks.GOLD_FENCE_GATE);
+                        entries.add(ModBlocks.GOLD_WALL);
+                        entries.add(ModBlocks.GOLD_CHAIN);
+
+                        entries.add(ModBlocks.GOLD_SAND);
+
                         entries.add(ModBlocks.GOLDEN_PLANKS);
                         entries.add(ModBlocks.GOLDEN_LEAVES);
 

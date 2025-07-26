@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "tutorialmod:block/chiseled_gold_bricks_top",
+    "side": "tutorialmod:block/chiseled_gold_bricks_side"
+  }
+}

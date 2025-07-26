@@ -7,6 +7,7 @@ import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.block.custom.PinkGarnetLampBlock;
 import net.follis.tutorialmod.item.ModItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
@@ -64,6 +65,30 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_PLANKS);
         blockStateModelGenerator.registerSingleton(ModBlocks.GOLDEN_LEAVES, TexturedModel.LEAVES);
         blockStateModelGenerator.registerTintableCross(ModBlocks.GOLDEN_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_BRICKS);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.COBBLED_GOLD);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLED_GOLD);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_SAND);
+        blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD, TexturedModel.CUBE_COLUMN);
+        blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD_BRICKS, TexturedModel.CUBE_COLUMN);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CUT_GOLD);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_BRICKS);
+        blockStateModelGenerator.registerSingleton(ModBlocks.SHAPED_GOLD, TexturedModel.CUBE_BOTTOM_TOP);
+        blockStateModelGenerator.registerSingleton(ModBlocks.ENGRAVED_GOLD, TexturedModel.CUBE_COLUMN);
+        blockStateModelGenerator.registerSingleton(ModBlocks.SCULPTED_GOLD, TexturedModel.CUBE_COLUMN);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_LARGE_BRICKS);
+        blockStateModelGenerator.registerItemModel(ModItems.GOLD_CHAIN);
+        blockStateModelGenerator.registerAxisRotated(ModBlocks.GOLD_CHAIN, ModelIds.getBlockModelId(ModBlocks.GOLD_CHAIN));
+
+        BlockStateModelGenerator.BlockTexturePool goldPool = blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.GOLD_BLOCK);
+        goldPool.stairs(ModBlocks.GOLD_STAIRS);
+        goldPool.slab(ModBlocks.GOLD_SLAB);
+        goldPool.button(ModBlocks.GOLD_BUTTON);
+        goldPool.fence(ModBlocks.GOLD_FENCE);
+        goldPool.fenceGate(ModBlocks.GOLD_FENCE_GATE);
+        goldPool.wall(ModBlocks.GOLD_WALL);
+
 
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.CHAIR);
 
