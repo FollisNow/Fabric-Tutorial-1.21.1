@@ -97,10 +97,10 @@ public class ModModelProvider extends FabricModelProvider {
         goldBricksPool.wall(ModBlocks.GOLD_BRICK_WALL);
 
         BlockStateModelGenerator.BlockTexturePool goldenWoodPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_PLANKS);
-        goldenWoodPool.stairs(ModBlocks.GOLDEN_WOOD_STAIRS);
-        goldenWoodPool.slab(ModBlocks.GOLDEN_WOOD_SLAB);
-        goldenWoodPool.fence(ModBlocks.GOLDEN_WOOD_FENCE);
-        goldenWoodPool.fenceGate(ModBlocks.GOLDEN_WOOD_FENCE_GATE);
+        goldenWoodPool.stairs(ModBlocks.GOLDEN_STAIRS);
+        goldenWoodPool.slab(ModBlocks.GOLDEN_SLAB);
+        goldenWoodPool.fence(ModBlocks.GOLDEN_FENCE);
+        goldenWoodPool.fenceGate(ModBlocks.GOLDEN_FENCE_GATE);
 
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.CHAIR);
 
@@ -119,7 +119,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.CAULIFLOWER, Models.GENERATED);
         itemModelGenerator.register(ModItems.LOCUST, Models.GENERATED);
         itemModelGenerator.register(ModItems.GRILLED_LOCUST, Models.GENERATED);
-        itemModelGenerator.register(ModItems.BUG_NET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BUG_JAR, Models.GENERATED);
         // itemModelGenerator.register(ModItems.CHISEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.STARLIGHT_ASHES, Models.GENERATED);
 

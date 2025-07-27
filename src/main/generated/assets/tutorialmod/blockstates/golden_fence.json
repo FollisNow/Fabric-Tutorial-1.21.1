@@ -2,12 +2,12 @@
   "multipart": [
     {
       "apply": {
-        "model": "tutorialmod:block/golden_wood_fence_post"
+        "model": "tutorialmod:block/golden_fence_post"
       }
     },
     {
       "apply": {
-        "model": "tutorialmod:block/golden_wood_fence_side",
+        "model": "tutorialmod:block/golden_fence_side",
         "uvlock": true
       },
       "when": {
@@ -16,7 +16,7 @@
     },
     {
       "apply": {
-        "model": "tutorialmod:block/golden_wood_fence_side",
+        "model": "tutorialmod:block/golden_fence_side",
         "uvlock": true,
         "y": 90
       },
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "tutorialmod:block/golden_wood_fence_side",
+        "model": "tutorialmod:block/golden_fence_side",
         "uvlock": true,
         "y": 180
       },
@@ -36,7 +36,7 @@
     },
     {
       "apply": {
-        "model": "tutorialmod:block/golden_wood_fence_side",
+        "model": "tutorialmod:block/golden_fence_side",
         "uvlock": true,
         "y": 270
       },

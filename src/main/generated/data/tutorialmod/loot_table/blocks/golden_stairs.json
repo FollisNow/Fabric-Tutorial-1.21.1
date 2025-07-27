@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:golden_wood_stairs"
+          "name": "tutorialmod:golden_stairs"
         }
       ],
       "rolls": 1.0

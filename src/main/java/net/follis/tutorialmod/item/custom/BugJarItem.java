@@ -31,10 +31,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BugNetItem extends Item {
+public class BugJarItem extends Item {
     private World world;
 
-    public BugNetItem(Settings settings) {
+    public BugJarItem(Settings settings) {
         super(settings);
     }
 

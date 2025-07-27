@@ -5,7 +5,7 @@
   "item.tutorialmod.cauliflower": "Cauliflower",
   "item.tutorialmod.starlight_ashes": "Starlight Ashes",
 
-  "item.tutorialmod.bug_net": "Bug Net",
+  "item.tutorialmod.bug_jar": "Bug Jar",
 
   "item.tutorialmod.pink_garnet_sword": "Pink Garnet Sword",
   "item.tutorialmod.pink_garnet_pickaxe": "Pink Garnet Pickaxe",
@@ -98,25 +98,17 @@
 
   "block.tutorialmod.golden_dirt": "Golden Dirt",
   "block.tutorialmod.golden_sand": "Golden Sand",
+  "block.tutorialmod.golden_sapling": "Golden Sapling",
+  "block.tutorialmod.golden_leaves": "Golden Leaves",
   "block.tutorialmod.golden_log": "Golden Log",
   "block.tutorialmod.golden_wood": "Golden Wood",
   "block.tutorialmod.stripped_golden_log": "Stripped Golden Log",
   "block.tutorialmod.stripped_golden_wood": "Stripped Golden Wood",
   "block.tutorialmod.golden_planks": "Golden Planks",
-  "block.tutorialmod.golden_leaves": "Golden Leaves",
-  "block.tutorialmod.golden_sapling": "Golden Sapling",
-
-  "block.tutorialmod.gold_bricks": "Gold Bricks",
-  "block.tutorialmod.cobbled_gold": "Cobbled Gold",
-  "block.tutorialmod.crumbled_gold": "Crumbled Gold",
-  "block.tutorialmod.chiseled_gold": "Chiseled Gold",
-  "block.tutorialmod.chiseled_gold_bricks": "Chiseled Gold Bricks",
-  "block.tutorialmod.cut_gold": "Cut Gold",
-  "block.tutorialmod.golden_bricks": "Golden Bricks",
-  "block.tutorialmod.shaped_gold": "Shaped Gold",
-  "block.tutorialmod.engraved_gold": "Engraved Gold",
-  "block.tutorialmod.sculpted_gold": "Sculpted Gold",
-  "block.tutorialmod.gold_large_bricks": "Gold Large Bricks",
+  "block.tutorialmod.golden_stairs": "Golden Stairs",
+  "block.tutorialmod.golden_slab": "Golden Slab",
+  "block.tutorialmod.golden_fence": "Golden Fence",
+  "block.tutorialmod.golden_fence_gate": "Golden Fence Gate",
 
   "block.tutorialmod.gold_stairs": "Gold Stairs",
   "block.tutorialmod.gold_slab": "Gold Slab",
@@ -124,6 +116,28 @@
   "block.tutorialmod.gold_fence": "Gold Fence",
   "block.tutorialmod.gold_fence_gate": "Gold Gate",
   "block.tutorialmod.gold_wall": "Gold Wall",
+
+  "block.tutorialmod.golden_bricks": "Golden Bricks",
+  "block.tutorialmod.golden_brick_stairs": "Golden Brick Stairs",
+  "block.tutorialmod.golden_brick_slab": "Golden Brick Slab",
+  "block.tutorialmod.golden_brick_wall": "Golden Brick Wall",
+
+  "block.tutorialmod.gold_bricks": "Gold Bricks",
+  "block.tutorialmod.gold_brick_stairs": "Gold Brick Stairs",
+  "block.tutorialmod.gold_brick_slab": "Gold Brick Slab",
+  "block.tutorialmod.gold_brick_wall": "Gold Brick Wall",
+
+  "block.tutorialmod.cobbled_gold": "Cobbled Gold",
+  "block.tutorialmod.crumbled_gold": "Crumbled Gold",
+  "block.tutorialmod.chiseled_gold": "Chiseled Gold",
+  "block.tutorialmod.chiseled_gold_bricks": "Chiseled Gold Bricks",
+  "block.tutorialmod.cut_gold": "Cut Gold",
+  "block.tutorialmod.shaped_gold": "Shaped Gold",
+  "block.tutorialmod.engraved_gold": "Engraved Gold",
+  "block.tutorialmod.sculpted_gold": "Sculpted Gold",
+  "block.tutorialmod.gold_large_bricks": "Gold Large Bricks",
+
+
   "item.tutorialmod.gold_chain": "Gold Chain",
   "block.tutorialmod.gold_chain": "Gold Chain",
 

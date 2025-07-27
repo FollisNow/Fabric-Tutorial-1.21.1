@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:golden_wood_fence_gate"
+          "name": "tutorialmod:golden_fence_gate"
         }
       ],
       "rolls": 1.0

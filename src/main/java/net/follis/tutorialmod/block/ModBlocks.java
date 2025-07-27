@@ -87,6 +87,11 @@ public class ModBlocks {
     public static final Block GOLDEN_SAND = registerBlock("golden_sand",
             new ColoredFallingBlock(new ColorCode(14406560),AbstractBlock.Settings.copy(Blocks.SAND)));
 
+    public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
+            new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
+    public static final Block GOLDEN_LEAVES = registerBlock("golden_leaves",
+            new GoldenLeavesBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_LEAVES)));
+
     public static final Block GOLDEN_LOG = registerBlock("golden_log",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG)));
     public static final Block GOLDEN_WOOD = registerBlock("golden_wood",
@@ -96,16 +101,56 @@ public class ModBlocks {
     public static final Block STRIPPED_GOLDEN_WOOD = registerBlock("stripped_golden_wood",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD)));
 
+    // GOLDEN WOOD
     public static final Block GOLDEN_PLANKS = registerBlock("golden_planks",
             new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
-    public static final Block GOLDEN_LEAVES = registerBlock("golden_leaves",
-            new GoldenLeavesBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_LEAVES)));
+    public static final Block GOLDEN_STAIRS = registerBlock("golden_stairs",
+            new SittableStairsBlock(ModBlocks.GOLDEN_PLANKS.getDefaultState(), AbstractBlock.Settings.create().strength(2f)));
+    public static final Block GOLDEN_SLAB = registerBlock("golden_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f)));
+    public static final Block GOLDEN_FENCE = registerBlock("golden_fence",
+            new FenceBlock(AbstractBlock.Settings.create().strength(2f)));
+    public static final Block GOLDEN_FENCE_GATE = registerBlock("golden_fence_gate",
+            new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f)));
 
-    public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
-            new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
+    //GOLD
+    public static final Block GOLD_STAIRS = registerBlock("gold_stairs",
+            new SittableStairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_SLAB = registerBlock("gold_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_BUTTON = registerBlock("gold_button",
+            new ButtonBlock(BlockSetType.IRON, 2, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
+    public static final Block GOLD_FENCE = registerBlock("gold_fence",
+            new FenceBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_FENCE_GATE = registerBlock("gold_fence_gate",
+            new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_WALL = registerBlock("gold_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
+    // GOLDEN BRICKS
+    public static final Block GOLDEN_BRICKS = registerBlock("golden_bricks",
+            new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
+    public static final Block GOLDEN_BRICK_STAIRS = registerBlock("golden_brick_stairs",
+            new SittableStairsBlock(ModBlocks.GOLDEN_BRICKS.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLDEN_BRICK_SLAB = registerBlock("golden_brick_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLDEN_BRICK_WALL = registerBlock("golden_brick_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
+    // GOLD BRICKS
     public static final Block GOLD_BRICKS = registerBlock("gold_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.BRICKS).strength(4).requiresTool()));
+    public static final Block GOLD_BRICK_STAIRS = registerBlock("gold_brick_stairs",
+            new SittableStairsBlock(ModBlocks.GOLD_BRICKS.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_BRICK_SLAB = registerBlock("gold_brick_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_BRICK_WALL = registerBlock("gold_brick_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
+    //GOLD MISC
     public static final Block COBBLED_GOLD = registerBlock("cobbled_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.COBBLESTONE).strength(4).requiresTool()));
     public static final Block CRUMBLED_GOLD = registerBlock("crumbled_gold",
@@ -116,8 +161,6 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF_BRICKS).strength(4).requiresTool()));
     public static final Block CUT_GOLD = registerBlock("cut_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.CUT_COPPER).strength(4).requiresTool()));
-    public static final Block GOLDEN_BRICKS = registerBlock("golden_bricks",
-            new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
     public static final Block SHAPED_GOLD = registerBlock("shaped_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.SANDSTONE).strength(4).requiresTool()));
     public static final Block ENGRAVED_GOLD = registerBlock("engraved_gold",
@@ -126,53 +169,8 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(Blocks.CUT_SANDSTONE).strength(4).requiresTool()));
     public static final Block GOLD_LARGE_BRICKS = registerBlock("gold_large_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
-
-    public static final Block GOLD_STAIRS = registerBlock("gold_stairs",
-            new SittableStairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
-                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
-    public static final Block GOLD_SLAB = registerBlock("gold_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
-
-    public static final Block GOLD_BUTTON = registerBlock("gold_button",
-            new ButtonBlock(BlockSetType.IRON, 2, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
-
-    public static final Block GOLD_FENCE = registerBlock("gold_fence",
-            new FenceBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
-    public static final Block GOLD_FENCE_GATE = registerBlock("gold_fence_gate",
-            new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f).requiresTool()));
-    public static final Block GOLD_WALL = registerBlock("gold_wall",
-            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
-
     public static final Block GOLD_CHAIN = registerBlock("gold_chain",
             new ChainBlock(AbstractBlock.Settings.copy(Blocks.CHAIN).nonOpaque()));
-
-    // GOLDEN WOOD
-    public static final Block GOLDEN_WOOD_STAIRS = registerBlock("golden_wood_stairs",
-            new SittableStairsBlock(ModBlocks.GOLDEN_PLANKS.getDefaultState(), AbstractBlock.Settings.create().strength(2f)));
-    public static final Block GOLDEN_WOOD_SLAB = registerBlock("golden_wood_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f)));
-    public static final Block GOLDEN_WOOD_FENCE = registerBlock("golden_wood_fence",
-            new FenceBlock(AbstractBlock.Settings.create().strength(2f)));
-    public static final Block GOLDEN_WOOD_FENCE_GATE = registerBlock("golden_wood_fence_gate",
-            new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f)));
-
-    // GOLDEN BRICKS
-    public static final Block GOLDEN_BRICK_STAIRS = registerBlock("golden_brick_stairs",
-            new SittableStairsBlock(ModBlocks.GOLDEN_BRICKS.getDefaultState(),
-                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
-    public static final Block GOLDEN_BRICK_SLAB = registerBlock("golden_brick_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
-    public static final Block GOLDEN_BRICK_WALL = registerBlock("golden_brick_wall",
-            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
-
-    // GOLD BRICKS
-    public static final Block GOLD_BRICK_STAIRS = registerBlock("gold_brick_stairs",
-            new SittableStairsBlock(ModBlocks.GOLD_BRICKS.getDefaultState(),
-                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
-    public static final Block GOLD_BRICK_SLAB = registerBlock("gold_brick_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
-    public static final Block GOLD_BRICK_WALL = registerBlock("gold_brick_wall",
-            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
 
 

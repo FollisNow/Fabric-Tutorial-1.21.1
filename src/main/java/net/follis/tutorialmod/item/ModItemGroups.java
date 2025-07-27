@@ -50,7 +50,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.TOMAHAWK);
                         entries.add(ModItems.SPECTRE_STAFF);
-                        entries.add(ModItems.BUG_NET);
+                        entries.add(ModItems.BUG_JAR);
 
                         entries.add(ModItems.MANTIS_SPAWN_EGG);
                         entries.add(ModItems.LOCUST_SPAWN_EGG);
@@ -88,48 +88,59 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.PINK_GARNET_LAMP);
 
-                        entries.add(ModBlocks.GOLDEN_SAPLING);
+
+                        //GOLDEN NATURE
                         entries.add(ModBlocks.GOLDEN_DIRT);
                         entries.add(ModBlocks.GOLDEN_SAND);
+                        entries.add(ModBlocks.GOLDEN_SAPLING);
+                        entries.add(ModBlocks.GOLDEN_LEAVES);
                         entries.add(ModBlocks.GOLDEN_LOG);
                         entries.add(ModBlocks.GOLDEN_WOOD);
                         entries.add(ModBlocks.STRIPPED_GOLDEN_LOG);
                         entries.add(ModBlocks.STRIPPED_GOLDEN_WOOD);
 
+                        //GOLDEN WOOD
                         entries.add(ModBlocks.GOLDEN_PLANKS);
-                        entries.add(ModBlocks.GOLDEN_LEAVES);
-                        entries.add(ModBlocks.GOLDEN_WOOD_STAIRS);
-                        entries.add(ModBlocks.GOLDEN_WOOD_SLAB);
-                        entries.add(ModBlocks.GOLDEN_WOOD_FENCE);
-                        entries.add(ModBlocks.GOLDEN_WOOD_FENCE_GATE);
+                        entries.add(ModBlocks.GOLDEN_STAIRS);
+                        entries.add(ModBlocks.GOLDEN_SLAB);
+                        entries.add(ModBlocks.GOLDEN_FENCE);
+                        entries.add(ModBlocks.GOLDEN_FENCE_GATE);
 
-                        entries.add(ModBlocks.GOLD_BRICKS);
-                        entries.add(ModBlocks.COBBLED_GOLD);
-                        entries.add(ModBlocks.CRUMBLED_GOLD);
-                        entries.add(ModBlocks.CHISELED_GOLD);
-                        entries.add(ModBlocks.CHISELED_GOLD_BRICKS);
-                        entries.add(ModBlocks.CUT_GOLD);
-                        entries.add(ModBlocks.GOLDEN_BRICKS);
-                        entries.add(ModBlocks.SHAPED_GOLD);
-                        entries.add(ModBlocks.ENGRAVED_GOLD);
-                        entries.add(ModBlocks.SCULPTED_GOLD);
-                        entries.add(ModBlocks.GOLD_LARGE_BRICKS);
-
+                        //GOLD
                         entries.add(ModBlocks.GOLD_STAIRS);
                         entries.add(ModBlocks.GOLD_SLAB);
                         entries.add(ModBlocks.GOLD_BUTTON);
                         entries.add(ModBlocks.GOLD_FENCE);
                         entries.add(ModBlocks.GOLD_FENCE_GATE);
                         entries.add(ModBlocks.GOLD_WALL);
-                        entries.add(ModBlocks.GOLD_CHAIN);
 
+                        //GOLDEN BRICKS
+                        entries.add(ModBlocks.GOLDEN_BRICKS);
                         entries.add(ModBlocks.GOLDEN_BRICK_STAIRS);
                         entries.add(ModBlocks.GOLDEN_BRICK_SLAB);
                         entries.add(ModBlocks.GOLDEN_BRICK_WALL);
 
+                        //GOLD BRICKS
+                        entries.add(ModBlocks.GOLD_BRICKS);
                         entries.add(ModBlocks.GOLD_BRICK_STAIRS);
                         entries.add(ModBlocks.GOLD_BRICK_SLAB);
                         entries.add(ModBlocks.GOLD_BRICK_WALL);
+
+                        //GOLD MISC
+                        entries.add(ModBlocks.COBBLED_GOLD);
+                        entries.add(ModBlocks.CRUMBLED_GOLD);
+                        entries.add(ModBlocks.CHISELED_GOLD);
+                        entries.add(ModBlocks.CHISELED_GOLD_BRICKS);
+                        entries.add(ModBlocks.CUT_GOLD);
+                        entries.add(ModBlocks.SHAPED_GOLD);
+                        entries.add(ModBlocks.ENGRAVED_GOLD);
+                        entries.add(ModBlocks.SCULPTED_GOLD);
+                        entries.add(ModBlocks.GOLD_LARGE_BRICKS);
+                        entries.add(ModBlocks.GOLD_CHAIN);
+
+
+
+
 
 
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);

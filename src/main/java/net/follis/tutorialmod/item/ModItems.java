@@ -119,8 +119,8 @@ public class ModItems {
                     .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 1, -1.4f))));
 
 
-    public static final Item BUG_NET = registerItem("bug_net",
-            new BugNetItem(new Item.Settings().maxCount(1)));
+    public static final Item BUG_JAR = registerItem("bug_jar",
+            new BugJarItem(new Item.Settings().maxCount(1)));
 
 
     private static Item registerItem(String name, Item item) {

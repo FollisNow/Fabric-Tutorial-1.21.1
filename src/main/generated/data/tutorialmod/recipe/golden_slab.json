@@ -1,20 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "building",
   "key": {
     "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
       "item": "tutorialmod:golden_planks"
     }
   },
   "pattern": [
-    "W#W",
-    "W#W"
+    "###"
   ],
   "result": {
-    "count": 3,
-    "id": "tutorialmod:golden_wood_fence"
+    "count": 6,
+    "id": "tutorialmod:golden_slab"
   }
 }

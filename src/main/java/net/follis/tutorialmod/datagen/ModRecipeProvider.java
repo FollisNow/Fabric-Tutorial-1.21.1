@@ -62,7 +62,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Blocks.COBWEB), conditionsFromItem(Blocks.COBWEB))
                 .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUG_NET)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUG_JAR)
                 .pattern(" #^")
                 .pattern(" ##")
                 .pattern("#  ")
@@ -98,10 +98,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_GOLDEN_WOOD, ModBlocks.STRIPPED_GOLDEN_LOG);
         offerBarkBlockRecipe(exporter, ModBlocks.GOLDEN_WOOD, ModBlocks.GOLDEN_LOG);
 
-        offerStairsRecipe(exporter, ModBlocks.GOLDEN_WOOD_STAIRS, ModBlocks.GOLDEN_PLANKS);
-        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_WOOD_SLAB, ModBlocks.GOLDEN_PLANKS);
-        offerFenceRecipe(exporter, ModBlocks.GOLDEN_WOOD_FENCE, ModBlocks.GOLDEN_PLANKS);
-        offerFenceGateRecipe(exporter, ModBlocks.GOLDEN_WOOD_FENCE_GATE, ModBlocks.GOLDEN_PLANKS);
+        offerStairsRecipe(exporter, ModBlocks.GOLDEN_STAIRS, ModBlocks.GOLDEN_PLANKS);
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_SLAB, ModBlocks.GOLDEN_PLANKS);
+        offerFenceRecipe(exporter, ModBlocks.GOLDEN_FENCE, ModBlocks.GOLDEN_PLANKS);
+        offerFenceGateRecipe(exporter, ModBlocks.GOLDEN_FENCE_GATE, ModBlocks.GOLDEN_PLANKS);
 
         // GOLDEN
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICKS)

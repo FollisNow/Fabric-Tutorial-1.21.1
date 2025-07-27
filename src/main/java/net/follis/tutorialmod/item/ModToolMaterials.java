@@ -14,7 +14,7 @@ public enum ModToolMaterials implements ToolMaterial {
     PINK_GARNET(ModTags.Blocks.INCORRECT_FOR_PINK_GARNET_TOOL,
             1200, 5.0F, 4.0F, 22, () -> Ingredient.ofItems(ModItems.PINK_GARNET)),
     GOLDEN(ModTags.Blocks.INCORRECT_FOR_GOLDEN_TOOL,
-            600, 8.0F, 4.0F, 30, () -> Ingredient.ofItems(Items.GOLD_INGOT));
+            600, 8.0F, 4.0F, 33, () -> Ingredient.ofItems(Items.GOLD_INGOT));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;

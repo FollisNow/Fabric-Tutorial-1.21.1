@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tutorialmod:golden_wood_fence_gate"
+        "recipe": "tutorialmod:golden_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "tutorialmod:golden_wood_fence_gate"
+      "tutorialmod:golden_stairs"
     ]
   }
 }

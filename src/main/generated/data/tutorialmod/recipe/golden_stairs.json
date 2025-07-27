@@ -7,10 +7,12 @@
     }
   },
   "pattern": [
+    "#  ",
+    "## ",
     "###"
   ],
   "result": {
-    "count": 6,
-    "id": "tutorialmod:golden_wood_slab"
+    "count": 4,
+    "id": "tutorialmod:golden_stairs"
   }
 }

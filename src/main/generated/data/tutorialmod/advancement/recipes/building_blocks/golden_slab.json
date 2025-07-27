@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cobweb": {
+    "has_golden_planks": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:cobweb"
+            "items": "tutorialmod:golden_planks"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tutorialmod:bug_net"
+        "recipe": "tutorialmod:golden_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cobweb"
+      "has_golden_planks"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tutorialmod:bug_net"
+      "tutorialmod:golden_slab"
     ]
   }
 }
