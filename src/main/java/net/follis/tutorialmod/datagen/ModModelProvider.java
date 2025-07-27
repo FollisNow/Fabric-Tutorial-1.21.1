@@ -69,7 +69,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_BRICKS);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.COBBLED_GOLD);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLED_GOLD);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_SAND);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_SAND);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD_BRICKS, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CUT_GOLD);
@@ -137,5 +137,8 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.AMETHYST_BEE_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+
+        itemModelGenerator.register(ModItems.GOLDEN_NEEDLE, Models.HANDHELD);
+
     }
 }

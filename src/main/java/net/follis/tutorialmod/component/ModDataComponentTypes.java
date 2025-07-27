@@ -1,5 +1,6 @@
 package net.follis.tutorialmod.component;
 
+import com.mojang.serialization.Codec;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.item.custom.BugNetItem;
@@ -11,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.function.UnaryOperator;
 
 public class ModDataComponentTypes {
@@ -24,6 +26,11 @@ public class ModDataComponentTypes {
     public static final ComponentType<List<BugNetItem.BugData>> BUGS =
             register("bugs", builder -> builder.codec(BugNetItem.BugData.LIST_CODEC)
                     .packetCodec(BugNetItem.BugData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
+
+    public static final ComponentType<Integer> ENTITY_ID_CODEC =
+            register("golden_needle_target", builder -> builder.codec(Codec.INT));
+    public static final ComponentType<Integer> GOLDEN_NEEDLE_STACKS_CODEC =
+            register("golden_needle_stacks", builder -> builder.codec(Codec.INT));
 
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

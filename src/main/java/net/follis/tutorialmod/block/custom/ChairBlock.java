@@ -40,7 +40,7 @@ public class ChairBlock extends HorizontalFacingBlock {
             if(entities.isEmpty()) {
                 entity = ModEntities.CHAIR.spawn((ServerWorld) world, pos, SpawnReason.TRIGGERED);
             } else {
-                entity = entities.get(0);
+                entity = entities.getFirst();
             }
 
             player.startRiding(entity);

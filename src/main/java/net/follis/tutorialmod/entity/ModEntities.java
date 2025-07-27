@@ -7,6 +7,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 public class ModEntities {
     public static final EntityType<MantisEntity> MANTIS = Registry.register(Registries.ENTITY_TYPE,
@@ -33,6 +34,11 @@ public class ModEntities {
             Identifier.of(TutorialMod.MOD_ID, "chair_entity"),
             EntityType.Builder.create(ChairEntity::new, SpawnGroup.MISC)
                     .dimensions(0.5f, 0.5f).build());
+
+    public static final EntityType<LockingEntity> LOCK = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "locking_entity"),
+            EntityType.Builder.create(LockingEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.1f, 0.1f).build());
 
 
 

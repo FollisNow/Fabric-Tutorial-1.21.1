@@ -103,12 +103,28 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_GOLD_BRICKS, Items.GOLD_BLOCK);
         offerCutCopperRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Blocks.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Items.GOLD_BLOCK, 4);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.GOLDEN_BRICKS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICKS)
                 .pattern(" # ")
                 .pattern("#^#")
                 .pattern(" # ")
                 .input('#', Items.GOLD_NUGGET)
                 .input('^', Items.STONE_BRICKS)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_DIRT)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.DIRT)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_SAND)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.SAND)
                 .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
                 .offerTo(exporter);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHAPED_GOLD, Items.GOLD_BLOCK);
@@ -122,6 +138,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE_GATE, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_CHAIN, Items.GOLD_BLOCK, 8);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_CHAIN)
+                .pattern("#")
+                .pattern("^")
+                .pattern("#")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.GOLD_INGOT)
+                .criterion(hasItem(Items.GOLD_INGOT), conditionsFromItem(Items.GOLD_INGOT))
+                .offerTo(exporter);
+
 
         offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(TutorialMod.MOD_ID, "kaupen"));
     }

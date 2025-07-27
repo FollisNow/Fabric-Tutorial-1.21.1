@@ -56,6 +56,8 @@ public class ModItemGroups {
                         entries.add(ModItems.LOCUST_SPAWN_EGG);
                         entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
 
+                        entries.add(ModItems.GOLDEN_NEEDLE);
+
                     }).build());
 
     public static final ItemGroup PINK_GARNET_BLOCKS_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -112,7 +114,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_WALL);
                         entries.add(ModBlocks.GOLD_CHAIN);
 
-                        entries.add(ModBlocks.GOLD_SAND);
+                        entries.add(ModBlocks.GOLDEN_SAND);
 
                         entries.add(ModBlocks.GOLDEN_PLANKS);
                         entries.add(ModBlocks.GOLDEN_LEAVES);

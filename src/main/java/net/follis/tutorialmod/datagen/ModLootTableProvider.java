@@ -84,6 +84,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.PINK_GARNET_NETHER_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_NETHER_ORE, ModItems.RAW_PINK_GARNET, 3, 8));
 
         addDrop(ModBlocks.GOLDEN_DIRT);
+        addDrop(ModBlocks.GOLDEN_SAND);
         addDrop(ModBlocks.GOLDEN_LOG);
         addDrop(ModBlocks.GOLDEN_WOOD);
         addDrop(ModBlocks.STRIPPED_GOLDEN_LOG);
@@ -111,7 +112,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.GOLD_FENCE_GATE);
         addDrop(ModBlocks.GOLD_CHAIN, ModItems.GOLD_CHAIN);
 
-        addDrop(ModBlocks.GOLD_SAND);
 
     }
 

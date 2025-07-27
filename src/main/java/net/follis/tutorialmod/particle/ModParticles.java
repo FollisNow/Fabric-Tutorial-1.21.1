@@ -14,6 +14,9 @@ public class ModParticles {
     public static final SimpleParticleType GOLDEN_LEAVES_PARTICLE =
             registerParticle("golden_leaves_particle", FabricParticleTypes.simple());
 
+    public static final SimpleParticleType GOLDEN_CHAIN_PARTICLE =
+            registerParticle("golden_chain_particle", FabricParticleTypes.simple());
+
     private static SimpleParticleType registerParticle(String name, SimpleParticleType particleType) {
         return Registry.register(Registries.PARTICLE_TYPE, Identifier.of(TutorialMod.MOD_ID, name), particleType);
     }

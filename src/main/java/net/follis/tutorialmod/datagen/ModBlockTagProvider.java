@@ -43,7 +43,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(ModBlocks.GOLD_FENCE_GATE);
         getOrCreateTagBuilder(BlockTags.WALLS).add(ModBlocks.GOLD_WALL);
 
-
+        getOrCreateTagBuilder(ModTags.Blocks.NEEDS_GOLDEN_TOOL)
+                .addTag(BlockTags.NEEDS_DIAMOND_TOOL);
 
 
         getOrCreateTagBuilder(BlockTags.BEEHIVES)

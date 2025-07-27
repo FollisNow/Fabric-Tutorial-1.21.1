@@ -97,6 +97,7 @@
   "block.tutorialmod.crystal_mushroom": "Crystal Mushroom",
 
   "block.tutorialmod.golden_dirt": "Golden Dirt",
+  "block.tutorialmod.golden_sand": "Golden Sand",
   "block.tutorialmod.golden_log": "Golden Log",
   "block.tutorialmod.golden_wood": "Golden Wood",
   "block.tutorialmod.stripped_golden_log": "Stripped Golden Log",
@@ -104,6 +105,30 @@
   "block.tutorialmod.golden_planks": "Golden Planks",
   "block.tutorialmod.golden_leaves": "Golden Leaves",
   "block.tutorialmod.golden_sapling": "Golden Sapling",
+
+  "block.tutorialmod.gold_bricks": "Gold Bricks",
+  "block.tutorialmod.cobbled_gold": "Cobbled Gold",
+  "block.tutorialmod.crumbled_gold": "Crumbled Gold",
+  "block.tutorialmod.chiseled_gold": "Chiseled Gold",
+  "block.tutorialmod.chiseled_gold_bricks": "Chiseled Gold Bricks",
+  "block.tutorialmod.cut_gold": "Cut Gold",
+  "block.tutorialmod.golden_bricks": "Golden Bricks",
+  "block.tutorialmod.shaped_gold": "Shaped Gold",
+  "block.tutorialmod.engraved_gold": "Engraved Gold",
+  "block.tutorialmod.sculpted_gold": "Sculpted Gold",
+  "block.tutorialmod.gold_large_bricks": "Gold Large Bricks",
+
+  "block.tutorialmod.gold_stairs": "Gold Stairs",
+  "block.tutorialmod.gold_slab": "Gold Slab",
+  "block.tutorialmod.gold_button": "Gold Button",
+  "block.tutorialmod.gold_fence": "Gold Fence",
+  "block.tutorialmod.gold_fence_gate": "Gold Gate",
+  "block.tutorialmod.gold_wall": "Gold Wall",
+  "item.tutorialmod.gold_chain": "Gold Chain",
+  "block.tutorialmod.gold_chain": "Gold Chain",
+
+  "item.tutorialmod.golden_needle": "Golden Needle",
+
 
   "block.tutorialmod.chair": "Chair",
   "block.tutorialmod.pedestal": "Pedestal",

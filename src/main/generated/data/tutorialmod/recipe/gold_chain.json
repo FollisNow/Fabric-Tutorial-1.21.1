@@ -6,16 +6,16 @@
       "item": "minecraft:gold_nugget"
     },
     "^": {
-      "item": "minecraft:stone_bricks"
+      "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    " # ",
-    "#^#",
-    " # "
+    "#",
+    "^",
+    "#"
   ],
   "result": {
     "count": 1,
-    "id": "tutorialmod:golden_bricks"
+    "id": "tutorialmod:gold_chain"
   }
 }

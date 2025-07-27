@@ -84,6 +84,8 @@ public class ModBlocks {
 
     public static final Block GOLDEN_DIRT = registerBlock("golden_dirt",
             new Block(AbstractBlock.Settings.copy(Blocks.DIRT)));
+    public static final Block GOLDEN_SAND = registerBlock("golden_sand",
+            new ColoredFallingBlock(new ColorCode(14406560),AbstractBlock.Settings.copy(Blocks.SAND)));
 
     public static final Block GOLDEN_LOG = registerBlock("golden_log",
             new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG)));
@@ -124,9 +126,6 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(Blocks.CUT_SANDSTONE).strength(4).requiresTool()));
     public static final Block GOLD_LARGE_BRICKS = registerBlock("gold_large_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
-
-    public static final Block GOLD_SAND = registerBlock("gold_sand",
-            new ColoredFallingBlock(new ColorCode(14406560),AbstractBlock.Settings.copy(Blocks.SAND)));
 
     public static final Block GOLD_STAIRS = registerBlock("gold_stairs",
             new SittableStairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),

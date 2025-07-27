@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:gold_sand"
+          "name": "tutorialmod:golden_sand"
         }
       ],
       "rolls": 1.0

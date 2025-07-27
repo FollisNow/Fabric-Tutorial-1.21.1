@@ -114,6 +114,11 @@ public class ModItems {
     public static final Item SPECTRE_STAFF = registerItem("spectre_staff",
             new Item(new Item.Settings().maxCount(1)));
 
+    public static final Item GOLDEN_NEEDLE = registerItem("golden_needle",
+            new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()
+                    .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 1, -1.4f))));
+
+
     public static final Item BUG_NET = registerItem("bug_net",
             new BugNetItem(new Item.Settings().maxCount(1)));
 
