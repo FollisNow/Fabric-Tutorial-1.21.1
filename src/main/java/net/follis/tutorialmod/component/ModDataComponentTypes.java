@@ -12,7 +12,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.function.UnaryOperator;
 
 public class ModDataComponentTypes {

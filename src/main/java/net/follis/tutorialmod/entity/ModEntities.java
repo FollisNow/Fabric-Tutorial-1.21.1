@@ -7,7 +7,6 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 
 public class ModEntities {
     public static final EntityType<MantisEntity> MANTIS = Registry.register(Registries.ENTITY_TYPE,

@@ -1,6 +1,5 @@
 package net.follis.tutorialmod.entity.client;
 
-import net.follis.tutorialmod.entity.custom.ChairEntity;
 import net.follis.tutorialmod.entity.custom.LockingEntity;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.entity.EntityRenderer;
