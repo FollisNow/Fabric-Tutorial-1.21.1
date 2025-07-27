@@ -26,22 +26,35 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PEDESTAL)
                 .add(ModBlocks.AMETHYST_BEE_HIVE)
 
-                .add(ModBlocks.GOLD_BRICKS)
                 .add(ModBlocks.COBBLED_GOLD)
                 .add(ModBlocks.CRUMBLED_GOLD)
                 .add(ModBlocks.CHISELED_GOLD)
                 .add(ModBlocks.CHISELED_GOLD_BRICKS)
                 .add(ModBlocks.CUT_GOLD)
-                .add(ModBlocks.GOLDEN_BRICKS)
                 .add(ModBlocks.SHAPED_GOLD)
                 .add(ModBlocks.ENGRAVED_GOLD)
                 .add(ModBlocks.SCULPTED_GOLD)
                 .add(ModBlocks.GOLD_LARGE_BRICKS)
-                .add(ModBlocks.GOLD_CHAIN);
+                .add(ModBlocks.GOLD_CHAIN)
+
+                .add(ModBlocks.GOLD_BRICKS)
+                .add(ModBlocks.GOLD_BRICK_STAIRS)
+                .add(ModBlocks.GOLD_BRICK_SLAB)
+                .add(ModBlocks.GOLD_BRICK_WALL)
+
+                .add(ModBlocks.GOLDEN_BRICKS)
+                .add(ModBlocks.GOLDEN_BRICK_STAIRS)
+                .add(ModBlocks.GOLDEN_BRICK_SLAB)
+                .add(ModBlocks.GOLDEN_BRICK_WALL)
+
+        ;
 
         getOrCreateTagBuilder(BlockTags.FENCES).add(ModBlocks.GOLD_FENCE);
         getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(ModBlocks.GOLD_FENCE_GATE);
         getOrCreateTagBuilder(BlockTags.WALLS).add(ModBlocks.GOLD_WALL);
+        getOrCreateTagBuilder(BlockTags.WALLS).add(ModBlocks.GOLDEN_BRICK_WALL);
+        getOrCreateTagBuilder(BlockTags.WALLS).add(ModBlocks.GOLD_BRICK_WALL);
+
 
         getOrCreateTagBuilder(ModTags.Blocks.NEEDS_GOLDEN_TOOL)
                 .addTag(BlockTags.NEEDS_DIAMOND_TOOL);

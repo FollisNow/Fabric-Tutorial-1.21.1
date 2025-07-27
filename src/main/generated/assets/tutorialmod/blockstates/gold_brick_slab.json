@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tutorialmod:block/gold_brick_slab"
+    },
+    "type=double": {
+      "model": "tutorialmod:block/gold_bricks"
+    },
+    "type=top": {
+      "model": "tutorialmod:block/gold_brick_slab_top"
+    }
+  }
+}

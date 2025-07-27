@@ -62,18 +62,15 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerLog(ModBlocks.GOLDEN_LOG).log(ModBlocks.GOLDEN_LOG).wood(ModBlocks.GOLDEN_WOOD);
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_GOLDEN_LOG).log(ModBlocks.STRIPPED_GOLDEN_LOG).wood(ModBlocks.STRIPPED_GOLDEN_WOOD);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_PLANKS);
         blockStateModelGenerator.registerSingleton(ModBlocks.GOLDEN_LEAVES, TexturedModel.LEAVES);
         blockStateModelGenerator.registerTintableCross(ModBlocks.GOLDEN_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_BRICKS);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.COBBLED_GOLD);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLED_GOLD);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_SAND);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD_BRICKS, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CUT_GOLD);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_BRICKS);
         blockStateModelGenerator.registerSingleton(ModBlocks.SHAPED_GOLD, TexturedModel.CUBE_BOTTOM_TOP);
         blockStateModelGenerator.registerSingleton(ModBlocks.ENGRAVED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.SCULPTED_GOLD, TexturedModel.CUBE_COLUMN);
@@ -89,6 +86,21 @@ public class ModModelProvider extends FabricModelProvider {
         goldPool.fenceGate(ModBlocks.GOLD_FENCE_GATE);
         goldPool.wall(ModBlocks.GOLD_WALL);
 
+        BlockStateModelGenerator.BlockTexturePool goldenBricksPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_BRICKS);
+        goldenBricksPool.stairs(ModBlocks.GOLDEN_BRICK_STAIRS);
+        goldenBricksPool.slab(ModBlocks.GOLDEN_BRICK_SLAB);
+        goldenBricksPool.wall(ModBlocks.GOLDEN_BRICK_WALL);
+
+        BlockStateModelGenerator.BlockTexturePool goldBricksPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLD_BRICKS);
+        goldBricksPool.stairs(ModBlocks.GOLD_BRICK_STAIRS);
+        goldBricksPool.slab(ModBlocks.GOLD_BRICK_SLAB);
+        goldBricksPool.wall(ModBlocks.GOLD_BRICK_WALL);
+
+        BlockStateModelGenerator.BlockTexturePool goldenWoodPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_PLANKS);
+        goldenWoodPool.stairs(ModBlocks.GOLDEN_WOOD_STAIRS);
+        goldenWoodPool.slab(ModBlocks.GOLDEN_WOOD_SLAB);
+        goldenWoodPool.fence(ModBlocks.GOLDEN_WOOD_FENCE);
+        goldenWoodPool.fenceGate(ModBlocks.GOLDEN_WOOD_FENCE_GATE);
 
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.CHAIR);
 

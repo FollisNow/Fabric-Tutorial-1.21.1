@@ -1,6 +1,8 @@
 {
   "values": [
     "tutorialmod:gold_wall",
+    "tutorialmod:golden_brick_wall",
+    "tutorialmod:gold_brick_wall",
     "tutorialmod:pink_garnet_wall"
   ]
 }

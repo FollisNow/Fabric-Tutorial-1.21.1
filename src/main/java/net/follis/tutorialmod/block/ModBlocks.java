@@ -142,10 +142,37 @@ public class ModBlocks {
             new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_WALL = registerBlock("gold_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
     public static final Block GOLD_CHAIN = registerBlock("gold_chain",
             new ChainBlock(AbstractBlock.Settings.copy(Blocks.CHAIN).nonOpaque()));
 
+    // GOLDEN WOOD
+    public static final Block GOLDEN_WOOD_STAIRS = registerBlock("golden_wood_stairs",
+            new SittableStairsBlock(ModBlocks.GOLDEN_PLANKS.getDefaultState(), AbstractBlock.Settings.create().strength(2f)));
+    public static final Block GOLDEN_WOOD_SLAB = registerBlock("golden_wood_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f)));
+    public static final Block GOLDEN_WOOD_FENCE = registerBlock("golden_wood_fence",
+            new FenceBlock(AbstractBlock.Settings.create().strength(2f)));
+    public static final Block GOLDEN_WOOD_FENCE_GATE = registerBlock("golden_wood_fence_gate",
+            new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f)));
 
+    // GOLDEN BRICKS
+    public static final Block GOLDEN_BRICK_STAIRS = registerBlock("golden_brick_stairs",
+            new SittableStairsBlock(ModBlocks.GOLDEN_BRICKS.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLDEN_BRICK_SLAB = registerBlock("golden_brick_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLDEN_BRICK_WALL = registerBlock("golden_brick_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
+    // GOLD BRICKS
+    public static final Block GOLD_BRICK_STAIRS = registerBlock("gold_brick_stairs",
+            new SittableStairsBlock(ModBlocks.GOLD_BRICKS.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_BRICK_SLAB = registerBlock("gold_brick_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_BRICK_WALL = registerBlock("gold_brick_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
 
 

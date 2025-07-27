@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tutorialmod:block/golden_wood_slab"
+    },
+    "type=double": {
+      "model": "tutorialmod:block/golden_planks"
+    },
+    "type=top": {
+      "model": "tutorialmod:block/golden_wood_slab_top"
+    }
+  }
+}

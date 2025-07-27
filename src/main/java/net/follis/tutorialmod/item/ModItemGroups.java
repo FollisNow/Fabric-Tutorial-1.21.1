@@ -88,11 +88,20 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.PINK_GARNET_LAMP);
 
+                        entries.add(ModBlocks.GOLDEN_SAPLING);
                         entries.add(ModBlocks.GOLDEN_DIRT);
+                        entries.add(ModBlocks.GOLDEN_SAND);
                         entries.add(ModBlocks.GOLDEN_LOG);
                         entries.add(ModBlocks.GOLDEN_WOOD);
                         entries.add(ModBlocks.STRIPPED_GOLDEN_LOG);
                         entries.add(ModBlocks.STRIPPED_GOLDEN_WOOD);
+
+                        entries.add(ModBlocks.GOLDEN_PLANKS);
+                        entries.add(ModBlocks.GOLDEN_LEAVES);
+                        entries.add(ModBlocks.GOLDEN_WOOD_STAIRS);
+                        entries.add(ModBlocks.GOLDEN_WOOD_SLAB);
+                        entries.add(ModBlocks.GOLDEN_WOOD_FENCE);
+                        entries.add(ModBlocks.GOLDEN_WOOD_FENCE_GATE);
 
                         entries.add(ModBlocks.GOLD_BRICKS);
                         entries.add(ModBlocks.COBBLED_GOLD);
@@ -114,14 +123,16 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_WALL);
                         entries.add(ModBlocks.GOLD_CHAIN);
 
-                        entries.add(ModBlocks.GOLDEN_SAND);
+                        entries.add(ModBlocks.GOLDEN_BRICK_STAIRS);
+                        entries.add(ModBlocks.GOLDEN_BRICK_SLAB);
+                        entries.add(ModBlocks.GOLDEN_BRICK_WALL);
 
-                        entries.add(ModBlocks.GOLDEN_PLANKS);
-                        entries.add(ModBlocks.GOLDEN_LEAVES);
+                        entries.add(ModBlocks.GOLD_BRICK_STAIRS);
+                        entries.add(ModBlocks.GOLD_BRICK_SLAB);
+                        entries.add(ModBlocks.GOLD_BRICK_WALL);
 
-                        entries.add(ModBlocks.GOLDEN_SAPLING);
+
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);
-
                         entries.add(ModBlocks.CHAIR);
                         entries.add(ModBlocks.PEDESTAL);
                         entries.add(ModBlocks.GROWTH_CHAMBER);

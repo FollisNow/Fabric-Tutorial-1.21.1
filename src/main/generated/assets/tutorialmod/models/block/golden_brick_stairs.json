@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "tutorialmod:block/golden_bricks",
+    "side": "tutorialmod:block/golden_bricks",
+    "top": "tutorialmod:block/golden_bricks"
+  }
+}

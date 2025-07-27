@@ -8,17 +8,23 @@
     "tutorialmod:growth_chamber",
     "tutorialmod:pedestal",
     "tutorialmod:amethyst_bee_hive",
-    "tutorialmod:gold_bricks",
     "tutorialmod:cobbled_gold",
     "tutorialmod:crumbled_gold",
     "tutorialmod:chiseled_gold",
     "tutorialmod:chiseled_gold_bricks",
     "tutorialmod:cut_gold",
-    "tutorialmod:golden_bricks",
     "tutorialmod:shaped_gold",
     "tutorialmod:engraved_gold",
     "tutorialmod:sculpted_gold",
     "tutorialmod:gold_large_bricks",
-    "tutorialmod:gold_chain"
+    "tutorialmod:gold_chain",
+    "tutorialmod:gold_bricks",
+    "tutorialmod:gold_brick_stairs",
+    "tutorialmod:gold_brick_slab",
+    "tutorialmod:gold_brick_wall",
+    "tutorialmod:golden_bricks",
+    "tutorialmod:golden_brick_stairs",
+    "tutorialmod:golden_brick_slab",
+    "tutorialmod:golden_brick_wall"
   ]
 }
