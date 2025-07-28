@@ -25,6 +25,7 @@
         "Properties": {
           "distance": "7",
           "persistent": "false",
+          "unnatural": "false",
           "waterlogged": "false"
         }
       }

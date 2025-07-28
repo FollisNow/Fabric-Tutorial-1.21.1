@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-28T10:15:29.5432596	Tutorial Mod/Block Loot Tables
+// 1.21.1	2025-07-28T16:23:22.9190463	Tutorial Mod/Block Loot Tables
 64c3df15b6e946537414a0cc30f320d8b8019264 data\tutorialmod\loot_table\blocks\pink_garnet_stairs.json
 bb4295bb26b608113d9469f979cd894f59bb83a7 data\tutorialmod\loot_table\blocks\cobbled_gold.json
 d5563207c0a35cafffee72bb03d4673f5560b966 data\tutorialmod\loot_table\blocks\gold_fence_gate.json
@@ -12,8 +12,8 @@ b1e4fb9d59b60b3928ea0bb860d889e121b79361 data\tutorialmod\loot_table\blocks\gold
 f40ffe04abee684dbf45e9dbecffc8535b0237ac data\tutorialmod\loot_table\blocks\honey_berry_bush.json
 20c1b94f16da89972e44952293dc87c35d46d12c data\tutorialmod\loot_table\blocks\pink_garnet_block.json
 3c31c7add7ff4150dd0c04fefe695feb324e9301 data\tutorialmod\loot_table\blocks\gold_wall.json
-cc8da8286f80b9a8c4c5fb7aa3418babf4c748fb data\tutorialmod\loot_table\blocks\golden_log.json
 c524d99e89d1a6b91131c503e69d1343642df802 data\tutorialmod\loot_table\blocks\raw_pink_garnet_block.json
+cc8da8286f80b9a8c4c5fb7aa3418babf4c748fb data\tutorialmod\loot_table\blocks\golden_log.json
 34646e01b75f06e8beb5c30eae861a280df32100 data\tutorialmod\loot_table\blocks\pink_garnet_nether_ore.json
 72bd4fdef117dcb8aba555f3077912da54d991dc data\tutorialmod\loot_table\blocks\growth_chamber.json
 ae89237b8cdc29c0799516f7b915a192a92ac0f2 data\tutorialmod\loot_table\blocks\golden_slab.json
@@ -21,8 +21,8 @@ aba6545b7719a6ba09923ffe9708c8687f5ce4e9 data\tutorialmod\loot_table\blocks\caul
 a58d266a4d5d489ce2eb0fc0bfa5b8f8bb281146 data\tutorialmod\loot_table\blocks\golden_planks.json
 484d35493c4d13f5e5c4b2a70ef2b24e3d7a6260 data\tutorialmod\loot_table\blocks\crystal_mushroom.json
 187fcfc9fe51ec01122b82abb82fd7ffe989b8f1 data\tutorialmod\loot_table\blocks\gold_brick_stairs.json
-8689509b2741303b769d4d42ef80b7df442e7c89 data\tutorialmod\loot_table\blocks\golden_stairs.json
 5b57b6c63dea3d5d2067e760e186919ce84fb305 data\tutorialmod\loot_table\blocks\pedestal.json
+8689509b2741303b769d4d42ef80b7df442e7c89 data\tutorialmod\loot_table\blocks\golden_stairs.json
 fe67ddbb57200b0f7a06f41dad6e78c2b317c133 data\tutorialmod\loot_table\blocks\gold_slab.json
 cbb358d78cd57da58c907a35212d486fa6f68efa data\tutorialmod\loot_table\blocks\magic_block.json
 a07500243962bc1305dcdf21b4835d6ebf249de9 data\tutorialmod\loot_table\blocks\golden_leaves.json

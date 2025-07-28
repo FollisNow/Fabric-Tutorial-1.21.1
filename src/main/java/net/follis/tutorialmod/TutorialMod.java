@@ -179,4 +179,6 @@ public class TutorialMod implements ModInitializer {
 		});
 	}
 	//Les fourmies attrapents les objets par terre et peuvent construire des structures
+	// Structures: Gold temples, bosses in them: The king in yellow reference, King Midas, Adventurers with artifacts,
+	// Overgrown carnivore flora,
 }
