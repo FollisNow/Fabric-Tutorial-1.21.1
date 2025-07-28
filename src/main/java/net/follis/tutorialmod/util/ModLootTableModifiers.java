@@ -15,8 +15,6 @@ import net.minecraft.util.Identifier;
 public class ModLootTableModifiers {
     private static final Identifier GRASS_BLOCK_ID
             = Identifier.of("minecraft", "blocks/short_grass");
-    private static final Identifier CREEPER_ID
-            = Identifier.of("minecraft", "entities/creeper");
 
     public static void modifyLootTables() {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registry) -> {
