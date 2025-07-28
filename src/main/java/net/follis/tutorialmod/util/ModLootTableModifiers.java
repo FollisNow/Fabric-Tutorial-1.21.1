@@ -1,6 +1,7 @@
 package net.follis.tutorialmod.util;
 
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -39,11 +40,11 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(CREEPER_ID.equals(key.getValue())) {
+            if(LootTables.SHIPWRECK_TREASURE_CHEST.equals(key) || LootTables.BURIED_TREASURE_CHEST.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.75f)) // Drops 75% of the time
-                        .with(ItemEntry.builder(ModItems.CAULIFLOWER))
+                        .conditionally(RandomChanceLootCondition.builder(0.5f)) // Drops 50% of the time
+                        .with(ItemEntry.builder(ModBlocks.GOLDEN_SAPLING))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
