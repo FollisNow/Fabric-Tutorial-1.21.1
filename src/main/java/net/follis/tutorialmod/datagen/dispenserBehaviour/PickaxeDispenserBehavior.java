@@ -1,4 +1,4 @@
-package net.follis.tutorialmod.datagen;
+package net.follis.tutorialmod.datagen.dispenserBehaviour;
 
 import net.follis.tutorialmod.block.custom.AmethystBeeHiveBlock;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;

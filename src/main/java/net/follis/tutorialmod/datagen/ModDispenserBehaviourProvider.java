@@ -1,5 +1,7 @@
 package net.follis.tutorialmod.datagen;
 
+import net.follis.tutorialmod.datagen.dispenserBehaviour.JarDispenserBehavior;
+import net.follis.tutorialmod.datagen.dispenserBehaviour.PickaxeDispenserBehavior;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
@@ -16,6 +18,8 @@ public class ModDispenserBehaviourProvider implements DispenserBehavior {
         DispenserBlock.registerBehavior(Items.DIAMOND_PICKAXE.asItem(), new PickaxeDispenserBehavior());
         DispenserBlock.registerBehavior(Items.NETHERITE_PICKAXE.asItem(), new PickaxeDispenserBehavior());
         DispenserBlock.registerBehavior(ModItems.PINK_GARNET_PICKAXE.asItem(), new PickaxeDispenserBehavior());
+
+        DispenserBlock.registerBehavior(ModItems.BUG_JAR.asItem(), new JarDispenserBehavior());
     }
 
     @Override
