@@ -1,16 +1,11 @@
 package net.follis.tutorialmod.datagen.dispenserBehaviour;
 
-import net.follis.tutorialmod.block.custom.AmethystBeeHiveBlock;
-import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.item.custom.BugJarItem;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
