@@ -180,5 +180,5 @@ public class TutorialMod implements ModInitializer {
 	}
 	//Les fourmies attrapents les objets par terre et peuvent construire des structures
 	// Structures: Gold temples, bosses in them: The king in yellow reference, King Midas, Adventurers with artifacts,
-	// Overgrown carnivore flora,
+	// A boss that @you to invite you to defeat them, Overgrown carnivore flora,
 }
