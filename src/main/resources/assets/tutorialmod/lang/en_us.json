@@ -36,26 +36,32 @@
   "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.slimey_potion": "Slimey Arrow",
 
   "item.minecraft.potion.effect.attraction_potion": "Potion of Attraction",
   "item.minecraft.splash_potion.effect.attraction_potion": "Splash Potion of Attraction",
   "item.minecraft.lingering_potion.effect.attraction_potion": "Lingering Potion of Attraction",
+  "item.minecraft.tipped_arrow.effect.attraction_potion": "Arrow of Attraction",
 
   "item.minecraft.potion.effect.rejuvenation_potion": "Potion of Rejuvenation",
   "item.minecraft.splash_potion.effect.rejuvenation_potion": "Splash Potion of Rejuvenation",
   "item.minecraft.lingering_potion.effect.rejuvenation_potion": "Lingering Potion of Rejuvenation",
+  "item.minecraft.tipped_arrow.effect.rejuvenation_potion": "Arrow of Rejuvenation",
 
   "item.minecraft.potion.effect.hatred_potion": "Potion of Hatred",
   "item.minecraft.splash_potion.effect.hatred_potion": "Splash Potion of Hatred",
   "item.minecraft.lingering_potion.effect.hatred_potion": "Lingering Potion of Hatred",
+  "item.minecraft.tipped_arrow.effect.hatred_potion": "Arrow of Hatred",
 
   "item.minecraft.potion.effect.love_potion": "Potion of Love",
   "item.minecraft.splash_potion.effect.love_potion": "Splash Potion of Love",
   "item.minecraft.lingering_potion.effect.love_potion": "Lingering Potion of Love",
+  "item.minecraft.tipped_arrow.effect.love_potion": "Arrow of Love",
 
   "item.minecraft.potion.effect.sporulation_potion": "Potion of Sporulation",
   "item.minecraft.splash_potion.effect.sporulation_potion": "Splash Potion of Sporulation",
   "item.minecraft.lingering_potion.effect.sporulation_potion": "Lingering Potion of Sporulation",
+  "item.minecraft.tipped_arrow.effect.sporulation_potion": "Arrow of Sporulation",
 
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
   "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
