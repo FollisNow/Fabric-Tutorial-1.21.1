@@ -51,9 +51,9 @@ public interface IMakeGolems {
             }
         }    }
 
-    private BlockPattern getCorrespondingPattern(Block block) {
+    default BlockPattern getCorrespondingPattern(Block block) {
         return BlockPatternBuilder.start().aisle(
-                        "~^~",
+                "~^~",
                         "###",
                         "~#~").
                 where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.MAGIC_BLOCK))).
