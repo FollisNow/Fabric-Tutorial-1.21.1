@@ -9,11 +9,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class PedestalScreen extends HandledScreen<PedestalScreenHandler> {
+public class GoldenPedestalScreen extends HandledScreen<GoldenPedestalScreenHandler> {
     public static final Identifier GUI_TEXTURE =
-            Identifier.of(TutorialMod.MOD_ID, "textures/gui/pedestal/pedestal_gui.png");
+            Identifier.of(TutorialMod.MOD_ID, "textures/gui/golden_pedestal/golden_pedestal_gui.png");
 
-    public PedestalScreen(PedestalScreenHandler handler, PlayerInventory inventory, Text title) {
+    public GoldenPedestalScreen(GoldenPedestalScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 

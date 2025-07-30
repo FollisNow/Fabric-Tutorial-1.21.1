@@ -1,6 +1,6 @@
 package net.follis.tutorialmod.block.entity.renderer;
 
-import net.follis.tutorialmod.block.entity.custom.PedestalBlockEntity;
+import net.follis.tutorialmod.block.entity.custom.GoldenPedestalBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.OverlayTexture;
@@ -16,13 +16,13 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
-public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
-    public PedestalBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+public class GoldenPedestalBlockEntityRenderer implements BlockEntityRenderer<GoldenPedestalBlockEntity> {
+    public GoldenPedestalBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
 
     }
 
     @Override
-    public void render(PedestalBlockEntity entity, float tickDelta, MatrixStack matrices,
+    public void render(GoldenPedestalBlockEntity entity, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light, int overlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
         ItemStack stack = entity.getStack(0);

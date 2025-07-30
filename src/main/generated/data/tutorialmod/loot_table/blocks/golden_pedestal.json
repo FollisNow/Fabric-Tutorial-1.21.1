@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:pedestal"
+          "name": "tutorialmod:golden_pedestal"
         }
       ],
       "rolls": 1.0

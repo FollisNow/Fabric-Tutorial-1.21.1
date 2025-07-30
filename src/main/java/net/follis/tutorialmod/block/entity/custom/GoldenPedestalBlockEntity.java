@@ -3,7 +3,7 @@ package net.follis.tutorialmod.block.entity.custom;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.follis.tutorialmod.block.entity.ImplementedInventory;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
-import net.follis.tutorialmod.screen.custom.PedestalScreenHandler;
+import net.follis.tutorialmod.screen.custom.GoldenPedestalScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,12 +22,12 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public class PedestalBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
+public class GoldenPedestalBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     private float rotation = 0;
 
-    public PedestalBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.PEDESTAL_BE, pos, state);
+    public GoldenPedestalBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.GOLDEN_PEDESTAL_BE, pos, state);
     }
 
     @Override
@@ -62,13 +62,13 @@ public class PedestalBlockEntity extends BlockEntity implements ImplementedInven
 
     @Override
     public Text getDisplayName() {
-        return Text.literal("Pedestal");
+        return Text.literal("Golden Pedestal");
     }
 
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new PedestalScreenHandler(syncId, playerInventory, this.pos);
+        return new GoldenPedestalScreenHandler(syncId, playerInventory, this.pos);
     }
 
 

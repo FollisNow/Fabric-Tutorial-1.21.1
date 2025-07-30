@@ -10,15 +10,15 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.BlockPos;
 
-public class PedestalScreenHandler extends ScreenHandler {
+public class GoldenPedestalScreenHandler extends ScreenHandler {
     private final Inventory inventory;
 
-    public PedestalScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
+    public GoldenPedestalScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
         this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos));
     }
 
-    public PedestalScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity) {
-        super(ModScreenHandlers.PEDESTAL_SCREEN_HANDLER, syncId);
+    public GoldenPedestalScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity) {
+        super(ModScreenHandlers.GOLDEN_PEDESTAL_SCREEN_HANDLER, syncId);
         this.inventory = ((Inventory) blockEntity);
 
         this.addSlot(new Slot(inventory, 0, 80, 35) {

@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
-import net.follis.tutorialmod.block.entity.renderer.PedestalBlockEntityRenderer;
+import net.follis.tutorialmod.block.entity.renderer.GoldenPedestalBlockEntityRenderer;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.client.*;
 import net.follis.tutorialmod.particle.GoldenChainParticle;
@@ -16,7 +16,7 @@ import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.particle.PinkGarnetParticle;
 import net.follis.tutorialmod.screen.ModScreenHandlers;
 import net.follis.tutorialmod.screen.custom.GrowthChamberScreen;
-import net.follis.tutorialmod.screen.custom.PedestalScreen;
+import net.follis.tutorialmod.screen.custom.GoldenPedestalScreen;
 import net.follis.tutorialmod.util.ModModelPredicates;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
@@ -57,8 +57,8 @@ public class TutorialModClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.GOLDEN_LEAVES_PARTICLE, GoldenLeavesParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.GOLDEN_CHAIN_PARTICLE, GoldenChainParticle.Factory::new);
 
-        BlockEntityRendererFactories.register(ModBlockEntities.PEDESTAL_BE, PedestalBlockEntityRenderer::new);
-        HandledScreens.register(ModScreenHandlers.PEDESTAL_SCREEN_HANDLER, PedestalScreen::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.GOLDEN_PEDESTAL_BE, GoldenPedestalBlockEntityRenderer::new);
+        HandledScreens.register(ModScreenHandlers.GOLDEN_PEDESTAL_SCREEN_HANDLER, GoldenPedestalScreen::new);
 
         HandledScreens.register(ModScreenHandlers.GROWTH_CHAMBER_SCREEN_HANDLER, GrowthChamberScreen::new);
     }

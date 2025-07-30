@@ -1,7 +1,7 @@
 package net.follis.tutorialmod.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.follis.tutorialmod.block.entity.custom.PedestalBlockEntity;
+import net.follis.tutorialmod.block.entity.custom.GoldenPedestalBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,12 +18,12 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class PedestalBlock extends BlockWithEntity implements BlockEntityProvider {
+public class GoldenPedestalBlock extends BlockWithEntity implements BlockEntityProvider {
     private static final VoxelShape SHAPE =
             Block.createCuboidShape(2, 0, 2, 14, 13, 14);
-    public static final MapCodec<PedestalBlock> CODEC = PedestalBlock.createCodec(PedestalBlock::new);
+    public static final MapCodec<GoldenPedestalBlock> CODEC = GoldenPedestalBlock.createCodec(GoldenPedestalBlock::new);
 
-    public PedestalBlock(Settings settings) {
+    public GoldenPedestalBlock(Settings settings) {
         super(settings);
     }
 
@@ -40,7 +40,7 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new PedestalBlockEntity(pos, state);
+        return new GoldenPedestalBlockEntity(pos, state);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if(state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if(blockEntity instanceof PedestalBlockEntity) {
-                ItemScatterer.spawn(world, pos, ((PedestalBlockEntity) blockEntity));
+            if(blockEntity instanceof GoldenPedestalBlockEntity) {
+                ItemScatterer.spawn(world, pos, ((GoldenPedestalBlockEntity) blockEntity));
                 world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -63,24 +63,24 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos,
                                              PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(world.getBlockEntity(pos) instanceof PedestalBlockEntity pedestalBlockEntity) {
-            if(pedestalBlockEntity.isEmpty() && !stack.isEmpty()) {
-                pedestalBlockEntity.setStack(0, stack.copyWithCount(1));
+        if(world.getBlockEntity(pos) instanceof GoldenPedestalBlockEntity goldenPedestalBlockEntity) {
+            if(goldenPedestalBlockEntity.isEmpty() && !stack.isEmpty()) {
+                goldenPedestalBlockEntity.setStack(0, stack.copyWithCount(1));
                 world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 2f);
                 stack.decrement(1);
 
-                pedestalBlockEntity.markDirty();
+                goldenPedestalBlockEntity.markDirty();
                 world.updateListeners(pos, state, state, 0);
             } else if(stack.isEmpty() && !player.isSneaking()) {
-                ItemStack stackOnPedestal = pedestalBlockEntity.getStack(0);
+                ItemStack stackOnPedestal = goldenPedestalBlockEntity.getStack(0);
                 player.setStackInHand(Hand.MAIN_HAND, stackOnPedestal);
                 world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 1f);
-                pedestalBlockEntity.clear();
+                goldenPedestalBlockEntity.clear();
 
-                pedestalBlockEntity.markDirty();
+                goldenPedestalBlockEntity.markDirty();
                 world.updateListeners(pos, state, state, 0);
             } else if(player.isSneaking() && !world.isClient()) {
-                player.openHandledScreen(pedestalBlockEntity);
+                player.openHandledScreen(goldenPedestalBlockEntity);
             }
         }
 

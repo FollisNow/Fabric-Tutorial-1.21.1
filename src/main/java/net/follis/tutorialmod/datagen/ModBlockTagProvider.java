@@ -23,7 +23,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PINK_GARNET_DEEPSLATE_ORE)
                 .add(ModBlocks.MAGIC_BLOCK)
                 .add(ModBlocks.GROWTH_CHAMBER)
-                .add(ModBlocks.PEDESTAL)
+                .add(ModBlocks.GOLDEN_PEDESTAL)
                 .add(ModBlocks.AMETHYST_BEE_HIVE)
 
                 .add(ModBlocks.COBBLED_GOLD)
