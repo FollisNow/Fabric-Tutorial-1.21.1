@@ -146,6 +146,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);
                         entries.add(ModBlocks.CHAIR);
                         entries.add(ModBlocks.GOLDEN_PEDESTAL);
+                        entries.add(ModBlocks.GOLDEN_HOTEL);
                         entries.add(ModBlocks.GROWTH_CHAMBER);
                         entries.add(ModBlocks.AMETHYST_BEE_HIVE);
 

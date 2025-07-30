@@ -26,15 +26,15 @@ public class ModRenderTypes {
             RenderSystem.defaultBlendFunc();
         });
 
-    private static final RenderPhase GHOST_RENDER_LAYER = RenderLayer.of(
-            "cucumber:ghost",
+    public static final RenderLayer GHOST_RENDER_LAYER = RenderLayer.of(
+            "tutorialmod:ghost",
             VertexFormats.POSITION_COLOR_TEXTURE_LIGHT,
             VertexFormat.DrawMode.QUADS, 2097152, true, false,
             RenderLayer.MultiPhaseParameters.builder()
                     .program(RenderPhase.POSITION_COLOR_TEXTURE_LIGHTMAP_PROGRAM)
                     .texture(RenderPhase.BLOCK_ATLAS_TEXTURE)
                     .transparency(GHOST_TRANSPARENCY)
-                    .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
+                    .depthTest(RenderPhase.LEQUAL_DEPTH_TEST)
                     .build(false)
     );
 }

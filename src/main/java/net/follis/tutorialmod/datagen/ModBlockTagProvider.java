@@ -24,6 +24,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.MAGIC_BLOCK)
                 .add(ModBlocks.GROWTH_CHAMBER)
                 .add(ModBlocks.GOLDEN_PEDESTAL)
+                .add(ModBlocks.GOLDEN_HOTEL)
                 .add(ModBlocks.AMETHYST_BEE_HIVE)
 
                 .add(ModBlocks.COBBLED_GOLD)

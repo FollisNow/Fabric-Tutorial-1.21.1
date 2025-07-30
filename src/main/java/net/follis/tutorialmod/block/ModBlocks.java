@@ -180,6 +180,11 @@ public class ModBlocks {
     public static final Block GOLDEN_PEDESTAL = registerBlock("golden_pedestal",
             new GoldenPedestalBlock(AbstractBlock.Settings.create().nonOpaque().strength(3f).requiresTool()));
 
+    public static final Block GOLDEN_HOTEL = registerBlock("golden_hotel",
+            new GoldenHotelBlock(AbstractBlock.Settings.create().nonOpaque().strength(3f).requiresTool()));
+
+
+
     public static final Block GROWTH_CHAMBER = registerBlock("growth_chamber",
             new GrowthChamberBlock(AbstractBlock.Settings.create().strength(3f).requiresTool()));
 

@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
+import net.follis.tutorialmod.block.entity.renderer.GoldenHotelBlockEntityRenderer;
 import net.follis.tutorialmod.block.entity.renderer.GoldenPedestalBlockEntityRenderer;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.client.*;
@@ -15,6 +16,7 @@ import net.follis.tutorialmod.particle.GoldenLeavesParticle;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.particle.PinkGarnetParticle;
 import net.follis.tutorialmod.screen.ModScreenHandlers;
+import net.follis.tutorialmod.screen.custom.GoldenHotelScreen;
 import net.follis.tutorialmod.screen.custom.GrowthChamberScreen;
 import net.follis.tutorialmod.screen.custom.GoldenPedestalScreen;
 import net.follis.tutorialmod.util.ModModelPredicates;
@@ -59,6 +61,9 @@ public class TutorialModClient implements ClientModInitializer {
 
         BlockEntityRendererFactories.register(ModBlockEntities.GOLDEN_PEDESTAL_BE, GoldenPedestalBlockEntityRenderer::new);
         HandledScreens.register(ModScreenHandlers.GOLDEN_PEDESTAL_SCREEN_HANDLER, GoldenPedestalScreen::new);
+
+        BlockEntityRendererFactories.register(ModBlockEntities.GOLDEN_HOTEL_BE, GoldenHotelBlockEntityRenderer::new);
+        HandledScreens.register(ModScreenHandlers.GOLDEN_HOTEL_SCREEN_HANDLER, GoldenHotelScreen::new);
 
         HandledScreens.register(ModScreenHandlers.GROWTH_CHAMBER_SCREEN_HANDLER, GrowthChamberScreen::new);
     }

@@ -39,6 +39,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.MAGIC_BLOCK);
 
         addDrop(ModBlocks.GOLDEN_PEDESTAL);
+        addDrop(ModBlocks.GOLDEN_HOTEL);
         addDrop(ModBlocks.GROWTH_CHAMBER);
         addDrop(ModBlocks.AMETHYST_BEE_HIVE);
 
