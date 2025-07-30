@@ -96,7 +96,7 @@ public class GoldenHotelBlock extends BlockWithEntity implements BlockEntityProv
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-            this.getParticleOffsets(state).forEach((offset) -> spawnCandleParticles(world, offset.add(pos.getX(), pos.getY(), pos.getZ()), random));
+            this.getParticleOffsets().forEach((offset) -> spawnCandleParticles(world, offset.add(pos.getX(), pos.getY(), pos.getZ()), random));
     }
 
     private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
@@ -134,7 +134,7 @@ public class GoldenHotelBlock extends BlockWithEntity implements BlockEntityProv
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    protected Iterable<Vec3d> getParticleOffsets(BlockState state) {
+    protected Iterable<Vec3d> getParticleOffsets() {
         return CANDLES_TO_PARTICLE_OFFSETS;
     }
     static {

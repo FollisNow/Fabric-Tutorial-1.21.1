@@ -2,7 +2,6 @@ package net.follis.tutorialmod.block.entity;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
-import net.follis.tutorialmod.block.custom.GoldenHotelBlock;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.block.entity.custom.GoldenHotelBlockEntity;
 import net.follis.tutorialmod.block.entity.custom.GrowthChamberBlockEntity;
