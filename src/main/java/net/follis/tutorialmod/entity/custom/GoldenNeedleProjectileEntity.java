@@ -40,7 +40,7 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
     }
 
     public GoldenNeedleProjectileEntity(World world, LivingEntity owner, ItemStack stack) {
-        super(ModEntities.GOLDEN_NEEDLE, owner, world, stack, (ItemStack)null);
+        super(ModEntities.GOLDEN_NEEDLE, owner, world, stack, null);
         this.dataTracker.set(LOYALTY, this.getLoyalty(stack));
         this.dataTracker.set(ENCHANTED, stack.hasGlint());
     }
@@ -95,7 +95,7 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
         }
     }
     public boolean isEnchanted() {
-        return (Boolean)this.dataTracker.get(ENCHANTED);
+        return this.dataTracker.get(ENCHANTED);
     }
 
 
@@ -110,7 +110,7 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
         }
 
         Entity entity = this.getOwner();
-        int i = (Byte)this.dataTracker.get(LOYALTY);
+        int i = this.dataTracker.get(LOYALTY);
         if (i > 0 && (this.dealtDamage || this.isNoClip()) && entity != null && getDuration() <= 0) {
             if (!this.isOwnerAlive()) {
                 if (!this.getWorld().isClient && this.pickupType == PickupPermission.ALLOWED) {

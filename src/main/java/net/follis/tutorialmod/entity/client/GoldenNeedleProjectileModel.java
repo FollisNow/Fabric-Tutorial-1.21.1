@@ -2,7 +2,6 @@ package net.follis.tutorialmod.entity.client;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.custom.GoldenNeedleProjectileEntity;
-import net.follis.tutorialmod.entity.custom.TomahawkProjectileEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
