@@ -35,12 +35,24 @@ public class GoldenPedestalBlockEntity extends BlockEntity implements Implemente
         return inventory;
     }
 
+    public ItemStack getStack() {
+        return inventory.getFirst();
+    }
+
     public float getRenderingRotation() {
         rotation += 0.5f;
         if(rotation >= 360) {
             rotation = 0;
         }
         return rotation;
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+        if (this.world != null) {
+            this.world.updateListeners(this.getPos(), getCachedState(), getCachedState(), 3);
+        }
     }
 
     @Override

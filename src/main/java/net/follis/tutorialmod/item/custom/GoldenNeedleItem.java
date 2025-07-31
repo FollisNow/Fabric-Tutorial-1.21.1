@@ -1,21 +1,20 @@
 package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.component.ModDataComponentTypes;
-import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.entity.custom.LockingEntity;
+import net.follis.tutorialmod.entity.custom.GoldenNeedleProjectileEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -28,28 +27,33 @@ public class GoldenNeedleItem extends SwordItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (world instanceof ServerWorld serverWorld) {
-            HitResult hit = user.raycast(20, 0, false);
-            if (hit.getType() == HitResult.Type.BLOCK) {
-                if (getCurrentStacks(user) > 0 && serverWorld.getEntityById(user.getMainHandStack().getOrDefault(ModDataComponentTypes.ENTITY_ID_CODEC, 0)) instanceof  LivingEntity livingEntity) {
-                    BlockHitResult blockHit = (BlockHitResult) hit;
-                    BlockPos pos = blockHit.getBlockPos();
-                    LockingEntity lockingEntity;
-                    List<LockingEntity> entities = world.getEntitiesByType(ModEntities.LOCK, new Box(pos), lock -> true);
+            ItemStack stack = user.getStackInHand(hand);
+            stack.damage(1, user, LivingEntity.getSlotForHand(user.getActiveHand()));
 
-                    if(entities.isEmpty()) {
-                        lockingEntity = ModEntities.LOCK.spawn(serverWorld, pos, SpawnReason.TRIGGERED);
-                    } else {
-                        lockingEntity = entities.getFirst();
-                    }
-                    assert lockingEntity != null;
-                    lockingEntity.setTarget(livingEntity.getId());
-                    lockingEntity.setDuration(getCurrentStacks(user));
-                    resetStacks(user);
-                }
+            world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+            GoldenNeedleProjectileEntity goldenNeedleProjectile = new GoldenNeedleProjectileEntity(world, user, stack);
+            goldenNeedleProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 3f, 0f);
+
+            if (serverWorld.getEntityById(user.getMainHandStack().getOrDefault(ModDataComponentTypes.ENTITY_ID_CODEC, 0)) instanceof  LivingEntity livingEntity) {
+                goldenNeedleProjectile.setTarget(livingEntity.getId());
+                goldenNeedleProjectile.setDuration(getCurrentStacks(user));
+                goldenNeedleProjectile.setVelocity(goldenNeedleProjectile.getVelocity().multiply(0.4));
+
             }
-        }
 
+            resetStacks(user);
+            resetTarget(user);
+            user.getInventory().removeOne(stack);
+
+            world.spawnEntity(goldenNeedleProjectile);
+        }
         return super.use(world, user, hand);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        super.appendTooltip(stack, context, tooltip, type);
+        tooltip.add(Text.literal("1 True Damage").formatted(Formatting.WHITE));
     }
 
     @Override
@@ -64,10 +68,10 @@ public class GoldenNeedleItem extends SwordItem {
         int lastEntityId = user.getMainHandStack().getOrDefault(ModDataComponentTypes.ENTITY_ID_CODEC, 0);
         if (lastEntityId == entityId){
             int stackCount = user.getMainHandStack().getOrDefault(ModDataComponentTypes.GOLDEN_NEEDLE_STACKS_CODEC, 0);
-            user.getMainHandStack().set(ModDataComponentTypes.GOLDEN_NEEDLE_STACKS_CODEC, stackCount + 40);
+            user.getMainHandStack().set(ModDataComponentTypes.GOLDEN_NEEDLE_STACKS_CODEC, stackCount + 60);
         } else {
             user.getMainHandStack().set(ModDataComponentTypes.ENTITY_ID_CODEC, entityId);
-            user.getMainHandStack().set(ModDataComponentTypes.GOLDEN_NEEDLE_STACKS_CODEC, 0);
+            user.getMainHandStack().set(ModDataComponentTypes.GOLDEN_NEEDLE_STACKS_CODEC, 60);
         }
     }
     private int getCurrentStacks(LivingEntity user) {
@@ -75,5 +79,8 @@ public class GoldenNeedleItem extends SwordItem {
     }
     private void resetStacks(LivingEntity user) {
         user.getMainHandStack().set(ModDataComponentTypes.GOLDEN_NEEDLE_STACKS_CODEC, 0);
+    }
+    private void resetTarget(LivingEntity user) {
+        user.getMainHandStack().set(ModDataComponentTypes.ENTITY_ID_CODEC, 0);
     }
 }

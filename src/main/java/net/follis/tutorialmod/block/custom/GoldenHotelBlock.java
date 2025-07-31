@@ -2,9 +2,12 @@ package net.follis.tutorialmod.block.custom;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.MapCodec;
+import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.block.entity.custom.GoldenHotelBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -144,5 +147,16 @@ public class GoldenHotelBlock extends BlockWithEntity implements BlockEntityProv
                 new Vec3d(0.9375F, 0.313F, 0.9375F),
                 new Vec3d(0.0625F, 0.313F, 0.9375F),
                 new Vec3d(0.9375F, 0.313F, 0.0625F));
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        if(world.isClient()) {
+            return null;
+        }
+
+        return validateTicker(type, ModBlockEntities.GOLDEN_HOTEL_BE,
+                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
 }

@@ -1,8 +1,11 @@
 package net.follis.tutorialmod.block.entity.custom;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.follis.tutorialmod.block.custom.GoldenHotelBlock;
 import net.follis.tutorialmod.block.entity.ImplementedInventory;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
+import net.follis.tutorialmod.recipe.CustomRecipeManager;
+import net.follis.tutorialmod.recipe.GoldenHotelRecipeBuilder;
 import net.follis.tutorialmod.screen.custom.GoldenHotelScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,12 +23,17 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     private float rotation = 0;
-
+    private final List<Integer> offsets = List.of(-2, 2);
     public GoldenHotelBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.GOLDEN_HOTEL_BE, pos, state);
     }
@@ -41,6 +49,68 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
             rotation = 0;
         }
         return rotation;
+    }
+
+    public void tick(World world, BlockPos pos, BlockState state) {
+        if(!this.isEmpty()) {
+            List<GoldenPedestalBlockEntity> pedestals = getPedestals(world, pos);
+            if (pedestals.size() == 2) {
+                boolean matchCount = false;
+                GoldenHotelRecipeBuilder currentRecipe = getMatchingRecipe();
+                if (currentRecipe != null){
+                    if ((currentRecipe.getInput1().test(pedestals.get(0).getStack()) && currentRecipe.getInput2().test(pedestals.get(1).getStack())) ||
+                            (currentRecipe.getInput1().test(pedestals.get(1).getStack()) && currentRecipe.getInput2().test(pedestals.get(0).getStack()))) {
+                        matchCount = true;
+                    }
+                }
+                if (matchCount) {
+                    for (GoldenPedestalBlockEntity pedestal : pedestals) {
+                        pedestal.setStack(0, ItemStack.EMPTY);
+                        pedestal.markDirty();
+                        System.out.println("called mark dirty on pedestals");
+                    }
+                    this.setStack(0, ItemStack.EMPTY);
+                    this.setStack(0, currentRecipe.getOutputItemStack());
+                    this.markDirty();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+        if (this.world != null) {
+            this.world.updateListeners(this.getPos(), getCachedState(), getCachedState(), 3);
+        }
+    }
+
+    private GoldenHotelRecipeBuilder getMatchingRecipe() {
+        List<GoldenHotelRecipeBuilder> recipes = CustomRecipeManager.getRecipes();
+        for (GoldenHotelRecipeBuilder recipe : recipes) {
+            if (recipe.getInputMain().test(this.getStack(0)))
+                return recipe;
+        }
+        return null;
+    }
+
+
+    private List<GoldenPedestalBlockEntity> getPedestals(World world, BlockPos pos) {
+        Direction facing = world.getBlockState(pos).get(GoldenHotelBlock.FACING);
+        List<GoldenPedestalBlockEntity> pedestals = new ArrayList<>(List.of());
+        offsets.forEach(offset -> {
+            if (facing == Direction.NORTH || facing == Direction.SOUTH){
+                if (world.getBlockEntity(pos.offset(Direction.EAST, offset)) instanceof GoldenPedestalBlockEntity pedestal) {
+                    pedestals.add(pedestal);
+                }
+            }
+            if (facing == Direction.EAST || facing == Direction.WEST){
+                if (world.getBlockEntity(pos.offset(Direction.NORTH, offset)) instanceof GoldenPedestalBlockEntity pedestal) {
+                    pedestals.add(pedestal);
+                }
+            }
+        });
+        return pedestals;
     }
 
     @Override

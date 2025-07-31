@@ -29,6 +29,11 @@ public class ModEntities {
             EntityType.Builder.<TomahawkProjectileEntity>create(TomahawkProjectileEntity::new, SpawnGroup.MISC)
                     .dimensions(0.5f, 1.15f).build());
 
+    public static final EntityType<GoldenNeedleProjectileEntity> GOLDEN_NEEDLE = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "golden_needle"),
+            EntityType.Builder.<GoldenNeedleProjectileEntity>create(GoldenNeedleProjectileEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.5f, 0.5f).build());
+
     public static final EntityType<ChairEntity> CHAIR = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "chair_entity"),
             EntityType.Builder.create(ChairEntity::new, SpawnGroup.MISC)
