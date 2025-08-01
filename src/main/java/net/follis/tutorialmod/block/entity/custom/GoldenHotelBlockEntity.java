@@ -1,7 +1,6 @@
 package net.follis.tutorialmod.block.entity.custom;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.custom.GoldenHotelBlock;
 import net.follis.tutorialmod.block.entity.ImplementedInventory;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
@@ -13,7 +12,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
