@@ -65,8 +65,12 @@ public class AmethystBeeHiveBlockEntity extends BlockEntity {
         if (this.isNearFire()) {
             assert this.world != null;
             this.angerBees(null, this.world.getBlockState(this.getPos()), AmethystBeeState.EMERGENCY);
-        }
 
+        }
+        if (this.world != null) {
+            this.world.updateListeners(this.getPos(), getCachedState(), getCachedState(), 3);
+
+        }
         super.markDirty();
     }
 

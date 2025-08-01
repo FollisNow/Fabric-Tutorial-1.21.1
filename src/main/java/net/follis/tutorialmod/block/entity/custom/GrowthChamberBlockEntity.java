@@ -99,6 +99,7 @@ public class GrowthChamberBlockEntity extends BlockEntity implements ExtendedScr
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        this.getItems().clear();
         Inventories.readNbt(nbt, inventory, registryLookup);
         progress = nbt.getInt("growth_chamber.progress");
         maxProgress = nbt.getInt("growth_chamber.max_progress");

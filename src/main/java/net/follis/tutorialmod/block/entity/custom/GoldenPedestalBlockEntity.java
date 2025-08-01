@@ -9,6 +9,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -20,6 +21,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class GoldenPedestalBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
@@ -51,8 +53,14 @@ public class GoldenPedestalBlockEntity extends BlockEntity implements Implemente
     public void markDirty() {
         super.markDirty();
         if (this.world != null) {
-            this.world.updateListeners(this.getPos(), getCachedState(), getCachedState(), 3);
+            this.world.updateListeners(this.getPos(), getCachedState(), getCachedState(), 0);
         }
+    }
+
+    //so the hopper doesn't push in input if there's already an item
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+        return this.isEmpty();
     }
 
     @Override
@@ -63,6 +71,7 @@ public class GoldenPedestalBlockEntity extends BlockEntity implements Implemente
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        this.getItems().clear();
         super.readNbt(nbt, registryLookup);
         Inventories.readNbt(nbt, inventory, registryLookup);
     }
@@ -94,4 +103,5 @@ public class GoldenPedestalBlockEntity extends BlockEntity implements Implemente
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
         return createNbt(registryLookup);
     }
+
 }

@@ -1,6 +1,7 @@
 package net.follis.tutorialmod.block.entity.custom;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.custom.GoldenHotelBlock;
 import net.follis.tutorialmod.block.entity.ImplementedInventory;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
@@ -12,6 +13,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -65,11 +67,10 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
                 }
                 if (matchCount) {
                     for (GoldenPedestalBlockEntity pedestal : pedestals) {
-                        pedestal.setStack(0, ItemStack.EMPTY);
+                        pedestal.removeStack(0);
                         pedestal.markDirty();
-                        System.out.println("called mark dirty on pedestals");
                     }
-                    this.setStack(0, ItemStack.EMPTY);
+                    this.removeStack(0);
                     this.setStack(0, currentRecipe.getOutputItemStack());
                     this.markDirty();
                 }
@@ -112,6 +113,11 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
         });
         return pedestals;
     }
+    //so the hopper doesn't push in input if there's already an item
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+        return this.isEmpty();
+    }
 
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
@@ -121,6 +127,7 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        this.getItems().clear();
         super.readNbt(nbt, registryLookup);
         Inventories.readNbt(nbt, inventory, registryLookup);
     }
@@ -140,7 +147,6 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new GoldenHotelScreenHandler(syncId, playerInventory, this.pos);
     }
-
 
     @Nullable
     @Override
