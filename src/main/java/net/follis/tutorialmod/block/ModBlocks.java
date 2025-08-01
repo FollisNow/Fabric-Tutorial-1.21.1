@@ -169,9 +169,8 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(Blocks.CUT_SANDSTONE).strength(4).requiresTool()));
     public static final Block GOLD_LARGE_BRICKS = registerBlock("gold_large_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
-    public static final Block GOLD_CHAIN = registerBlock("gold_chain",
+    public static final Block GOLD_CHAIN = registerBlockWithoutBlockItem("gold_chain",
             new ChainBlock(AbstractBlock.Settings.copy(Blocks.CHAIN).nonOpaque()));
-
 
 
     public static final Block CHAIR = registerBlock("chair",
@@ -184,13 +183,11 @@ public class ModBlocks {
             new GoldenHotelBlock(AbstractBlock.Settings.create().nonOpaque().strength(3f).requiresTool()));
 
 
-
     public static final Block GROWTH_CHAMBER = registerBlock("growth_chamber",
             new GrowthChamberBlock(AbstractBlock.Settings.create().strength(3f).requiresTool()));
 
     public static final Block AMETHYST_BEE_HIVE = registerBlock("amethyst_bee_hive",
             new AmethystBeeHiveBlock(AbstractBlock.Settings.create().strength(4f).requiresTool()));
-
 
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {

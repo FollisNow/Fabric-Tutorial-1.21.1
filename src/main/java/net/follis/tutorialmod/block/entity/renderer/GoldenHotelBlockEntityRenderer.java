@@ -47,12 +47,18 @@ public class GoldenHotelBlockEntityRenderer implements BlockEntityRenderer<Golde
         if (entity.getWorld().isClient && !entity.getWorld().getBlockState(entity.getPos()).isAir()) {
             Direction facing = entity.getWorld().getBlockState(entity.getPos()).get(GoldenHotelBlock.FACING);
             offsets.forEach(offset -> {
-                if (entity.getWorld().getBlockState(entity.getPos().offset(facing.rotateYCounterclockwise(), offset)).isAir()) {
-                    if (facing == Direction.NORTH || facing == Direction.SOUTH){
+                if (entity.getWorld().getBlockState(entity.getPos().offset(facing.rotateYClockwise(), offset)).isAir()) {
+                    if (facing == Direction.NORTH){
                         renderSidePedestal(matrices, vertexConsumers, light, overlay, offset, 0);
                     }
-                    if (facing == Direction.EAST || facing == Direction.WEST){
+                    if (facing == Direction.SOUTH) {
+                        renderSidePedestal(matrices, vertexConsumers, light, overlay, offset * -1, 0);
+                    }
+                    if (facing == Direction.EAST){
                         renderSidePedestal(matrices, vertexConsumers, light, overlay, 0, offset);
+                    }
+                    if (facing == Direction.WEST) {
+                        renderSidePedestal(matrices, vertexConsumers, light, overlay, 0, offset * -1);
                     }
                 }
             });

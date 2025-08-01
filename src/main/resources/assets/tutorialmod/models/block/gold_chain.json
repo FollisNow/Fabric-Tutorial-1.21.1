@@ -1,5 +1,4 @@
 {
-  "parent": "tutorialmod:block/block",
   "textures": {
     "particle": "tutorialmod:block/gold_chain",
     "all": "tutorialmod:block/gold_chain"
