@@ -19,7 +19,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
@@ -36,7 +35,7 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
             DataTracker.registerData(GoldenNeedleProjectileEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private boolean dealtDamage;
     public int returnTimer;
-    private double groundVelocityFactor = 0.005;
+    private final double groundVelocityFactor = 0.005;
 
     public GoldenNeedleProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
