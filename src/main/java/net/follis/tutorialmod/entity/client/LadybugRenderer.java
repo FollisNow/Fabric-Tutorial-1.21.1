@@ -4,8 +4,6 @@ import com.google.common.collect.Maps;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.custom.LadybugEntity;
 import net.follis.tutorialmod.entity.custom.LadybugVariant;
-import net.follis.tutorialmod.entity.custom.MantisEntity;
-import net.follis.tutorialmod.entity.custom.MantisVariant;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;

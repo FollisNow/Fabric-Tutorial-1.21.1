@@ -2,14 +2,12 @@ package net.follis.tutorialmod.entity.client;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.custom.LadybugEntity;
-import net.follis.tutorialmod.entity.custom.MantisEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 
 public class LadybugModel<T extends LadybugEntity> extends SinglePartEntityModel<T> {
     public static final EntityModelLayer LADYBUG = new EntityModelLayer(Identifier.of(TutorialMod.MOD_ID, "ladybug"), "main");
