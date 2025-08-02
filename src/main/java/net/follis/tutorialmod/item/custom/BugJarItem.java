@@ -42,6 +42,14 @@ public class BugJarItem extends Item {
     public BugJarItem(Settings settings) {
         super(settings);
     }
+    @Override
+    public Text getName() {
+        return Text.translatable(this.getTranslationKey()).formatted(Formatting.GOLD);
+    }
+    @Override
+    public Text getName(ItemStack stack) {
+        return Text.translatable(this.getTranslationKey(stack)).formatted(Formatting.GOLD);
+    }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {

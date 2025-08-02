@@ -1,26 +1,41 @@
 package net.follis.tutorialmod.item.custom;
 
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.custom.GoldenNeedleProjectileEntity;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.TridentEntity;
+import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class GoldenNeedleItem extends SwordItem {
-    public GoldenNeedleItem(ToolMaterial toolMaterial, Settings settings) {
+public class GoldenNeedleItem extends SwordItem implements ProjectileItem {
+    public GoldenNeedleItem(ToolMaterial toolMaterial, SwordItem.Settings settings) {
         super(toolMaterial, settings);
+    }
+    @Override
+    public Text getName() {
+        return Text.translatable(this.getTranslationKey()).formatted(Formatting.GOLD);
+    }
+    @Override
+    public Text getName(ItemStack stack) {
+        return Text.translatable(this.getTranslationKey(stack)).formatted(Formatting.GOLD);
     }
 
     @Override
@@ -37,13 +52,10 @@ public class GoldenNeedleItem extends SwordItem {
                 goldenNeedleProjectile.setTarget(livingEntity.getId());
                 goldenNeedleProjectile.setDuration(getCurrentStacks(user));
                 goldenNeedleProjectile.setVelocity(goldenNeedleProjectile.getVelocity().multiply(0.4));
-
             }
-
             resetStacks(user);
             resetTarget(user);
             user.getInventory().removeOne(stack);
-
             world.spawnEntity(goldenNeedleProjectile);
         }
         return super.use(world, user, hand);
@@ -80,5 +92,17 @@ public class GoldenNeedleItem extends SwordItem {
     }
     private void resetTarget(LivingEntity user) {
         user.getMainHandStack().set(ModDataComponentTypes.ENTITY_ID_CODEC, 0);
+    }
+
+    @Override
+    public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+        return super.canBeEnchantedWith(stack, enchantment, context);
+    }
+
+    @Override
+    public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
+        GoldenNeedleProjectileEntity goldenNeedleProjectile = new GoldenNeedleProjectileEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1));
+        goldenNeedleProjectile.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED;
+        return goldenNeedleProjectile;
     }
 }

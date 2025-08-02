@@ -187,8 +187,7 @@
   "tooltip.tutorialmod.chisel": "Press §eShift§r for more Information!",
 
   "tooltip.tutorialmod.bug_jar.shift_down": "This item helps you catch fancy bugs!",
-  "tooltip.tutorialmod.bug_jar": "Press §eShift§r for more Information!",
-  "tooltip.tutorialmod.bug_jar.last_caught": "Last Bug Caught: ",
+  "tooltip.tutorialmod.bug_jar": "§6Press §eShift§r§6 for content",
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
   "tooltip.tutorialmod.locust.tooltip": "Taste better than it looks",
