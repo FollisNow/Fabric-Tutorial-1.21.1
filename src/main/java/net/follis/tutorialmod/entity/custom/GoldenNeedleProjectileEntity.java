@@ -33,9 +33,9 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
             DataTracker.registerData(GoldenNeedleProjectileEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> DATA_ID_TYPE_DURATION =
             DataTracker.registerData(GoldenNeedleProjectileEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private final double groundVelocityFactor = 0.005;
     private boolean dealtDamage;
     public int returnTimer;
-    private final double groundVelocityFactor = 0.005;
 
     public GoldenNeedleProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
