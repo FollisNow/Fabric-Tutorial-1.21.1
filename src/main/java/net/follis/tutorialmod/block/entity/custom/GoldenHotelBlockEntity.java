@@ -76,14 +76,6 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
         }
     }
 
-    @Override
-    public void markDirty() {
-        super.markDirty();
-        if (this.world != null) {
-            this.world.updateListeners(this.getPos(), getCachedState(), getCachedState(), 3);
-        }
-    }
-
     private GoldenHotelRecipeBuilder getMatchingRecipe() {
         List<GoldenHotelRecipeBuilder> recipes = CustomRecipeManager.getRecipes();
         for (GoldenHotelRecipeBuilder recipe : recipes) {
@@ -92,7 +84,6 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
         }
         return null;
     }
-
 
     private List<GoldenPedestalBlockEntity> getPedestals(World world, BlockPos pos) {
         Direction facing = world.getBlockState(pos).get(GoldenHotelBlock.FACING);
@@ -115,6 +106,14 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
     @Override
     public boolean isValid(int slot, ItemStack stack) {
         return this.isEmpty();
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+        if (this.world != null) {
+            this.world.updateListeners(this.getPos(), getCachedState(), getCachedState(), 3);
+        }
     }
 
     @Override

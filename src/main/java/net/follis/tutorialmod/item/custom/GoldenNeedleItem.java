@@ -53,7 +53,6 @@ public class GoldenNeedleItem extends SwordItem {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
-        tooltip.add(Text.literal("1 True Damage").formatted(Formatting.WHITE));
     }
 
     @Override

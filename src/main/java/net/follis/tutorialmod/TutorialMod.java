@@ -16,6 +16,7 @@ import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.AmethystBeeEntity;
+import net.follis.tutorialmod.entity.custom.LadybugEntity;
 import net.follis.tutorialmod.entity.custom.LocustEntity;
 import net.follis.tutorialmod.entity.custom.MantisEntity;
 import net.follis.tutorialmod.item.ModItemGroups;
@@ -125,6 +126,7 @@ public class TutorialMod implements ModInitializer {
 		FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.GOLDEN_LEAVES, 30, 60);
 
 		FabricDefaultAttributeRegistry.register(ModEntities.MANTIS, MantisEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.LADYBUG, LadybugEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());
 

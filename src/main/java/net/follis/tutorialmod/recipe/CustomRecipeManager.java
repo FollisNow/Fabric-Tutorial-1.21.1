@@ -22,6 +22,10 @@ public class CustomRecipeManager {
                 List.of(Blocks.GOLD_BLOCK, ModBlocks.GOLD_FENCE_GATE),
                 Items.DECORATED_POT));
 
+        recipes.add(createRecipe(ModItems.GRILLED_LOCUST,
+                List.of(Blocks.DIRT, Blocks.DIRT),
+                Items.BIRCH_PLANKS));
+
         return recipes;
     }
 
