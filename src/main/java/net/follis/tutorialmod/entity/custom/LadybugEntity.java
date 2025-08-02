@@ -1,0 +1,487 @@
+package net.follis.tutorialmod.entity.custom;
+
+import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.util.ModTags;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.BirdNavigation;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.MobNavigation;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.*;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.EntityEffectParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.TimeHelper;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable {
+    public final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
+    public static final int field_28638 = MathHelper.ceil(1.4959966F);
+    private int particleTickCounter = 0; // Counter to track ticks
+
+    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(LadybugEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> POTION_GENE = DataTracker.registerData(LadybugEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> ANGER;
+    @Nullable
+    private UUID angryAt;
+    private static final UniformIntProvider ANGER_TIME_RANGE;
+
+
+    public LadybugEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+        super(entityType, world);
+        this.moveControl = new FlightMoveControl(this, 20, true);
+
+    }
+
+    @Override
+    protected void initGoals() {
+        this.goalSelector.add(0, new BiteGoal(this, 1.4F, true));
+
+        this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
+        this.goalSelector.add(2, new TemptGoal(this, 1.25D, this::foodSelector, false));
+
+        this.goalSelector.add(3, new WanderNearTargetGoal(this, 1.0D, 1));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
+        this.goalSelector.add(5, new LookAroundGoal(this));
+        this.goalSelector.add(6, new SwimGoal(this));
+
+        this.targetSelector.add(1, (new LadybugRevengeGoal(this)).setGroupRevenge());
+        this.targetSelector.add(2, new BiteTargetGoal(this));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 10, false, false, (entity) -> entity instanceof Monster && !(entity instanceof CreeperEntity) && !isWearingGold(entity)));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 5, false, false, this::shouldAngerAt));
+    }
+
+    private boolean foodSelector(ItemStack stack) {
+        if(this.getVariant() == LadybugVariant.OMEN) {
+            return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
+        } else {
+            return stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST);
+        }
+    }
+
+    public static DefaultAttributeContainer.Builder createAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 7.0F)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.65F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
+    }
+
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        LadybugEntity baby = ModEntities.LADYBUG.create(world);
+        if (baby != null && entity instanceof LadybugEntity ladybug) {
+            if (((this.getVariant() != LadybugVariant.OMEN || ladybug.getVariant() != LadybugVariant.OMEN) && random.nextInt(100) == 0) ||
+                    (this.getVariant() == LadybugVariant.OMEN && ladybug.getVariant() == LadybugVariant.OMEN)) {
+                baby.setVariant(LadybugVariant.OMEN);
+            } else {
+                baby.setVariant(LadybugVariant.DEFAULT);
+            }
+
+            if (baby.getVariant() == LadybugVariant.OMEN) {
+                if (this.getPotionGene() != null && this.getPotionGene() == ladybug.getPotionGene()) {
+                    baby.setPotionGene(this.getPotionGene());
+                    world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+                } else if (this.random.nextFloat() <= 0.33f) {
+                    List<RegistryEntry<StatusEffect>> firstEffects = this.getActiveStatusEffects().keySet().stream().toList();
+                    List<RegistryEntry<StatusEffect>> secondEffects = ladybug.getActiveStatusEffects().keySet().stream().toList();
+                    List<RegistryEntry<StatusEffect>> sharedEffects = new ArrayList<>();
+                    for (RegistryEntry<StatusEffect> effect : firstEffects) {
+                        if (secondEffects.contains(effect)) {
+                            sharedEffects.add(effect);
+                        }
+                    }
+                    if (!sharedEffects.isEmpty()) {
+                        baby.setPotionGene(sharedEffects.get(this.random.nextInt(sharedEffects.size())).value());
+                        world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+                    }
+                }
+            }
+        }
+        return baby;
+    }
+
+    @Override
+    public void breed(ServerWorld world, AnimalEntity other) {
+        super.breed(world, other);
+        this.setBreedingAge(1200);
+        other.setBreedingAge(1200);
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        if (this.getVariant() == LadybugVariant.OMEN)
+            return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
+        return stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST) || stack.isOf(ModItems.GRILLED_LOCUST);
+    }
+
+    public StatusEffect getPotionGene() {
+        if (this.dataTracker.get(POTION_GENE) == -1) {
+            return null;
+        }
+        return Registries.STATUS_EFFECT.get(this.dataTracker.get(POTION_GENE));
+    }
+
+    public void setPotionGene(StatusEffect potion) {
+        this.dataTracker.set(POTION_GENE, Registries.STATUS_EFFECT.getRawId(potion));
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        this.setNoGravity(isNavigating());
+
+        if (this.getWorld().isClient()) {
+            this.setupAnimationStates();
+        }
+
+        if (this.getWorld().isClient) {
+            this.particleTickCounter++;
+            if (this.particleTickCounter >= 10) {
+                this.particleTickCounter = 0;
+                summonPotionParticle();
+            }
+        }
+    }
+
+    @Override
+    protected void mobTick() {
+        if (!this.getWorld().isClient) {
+            this.tickAngerLogic((ServerWorld)this.getWorld(), false);
+        }
+    }
+
+    // ATTACK PERKS
+    @Override
+    public boolean tryAttack(Entity target) {
+        DamageSource damageSource = this.getDamageSources().sting(this);
+        float damage = (float) this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        target.timeUntilRegen = 0;
+        if (target.damage(damageSource, damage)) {
+            if (this.getPotionGene() != null && target instanceof LivingEntity livingEntity) {
+                livingEntity.addStatusEffect(new StatusEffectInstance(RegistryEntry.of(this.getPotionGene()), 5 * 20));
+            }
+            this.onAttacking(target);
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (this.isInvulnerableTo(source)) {
+            return false;
+        } else {
+            Entity entity = source.getAttacker();
+            if (entity != null && !(entity instanceof PlayerEntity) && !(entity instanceof PersistentProjectileEntity)) {
+                amount = (amount + 1.0F) / 2.0F;
+            }
+            return super.damage(source, amount);
+        }
+    }
+    @Override
+    public boolean isInvulnerableTo(DamageSource damageSource) {
+        if (damageSource.isOf(DamageTypes.CACTUS) || damageSource.isOf(DamageTypes.SWEET_BERRY_BUSH) || damageSource.getAttacker() instanceof EnderDragonEntity || damageSource.isOf(DamageTypes.CRAMMING)) {
+            return true;
+        } else {
+            return super.isInvulnerableTo(damageSource);
+        }
+    }
+
+    // TARGETING
+    @Override
+    public boolean canTarget(EntityType<?> type) {
+        return type != EntityType.CREEPER;
+    }
+    private boolean isWearingGold(LivingEntity entity) {
+        for(ItemStack stack : entity.getAllArmorItems()){
+            if (stack.isIn(ModTags.Items.GOLDEN_ITEMS))
+                return true;
+        }
+        return false;
+    }
+    @Override
+    public boolean shouldAngerAt(LivingEntity entity) {
+        if (!this.canTarget(entity) || isWearingGold(entity)) {
+            return false;
+        } else {
+            return entity.getType() == EntityType.PLAYER && this.isUniversallyAngry(entity.getWorld()) || entity.getUuid().equals(this.getAngryAt());
+        }
+    }
+
+
+
+    // STATUS EFFECT
+    private void summonPotionParticle() {
+        if (this.getPotionGene() != null) {
+            StatusEffect effect = this.getPotionGene();
+            int k = effect.getColor();
+            float d = (float) ((k >> 16 & 0xFF)) / 255.0F;
+            float e = (float) ((k >> 8 & 0xFF)) / 255.0F;
+            float f = (float) ((k & 0xFF)) / 255.0F;
+            this.getWorld().addParticle(EntityEffectParticleEffect.create(ParticleTypes.ENTITY_EFFECT, d, e, f), this.getParticleX(0.5), this.getRandomBodyY(), this.getParticleZ(0.5), d, e, f);
+        }
+    }
+    @Override
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        return super.canHaveStatusEffect(effect) && this.getPotionGene() == null;
+    }
+    @Override
+    protected void tickStatusEffects() {
+        super.tickStatusEffects();
+    }
+
+
+
+
+
+    /* VARIANT & POTION EFFECT*/
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
+        builder.add(POTION_GENE, -1);
+        builder.add(ANGER, 0);
+
+    }
+
+    public LadybugVariant getVariant() {
+        return LadybugVariant.byId(this.getTypeVariant() & 255);
+    }
+
+    private int getTypeVariant() {
+        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
+    }
+
+    private void setVariant(LadybugVariant variant) {
+        this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("Variant", this.getTypeVariant());
+        if (this.getPotionGene() != null) {
+            nbt.putString("PotionGene", String.valueOf(Registries.STATUS_EFFECT.getId(this.getPotionGene())));
+        }
+        this.writeAngerToNbt(nbt);
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        if (nbt.contains("PotionGene")) {
+            Identifier id = Identifier.of(nbt.getString("PotionGene"));
+            StatusEffect potion = Registries.STATUS_EFFECT.get(id);
+            this.dataTracker.set(POTION_GENE, Registries.STATUS_EFFECT.getRawId(potion));
+        }
+        this.readAngerFromNbt(this.getWorld(), nbt);
+    }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                 @Nullable EntityData entityData) {
+        LadybugVariant variant = this.random.nextInt(100) == 0? LadybugVariant.OMEN : LadybugVariant.DEFAULT;
+        setVariant(variant);
+        return super.initialize(world, difficulty, spawnReason, entityData);
+    }
+
+    /* SOUNDS */
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_ALLAY_HURT;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_PANDA_DEATH;
+    }
+
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = 40;
+            this.idleAnimationState.start(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
+
+    public boolean isFlappingWings() {
+        return this.isInAir() && this.age % field_28638 == 0;
+    }
+    @Override
+    public boolean isInAir() {
+        return !this.isOnGround();
+    }
+    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {}
+    protected EntityNavigation createNavigation(World world) {
+        BirdNavigation birdNavigation = new BirdNavigation(this, world) {
+            public boolean isValidPosition(BlockPos pos) {
+                return !this.world.getBlockState(pos.down()).isAir();
+            }
+        };
+        birdNavigation.setCanPathThroughDoors(false);
+        birdNavigation.setCanSwim(false);
+        birdNavigation.setCanEnterOpenDoors(true);
+
+        MobNavigation mobNavigation = new MobNavigation(this, world) {
+            public boolean isValidPosition(BlockPos pos) {
+                return !this.world.getBlockState(pos.down()).isAir();
+            }
+        };
+        mobNavigation.setCanEnterOpenDoors(true);
+        mobNavigation.setCanSwim(false);
+        mobNavigation.setCanPathThroughDoors(false);
+
+        if (birdNavigation.getTargetPos() != null && birdNavigation.getTargetPos().isWithinDistance(this.getPos(), 2))
+            return mobNavigation;
+        return birdNavigation;
+    }
+
+    public float getPathfindingFavor(BlockPos pos, WorldView world) {
+        return world.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+    }
+
+    @Override
+    public int getAngerTime() {
+        return this.dataTracker.get(ANGER);
+    }
+
+    @Override
+    public void setAngerTime(int angerTime) {
+        this.dataTracker.set(ANGER, angerTime);
+
+    }
+
+    @Override
+    public @Nullable UUID getAngryAt() {
+        return this.angryAt;
+    }
+
+    @Override
+    public void setAngryAt(@Nullable UUID angryAt) {
+        this.angryAt = angryAt;
+
+    }
+
+    @Override
+    public void chooseRandomAngerTime() {
+        this.setAngerTime(ANGER_TIME_RANGE.get(this.random));
+    }
+
+    class BiteGoal extends MeleeAttackGoal {
+        BiteGoal(final PathAwareEntity mob, final double speed, final boolean pauseWhenMobIdle) {
+            super(mob, speed, pauseWhenMobIdle);
+        }
+
+        public boolean canStart() {
+            return super.canStart() && LadybugEntity.this.hasAngerTime() && LadybugEntity.this.getVariant() == LadybugVariant.OMEN;
+        }
+
+        public boolean shouldContinue() {
+            return super.shouldContinue() && LadybugEntity.this.hasAngerTime() && LadybugEntity.this.getVariant() == LadybugVariant.OMEN;
+        }
+    }
+
+    class LadybugRevengeGoal extends RevengeGoal {
+        LadybugRevengeGoal(final LadybugEntity ladybug) {
+            super(ladybug);
+        }
+
+        public boolean shouldContinue() {
+            return LadybugEntity.this.hasAngerTime() && super.shouldContinue() && LadybugEntity.this.getVariant() == LadybugVariant.OMEN;
+        }
+
+        protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
+            if (mob instanceof LadybugEntity && this.mob.canSee(target) && !((LadybugEntity) mob).isWearingGold(target)) {
+                mob.setTarget(target);
+            } else {
+                mob.setTarget(null);
+            }
+
+        }
+    }
+
+    static class BiteTargetGoal extends ActiveTargetGoal<PlayerEntity> {
+        public BiteTargetGoal(LadybugEntity ladybug) {
+            super(ladybug, PlayerEntity.class, 10, true, false, ladybug::shouldAngerAt);
+        }
+
+        public boolean canStart() {
+            return this.canBite() && super.canStart();
+        }
+
+        public boolean shouldContinue() {
+            boolean bl = this.canBite();
+            if (this.mob.getTarget() != null && mob instanceof LadybugEntity ladybug && !ladybug.isWearingGold(ladybug.getTarget())) {
+                this.target = null;
+                return false;
+            } else if (bl && this.mob.getTarget() != null ) {
+                return super.shouldContinue();
+            } else {
+                this.target = null;
+                return false;
+            }
+        }
+
+        private boolean canBite() {
+            LadybugEntity ladybugEntity = (LadybugEntity)this.mob;
+            return ladybugEntity.hasAngerTime();
+        }
+    }
+
+    static {
+        ANGER = DataTracker.registerData(LadybugEntity.class, TrackedDataHandlerRegistry.INTEGER);
+        ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
+    }
+}

@@ -64,6 +64,7 @@
   "item.minecraft.tipped_arrow.effect.sporulation_potion": "Arrow of Sporulation",
 
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
+  "item.tutorialmod.ladybug_spawn_egg": "Ladybug Spawn Egg",
   "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
   "item.tutorialmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
 
@@ -198,6 +199,7 @@
   "trim_pattern.tutorialmod.kaupen": "Kaupen Armor Pattern",
 
   "entity.tutorialmod.mantis": "Mantis",
+  "entity.tutorialmod.ladybug": "Ladybug",
   "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.amethyst_bee": "Amethyst Bee",
   "entity.tutorialmod.tomahawk": "Tomahawk"
