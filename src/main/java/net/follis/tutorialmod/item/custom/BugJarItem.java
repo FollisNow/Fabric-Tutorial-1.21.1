@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.follis.tutorialmod.entity.ModEntities;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;
@@ -16,16 +17,20 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -42,22 +47,42 @@ public class BugJarItem extends Item {
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 
         if(Screen.hasShiftDown()) {
-            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_net.shift_down"));
-
+            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_jar.shift_down"));
+            Formatting[] formatting = new Formatting[]{Formatting.GRAY, Formatting.ITALIC};
             List<BugData> bugDataList = new ArrayList<>(stack.getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
             if(!bugDataList.isEmpty()) {
-                Formatting[] formatting = new Formatting[]{Formatting.GRAY};
-                tooltip.add(Text.literal(Text.translatable("tooltip.tutorialmod.bug_net.last_caught").getString() + bugDataList.getLast().entityData.copyNbt().get("id")).formatted(formatting));
                 List<BugData> reversedList = bugDataList.reversed();
                 for (BugData bugData: reversedList) {
-                    if (bugData != reversedList.getFirst())
-                        tooltip.add(Text.literal(Text.translatable("tooltip.tutorialmod.bug_net.caught").getString() + bugData.entityData.copyNbt().get("id")).formatted(formatting));
+                    if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.LADYBUG) {
+                        var potionId = bugData.entityData.copyNbt().getString("PotionGene");
+                        var statusEffect = Registries.STATUS_EFFECT.get(Identifier.of(potionId));
+                        if (statusEffect != null) {
+                            tooltip.add(Text.translatable(convertToKey(bugData)).formatted(formatting)
+                                    .append(" ")
+                                    .append(Text.literal(Text.translatable(statusEffect.getTranslationKey()).getString().toLowerCase())
+                                            .setStyle(Style.EMPTY)
+                                            .withColor(statusEffect.getColor())));
+                        } else {
+                            tooltip.add(Text.translatable(convertToKey(bugData)).formatted(formatting));
+                        }
+
+                    } else {
+                        tooltip.add(Text.translatable(convertToKey(bugData)).formatted(formatting));
+                    }
                 }
             }
         } else {
-            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_net"));
+            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_jar"));
         }
         super.appendTooltip(stack, context, tooltip, type);
+    }
+
+    private static Identifier getIdentifier(BugData bugData) {
+        return Identifier.of(bugData.entityData.copyNbt().getString("id"));
+    }
+
+    private static @NotNull String convertToKey(BugData bugData) {
+        return "entity." + bugData.entityData.copyNbt().getString("id").replace(":", ".");
     }
 
     @Override

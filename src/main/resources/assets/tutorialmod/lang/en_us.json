@@ -186,10 +186,9 @@
   "tooltip.tutorialmod.chisel.shift_down": "This item chisels blocks into Bricks!",
   "tooltip.tutorialmod.chisel": "Press §eShift§r for more Information!",
 
-  "tooltip.tutorialmod.bug_net.shift_down": "This item helps you catch fancy bugs!",
-  "tooltip.tutorialmod.bug_net": "Press §eShift§r for more Information!",
-  "tooltip.tutorialmod.bug_net.last_caught": "Last Bug Caught ",
-  "tooltip.tutorialmod.bug_net.caught": "Bug Caught ",
+  "tooltip.tutorialmod.bug_jar.shift_down": "This item helps you catch fancy bugs!",
+  "tooltip.tutorialmod.bug_jar": "Press §eShift§r for more Information!",
+  "tooltip.tutorialmod.bug_jar.last_caught": "Last Bug Caught: ",
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
   "tooltip.tutorialmod.locust.tooltip": "Taste better than it looks",
