@@ -24,6 +24,12 @@ public class ModEntities {
             EntityType.Builder.create(AmethystBeeEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.5f, 0.5f).build());
 
+    public static final EntityType<LadybugEntity> LADYBUG = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "ladybug"),
+            EntityType.Builder.create(LadybugEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.5f, 0.5f).build());
+
+
     public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "tomahawk"),
             EntityType.Builder.<TomahawkProjectileEntity>create(TomahawkProjectileEntity::new, SpawnGroup.MISC)

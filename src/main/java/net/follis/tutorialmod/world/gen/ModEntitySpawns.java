@@ -17,5 +17,12 @@ public class ModEntitySpawns {
 
         SpawnRestriction.register(ModEntities.MANTIS, SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
+
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FLOWER_FOREST),
+                SpawnGroup.CREATURE, ModEntities.LADYBUG, 30, 2, 4);
+
+        SpawnRestriction.register(ModEntities.LADYBUG, SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
     }
 }
