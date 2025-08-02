@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.ModTags;
-import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
