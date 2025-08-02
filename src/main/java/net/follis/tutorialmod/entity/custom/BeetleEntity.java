@@ -116,7 +116,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
                     (this.getVariant() == BeetleVariant.OMEN && beetle.getVariant() == BeetleVariant.OMEN)) {
                 baby.setVariant(BeetleVariant.OMEN);
             } else {
-                baby.setVariant(BeetleVariant.DEFAULT);
+                baby.setVariant(this.getVariant());
             }
 
             if (baby.getVariant() == BeetleVariant.OMEN) {
@@ -322,7 +322,13 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  @Nullable EntityData entityData) {
-        BeetleVariant variant = this.random.nextInt(100) == 0? BeetleVariant.OMEN : BeetleVariant.DEFAULT;
+        BeetleVariant variant;
+        if (this.random.nextInt(100) == 0) {
+            variant = BeetleVariant.OMEN;
+        }
+        else {
+            variant = BeetleVariant.byId(this.random.nextBetween(1, BeetleVariant.values().length - 1));
+        }
         setVariant(variant);
         return super.initialize(world, difficulty, spawnReason, entityData);
     }

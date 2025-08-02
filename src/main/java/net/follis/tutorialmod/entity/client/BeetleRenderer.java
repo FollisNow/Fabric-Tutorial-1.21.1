@@ -16,10 +16,14 @@ import java.util.Map;
 public class BeetleRenderer extends MobEntityRenderer<BeetleEntity, BeetleModel<BeetleEntity>> {
     private static final Map<BeetleVariant, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(BeetleVariant.class), map -> {
-                map.put(BeetleVariant.DEFAULT,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/beetle/beetle.png"));
                 map.put(BeetleVariant.OMEN,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/beetle/beetle_omen.png"));
+                map.put(BeetleVariant.SCARAB,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/beetle/beetle_scarab.png"));
+                map.put(BeetleVariant.LADYBUG,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/beetle/beetle_ladybug.png"));
+                map.put(BeetleVariant.BARK,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/beetle/beetle_bark.png"));
             });
 
     public BeetleRenderer(EntityRendererFactory.Context context) {
