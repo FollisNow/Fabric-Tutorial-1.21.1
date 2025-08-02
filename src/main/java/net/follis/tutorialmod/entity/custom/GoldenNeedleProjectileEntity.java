@@ -8,6 +8,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -17,6 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
@@ -33,6 +36,7 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
             DataTracker.registerData(GoldenNeedleProjectileEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private boolean dealtDamage;
     public int returnTimer;
+    private double groundVelocityFactor = 0.005;
 
     public GoldenNeedleProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -83,9 +87,6 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
         return super.tryPickup(player) || this.isOwner(player) && player.getInventory().insertStack(this.asItemStack()) && player.getPos().isInRange(this.getPos(), 0.5);
     }
 
-    public boolean isGrounded() {
-        return inGround;
-    }
     private boolean isOwnerAlive() {
         Entity entity = this.getOwner();
         if (entity != null && entity.isAlive()) {
@@ -94,14 +95,10 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
             return false;
         }
     }
-    public boolean isEnchanted() {
-        return this.dataTracker.get(ENCHANTED);
-    }
-
 
     @Override
     public void tick() {
-        if (this.inGroundTime > getDuration() + 4) {
+        if (getDuration() <= 0 && this.inGroundTime > 20) {
             this.dealtDamage = true;
             this.getItemStack().set(ModDataComponentTypes.ENTITY_ID_CODEC, 0);
             this.getItemStack().set(ModDataComponentTypes.GOLDEN_NEEDLE_STACKS_CODEC, 0);
@@ -111,7 +108,7 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
 
         Entity entity = this.getOwner();
         int i = this.dataTracker.get(LOYALTY);
-        if (i > 0 && (this.dealtDamage || this.isNoClip()) && entity != null && getDuration() <= 0) {
+        if (i > 0 && this.dealtDamage && entity != null && getDuration() <= 0 && (this.isNoClip() || this.inGroundTime > 20)) {
             if (!this.isOwnerAlive()) {
                 if (!this.getWorld().isClient && this.pickupType == PickupPermission.ALLOWED) {
                     this.getItemStack().set(ModDataComponentTypes.ENTITY_ID_CODEC, 0);
@@ -138,25 +135,47 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
                 double d = 0.05 * (double)i;
                 this.setVelocity(this.getVelocity().multiply(0.95).add(vec3d.normalize().multiply(d)));
                 if (this.returnTimer == 0) {
-                    this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
+                    this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 7.0F, 3.0F);
                 }
-
                 ++this.returnTimer;
             }
         }
 
 
 
-        if (this.getWorld() instanceof ServerWorld serverWorld && getTargetId() != 0){
-            Entity target = serverWorld.getEntityById(getTargetId());
+        if (getTargetId() != 0){
+            World world = this.getWorld();
+            Entity target = world.getEntityById(getTargetId());
             if (target != null && target.isAlive() && getDuration() > 0) {
-                Vec3d diff = this.getPos().subtract(target.getPos());
-                target.setVelocity(diff.multiply(0.1));
-                addParticles(this, target, serverWorld);
-                addParticles(this, target, serverWorld);
-                addParticles(this, target, serverWorld);
-                addParticles(this, target, serverWorld);
-                setDuration(getDuration() - 1);
+                Vec3d diff = this.getPos().subtract(target.getPos()).multiply(0.1);
+                Vec3d appliedForce = diff;
+
+                if (this.inGround) {
+                    if (this.getPos().distanceTo(target.getPos()) < 2.2) {
+                        appliedForce = diff.multiply(this.groundVelocityFactor);
+                        if (!world.isClient && this.getPos().distanceTo(target.getPos()) >= 2.0 && this.inGroundTime > 20) {
+                            setDuration(0);
+                            world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_CHAIN_BREAK, SoundCategory.PLAYERS, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+                        }
+                    }
+                }
+
+
+                if (target instanceof PlayerEntity playerEntity) {
+                    playerEntity.addVelocity(appliedForce);
+                    if (playerEntity.isOnGround()) {
+                        playerEntity.move(MovementType.SELF, appliedForce);
+                    }
+                } else {
+                    target.setVelocity(appliedForce);
+                }
+                if (world instanceof ServerWorld serverWorld){
+                    addParticles(this, target, serverWorld);
+                    addParticles(this, target, serverWorld);
+                    addParticles(this, target, serverWorld);
+                    addParticles(this, target, serverWorld);
+                    setDuration(getDuration() - 1);
+                }
             }
         }
         super.tick();
