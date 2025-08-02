@@ -23,6 +23,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -38,6 +39,7 @@ import java.util.List;
 
 public class BugJarItem extends Item {
     private World world;
+    TextColor darkGold = TextColor.fromRgb(0xBC7F04); // Custom gold-like color
 
     public BugJarItem(Settings settings) {
         super(settings);
@@ -55,8 +57,8 @@ public class BugJarItem extends Item {
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 
         if(Screen.hasShiftDown()) {
-            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_jar.shift_down"));
-            Formatting[] formatting = new Formatting[]{Formatting.GRAY, Formatting.ITALIC};
+            tooltip.add(Text.translatable("tooltip.tutorialmod.bug_jar.shift_down").withColor(darkGold.getRgb()));
+            Formatting[] formatting = new Formatting[]{Formatting.GRAY};
             List<BugData> bugDataList = new ArrayList<>(stack.getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
             if(!bugDataList.isEmpty()) {
                 List<BugData> reversedList = bugDataList.reversed();
@@ -65,7 +67,7 @@ public class BugJarItem extends Item {
                         var potionId = bugData.entityData.copyNbt().getString("PotionGene");
                         var statusEffect = Registries.STATUS_EFFECT.get(Identifier.of(potionId));
                         if (statusEffect != null) {
-                            tooltip.add(Text.translatable(convertToKey(bugData)).formatted(formatting)
+                            tooltip.add(Text.translatable(convertToKey(bugData)).withColor(darkGold.getRgb())
                                     .append(" ")
                                     .append(Text.literal(Text.translatable(statusEffect.getTranslationKey()).getString().toLowerCase())
                                             .setStyle(Style.EMPTY)
