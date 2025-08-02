@@ -102,6 +102,9 @@ public class ModItems {
     public static final Item MANTIS_SPAWN_EGG = registerItem("mantis_spawn_egg",
             new SpawnEggItem(ModEntities.MANTIS, 0x9dc783, 0xbfaf5f, new Item.Settings()));
 
+    public static final Item LADYBUG_SPAWN_EGG = registerItem("ladybug_spawn_egg",
+            new SpawnEggItem(ModEntities.LADYBUG, 0xf03232, 0x000000, new Item.Settings()));
+
     public static final Item LOCUST_SPAWN_EGG = registerItem("locust_spawn_egg",
             new SpawnEggItem(ModEntities.LOCUST, 0x58f0b5, 0x4fd5a3, new Item.Settings()));
 
@@ -116,7 +119,7 @@ public class ModItems {
 
     public static final Item GOLDEN_NEEDLE = registerItem("golden_needle",
             new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()
-                    .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 1, -1.4f))));
+                    .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 2, -1.4f))));
 
 
     public static final Item BUG_JAR = registerItem("bug_jar",
