@@ -5,7 +5,7 @@ import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
 
-public class LadybugAnimations {
+public class BeetleAnimations {
     public static final Animation IDLE_ANIMATION = Animation.Builder.create(2f).looping()
             .addBoneAnimation("left_wing",
                     new Transformation(Transformation.Targets.ROTATE,

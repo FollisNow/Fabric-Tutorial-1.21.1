@@ -63,7 +63,7 @@ public class BugJarItem extends Item {
             if(!bugDataList.isEmpty()) {
                 List<BugData> reversedList = bugDataList.reversed();
                 for (BugData bugData: reversedList) {
-                    if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.LADYBUG) {
+                    if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.BEETLE) {
                         var potionId = bugData.entityData.copyNbt().getString("PotionGene");
                         var statusEffect = Registries.STATUS_EFFECT.get(Identifier.of(potionId));
                         if (statusEffect != null) {

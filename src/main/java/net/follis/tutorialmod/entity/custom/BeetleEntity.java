@@ -52,21 +52,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable {
+public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public static final int field_28638 = MathHelper.ceil(1.4959966F);
     private int particleTickCounter = 0; // Counter to track ticks
 
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(LadybugEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> POTION_GENE = DataTracker.registerData(LadybugEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(BeetleEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> POTION_GENE = DataTracker.registerData(BeetleEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> ANGER;
     @Nullable
     private UUID angryAt;
     private static final UniformIntProvider ANGER_TIME_RANGE;
 
 
-    public LadybugEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public BeetleEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new FlightMoveControl(this, 20, true);
 
@@ -84,14 +84,14 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
         this.goalSelector.add(5, new LookAroundGoal(this));
         this.goalSelector.add(6, new SwimGoal(this));
 
-        this.targetSelector.add(1, (new LadybugRevengeGoal(this)).setGroupRevenge());
+        this.targetSelector.add(1, (new BeetleRevengeGoal(this)).setGroupRevenge());
         this.targetSelector.add(2, new BiteTargetGoal(this));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 10, false, false, (entity) -> entity instanceof Monster && !(entity instanceof CreeperEntity) && !isWearingGold(entity)));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 5, false, false, this::shouldAngerAt));
     }
 
     private boolean foodSelector(ItemStack stack) {
-        if(this.getVariant() == LadybugVariant.OMEN) {
+        if(this.getVariant() == BeetleVariant.OMEN) {
             return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
         } else {
             return stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST);
@@ -110,22 +110,22 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        LadybugEntity baby = ModEntities.LADYBUG.create(world);
-        if (baby != null && entity instanceof LadybugEntity ladybug) {
-            if (((this.getVariant() != LadybugVariant.OMEN || ladybug.getVariant() != LadybugVariant.OMEN) && random.nextInt(100) == 0) ||
-                    (this.getVariant() == LadybugVariant.OMEN && ladybug.getVariant() == LadybugVariant.OMEN)) {
-                baby.setVariant(LadybugVariant.OMEN);
+        BeetleEntity baby = ModEntities.BEETLE.create(world);
+        if (baby != null && entity instanceof BeetleEntity beetle) {
+            if (((this.getVariant() != BeetleVariant.OMEN || beetle.getVariant() != BeetleVariant.OMEN) && random.nextInt(100) == 0) ||
+                    (this.getVariant() == BeetleVariant.OMEN && beetle.getVariant() == BeetleVariant.OMEN)) {
+                baby.setVariant(BeetleVariant.OMEN);
             } else {
-                baby.setVariant(LadybugVariant.DEFAULT);
+                baby.setVariant(BeetleVariant.DEFAULT);
             }
 
-            if (baby.getVariant() == LadybugVariant.OMEN) {
-                if (this.getPotionGene() != null && this.getPotionGene() == ladybug.getPotionGene()) {
+            if (baby.getVariant() == BeetleVariant.OMEN) {
+                if (this.getPotionGene() != null && this.getPotionGene() == beetle.getPotionGene()) {
                     baby.setPotionGene(this.getPotionGene());
                     world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
                 } else if (this.random.nextFloat() <= 0.33f) {
                     List<RegistryEntry<StatusEffect>> firstEffects = this.getActiveStatusEffects().keySet().stream().toList();
-                    List<RegistryEntry<StatusEffect>> secondEffects = ladybug.getActiveStatusEffects().keySet().stream().toList();
+                    List<RegistryEntry<StatusEffect>> secondEffects = beetle.getActiveStatusEffects().keySet().stream().toList();
                     List<RegistryEntry<StatusEffect>> sharedEffects = new ArrayList<>();
                     for (RegistryEntry<StatusEffect> effect : firstEffects) {
                         if (secondEffects.contains(effect)) {
@@ -151,7 +151,7 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        if (this.getVariant() == LadybugVariant.OMEN)
+        if (this.getVariant() == BeetleVariant.OMEN)
             return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
         return stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST) || stack.isOf(ModItems.GRILLED_LOCUST);
     }
@@ -285,15 +285,15 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
 
     }
 
-    public LadybugVariant getVariant() {
-        return LadybugVariant.byId(this.getTypeVariant() & 255);
+    public BeetleVariant getVariant() {
+        return BeetleVariant.byId(this.getTypeVariant() & 255);
     }
 
     private int getTypeVariant() {
         return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(LadybugVariant variant) {
+    private void setVariant(BeetleVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
@@ -322,7 +322,7 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  @Nullable EntityData entityData) {
-        LadybugVariant variant = this.random.nextInt(100) == 0? LadybugVariant.OMEN : LadybugVariant.DEFAULT;
+        BeetleVariant variant = this.random.nextInt(100) == 0? BeetleVariant.OMEN : BeetleVariant.DEFAULT;
         setVariant(variant);
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
@@ -424,25 +424,25 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
         }
 
         public boolean canStart() {
-            return super.canStart() && LadybugEntity.this.hasAngerTime() && LadybugEntity.this.getVariant() == LadybugVariant.OMEN;
+            return super.canStart() && BeetleEntity.this.hasAngerTime() && BeetleEntity.this.getVariant() == BeetleVariant.OMEN;
         }
 
         public boolean shouldContinue() {
-            return super.shouldContinue() && LadybugEntity.this.hasAngerTime() && LadybugEntity.this.getVariant() == LadybugVariant.OMEN;
+            return super.shouldContinue() && BeetleEntity.this.hasAngerTime() && BeetleEntity.this.getVariant() == BeetleVariant.OMEN;
         }
     }
 
-    class LadybugRevengeGoal extends RevengeGoal {
-        LadybugRevengeGoal(final LadybugEntity ladybug) {
-            super(ladybug);
+    class BeetleRevengeGoal extends RevengeGoal {
+        BeetleRevengeGoal(final BeetleEntity beetle) {
+            super(beetle);
         }
 
         public boolean shouldContinue() {
-            return LadybugEntity.this.hasAngerTime() && super.shouldContinue() && LadybugEntity.this.getVariant() == LadybugVariant.OMEN;
+            return BeetleEntity.this.hasAngerTime() && super.shouldContinue() && BeetleEntity.this.getVariant() == BeetleVariant.OMEN;
         }
 
         protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
-            if (mob instanceof LadybugEntity && this.mob.canSee(target) && !((LadybugEntity) mob).isWearingGold(target)) {
+            if (mob instanceof BeetleEntity && this.mob.canSee(target) && !((BeetleEntity) mob).isWearingGold(target)) {
                 mob.setTarget(target);
             } else {
                 mob.setTarget(null);
@@ -452,8 +452,8 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
     }
 
     static class BiteTargetGoal extends ActiveTargetGoal<PlayerEntity> {
-        public BiteTargetGoal(LadybugEntity ladybug) {
-            super(ladybug, PlayerEntity.class, 10, true, false, ladybug::shouldAngerAt);
+        public BiteTargetGoal(BeetleEntity beetle) {
+            super(beetle, PlayerEntity.class, 10, true, false, beetle::shouldAngerAt);
         }
 
         public boolean canStart() {
@@ -462,7 +462,7 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
 
         public boolean shouldContinue() {
             boolean bl = this.canBite();
-            if (this.mob.getTarget() != null && mob instanceof LadybugEntity ladybug && !ladybug.isWearingGold(ladybug.getTarget())) {
+            if (this.mob.getTarget() != null && mob instanceof BeetleEntity beetle && !beetle.isWearingGold(beetle.getTarget())) {
                 this.target = null;
                 return false;
             } else if (bl && this.mob.getTarget() != null ) {
@@ -474,13 +474,13 @@ public class LadybugEntity extends AnimalEntity implements Flutterer, Angerable 
         }
 
         private boolean canBite() {
-            LadybugEntity ladybugEntity = (LadybugEntity)this.mob;
-            return ladybugEntity.hasAngerTime();
+            BeetleEntity beetleEntity = (BeetleEntity)this.mob;
+            return beetleEntity.hasAngerTime();
         }
     }
 
     static {
-        ANGER = DataTracker.registerData(LadybugEntity.class, TrackedDataHandlerRegistry.INTEGER);
+        ANGER = DataTracker.registerData(BeetleEntity.class, TrackedDataHandlerRegistry.INTEGER);
         ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
     }
 }
