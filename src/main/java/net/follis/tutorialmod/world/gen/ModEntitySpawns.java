@@ -19,7 +19,9 @@ public class ModEntitySpawns {
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FLOWER_FOREST),
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS, BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FLOWER_FOREST,
+                BiomeKeys.CHERRY_GROVE, BiomeKeys.FOREST, BiomeKeys.GROVE, BiomeKeys.MEADOW),
                 SpawnGroup.CREATURE, ModEntities.BEETLE, 30, 2, 4);
 
         SpawnRestriction.register(ModEntities.BEETLE, SpawnLocationTypes.ON_GROUND,
