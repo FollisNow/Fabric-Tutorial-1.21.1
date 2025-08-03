@@ -2,8 +2,6 @@ package net.follis.tutorialmod.entity.client;
 
 import com.google.common.collect.Maps;
 import net.follis.tutorialmod.TutorialMod;
-import net.follis.tutorialmod.entity.custom.BeetleEntity;
-import net.follis.tutorialmod.entity.custom.BeetleVariant;
 import net.follis.tutorialmod.entity.custom.LocustEntity;
 import net.follis.tutorialmod.entity.custom.LocustVariant;
 import net.minecraft.client.render.VertexConsumerProvider;
