@@ -21,7 +21,10 @@ public class ModItemGroups {
 
                         entries.add(ModItems.CHISEL);
                         entries.add(ModItems.CAULIFLOWER);
-                        entries.add(ModItems.LOCUST);
+                        entries.add(ModItems.LOCUST_GOLD);
+                        entries.add(ModItems.LOCUST_DREAM);
+                        entries.add(ModItems.LOCUST_GRASSHOPPER);
+                        entries.add(ModItems.LOCUST_RED);
                         entries.add(ModItems.GRILLED_LOCUST);
 
                         entries.add(ModItems.STARLIGHT_ASHES);

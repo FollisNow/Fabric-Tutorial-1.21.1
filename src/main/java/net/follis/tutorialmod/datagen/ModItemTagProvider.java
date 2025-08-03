@@ -64,5 +64,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(Items.GOLDEN_LEGGINGS)
                 .add(Items.GOLDEN_BOOTS);
 
+        getOrCreateTagBuilder(ModTags.Items.LOCUST_ITEMS)
+                .add(ModItems.LOCUST_GOLD)
+                .add(ModItems.LOCUST_DREAM)
+                .add(ModItems.LOCUST_GRASSHOPPER)
+                .add(ModItems.LOCUST_RED);
+
+
     }
 }

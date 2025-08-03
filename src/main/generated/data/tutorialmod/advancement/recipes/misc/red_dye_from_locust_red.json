@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_locust_grasshopper": {
+    "has_locust_red": {
       "conditions": {
         "items": [
           {
-            "items": "tutorialmod:locust_grasshopper"
+            "items": "tutorialmod:locust_red"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:grilled_locust_from_smoking"
+        "recipe": "tutorialmod:red_dye_from_locust_red"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_locust_grasshopper"
+      "has_locust_red"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:grilled_locust_from_smoking"
+      "tutorialmod:red_dye_from_locust_red"
     ]
   }
 }

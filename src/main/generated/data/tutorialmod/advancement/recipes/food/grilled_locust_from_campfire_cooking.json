@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_locust": {
+    "has_locust_grasshopper": {
       "conditions": {
         "items": [
           {
-            "items": "tutorialmod:locust"
+            "items": "tutorialmod:locust_grasshopper"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_locust"
+      "has_locust_grasshopper"
     ]
   ],
   "rewards": {

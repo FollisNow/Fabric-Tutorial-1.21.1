@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_locust_grasshopper": {
+    "has_locust_dream": {
       "conditions": {
         "items": [
           {
-            "items": "tutorialmod:locust_grasshopper"
+            "items": "tutorialmod:locust_dream"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:grilled_locust_from_smoking"
+        "recipe": "minecraft:grilled_locust_from_smelting_locust_dream"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_locust_grasshopper"
+      "has_locust_dream"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:grilled_locust_from_smoking"
+      "minecraft:grilled_locust_from_smelting_locust_dream"
     ]
   }
 }

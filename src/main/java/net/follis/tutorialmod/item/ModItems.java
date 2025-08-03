@@ -32,13 +32,36 @@ public class ModItems {
             super.appendTooltip(stack, context, tooltip, type);
         }
     });
-    public static final Item LOCUST = registerItem("locust", new Item(new Item.Settings().food(ModFoodComponents.LOCUST)) {
+    public static final Item LOCUST_GOLD = registerItem("locust_gold", new Item(new Item.Settings().food(ModFoodComponents.LOCUST_GOLD)) {
         @Override
         public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-            tooltip.add(Text.translatable("tooltip.tutorialmod.locust.tooltip"));
+            tooltip.add(Text.translatable("tooltip.tutorialmod.locust_gold.tooltip"));
             super.appendTooltip(stack, context, tooltip, type);
         }
     });
+    public static final Item LOCUST_DREAM = registerItem("locust_dream", new Item(new Item.Settings().food(ModFoodComponents.LOCUST_DREAM)) {
+        @Override
+        public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+            tooltip.add(Text.translatable("tooltip.tutorialmod.locust_dream.tooltip"));
+            super.appendTooltip(stack, context, tooltip, type);
+        }
+    });
+    public static final Item LOCUST_GRASSHOPPER = registerItem("locust_grasshopper", new Item(new Item.Settings().food(ModFoodComponents.LOCUST_GRASSHOPPER)) {
+        @Override
+        public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+            tooltip.add(Text.translatable("tooltip.tutorialmod.locust_grasshopper.tooltip"));
+            super.appendTooltip(stack, context, tooltip, type);
+        }
+    });
+    public static final Item LOCUST_RED = registerItem("locust_red", new Item(new Item.Settings().food(ModFoodComponents.LOCUST_RED)) {
+        @Override
+        public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+            tooltip.add(Text.translatable("tooltip.tutorialmod.locust_red.tooltip"));
+            super.appendTooltip(stack, context, tooltip, type);
+        }
+    });
+
+
     public static final Item GRILLED_LOCUST = registerItem("grilled_locust", new Item(new Item.Settings().food(ModFoodComponents.GRILLED_LOCUST)) {
         @Override
         public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {

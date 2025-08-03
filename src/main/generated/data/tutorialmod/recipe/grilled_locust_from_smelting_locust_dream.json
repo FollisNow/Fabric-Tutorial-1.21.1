@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "food",
+  "ingredient": {
+    "item": "tutorialmod:locust_dream"
+  },
+  "result": {
+    "id": "tutorialmod:grilled_locust"
+  }
+}

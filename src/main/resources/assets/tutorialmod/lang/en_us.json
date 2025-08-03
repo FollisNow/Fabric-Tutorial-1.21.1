@@ -30,7 +30,10 @@
 
   "item.tutorialmod.cauliflower_seeds": "Cauliflower Seeds",
   "item.tutorialmod.honey_berries": "Honey Berries",
-  "item.tutorialmod.locust": "Locust",
+  "item.tutorialmod.locust_gold": "Gold Locust",
+  "item.tutorialmod.locust_dream": "Dream Locust",
+  "item.tutorialmod.locust_grasshopper": "Grasshopper Locust",
+  "item.tutorialmod.locust_red": "Red Locust",
   "item.tutorialmod.grilled_locust": "Grilled Locust",
 
   "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
@@ -190,7 +193,11 @@
   "tooltip.tutorialmod.bug_jar": "§6Press §eShift§r§6 for content",
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
-  "tooltip.tutorialmod.locust.tooltip": "Taste better than it looks",
+
+  "tooltip.tutorialmod.locust_gold.tooltip": "§8Maybe the key?..",
+  "tooltip.tutorialmod.locust_dream.tooltip": "§8By night one way, \n§8By day another",
+  "tooltip.tutorialmod.locust_grasshopper.tooltip": "§8Taste better than it looks",
+  "tooltip.tutorialmod.locust_red.tooltip": "§8Don't even try",
   "tooltip.tutorialmod.grilled_locust.tooltip": "Taste even better than it looks",
 
   "trim_material.tutorialmod.pink_garnet": "Pink Garnet Material",

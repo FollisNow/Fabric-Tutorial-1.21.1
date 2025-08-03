@@ -5,7 +5,7 @@
   "experience": 0.25,
   "group": "food",
   "ingredient": {
-    "item": "tutorialmod:locust"
+    "item": "tutorialmod:locust_red"
   },
   "result": {
     "id": "tutorialmod:grilled_locust"

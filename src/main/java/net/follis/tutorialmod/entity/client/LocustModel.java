@@ -24,10 +24,8 @@ public class LocustModel<T extends LocustEntity> extends SinglePartEntityModel<T
         ModelPartData body = Locust.addChild("body", ModelPartBuilder.create().uv(18, 16).cuboid(-1.0F, -1.5F, 1.45F, 2.0F, 3.0F, 4.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-1.0F, -1.5F, -5.55F, 2.0F, 3.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -1.5F, 0.55F));
 
-        ModelPartData antennae = body.addChild("antennae", ModelPartBuilder.create().uv(28, 29).cuboid(1.0F, -1.0F, 0.0F, 0.0F, 1.0F, 1.0F, new Dilation(0.001F))
-                .uv(12, 30).cuboid(-1.0F, -1.0F, 0.0F, 0.0F, 1.0F, 1.0F, new Dilation(0.001F))
-                .uv(24, 29).cuboid(1.0F, -3.0F, 1.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.001F))
-                .uv(26, 29).cuboid(-1.0F, -3.0F, 1.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.001F)), ModelTransform.pivot(0.0F, -1.5F, 5.45F));
+        ModelPartData antennae = body.addChild("antennae", ModelPartBuilder.create().uv(0, 21).cuboid(1.0F, -5.0F, -10.0F, 0.0F, 5.0F, 12.0F, new Dilation(0.001F))
+                .uv(0, 21).mirrored().cuboid(-1.0F, -5.0F, -10.0F, 0.0F, 5.0F, 12.0F, new Dilation(0.001F)).mirrored(false), ModelTransform.pivot(0.0F, -1.5F, 5.45F));
 
         ModelPartData backLegs = body.addChild("backLegs", ModelPartBuilder.create().uv(18, 23).cuboid(1.0F, -0.4812F, -4.5108F, 1.0F, 1.0F, 5.0F, new Dilation(0.0F))
                 .uv(0, 26).cuboid(-2.0F, -0.4812F, -4.5108F, 1.0F, 1.0F, 5.0F, new Dilation(0.0F))

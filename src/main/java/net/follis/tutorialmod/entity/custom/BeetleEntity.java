@@ -97,7 +97,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
         if(this.getVariant() == BeetleVariant.OMEN) {
             return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
         } else {
-            return stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST);
+            return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD);
         }
     }
 
@@ -156,7 +156,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
     public boolean isBreedingItem(ItemStack stack) {
         if (this.getVariant() == BeetleVariant.OMEN)
             return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
-        return stack.isIn(ItemTags.BEE_FOOD) || stack.isOf(ModItems.LOCUST) || stack.isOf(ModItems.GRILLED_LOCUST);
+        return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST);
     }
 
     public StatusEffect getPotionGene() {
