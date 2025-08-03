@@ -331,7 +331,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
         if (this.random.nextInt(100) == 0) {
             variant = BeetleVariant.OMEN;
         }
-        else if (currentBiomeKey.isPresent() && this.random.nextFloat() < 0.6F){
+        else if (currentBiomeKey.isPresent() && this.random.nextFloat() < 0.7F){
             variant = biomeMap.get(currentBiomeKey.get());
         } else {
             variant = BeetleVariant.byId(this.random.nextBetween(1, BeetleVariant.values().length - 1));
