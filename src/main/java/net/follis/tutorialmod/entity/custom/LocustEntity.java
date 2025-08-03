@@ -1,9 +1,11 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.entity.goal.HarvestBlockGoal;
 import net.follis.tutorialmod.item.ModItems;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CropBlock;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -27,6 +29,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -35,12 +38,14 @@ import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class LocustEntity extends AnimalEntity {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(LocustEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private int ticksSinceHarvest;
 
     public LocustEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -51,9 +56,7 @@ public class LocustEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new HarvestBlockGoal(this, Blocks.WHEAT, 16)); // Specify the block to harvest
-        this.goalSelector.add(2, new HarvestBlockGoal(this, Blocks.SHORT_GRASS, 16)); // Specify the block to harvest
-        this.goalSelector.add(2, new HarvestBlockGoal(this, Blocks.TALL_GRASS, 16)); // Specify the block to harvest
+        this.goalSelector.add(1, new HarvestBlockGoal(this)); // Specify the block to harvest
 
         this.goalSelector.add(3, new AnimalMateGoal(this, 1.15D));
         this.goalSelector.add(4, new TemptGoal(this, 1.25D, Ingredient.ofItems(Items.WHEAT), false));
@@ -166,16 +169,32 @@ public class LocustEntity extends AnimalEntity {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
+    public int getHarvestTicks() {
+        return this.ticksSinceHarvest;
+    }
+    public void setHarvestTicks(int harvestTicks) {
+        this.ticksSinceHarvest = harvestTicks;
+    }
+
+    @Override
+    protected void mobTick() {
+        this.ticksSinceHarvest--;
+        super.mobTick();
+    }
+
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Variant", this.getTypeVariant());
+        nbt.putInt("TicksSincePollination", this.ticksSinceHarvest);
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        this.ticksSinceHarvest = nbt.getInt("TicksSincePollination");
+
     }
 
     @Override
@@ -206,4 +225,115 @@ public class LocustEntity extends AnimalEntity {
         put(BiomeKeys.MEADOW, LocustVariant.GRASSHOPPER);
         put(BiomeKeys.DESERT, LocustVariant.RED);
     }};
+
+
+    class HarvestBlockGoal extends Goal {
+        protected final LocustEntity locust;
+        private int range;
+        private BlockPos targetPos;
+        private List<Block> harvestableBlocks;
+
+        private static final List<Block> BASE_BLOCKS = List.of(Blocks.SHORT_GRASS, Blocks.TALL_GRASS); // Inferior species blocks
+        private static final Map<LocustVariant, List<Block>> harvestMap = new HashMap<>() {{
+        put(LocustVariant.DREAM, new ArrayList<>(BASE_BLOCKS){{
+            add(Blocks.WHEAT);
+            add(Blocks.CARROTS);
+            add(Blocks.POTATOES);
+        }});
+        put(LocustVariant.GRASSHOPPER, new ArrayList<>(BASE_BLOCKS){{
+            add(Blocks.WHEAT);
+            add(Blocks.CARROTS);
+        }});
+        put(LocustVariant.RED, new ArrayList<>(BASE_BLOCKS){{
+            add(Blocks.BEETROOTS);
+        }});
+        }};
+
+        public HarvestBlockGoal(LocustEntity locust) {
+            this.locust = locust;
+            this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
+        }
+
+        @Override
+        public boolean canStart() {
+            return LocustEntity.this.getRandom().nextInt(10) == 0 && LocustEntity.this.getHarvestTicks() <= 0;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return this.targetPos != null;
+        }
+
+        @Override
+        public void start() {
+            switch (LocustEntity.this.getVariant()) {
+                case GOLD -> this.range = 32;
+                case DREAM -> this.range = 16;
+                default -> this.range = 8;
+            }
+            this.harvestableBlocks = harvestMap.get(LocustEntity.this.getVariant());
+        }
+
+        @Override
+        public boolean shouldRunEveryTick() {
+            return true;
+        }
+
+        @Override
+        public void tick() {
+            switch (LocustEntity.this.getVariant()) {
+                case LocustVariant.GOLD -> {
+                    searchRoutine(40, 800);
+                }
+                case LocustVariant.DREAM -> {
+                    searchRoutine(2400, 4800);
+                }
+                default -> {
+                    searchRoutine(4800, 9600);
+                }
+            }
+
+            if (this.targetPos != null) {
+                this.locust.getNavigation().startMovingTo(this.targetPos.up().getX(), this.targetPos.up().getY(), this.targetPos.up().getZ(), 1.1F);
+
+                // Check if the entity is close enough to harvest
+                if (this.targetPos.isWithinDistance(this.locust.getBlockPos(), 2)) {
+                    harvestBlock(this.targetPos);
+                }
+            }
+        }
+
+        private void searchRoutine(int minCooldown, int maxCooldown) {
+            Predicate<BlockPos> condition = blockPos -> {
+                BlockState state = this.locust.getWorld().getBlockState(blockPos);
+                Block block = state.getBlock();
+                if (LocustEntity.this.getVariant() == LocustVariant.GOLD) {
+                    if (block instanceof CropBlock) {
+                        return ((CropBlock) block).isMature(state);
+                    }
+                } else if (this.harvestableBlocks.contains(block)) {
+                    // If it's a CropBlock, check if it's mature
+                    if (block instanceof CropBlock) {
+                        return ((CropBlock) block).isMature(state);
+                    }
+                    return true; // Non-CropBlock can be harvested
+                }
+                return false;
+            };
+
+            Optional<BlockPos> closestCropOrBlock = BlockPos.findClosest(this.locust.getBlockPos(), this.range, this.range / 2, condition);
+            this.targetPos = closestCropOrBlock.orElse(null);
+            if (this.targetPos != null){
+                LocustEntity.this.setHarvestTicks(minCooldown);
+            } else {
+                LocustEntity.this.setHarvestTicks(maxCooldown);
+            }
+
+        }
+
+        private void harvestBlock(BlockPos pos) {
+            this.locust.getWorld().breakBlock(pos, true, this.locust);
+            this.targetPos = null;
+        }
+    }
 }
