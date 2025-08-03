@@ -3,7 +3,7 @@ package net.follis.tutorialmod.entity.custom;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.ModTags;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.*;
@@ -31,7 +31,10 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.EntityEffectParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -46,11 +49,11 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
     public final AnimationState idleAnimationState = new AnimationState();
@@ -79,10 +82,11 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
         this.goalSelector.add(2, new TemptGoal(this, 1.25D, this::foodSelector, false));
 
-        this.goalSelector.add(3, new WanderNearTargetGoal(this, 1.0D, 1));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
+        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(6, new SwimGoal(this));
+        this.goalSelector.add(7, new GrowCropsGoal());
 
         this.targetSelector.add(1, (new BeetleRevengeGoal(this)).setGroupRevenge());
         this.targetSelector.add(2, new BiteTargetGoal(this));
@@ -322,16 +326,30 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  @Nullable EntityData entityData) {
+
+        Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
         BeetleVariant variant;
         if (this.random.nextInt(100) == 0) {
             variant = BeetleVariant.OMEN;
         }
-        else {
+        else if (currentBiomeKey.isPresent() && this.random.nextFloat() < 0.6F){
+            variant = biomeMap.get(currentBiomeKey.get());
+        } else {
             variant = BeetleVariant.byId(this.random.nextBetween(1, BeetleVariant.values().length - 1));
         }
-        setVariant(variant);
+        this.setVariant(variant);
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
+
+    private static final Map<RegistryKey<Biome>, BeetleVariant> biomeMap = new HashMap<>() {{
+        put(BiomeKeys.PLAINS, BeetleVariant.LADYBUG);
+        put(BiomeKeys.SUNFLOWER_PLAINS, BeetleVariant.LADYBUG);
+        put(BiomeKeys.FLOWER_FOREST, BeetleVariant.LADYBUG);
+        put(BiomeKeys.CHERRY_GROVE, BeetleVariant.LADYBUG);
+        put(BiomeKeys.FOREST, BeetleVariant.BARK);
+        put(BiomeKeys.GROVE, BeetleVariant.BARK);
+        put(BiomeKeys.MEADOW, BeetleVariant.SCARAB);
+    }};
 
     /* SOUNDS */
     @Nullable
@@ -482,6 +500,66 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
         private boolean canBite() {
             BeetleEntity beetleEntity = (BeetleEntity)this.mob;
             return beetleEntity.hasAngerTime();
+        }
+    }
+
+    class GrowCropsGoal extends NotAngryGoal {
+        public boolean canBeetleStart() {
+            return BeetleEntity.this.random.nextFloat() > 0.975F;
+        }
+
+        public boolean canBeetleContinue() {
+            return this.canBeetleStart();
+        }
+
+        public void tick() {
+            if (BeetleEntity.this.random.nextInt(this.getTickCount(30)) == 0) {
+                for(int i = 0; i <= 2; ++i) {
+                    BlockPos blockPos = BeetleEntity.this.getBlockPos().up(2-i);
+                    BlockState blockState = BeetleEntity.this.getWorld().getBlockState(blockPos);
+                    Block block = blockState.getBlock();
+                    BlockState blockState2 = null;
+                    if (blockState.isIn(BlockTags.BEE_GROWABLES)) {
+                        if (block instanceof CropBlock cropBlock) {
+                            if (!cropBlock.isMature(blockState)) {
+                                blockState2 = cropBlock.withAge(cropBlock.getAge(blockState) + 1);
+                            }
+                        } else if (block instanceof StemBlock) {
+                            int j = blockState.get(StemBlock.AGE);
+                            if (j < 7) {
+                                blockState2 = blockState.with(StemBlock.AGE, j + 1);
+                            }
+                        } else if (blockState.isOf(Blocks.SWEET_BERRY_BUSH)) {
+                            int j = blockState.get(SweetBerryBushBlock.AGE);
+                            if (j < 3) {
+                                blockState2 = blockState.with(SweetBerryBushBlock.AGE, j + 1);
+                            }
+                        } else if (blockState.isOf(Blocks.CAVE_VINES) || blockState.isOf(Blocks.CAVE_VINES_PLANT)) {
+                            ((Fertilizable)blockState.getBlock()).grow((ServerWorld)BeetleEntity.this.getWorld(), BeetleEntity.this.random, blockPos, blockState);
+                        }
+
+                        if (blockState2 != null) {
+                            BeetleEntity.this.getWorld().syncWorldEvent(2011, blockPos, 15);
+                            BeetleEntity.this.getWorld().setBlockState(blockPos, blockState2);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    abstract class NotAngryGoal extends Goal {
+        public abstract boolean canBeetleStart();
+
+        public abstract boolean canBeetleContinue();
+
+        public boolean canStart() {
+            return this.canBeetleStart() && !BeetleEntity.this.hasAngerTime();
+        }
+
+        public boolean shouldContinue() {
+            return this.canBeetleContinue() && !BeetleEntity.this.hasAngerTime();
         }
     }
 
