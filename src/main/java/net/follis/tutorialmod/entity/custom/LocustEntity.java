@@ -282,15 +282,9 @@ public class LocustEntity extends AnimalEntity {
         @Override
         public void tick() {
             switch (LocustEntity.this.getVariant()) {
-                case LocustVariant.GOLD -> {
-                    searchRoutine(40, 800);
-                }
-                case LocustVariant.DREAM -> {
-                    searchRoutine(2400, 4800);
-                }
-                default -> {
-                    searchRoutine(4800, 9600);
-                }
+                case LocustVariant.GOLD -> searchRoutine(40, 800);
+                case LocustVariant.DREAM -> searchRoutine(2400, 4800);
+                default -> searchRoutine(4800, 9600);
             }
 
             if (this.targetPos != null) {
