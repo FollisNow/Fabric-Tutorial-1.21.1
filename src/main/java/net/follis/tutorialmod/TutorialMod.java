@@ -2,6 +2,7 @@ package net.follis.tutorialmod;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -28,6 +29,7 @@ import net.follis.tutorialmod.screen.ModScreenHandlers;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.util.HammerUsageEvent;
 import net.follis.tutorialmod.util.ModLootTableModifiers;
+import net.follis.tutorialmod.util.DreamLocustEvent;
 import net.follis.tutorialmod.villager.ModVillagers;
 import net.follis.tutorialmod.world.gen.ModWorldGeneration;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -81,6 +83,7 @@ public class TutorialMod implements ModInitializer {
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
 		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
+		EntitySleepEvents.STOP_SLEEPING.register(new DreamLocustEvent());
 		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if(entity instanceof SheepEntity sheepEntity) {
 				if(player.getMainHandStack().getItem() == Items.END_ROD) {
