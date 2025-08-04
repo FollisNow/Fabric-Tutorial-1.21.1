@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
-import net.follis.tutorialmod.item.custom.BugJarItem;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
