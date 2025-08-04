@@ -3,6 +3,7 @@ package net.follis.tutorialmod.component;
 import com.mojang.serialization.Codec;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
+import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
 import net.follis.tutorialmod.item.custom.BugJarItem;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodecs;
@@ -21,10 +22,14 @@ public class ModDataComponentTypes {
     public static final ComponentType<List<AmethystBeeHiveBlockEntity.AmethystBeeData>> AMETHYST_BEES =
             register("bees", (builder) -> builder.codec(AmethystBeeHiveBlockEntity.AmethystBeeData.LIST_CODEC)
                     .packetCodec(AmethystBeeHiveBlockEntity.AmethystBeeData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
+//
+//    public static final ComponentType<List<BugJarItem.BugData>> BUGS =
+//            register("bugs", builder -> builder.codec(BugJarItem.BugData.LIST_CODEC)
+//                    .packetCodec(BugJarItem.BugData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
 
-    public static final ComponentType<List<BugJarItem.BugData>> BUGS =
-            register("bugs", builder -> builder.codec(BugJarItem.BugData.LIST_CODEC)
-                    .packetCodec(BugJarItem.BugData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
+    public static final ComponentType<List<AbstractEntityJarItem.BugData>> BUGS =
+            register("bugs", builder -> builder.codec(AbstractEntityJarItem.BugData.LIST_CODEC)
+                    .packetCodec(AbstractEntityJarItem.BugData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
 
     public static final ComponentType<Integer> ENTITY_ID_CODEC =
             register("golden_needle_target", builder -> builder.codec(Codec.INT));
