@@ -5,8 +5,6 @@
   "item.tutorialmod.cauliflower": "Cauliflower",
   "item.tutorialmod.starlight_ashes": "Starlight Ashes",
 
-  "item.tutorialmod.bug_jar": "Bug Jar",
-
   "item.tutorialmod.pink_garnet_sword": "Pink Garnet Sword",
   "item.tutorialmod.pink_garnet_pickaxe": "Pink Garnet Pickaxe",
   "item.tutorialmod.pink_garnet_shovel": "Pink Garnet Shovel",
@@ -189,8 +187,16 @@
   "tooltip.tutorialmod.chisel.shift_down": "This item chisels blocks into Bricks!",
   "tooltip.tutorialmod.chisel": "Press §eShift§r for more Information!",
 
+
+  "item.tutorialmod.bug_jar": "Bug Jar",
+  "item.tutorialmod.cursed_jar": "Cursed Jar",
+
+
   "tooltip.tutorialmod.bug_jar.shift_down": "This item helps you catch fancy bugs!",
   "tooltip.tutorialmod.bug_jar": "§6Press §eShift§r§6 for content",
+
+  "tooltip.tutorialmod.cursed_jar.shift_down": "Not all knowledge should be given to everyone...",
+  "tooltip.tutorialmod.cursed_jar": "§6Press §eShift§r§6 for content",
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
 
