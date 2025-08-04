@@ -14,7 +14,6 @@ public class ModEntitySpawns {
     public static void addSpawns() {
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.CHERRY_GROVE),
                 SpawnGroup.CREATURE, ModEntities.MANTIS, 30, 1, 2);
-
         SpawnRestriction.register(ModEntities.MANTIS, SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 
@@ -23,8 +22,17 @@ public class ModEntitySpawns {
                 BiomeKeys.PLAINS, BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FLOWER_FOREST,
                 BiomeKeys.CHERRY_GROVE, BiomeKeys.FOREST, BiomeKeys.GROVE, BiomeKeys.MEADOW),
                 SpawnGroup.CREATURE, ModEntities.BEETLE, 30, 2, 4);
-
         SpawnRestriction.register(ModEntities.BEETLE, SpawnLocationTypes.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
+                Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
+
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS, BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FLOWER_FOREST,
+                BiomeKeys.DESERT, BiomeKeys.CHERRY_GROVE, BiomeKeys.FOREST, BiomeKeys.GROVE,
+                BiomeKeys.MEADOW),
+                SpawnGroup.CREATURE, ModEntities.LOCUST, 30, 1, 3);
+        SpawnRestriction.register(ModEntities.LOCUST, SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
+
     }
 }
