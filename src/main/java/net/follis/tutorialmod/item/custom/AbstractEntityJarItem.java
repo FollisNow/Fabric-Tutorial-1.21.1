@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.codec.PacketCodec;
@@ -56,6 +57,9 @@ public abstract class AbstractEntityJarItem extends Item {
     }
     protected List<BugData> getMutableBugDataList(PlayerEntity player) {
         return new ArrayList<>(player.getMainHandStack().getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
+    }
+    protected List<BugData> getMutableBugDataList(PlayerEntity player, int slot) {
+        return new ArrayList<>(player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
     }
 
     private BlockPos positionEntity(Entity entity, ItemUsageContext context, World world) {
@@ -121,6 +125,20 @@ public abstract class AbstractEntityJarItem extends Item {
             player.getWorld().emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(entity, player.getWorld().getBlockState(pos)));
             player.getWorld().spawnEntity(entity);
         }
+    }
+
+    protected boolean tryKillBug(PlayerEntity player, int slot) {
+        if (player == null)
+            return false;
+        List<BugData> bugDataList = getMutableBugDataList(player, slot);
+
+        if (bugDataList.size() >= 2) {
+                bugDataList.remove(bugDataList.get(player.getRandom().nextInt(bugDataList.size() - 1)));
+
+            player.getInventory().getStack(slot).set(ModDataComponentTypes.BUGS, bugDataList);
+            return true;
+        }
+        return false;
     }
 
     public record BugData(NbtComponent entityData) {

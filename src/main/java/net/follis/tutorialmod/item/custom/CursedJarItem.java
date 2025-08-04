@@ -2,7 +2,9 @@ package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -24,7 +26,7 @@ import java.util.List;
 
 public class CursedJarItem extends AbstractEntityJarItem {
     private World world;
-
+    private static final int maxPoisonLevel = 100;
 
     public CursedJarItem(Settings settings) {
         super(settings);
@@ -95,5 +97,35 @@ public class CursedJarItem extends AbstractEntityJarItem {
             }
         }
         return super.useOnBlock(context);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if(TimeFlow(stack) > 6000) {
+            resetTime(stack);
+            if (entity instanceof PlayerEntity player) {
+                if (tryKillBug(player, slot)) {
+                    int poisonLevel = player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.POISON_TRACKING, 1);
+                    poisonLevel++;
+                    if (poisonLevel >= maxPoisonLevel) {
+                        player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, 0);
+                        player.dropItem(ModItems.LOCUST_RED);
+                    } else {
+                        player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, poisonLevel);
+                    }
+                }
+            }
+        }
+    }
+
+    private void resetTime(ItemStack stack) {
+        stack.set(ModDataComponentTypes.TIME_TRACKING, 0);
+    }
+
+    int TimeFlow(ItemStack stack) {
+        int time = stack.getOrDefault(ModDataComponentTypes.TIME_TRACKING, 0);
+        time++;
+        stack.set(ModDataComponentTypes.TIME_TRACKING, time);
+        return time;
     }
 }
