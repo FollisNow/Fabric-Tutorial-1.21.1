@@ -41,10 +41,13 @@ import net.minecraft.potion.Potions;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.village.TradeOffer;
+import net.minecraft.village.TradeOffers;
 import net.minecraft.village.TradedItem;
 import net.minecraft.village.VillagerProfession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 // Very important comment
 public class TutorialMod implements ModInitializer {
@@ -133,7 +136,7 @@ public class TutorialMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());
 
-		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, (List<TradeOffers.Factory> factories) -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 3),
 					new ItemStack(ModItems.CAULIFLOWER, 8), 7, 2, 0.04f));
@@ -143,13 +146,13 @@ public class TutorialMod implements ModInitializer {
 					new ItemStack(ModItems.CAULIFLOWER_SEEDS, 2), 3, 4, 0.04f));
 		});
 
-		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, factories -> {
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, (List<TradeOffers.Factory> factories) -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 12),
 					new ItemStack(ModItems.HONEY_BERRIES, 5), 4, 7, 0.04f));
 		});
 
-		TradeOfferHelper.registerVillagerOffers(ModVillagers.KAUPENGER, 1, factories -> {
+		TradeOfferHelper.registerVillagerOffers(ModVillagers.KAUPENGER, 1, (List<TradeOffers.Factory> factories) -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 10),
 					new ItemStack(ModItems.CHISEL, 1), 4, 7, 0.04f));
@@ -159,7 +162,7 @@ public class TutorialMod implements ModInitializer {
 					new ItemStack(ModItems.RAW_PINK_GARNET, 1), 4, 7, 0.04f));
 		});
 
-		TradeOfferHelper.registerVillagerOffers(ModVillagers.KAUPENGER, 2, factories -> {
+		TradeOfferHelper.registerVillagerOffers(ModVillagers.KAUPENGER, 2, (List<TradeOffers.Factory> factories) -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 10),
 					new ItemStack(ModItems.CHISEL, 1), 4, 7, 0.04f));
@@ -169,7 +172,7 @@ public class TutorialMod implements ModInitializer {
 					new ItemStack(ModItems.TOMAHAWK, 1), 3, 12, 0.09f));
 		});
 
-		TradeOfferHelper.registerWanderingTraderOffers(1, factories -> {
+		TradeOfferHelper.registerWanderingTraderOffers(1, (List<TradeOffers.Factory> factories) -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 10),
 					new ItemStack(ModItems.CHISEL, 1), 4, 7, 0.04f));
