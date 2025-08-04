@@ -12,7 +12,12 @@ import net.minecraft.util.math.BlockPos;
 public class DreamLocustEvent implements EntitySleepEvents.StopSleeping{
     @Override
     public void onStopSleeping(LivingEntity entity, BlockPos sleepingPos) {
-        if (entity instanceof PlayerEntity player && player.getInventory().contains(ModItems.LOCUST_GRASSHOPPER.getDefaultStack())) {
+        if (entity instanceof PlayerEntity player && (
+                player.getInventory().contains(ModItems.LOCUST_GOLD.getDefaultStack()) ||
+                player.getInventory().contains(ModItems.LOCUST_DREAM.getDefaultStack()) ||
+                player.getInventory().contains(ModItems.LOCUST_GRASSHOPPER.getDefaultStack()) ||
+                player.getInventory().contains(ModItems.LOCUST_RED.getDefaultStack())))
+        {
             LocustEntity locust = ModEntities.LOCUST.create(player.getWorld());
             if (locust != null)  {
                 locust.setVariant(LocustVariant.DREAM);
