@@ -91,10 +91,8 @@ public class TutorialMod implements ModInitializer {
 					player.getMainHandStack().decrement(1);
 					sheepEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 600, 6));
 				}
-
 				return ActionResult.PASS;
 			}
-
             return ActionResult.PASS;
         });
 
