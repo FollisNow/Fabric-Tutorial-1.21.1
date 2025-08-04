@@ -117,15 +117,4 @@ public class CursedJarItem extends AbstractEntityJarItem {
             }
         }
     }
-
-    private void resetTime(ItemStack stack) {
-        stack.set(ModDataComponentTypes.TIME_TRACKING, 0);
-    }
-
-    int TimeFlow(ItemStack stack) {
-        int time = stack.getOrDefault(ModDataComponentTypes.TIME_TRACKING, 0);
-        time++;
-        stack.set(ModDataComponentTypes.TIME_TRACKING, time);
-        return time;
-    }
 }

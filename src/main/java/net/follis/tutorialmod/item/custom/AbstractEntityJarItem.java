@@ -49,6 +49,17 @@ public abstract class AbstractEntityJarItem extends Item {
         super(settings);
     }
 
+    protected void resetTime(ItemStack stack) {
+        stack.set(ModDataComponentTypes.TIME_TRACKING, 0);
+    }
+
+    protected int TimeFlow(ItemStack stack) {
+        int time = stack.getOrDefault(ModDataComponentTypes.TIME_TRACKING, 0);
+        time++;
+        stack.set(ModDataComponentTypes.TIME_TRACKING, time);
+        return time;
+    }
+
     protected static Identifier getIdentifier(BugData bugData) {
         return Identifier.of(bugData.entityData.copyNbt().getString("id"));
     }
