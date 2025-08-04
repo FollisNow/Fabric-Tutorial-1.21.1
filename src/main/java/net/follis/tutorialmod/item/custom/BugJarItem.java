@@ -90,7 +90,7 @@ public class BugJarItem extends AbstractEntityJarItem {
     public ActionResult useOnBlock(ItemUsageContext context) {
         this.world = context.getWorld();
         if (context.getPlayer() != null && !context.getWorld().isClient) {
-            if (tryReleaseBugs(context.getBlockPos(), context.getPlayer())) {
+            if (tryReleaseBugs(context)) {
                 return ActionResult.SUCCESS;
             }
         }

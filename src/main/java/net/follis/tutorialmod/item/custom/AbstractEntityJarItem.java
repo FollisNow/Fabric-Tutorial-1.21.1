@@ -4,18 +4,22 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.minecraft.block.BlockState;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.NotNull;
@@ -55,13 +59,22 @@ public abstract class AbstractEntityJarItem extends Item {
         return new ArrayList<>(player.getMainHandStack().getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
     }
 
-    private void positionEntity(Entity entity, BlockPos pos) {
-        double x = pos.getX() + 0.5 + (double) entity.getRandom().nextInt(5) / 10;
-        double y = pos.getY() + 1.1;
-        double z = pos.getZ() + 0.5 + (double) entity.getRandom().nextInt(5) / 10;
-        entity.refreshPositionAndAngles(x, y, z, entity.getYaw(), entity.getPitch());
-    }
+    private BlockPos positionEntity(Entity entity, ItemUsageContext context, World world) {
+        // Get the block position and the side that was hit
+        BlockPos blockPos = context.getBlockPos();
+        Direction direction = context.getSide();
+        BlockState blockState = world.getBlockState(blockPos);
 
+        BlockPos blockPos2;
+        if (blockState.getCollisionShape(world, blockPos).isEmpty()) {
+            blockPos2 = blockPos;
+        } else {
+            blockPos2 = blockPos.offset(direction);
+        }
+        // Refresh the entity's position and angles
+        entity.refreshPositionAndAngles(blockPos2, entity.getYaw(), entity.getPitch());
+        return blockPos2;
+    }
 
     protected void captureEntity(Entity entity, PlayerEntity player) {
         entity.stopRiding();
@@ -76,18 +89,21 @@ public abstract class AbstractEntityJarItem extends Item {
         entity.discard();
     }
 
-    protected boolean tryReleaseBugs(BlockPos pos, PlayerEntity player) {
+    protected boolean tryReleaseBugs(ItemUsageContext context) {
+        PlayerEntity player = context.getPlayer();
+        if (player == null)
+            return false;
         List<BugData> bugDataList = getMutableBugDataList(player);
 
         if (!bugDataList.isEmpty()) {
             if (player.isSneaking()) {
                 for (BugData bugData : bugDataList) {
-                    releaseBug(pos, bugData, player);
+                    releaseBug(context, bugData);
                 }
                 bugDataList.clear();
             } else {
                 BugData lastBug = bugDataList.removeLast();
-                releaseBug(pos, lastBug, player);
+                releaseBug(context, lastBug);
             }
             player.getMainHandStack().set(ModDataComponentTypes.BUGS, bugDataList);
             return true;
@@ -95,10 +111,13 @@ public abstract class AbstractEntityJarItem extends Item {
         return false;
     }
 
-    protected void releaseBug(BlockPos pos, BugData bugData, PlayerEntity player) {
+    protected void releaseBug(ItemUsageContext context, BugData bugData) {
+        PlayerEntity player = context.getPlayer();
+        if (player == null)
+            return ;
         Entity entity = bugData.loadEntity(player.getWorld());
         if (entity != null) {
-            positionEntity(entity, pos);
+            BlockPos pos = positionEntity(entity, context, player.getWorld());
             player.getWorld().playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_EXIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
             player.getWorld().emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(entity, player.getWorld().getBlockState(pos)));
             player.getWorld().spawnEntity(entity);
