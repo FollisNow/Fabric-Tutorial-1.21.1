@@ -42,7 +42,6 @@ public class ModTags {
     }
 
     public static class EntityTypes {
-        public static  final TagKey<EntityType<?>> BUGS = createTag("bugs");
         private static TagKey<EntityType<?>> createTag(String name) {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(TutorialMod.MOD_ID, name));
         }

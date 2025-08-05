@@ -20,10 +20,7 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
         getOrCreateTagBuilder(EntityTypeTags.BEEHIVE_INHABITORS)
                 .add(ModEntities.AMETHYST_BEE);
 
-        getOrCreateTagBuilder(ModTags.EntityTypes.BUGS)
-                .add(EntityType.SPIDER)
-                .add(EntityType.CAVE_SPIDER)
-                .add(EntityType.BEE)
+        getOrCreateTagBuilder(EntityTypeTags.ARTHROPOD)
                 .add(ModEntities.AMETHYST_BEE)
                 .add(ModEntities.BEETLE)
                 .add(ModEntities.LOCUST)

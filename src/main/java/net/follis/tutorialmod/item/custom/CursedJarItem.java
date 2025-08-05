@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -83,7 +84,7 @@ public class CursedJarItem extends AbstractEntityJarItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         this.world = user.getWorld();
-        if (world instanceof ServerWorld && entity.getType().isIn(ModTags.EntityTypes.BUGS)) {
+        if (world instanceof ServerWorld && entity.getType().isIn(EntityTypeTags.ARTHROPOD)) {
             //Add logic for entityType or tag here
             captureEntity(entity, user);
             return ActionResult.SUCCESS;
