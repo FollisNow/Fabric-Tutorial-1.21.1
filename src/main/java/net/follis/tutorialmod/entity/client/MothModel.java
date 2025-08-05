@@ -8,7 +8,6 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 
 public class MothModel<T extends MothEntity> extends SinglePartEntityModel<T> {
     public static final EntityModelLayer MOTH = new EntityModelLayer(Identifier.of(TutorialMod.MOD_ID, "moth"), "main");
