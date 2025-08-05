@@ -12,7 +12,7 @@ import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.datagen.ModDispenserBehaviourProvider;
-import net.follis.tutorialmod.datagen.ModPointOfInterestTypes;
+import net.follis.tutorialmod.component.ModPointOfInterestTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
 import net.follis.tutorialmod.entity.ModEntities;

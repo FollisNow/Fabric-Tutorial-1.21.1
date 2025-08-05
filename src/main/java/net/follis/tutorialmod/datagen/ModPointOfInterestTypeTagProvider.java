@@ -2,6 +2,7 @@ package net.follis.tutorialmod.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.follis.tutorialmod.component.ModPointOfInterestTypes;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;

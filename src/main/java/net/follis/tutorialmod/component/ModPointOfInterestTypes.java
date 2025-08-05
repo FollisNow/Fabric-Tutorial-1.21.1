@@ -1,4 +1,4 @@
-package net.follis.tutorialmod.datagen;
+package net.follis.tutorialmod.component;
 
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.follis.tutorialmod.TutorialMod;
