@@ -2,7 +2,6 @@ package net.follis.tutorialmod.util;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
