@@ -16,10 +16,7 @@ import net.follis.tutorialmod.component.ModPointOfInterestTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.entity.custom.AmethystBeeEntity;
-import net.follis.tutorialmod.entity.custom.BeetleEntity;
-import net.follis.tutorialmod.entity.custom.LocustEntity;
-import net.follis.tutorialmod.entity.custom.MantisEntity;
+import net.follis.tutorialmod.entity.custom.*;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
@@ -130,6 +127,7 @@ public class TutorialMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(ModEntities.MANTIS, MantisEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.BEETLE, BeetleEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.MOTH, MothEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());
 
