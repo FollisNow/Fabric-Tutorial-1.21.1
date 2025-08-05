@@ -3,6 +3,7 @@ package net.follis.tutorialmod.item.custom;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -82,7 +83,7 @@ public class CursedJarItem extends AbstractEntityJarItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         this.world = user.getWorld();
-        if (world instanceof ServerWorld) {
+        if (world instanceof ServerWorld && entity.getType().isIn(ModTags.EntityTypes.BUGS)) {
             //Add logic for entityType or tag here
             captureEntity(entity, user);
             return ActionResult.SUCCESS;
@@ -93,7 +94,7 @@ public class CursedJarItem extends AbstractEntityJarItem {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         this.world = context.getWorld();
-        if (context.getPlayer() != null && !context.getWorld().isClient) {
+        if (context.getPlayer() != null && !context.getWorld().isClient && getBugCount(context.getPlayer()) == 1) {
             if (tryReleaseBugs(context)) {
                 return ActionResult.SUCCESS;
             }

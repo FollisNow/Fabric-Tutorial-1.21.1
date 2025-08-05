@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:bee",
+    "tutorialmod:amethyst_bee",
+    "tutorialmod:beetle",
+    "tutorialmod:locust",
+    "tutorialmod:mantis"
+  ]
+}

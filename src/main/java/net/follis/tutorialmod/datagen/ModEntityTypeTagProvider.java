@@ -3,6 +3,8 @@ package net.follis.tutorialmod.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.util.ModTags;
+import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.EntityTypeTags;
 
@@ -17,5 +19,14 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(EntityTypeTags.BEEHIVE_INHABITORS)
                 .add(ModEntities.AMETHYST_BEE);
+
+        getOrCreateTagBuilder(ModTags.EntityTypes.BUGS)
+                .add(EntityType.SPIDER)
+                .add(EntityType.CAVE_SPIDER)
+                .add(EntityType.BEE)
+                .add(ModEntities.AMETHYST_BEE)
+                .add(ModEntities.BEETLE)
+                .add(ModEntities.LOCUST)
+                .add(ModEntities.MANTIS);
     }
 }

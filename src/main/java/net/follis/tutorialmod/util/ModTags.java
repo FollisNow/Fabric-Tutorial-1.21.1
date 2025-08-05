@@ -2,6 +2,8 @@ package net.follis.tutorialmod.util;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -37,6 +39,13 @@ public class ModTags {
 
         private static TagKey<PointOfInterestType> createTag(String name) {
             return TagKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.of(TutorialMod.MOD_ID, name));
+        }
+    }
+
+    public static class EntityTypes {
+        public static  final TagKey<EntityType<?>> BUGS = createTag("bugs");
+        private static TagKey<EntityType<?>> createTag(String name) {
+            return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(TutorialMod.MOD_ID, name));
         }
     }
 }

@@ -60,6 +60,12 @@ public abstract class AbstractEntityJarItem extends Item {
     protected List<BugData> getMutableBugDataList(PlayerEntity player, int slot) {
         return new ArrayList<>(player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
     }
+    protected int getBugCount(PlayerEntity player) {
+        return player.getMainHandStack().getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()).size();
+    }
+    protected int getBugCount(PlayerEntity player, int slot) {
+        return player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()).size();
+    }
 
     private BlockPos positionEntity(Entity entity, ItemUsageContext context, World world) {
         // Get the block position and the side that was hit

@@ -2,6 +2,7 @@ package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -78,7 +79,7 @@ public class BugJarItem extends AbstractEntityJarItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         this.world = user.getWorld();
-        if (world instanceof ServerWorld) {
+        if (world instanceof ServerWorld && entity.getType().isIn(ModTags.EntityTypes.BUGS)) {
             //Add logic for entityType or tag here
             captureEntity(entity, user);
             return ActionResult.SUCCESS;
