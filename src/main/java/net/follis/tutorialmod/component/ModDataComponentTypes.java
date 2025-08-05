@@ -31,8 +31,6 @@ public class ModDataComponentTypes {
     public static final ComponentType<Integer> GOLDEN_NEEDLE_STACKS_CODEC =
             register("golden_needle_stacks", builder -> builder.codec(Codec.INT));
 
-    public static final ComponentType<Integer> TIME_TRACKING =
-            register("time_tracking", builder -> builder.codec(Codec.INT));
     public static final ComponentType<Integer> POISON_TRACKING =
             register("poison_tracking", builder -> builder.codec(Codec.INT));
 

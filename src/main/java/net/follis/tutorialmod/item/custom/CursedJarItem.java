@@ -12,6 +12,9 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -26,7 +29,7 @@ import java.util.List;
 
 public class CursedJarItem extends AbstractEntityJarItem {
     private World world;
-    private static final int maxPoisonLevel = 100;
+    private static final int maxPoisonLevel = 10;
 
     public CursedJarItem(Settings settings) {
         super(settings);
@@ -101,17 +104,19 @@ public class CursedJarItem extends AbstractEntityJarItem {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if(TimeFlow(stack) > 6000) {
-            resetTime(stack);
-            if (entity instanceof PlayerEntity player) {
-                if (tryKillBug(player, slot)) {
-                    int poisonLevel = player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.POISON_TRACKING, 1);
-                    poisonLevel++;
-                    if (poisonLevel >= maxPoisonLevel) {
-                        player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, 0);
-                        player.dropItem(ModItems.LOCUST_RED);
-                    } else {
-                        player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, poisonLevel);
+        if(world instanceof ServerWorld serverWorld) {
+            if(serverWorld.getTime() % 80 == 0) {
+                if (entity instanceof PlayerEntity player) {
+                    if (tryKillBug(player, slot)) {
+                        entity.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.BLOCKS, 0.7F, 0.3F);
+                        int poisonLevel = player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.POISON_TRACKING, 1);
+                        poisonLevel++;
+                        if (poisonLevel >= maxPoisonLevel) {
+                            player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, 0);
+                            player.dropItem(ModItems.LOCUST_RED);
+                        } else {
+                            player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, poisonLevel);
+                        }
                     }
                 }
             }

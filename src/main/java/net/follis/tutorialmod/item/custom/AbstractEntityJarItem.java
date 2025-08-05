@@ -49,17 +49,6 @@ public abstract class AbstractEntityJarItem extends Item {
         super(settings);
     }
 
-    protected void resetTime(ItemStack stack) {
-        stack.set(ModDataComponentTypes.TIME_TRACKING, 0);
-    }
-
-    protected int TimeFlow(ItemStack stack) {
-        int time = stack.getOrDefault(ModDataComponentTypes.TIME_TRACKING, 0);
-        time++;
-        stack.set(ModDataComponentTypes.TIME_TRACKING, time);
-        return time;
-    }
-
     protected static Identifier getIdentifier(BugData bugData) {
         return Identifier.of(bugData.entityData.copyNbt().getString("id"));
     }
@@ -98,7 +87,6 @@ public abstract class AbstractEntityJarItem extends Item {
         List<BugData> bugDataList = getMutableBugDataList(player);
         bugDataList.add(BugData.of(entity));
         player.getMainHandStack().set(ModDataComponentTypes.BUGS, bugDataList);
-
         player.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_BEEHIVE_ENTER, SoundCategory.BLOCKS, 1.0F, 1.0F);
         entity.discard();
     }
