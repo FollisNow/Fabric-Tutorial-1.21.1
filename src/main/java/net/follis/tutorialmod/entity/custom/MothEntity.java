@@ -9,7 +9,6 @@ import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -23,8 +22,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtHelper;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -50,6 +49,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT;
     private static final TrackedData<Integer> ANGER;
+    private static final TrackedData<BlockPos> WALL_POS;
 
     @Nullable
     private UUID angryAt;
@@ -72,7 +72,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         this.goalSelector.add(4, new LookAroundGoal(this));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(6, new SwimGoal(this));
-        this.goalSelector.add(7, new GrowCropsGoal());
 
         this.targetSelector.add(1, (new MothRevengeGoal(this)).setGroupRevenge());
         this.targetSelector.add(2, new BiteTargetGoal(this));
@@ -109,9 +108,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
                 baby.setVariant(this.getVariant());
             }
 
-            if (baby.getVariant() == MothVariant.OMEN) {
-
-            }
         }
         return baby;
     }
@@ -132,7 +128,15 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     public void tick() {
         super.tick();
 
-        this.setNoGravity(isNavigating());
+
+        if (this.getBlockPos() == this.getWallPos()) {
+            this.setPosition(this.getWallPos().toCenterPos());
+            this.setNoGravity(true);
+        } else {
+            this.setNoGravity(isNavigating());
+        }
+
+
 
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
@@ -173,6 +177,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(DATA_ID_TYPE_VARIANT, 0);
+        builder.add(WALL_POS, this.getBlockPos());
         builder.add(ANGER, 0);
     }
 
@@ -186,12 +191,24 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
 
     private void setVariant(MothVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
+
+    }
+
+    public BlockPos getWallPos() {
+        return this.dataTracker.get(WALL_POS);
+    }
+
+    protected void setWallPos(BlockPos pos) {
+        System.out.println("Wall pos set to " + pos);
+        this.dataTracker.set(WALL_POS, pos);
+
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Variant", this.getTypeVariant());
+        nbt.put("Wall", NbtHelper.fromBlockPos(this.getWallPos()));
 
         this.writeAngerToNbt(nbt);
     }
@@ -200,6 +217,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        this.dataTracker.set(WALL_POS, NbtHelper.toBlockPos(nbt, "Wall").orElse(this.getBlockPos()));
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
 
@@ -270,25 +288,21 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation birdNavigation = new BirdNavigation(this, world) {
             public boolean isValidPosition(BlockPos pos) {
-                BlockState state = this.world.getBlockState(pos);
-                return !state.isAir() || state.isSolid(); // Allow landing on solid blocks
+                if (
+                        !this.world.getBlockState(pos.north()).isAir() ||
+                        !this.world.getBlockState(pos.south()).isAir() ||
+                        !this.world.getBlockState(pos.east()).isAir() ||
+                        !this.world.getBlockState(pos.west()).isAir()) {
+                    MothEntity.this.setWallPos(pos);
+                    return true;
+                }
+                return false;
             }
+
         };
         birdNavigation.setCanPathThroughDoors(false);
         birdNavigation.setCanSwim(false);
         birdNavigation.setCanEnterOpenDoors(true);
-
-        MobNavigation mobNavigation = new MobNavigation(this, world) {
-            public boolean isValidPosition(BlockPos pos) {
-                return !this.world.getBlockState(pos.down()).isAir();
-            }
-        };
-        mobNavigation.setCanEnterOpenDoors(true);
-        mobNavigation.setCanSwim(false);
-        mobNavigation.setCanPathThroughDoors(false);
-
-        if (birdNavigation.getTargetPos() != null && birdNavigation.getTargetPos().isWithinDistance(this.getPos(), 2))
-            return mobNavigation;
         return birdNavigation;
     }
 
@@ -388,69 +402,10 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         }
     }
 
-    class GrowCropsGoal extends NotAngryGoal {
-        public boolean canMothStart() {
-            return MothEntity.this.random.nextFloat() > 0.975F;
-        }
-
-        public boolean canMothContinue() {
-            return this.canMothStart();
-        }
-
-        public void tick() {
-            if (MothEntity.this.random.nextInt(this.getTickCount(30)) == 0) {
-                for(int i = 0; i <= 2; ++i) {
-                    BlockPos blockPos = MothEntity.this.getBlockPos().up(2-i);
-                    BlockState blockState = MothEntity.this.getWorld().getBlockState(blockPos);
-                    Block block = blockState.getBlock();
-                    BlockState blockState2 = null;
-                    if (blockState.isIn(BlockTags.BEE_GROWABLES)) {
-                        if (block instanceof CropBlock cropBlock) {
-                            if (!cropBlock.isMature(blockState)) {
-                                blockState2 = cropBlock.withAge(cropBlock.getAge(blockState) + 1);
-                            }
-                        } else if (block instanceof StemBlock) {
-                            int j = blockState.get(StemBlock.AGE);
-                            if (j < 7) {
-                                blockState2 = blockState.with(StemBlock.AGE, j + 1);
-                            }
-                        } else if (blockState.isOf(Blocks.SWEET_BERRY_BUSH)) {
-                            int j = blockState.get(SweetBerryBushBlock.AGE);
-                            if (j < 3) {
-                                blockState2 = blockState.with(SweetBerryBushBlock.AGE, j + 1);
-                            }
-                        } else if (blockState.isOf(Blocks.CAVE_VINES) || blockState.isOf(Blocks.CAVE_VINES_PLANT)) {
-                            ((Fertilizable)blockState.getBlock()).grow((ServerWorld) MothEntity.this.getWorld(), MothEntity.this.random, blockPos, blockState);
-                        }
-
-                        if (blockState2 != null) {
-                            MothEntity.this.getWorld().syncWorldEvent(2011, blockPos, 15);
-                            MothEntity.this.getWorld().setBlockState(blockPos, blockState2);
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
-    abstract class NotAngryGoal extends Goal {
-        public abstract boolean canMothStart();
-
-        public abstract boolean canMothContinue();
-
-        public boolean canStart() {
-            return this.canMothStart() && !MothEntity.this.hasAngerTime();
-        }
-
-        public boolean shouldContinue() {
-            return this.canMothContinue() && !MothEntity.this.hasAngerTime();
-        }
-    }
-
     static {
         ANGER = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
         ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
         DATA_ID_TYPE_VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
+        WALL_POS = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     }
 }
