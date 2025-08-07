@@ -27,12 +27,12 @@ public class ModEntities {
     public static final EntityType<BeetleEntity> BEETLE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "beetle"),
             EntityType.Builder.create(BeetleEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(1.0f, 0.5f).build());
+                    .dimensions(0.5f, 0.5f).build());
 
     public static final EntityType<MothEntity> MOTH = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "moth"),
             EntityType.Builder.create(MothEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(0.5f, 0.5f).build());
+                    .dimensions(0.6f, 0.75f).build());
 
 
     public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,

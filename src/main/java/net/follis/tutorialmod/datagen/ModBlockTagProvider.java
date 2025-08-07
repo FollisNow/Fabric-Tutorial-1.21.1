@@ -83,5 +83,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.GOLDEN_WOOD)
                 .add(ModBlocks.STRIPPED_GOLDEN_LOG)
                 .add(ModBlocks.STRIPPED_GOLDEN_WOOD);
+
+        getOrCreateTagBuilder(BlockTags.LEAVES)
+                .add(ModBlocks.GOLDEN_LEAVES);
     }
 }

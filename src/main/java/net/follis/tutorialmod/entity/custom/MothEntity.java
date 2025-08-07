@@ -2,9 +2,11 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
@@ -22,34 +24,39 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.TimeHelper;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
-    public final AnimationState idleAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
+    public final AnimationState flyingAnimationState = new AnimationState();
+    public final AnimationState roostingAnimationState = new AnimationState();
+
     public static final int field_28638 = MathHelper.ceil(1.4959966F);
+    public float flapProgress;
+    public float maxWingDeviation;
+    public float prevMaxWingDeviation;
+    public float prevFlapProgress;
+    private float flapSpeed = 1.0F;
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT;
     private static final TrackedData<Integer> ANGER;
-    private static final TrackedData<BlockPos> WALL_POS;
+    private static final TrackedData<Boolean> IS_ROOSTING;
 
     @Nullable
     private UUID angryAt;
@@ -58,19 +65,27 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
 
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
-        this.moveControl = new FlightMoveControl(this, 20, true);
+        this.moveControl = new FlightMoveControl(this, 10, true);
     }
+
+    protected EntityNavigation createNavigation(World world) {
+        BirdNavigation birdNavigation = new BirdNavigation(this, world);
+        birdNavigation.setCanPathThroughDoors(false);
+        birdNavigation.setCanSwim(true);
+        birdNavigation.setCanEnterOpenDoors(true);
+        return birdNavigation;
+    }
+
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new BiteGoal(this, 1.4F, true));
+        this.goalSelector.add(0, new MothBiteGoal(this, 1.4F, true));
 
-        this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
-        this.goalSelector.add(2, new TemptGoal(this, 1.25D, this::foodSelector, false));
+        this.goalSelector.add(1, new MothMateGoal(this, 1.15D));
+        this.goalSelector.add(2, new MothTemptGoal(this, 1.25D, this::foodSelector, false));
 
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(4, new LatchGoal(this));
+        this.goalSelector.add(5, new FlyToTreeGoal(this, 1.4F, 12, 6));
         this.goalSelector.add(6, new SwimGoal(this));
 
         this.targetSelector.add(1, (new MothRevengeGoal(this)).setGroupRevenge());
@@ -88,12 +103,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 7.0F)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.65F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0F)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0F).add(EntityAttributes.GENERIC_FLYING_SPEED, 1F).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2F).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0F);
     }
 
     @Nullable
@@ -111,14 +121,12 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         }
         return baby;
     }
-
     @Override
     public void breed(ServerWorld world, AnimalEntity other) {
         super.breed(world, other);
         this.setBreedingAge(1200);
         other.setBreedingAge(1200);
     }
-
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isIn(ItemTags.BEE_FOOD);
@@ -127,26 +135,43 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     @Override
     public void tick() {
         super.tick();
+        if (this.isRoosting()) {
+            this.setVelocity(Vec3d.ZERO);
+            this.getNavigation().stop();
+        }
 
+        if (this.getNavigation().getTargetPos() != null && this.getWorld() instanceof ServerWorld serverWorld) {
+            Vec3d target = this.getNavigation().getTargetPos().toBottomCenterPos();
 
-        if (this.getBlockPos() == this.getWallPos()) {
-            this.setPosition(this.getWallPos().toCenterPos());
-            this.setNoGravity(true);
-        } else {
-            this.setNoGravity(isNavigating());
+            serverWorld.spawnParticles(ModParticles.PINK_GARNET_PARTICLE,
+                    target.x, target.y,
+                    target.z, 1, 0, 0, 0, 0);
         }
 
 
-
-        if (this.getWorld().isClient()) {
-            this.setupAnimationStates();
-        }
+        this.updateAnimations();
     }
 
     @Override
     protected void mobTick() {
-        if (!this.getWorld().isClient) {
-            this.tickAngerLogic((ServerWorld)this.getWorld(), false);
+
+    }
+
+    @Override
+    public void tickMovement() {
+        super.tickMovement();
+        this.flapWings();
+    }
+
+    public boolean damage(DamageSource source, float amount) {
+        if (this.isInvulnerableTo(source)) {
+            return false;
+        } else {
+            if (!this.getWorld().isClient && this.isRoosting()) {
+                this.setRoosting(false);
+            }
+
+            return super.damage(source, amount);
         }
     }
 
@@ -177,7 +202,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(DATA_ID_TYPE_VARIANT, 0);
-        builder.add(WALL_POS, this.getBlockPos());
+        builder.add(IS_ROOSTING, false);
         builder.add(ANGER, 0);
     }
 
@@ -194,13 +219,12 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
 
     }
 
-    public BlockPos getWallPos() {
-        return this.dataTracker.get(WALL_POS);
+    public boolean isRoosting() {
+        return this.dataTracker.get(IS_ROOSTING);
     }
 
-    protected void setWallPos(BlockPos pos) {
-        System.out.println("Wall pos set to " + pos);
-        this.dataTracker.set(WALL_POS, pos);
+    protected void setRoosting(boolean bl) {
+        this.dataTracker.set(IS_ROOSTING, bl);
 
     }
 
@@ -208,7 +232,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Variant", this.getTypeVariant());
-        nbt.put("Wall", NbtHelper.fromBlockPos(this.getWallPos()));
+        nbt.putBoolean("Roosting", this.isRoosting());
 
         this.writeAngerToNbt(nbt);
     }
@@ -217,7 +241,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
-        this.dataTracker.set(WALL_POS, NbtHelper.toBlockPos(nbt, "Wall").orElse(this.getBlockPos()));
+        this.dataTracker.set(IS_ROOSTING, nbt.getBoolean("Roosting"));
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
 
@@ -268,12 +292,13 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         return SoundEvents.ENTITY_PANDA_DEATH;
     }
 
-    private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 80;
-            this.idleAnimationState.start(this.age);
+    private void updateAnimations() {
+        if (this.isRoosting()) {
+            this.flyingAnimationState.stop();
+            this.roostingAnimationState.startIfNotRunning(this.age);
         } else {
-            --this.idleAnimationTimeout;
+            this.roostingAnimationState.stop();
+            this.flyingAnimationState.startIfNotRunning(this.age);
         }
     }
 
@@ -284,30 +309,27 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     public boolean isInAir() {
         return !this.isOnGround();
     }
-    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {}
-    protected EntityNavigation createNavigation(World world) {
-        BirdNavigation birdNavigation = new BirdNavigation(this, world) {
-            public boolean isValidPosition(BlockPos pos) {
-                if (
-                        !this.world.getBlockState(pos.north()).isAir() ||
-                        !this.world.getBlockState(pos.south()).isAir() ||
-                        !this.world.getBlockState(pos.east()).isAir() ||
-                        !this.world.getBlockState(pos.west()).isAir()) {
-                    MothEntity.this.setWallPos(pos);
-                    return true;
-                }
-                return false;
-            }
-
-        };
-        birdNavigation.setCanPathThroughDoors(false);
-        birdNavigation.setCanSwim(false);
-        birdNavigation.setCanEnterOpenDoors(true);
-        return birdNavigation;
+    public boolean isGrounded() {
+        return isOnGround();
     }
+    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {}
 
-    public float getPathfindingFavor(BlockPos pos, WorldView world) {
-        return world.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+    private void flapWings() {
+        this.prevFlapProgress = this.flapProgress;
+        this.prevMaxWingDeviation = this.maxWingDeviation;
+        this.maxWingDeviation += (float)(!this.isOnGround() && !this.hasVehicle() ? 4 : -1) * 0.3F;
+        this.maxWingDeviation = MathHelper.clamp(this.maxWingDeviation, 0.0F, 1.0F);
+        if (!this.isOnGround() && this.flapSpeed < 1.0F) {
+            this.flapSpeed = 1.0F;
+        }
+
+        this.flapSpeed *= 0.9F;
+        Vec3d vec3d = this.getVelocity();
+        if (!this.isOnGround() && vec3d.y < (double)0.0F) {
+            this.setVelocity(vec3d.multiply((double)1.0F, 0.6, (double)1.0F));
+        }
+
+        this.flapProgress += this.flapSpeed * 2.0F;
     }
 
     @Override
@@ -337,12 +359,8 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         this.setAngerTime(ANGER_TIME_RANGE.get(this.random));
     }
 
-    public boolean isGrounded() {
-        return isOnGround();
-    }
-
-    class BiteGoal extends MeleeAttackGoal {
-        BiteGoal(final PathAwareEntity mob, final double speed, final boolean pauseWhenMobIdle) {
+    class MothBiteGoal extends MeleeAttackGoal {
+        MothBiteGoal(final MothEntity mob, final double speed, final boolean pauseWhenMobIdle) {
             super(mob, speed, pauseWhenMobIdle);
         }
 
@@ -352,6 +370,13 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
 
         public boolean shouldContinue() {
             return super.shouldContinue() && MothEntity.this.hasAngerTime() && MothEntity.this.getVariant() == MothVariant.OMEN;
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            if (MothEntity.this.isRoosting())
+                MothEntity.this.setRoosting(false);
         }
     }
 
@@ -402,10 +427,227 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         }
     }
 
+    static class FlyToTreeGoal extends Goal {
+        protected final MothEntity mob;
+        protected double targetX;
+        protected double targetY;
+        protected double targetZ;
+        protected final double speed;
+        protected final int horizontalRange;
+        protected final int verticalRange;
+        protected int chance;
+
+        public FlyToTreeGoal(MothEntity mob, double speed, int horizontalRange, int verticalRange) {
+            this(mob, speed, 120, verticalRange, horizontalRange);
+        }
+        public FlyToTreeGoal(MothEntity mob, double speed, int chance, int horizontalRange, int verticalRange) {
+            this(mob, speed, verticalRange, horizontalRange, chance, false);
+        }
+        public FlyToTreeGoal(MothEntity entity, double speed, int horizontalRange, int verticalRange, int chance, boolean canDespawn) {
+            this.mob = entity;
+            this.speed = speed;
+            this.horizontalRange = horizontalRange;
+            this.verticalRange = verticalRange;
+            this.chance = chance;
+            this.setControls(EnumSet.of(Control.MOVE));
+        }
+        public boolean canStart() {
+            if (!this.mob.hasControllingPassenger() && (this.mob.random.nextInt(1200) == 0) || !this.mob.isRoosting()) {
+                Vec3d vec3d = this.getWanderTarget();
+                if (vec3d == null) {
+                    return false;
+                } else {
+                    this.targetX = vec3d.x;
+                    this.targetY = vec3d.y;
+                    this.targetZ = vec3d.z;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public boolean shouldContinue() {
+            return !this.mob.getNavigation().isIdle() && !this.mob.hasControllingPassenger();
+        }
+        public void start() {
+            this.mob.getNavigation().startMovingTo(this.targetX, this.targetY, this.targetZ, this.speed);
+            if (this.mob.isRoosting())
+                this.mob.setRoosting(false);
+        }
+        public void stop() {
+            this.mob.getNavigation().stop();
+            super.stop();
+        }
+
+        @Nullable
+        protected Vec3d getWanderTarget() {
+            Vec3d vec3d = null;
+            if (this.mob.isTouchingWater()) {
+                vec3d = FuzzyTargeting.find(this.mob, this.horizontalRange, this.verticalRange);
+            } else {
+                if (this.mob.getWorld() instanceof ServerWorld serverWorld) {
+                    vec3d = getRandomValidTreePos(serverWorld, this.mob.getBlockPos());
+                }
+            }
+            return vec3d == null ? this.mob.getPos() : vec3d;
+        }
+        @Nullable
+        private Vec3d getRandomValidTreePos(ServerWorld world, BlockPos originalPos) {
+            HashSet<BlockPos> validPositions = new HashSet<>();
+            BlockPos.Mutable offsetPos = originalPos.mutableCopy();
+
+            for (BlockPos targetPos : BlockPos.iterateOutwards(originalPos, this.horizontalRange, this.verticalRange, this.horizontalRange)) {
+                offsetPos.set(targetPos);
+                if (!isValidTreeStructure(world, targetPos)) continue;
+                validPositions.add(targetPos.toImmutable());
+            }
+
+            return !validPositions.isEmpty() ? new ArrayList<>(validPositions).get(world.random.nextInt(validPositions.size()-1)).toImmutable().toBottomCenterPos() : null;
+        }
+        private static boolean isValidTreeStructure(ServerWorld world, BlockPos pos) {
+            if (!world.getBlockState(pos).isAir() || !world.getBlockState(pos.up()).isAir()) return false;
+            Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
+
+            int validTreeSides = 0;
+            for (Direction direction : Direction.Type.HORIZONTAL) {
+                BlockPos entry = pos.offset(direction);
+                if (!isTreeBlock.test(world.getBlockState(entry))) {
+                    continue;
+                }
+                if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
+                    continue;
+                }
+                if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
+                    continue;
+                }
+                validTreeSides++;
+            }
+            return validTreeSides > 0 && validTreeSides < 4;
+        }
+    }
+
+    static class LatchGoal extends Goal {
+        protected final MothEntity mob;
+
+        LatchGoal(MothEntity mob) {
+            this.mob = mob;
+        }
+
+        @Override
+        public boolean canStart() {
+            if (this.mob.getWorld() instanceof ServerWorld serverWorld){
+                return this.mob.random.nextInt(10) == 0 && !this.mob.isRoosting() && isValidTreeStructure(serverWorld, this.mob.getBlockPos());
+            }
+            return false;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            boolean bl = false;
+            if (this.mob.getWorld() instanceof ServerWorld serverWorld){
+                 bl = this.mob.getRandom().nextInt(6000) != 0 && isValidTreeStructure(serverWorld, this.mob.getBlockPos())
+                         && !this.mob.hasControllingPassenger();
+            }
+            if (!bl) {
+                this.mob.setRoosting(false);
+            }
+            return bl;
+        }
+
+        @Override
+        public void start() {
+            this.mob.setRoosting(true);
+            this.mob.setPosition(this.mob.getBlockPos().toBottomCenterPos());
+            this.mob.getNavigation().stop();
+
+            if (this.mob.getWorld() instanceof ServerWorld serverWorld) {
+                Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
+                for (Direction direction : Direction.Type.HORIZONTAL) {
+                    BlockPos entry = this.mob.getBlockPos().offset(direction);
+                    if (isTreeBlock.test(serverWorld.getBlockState(entry))) {
+                        alignForwardToDirection(direction, this.mob);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        private void alignForwardToDirection(Direction direction, MothEntity moth) {
+            switch (direction) {
+                case NORTH:
+                    moth.setHeadYaw(180.0F);
+                    moth.setYaw(180.0F);
+                    break;
+                case SOUTH:
+                    moth.setHeadYaw(0.0F);
+                    moth.setYaw(0.0F);
+                    break;
+                case WEST:
+                    moth.setHeadYaw(90.0F);
+                    moth.setYaw(90.0F);
+                    break;
+                case EAST:
+                    moth.setHeadYaw(-90.0F);
+                    moth.setYaw(-90.0F);
+                    break;
+                default:
+                    // Handle invalid direction if needed
+                    break;
+            }
+            mob.setPitch(0.0F); // Set pitch to level (0 degrees)
+        }
+
+        private static boolean isValidTreeStructure(ServerWorld world, BlockPos pos) {
+            if (!world.getBlockState(pos).isAir() || !world.getBlockState(pos.up()).isAir()) return false;
+            Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
+
+            int validTreeSides = 0;
+            for (Direction direction : Direction.Type.HORIZONTAL) {
+                BlockPos entry = pos.offset(direction);
+                if (!isTreeBlock.test(world.getBlockState(entry))) {
+                    continue;
+                }
+                if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
+                    continue;
+                }
+                if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
+                    continue;
+                }
+                validTreeSides++;
+            }
+            return validTreeSides > 0 && validTreeSides < 4;
+        }
+    }
+
+    class MothMateGoal extends AnimalMateGoal {
+        public MothMateGoal(MothEntity animal, double speed) {
+            super(animal, speed);
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            if (MothEntity.this.isRoosting())
+                MothEntity.this.setRoosting(false);
+        }
+    }
+
+    class MothTemptGoal extends TemptGoal {
+        public MothTemptGoal(PathAwareEntity entity, double speed, Predicate<ItemStack> foodPredicate, boolean canBeScared) {
+            super(entity, speed, foodPredicate, canBeScared);
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            if (MothEntity.this.isRoosting())
+                MothEntity.this.setRoosting(false);
+        }
+    }
     static {
         ANGER = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
         ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
         DATA_ID_TYPE_VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
-        WALL_POS = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+        IS_ROOSTING = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     }
 }

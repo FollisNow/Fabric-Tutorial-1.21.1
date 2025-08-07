@@ -8,9 +8,12 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 
 public class MothModel<T extends MothEntity> extends SinglePartEntityModel<T> {
     public static final EntityModelLayer MOTH = new EntityModelLayer(Identifier.of(TutorialMod.MOD_ID, "moth"), "main");
+    private final ModelPart root;
     private final ModelPart moth;
     private final ModelPart right_antenna;
     private final ModelPart left_antenna;
@@ -21,7 +24,8 @@ public class MothModel<T extends MothEntity> extends SinglePartEntityModel<T> {
     private final ModelPart left_wing_inner;
     private final ModelPart right_wing_inner;
     public MothModel(ModelPart root) {
-        this.moth = root.getChild("moth");
+        this.root = root.getChild("root");
+        this.moth = this.root.getChild("moth");
         this.right_antenna = this.moth.getChild("right_antenna");
         this.left_antenna = this.moth.getChild("left_antenna");
         this.left_wing_tip = this.moth.getChild("left_wing_tip");
@@ -34,7 +38,9 @@ public class MothModel<T extends MothEntity> extends SinglePartEntityModel<T> {
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData moth = modelPartData.addChild("moth", ModelPartBuilder.create().uv(14, 12).cuboid(-3.0F, -4.0F, -6.0F, 6.0F, 4.0F, 12.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData root = modelPartData.addChild("root", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+
+        ModelPartData moth = root.addChild("moth", ModelPartBuilder.create().uv(14, 12).cuboid(-3.0F, -4.0F, -6.0F, 6.0F, 4.0F, 12.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
         ModelPartData right_antenna = moth.addChild("right_antenna", ModelPartBuilder.create().uv(8, 16).cuboid(0.0F, 0.0F, -7.0F, 2.0F, 0.0F, 7.0F, new Dilation(0.001F))
                 .uv(25, -7).cuboid(0.0F, 0.0F, -7.0F, 0.0F, 2.0F, 7.0F, new Dilation(0.001F)), ModelTransform.pivot(-3.0F, -2.5F, -6.0F));
@@ -58,19 +64,21 @@ public class MothModel<T extends MothEntity> extends SinglePartEntityModel<T> {
     @Override
     public void setAngles(MothEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-        if (!entity.isGrounded()) {
+        if (entity.isRoosting()) {
+            this.updateAnimation(entity.roostingAnimationState, MothAnimations.ROOSTINGFLAT_ANIMATION, ageInTicks, 1.0F);
+        } else {
             this.moth.pitch = -0.5F; // Set a constant tilt value
+            this.updateAnimation(entity.flyingAnimationState, MothAnimations.FLY_ANIMATION, ageInTicks, 1.0F);
         }
-        this.animateMovement(MothAnimations.FLY_ANIMATION, limbSwing, limbSwingAmount, 2f, 2.5f);
-        this.updateAnimation(entity.idleAnimationState, MothAnimations.IDLE_ANIMATION, ageInTicks, 1f);
     }
+
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
-        moth.render(matrices, vertexConsumer, light, overlay, color);
+        root.render(matrices, vertexConsumer, light, overlay, color);
     }
 
     @Override
     public ModelPart getPart() {
-        return moth;
+        return root;
     }
 }
