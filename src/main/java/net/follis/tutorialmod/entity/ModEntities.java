@@ -32,7 +32,7 @@ public class ModEntities {
     public static final EntityType<MothEntity> MOTH = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "moth"),
             EntityType.Builder.create(MothEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(0.6f, 0.75f).build());
+                    .dimensions(0.4f, 0.75f).build());
 
 
     public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,

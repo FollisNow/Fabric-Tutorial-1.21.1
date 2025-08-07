@@ -272,12 +272,13 @@ public class MothAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-    public static final Animation ROOSTINGFLAT_ANIMATION = Animation.Builder.create(2f).looping()
+
+    public static final Animation ROOSTING_ANIMATION = Animation.Builder.create(2f).looping()
             .addBoneAnimation("moth",
                     new Transformation(Transformation.Targets.TRANSLATE,
-                            new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 6f, -8f),
+                            new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 6f, -2f),
                                     Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createTranslationalVector(0f, 6f, -8f),
+                            new Keyframe(2f, AnimationHelper.createTranslationalVector(0f, 6f, -2f),
                                     Transformation.Interpolations.LINEAR)))
             .addBoneAnimation("moth",
                     new Transformation(Transformation.Targets.ROTATE,

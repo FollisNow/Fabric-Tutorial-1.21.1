@@ -63,7 +63,7 @@ public class MothModel<T extends MothEntity> extends SinglePartEntityModel<T> {
     public void setAngles(MothEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         if (entity.isRoosting()) {
-            this.updateAnimation(entity.roostingAnimationState, MothAnimations.ROOSTINGFLAT_ANIMATION, ageInTicks, 1.0F);
+            this.updateAnimation(entity.roostingAnimationState, MothAnimations.ROOSTING_ANIMATION, ageInTicks, 1.0F);
         } else {
             this.moth.pitch = -0.5F; // Set a constant tilt value
             this.updateAnimation(entity.flyingAnimationState, MothAnimations.FLY_ANIMATION, ageInTicks, 1.0F);
