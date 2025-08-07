@@ -309,9 +309,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     public boolean isInAir() {
         return !this.isOnGround();
     }
-    public boolean isGrounded() {
-        return isOnGround();
-    }
+
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {}
 
     private void flapWings() {
@@ -326,7 +324,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         this.flapSpeed *= 0.9F;
         Vec3d vec3d = this.getVelocity();
         if (!this.isOnGround() && vec3d.y < (double)0.0F) {
-            this.setVelocity(vec3d.multiply((double)1.0F, 0.6, (double)1.0F));
+            this.setVelocity(vec3d.multiply(1.0F, 0.6, 1.0F));
         }
 
         this.flapProgress += this.flapSpeed * 2.0F;
@@ -440,10 +438,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         public FlyToTreeGoal(MothEntity mob, double speed, int horizontalRange, int verticalRange) {
             this(mob, speed, 120, verticalRange, horizontalRange);
         }
-        public FlyToTreeGoal(MothEntity mob, double speed, int chance, int horizontalRange, int verticalRange) {
-            this(mob, speed, verticalRange, horizontalRange, chance, false);
-        }
-        public FlyToTreeGoal(MothEntity entity, double speed, int horizontalRange, int verticalRange, int chance, boolean canDespawn) {
+        public FlyToTreeGoal(MothEntity entity, double speed, int horizontalRange, int verticalRange, int chance) {
             this.mob = entity;
             this.speed = speed;
             this.horizontalRange = horizontalRange;

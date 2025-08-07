@@ -7,23 +7,6 @@ import net.minecraft.client.render.entity.animation.Transformation;
 
 public class MothAnimations {
 
-    public static final Animation IDLE_ANIMATION = Animation.Builder.create(4f).looping()
-            .addBoneAnimation("right_antenna",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(0.45833f, AnimationHelper.createRotationalVector(0f, 15f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(0.625f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("left_antenna",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(0.45833f, AnimationHelper.createRotationalVector(0f, -15f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(0.625f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR))).build();
     public static final Animation FLY_ANIMATION = Animation.Builder.create(2f).looping()
             .addBoneAnimation("right_wing",
                     new Transformation(Transformation.Targets.ROTATE,
@@ -289,70 +272,12 @@ public class MothAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-    public static final Animation ROOSTING_ANIMATION = Animation.Builder.create(2f).looping()
-            .addBoneAnimation("moth",
-                    new Transformation(Transformation.Targets.TRANSLATE,
-                            new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 6f, -2f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createTranslationalVector(0f, 6f, -2f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("moth",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(-90f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createRotationalVector(-90f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("right_antenna",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 30f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(1f, AnimationHelper.createRotationalVector(0f, 25f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 30f, 0f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("left_antenna",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(0f, -30f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(1f, AnimationHelper.createRotationalVector(0f, -25f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createRotationalVector(0f, -30f, 0f),
-                                    Transformation.Interpolations.LINEAR))).build();
     public static final Animation ROOSTINGFLAT_ANIMATION = Animation.Builder.create(2f).looping()
             .addBoneAnimation("moth",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 6f, -8f),
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(2f, AnimationHelper.createTranslationalVector(0f, 6f, -8f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("moth",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(-90f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createRotationalVector(-90f, 0f, 0f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("right_antenna",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 30f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(1f, AnimationHelper.createRotationalVector(0f, 25f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 30f, 0f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("left_antenna",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(0f, -30f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(1f, AnimationHelper.createRotationalVector(0f, -25f, 0f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createRotationalVector(0f, -30f, 0f),
-                                    Transformation.Interpolations.LINEAR))).build();
-    public static final Animation ROOSTINGFLATBACK_ANIMATION = Animation.Builder.create(2f).looping()
-            .addBoneAnimation("moth",
-                    new Transformation(Transformation.Targets.TRANSLATE,
-                            new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 6f, 4f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(2f, AnimationHelper.createTranslationalVector(0f, 6f, 4f),
                                     Transformation.Interpolations.LINEAR)))
             .addBoneAnimation("moth",
                     new Transformation(Transformation.Targets.ROTATE,
