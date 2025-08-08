@@ -13,7 +13,9 @@ import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -135,15 +137,11 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     @Override
     public void tick() {
         super.tick();
-
-
-        //spawnParticlesToTarget();
-
-
+        //spawnParticlesAtTarget();
         this.updateAnimations();
     }
 
-    private void spawnParticlesToTarget() {
+    private void spawnParticlesAtTarget() {
         if (this.getNavigation().getTargetPos() != null && this.getWorld() instanceof ServerWorld serverWorld) {
             Vec3d target = this.getNavigation().getTargetPos().toBottomCenterPos();
 
@@ -168,6 +166,15 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
             }
 
             return super.damage(source, amount);
+        }
+    }
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource damageSource) {
+        if (damageSource.isOf(DamageTypes.CACTUS) || damageSource.isOf(DamageTypes.SWEET_BERRY_BUSH) || damageSource.getAttacker() instanceof EnderDragonEntity || damageSource.isOf(DamageTypes.CRAMMING)) {
+            return true;
+        } else {
+            return super.isInvulnerableTo(damageSource);
         }
     }
 
@@ -359,11 +366,11 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         }
 
         public boolean canStart() {
-            return super.canStart() && MothEntity.this.hasAngerTime() && MothEntity.this.getVariant() == MothVariant.OMEN;
+            return super.canStart() && MothEntity.this.hasAngerTime();
         }
 
         public boolean shouldContinue() {
-            return super.shouldContinue() && MothEntity.this.hasAngerTime() && MothEntity.this.getVariant() == MothVariant.OMEN;
+            return super.shouldContinue() && MothEntity.this.hasAngerTime();
         }
 
         @Override
@@ -380,7 +387,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         }
 
         public boolean shouldContinue() {
-            return MothEntity.this.hasAngerTime() && super.shouldContinue() && MothEntity.this.getVariant() == MothVariant.OMEN;
+            return MothEntity.this.hasAngerTime() && super.shouldContinue();
         }
 
         protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
