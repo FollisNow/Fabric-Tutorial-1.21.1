@@ -97,7 +97,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     }
 
     private boolean foodSelector(ItemStack stack) {
-        if(this.getVariant() == MothVariant.OMEN) {
+        if(this.getVariant() == MothVariant.VERY_RARE) {
             return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
         } else {
             return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD);
@@ -113,9 +113,9 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         MothEntity baby = ModEntities.MOTH.create(world);
         if (baby != null && entity instanceof MothEntity moth) {
-            if (((this.getVariant() != MothVariant.OMEN || moth.getVariant() != MothVariant.OMEN) && random.nextInt(100) == 0) ||
-                    (this.getVariant() == MothVariant.OMEN && moth.getVariant() == MothVariant.OMEN)) {
-                baby.setVariant(MothVariant.OMEN);
+            if (((this.getVariant() != MothVariant.VERY_RARE || moth.getVariant() != MothVariant.VERY_RARE) && random.nextInt(100) == 0) ||
+                    (this.getVariant() == MothVariant.VERY_RARE && moth.getVariant() == MothVariant.VERY_RARE)) {
+                baby.setVariant(MothVariant.VERY_RARE);
             } else {
                 baby.setVariant(this.getVariant());
             }
@@ -255,25 +255,25 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
         MothVariant variant;
         if (this.random.nextInt(100) == 0) {
-            variant = MothVariant.OMEN;
+            variant = MothVariant.VERY_RARE;
         }
         else if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
             variant = biomeMap.get(currentBiomeKey.get());
         } else {
             variant = MothVariant.byId(this.random.nextBetween(1, MothVariant.values().length - 1));
         }
-        this.setVariant(variant);
+        this.setVariant(MothVariant.OAK);
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     private static final Map<RegistryKey<Biome>, MothVariant> biomeMap = new HashMap<>() {{
-        put(BiomeKeys.PLAINS, MothVariant.LADYBUG);
-        put(BiomeKeys.SUNFLOWER_PLAINS, MothVariant.LADYBUG);
-        put(BiomeKeys.FLOWER_FOREST, MothVariant.LADYBUG);
-        put(BiomeKeys.CHERRY_GROVE, MothVariant.LADYBUG);
-        put(BiomeKeys.FOREST, MothVariant.BARK);
-        put(BiomeKeys.GROVE, MothVariant.BARK);
-        put(BiomeKeys.MEADOW, MothVariant.SCARAB);
+        put(BiomeKeys.PLAINS, MothVariant.RARE2);
+        put(BiomeKeys.SUNFLOWER_PLAINS, MothVariant.RARE2);
+        put(BiomeKeys.FLOWER_FOREST, MothVariant.RARE2);
+        put(BiomeKeys.CHERRY_GROVE, MothVariant.RARE2);
+        put(BiomeKeys.FOREST, MothVariant.RARE3);
+        put(BiomeKeys.GROVE, MothVariant.RARE3);
+        put(BiomeKeys.MEADOW, MothVariant.RARE1);
     }};
 
     /* SOUNDS */

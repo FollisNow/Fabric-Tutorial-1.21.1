@@ -4,10 +4,18 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum MothVariant {
-    OMEN(0),
-    SCARAB(1),
-    LADYBUG(2),
-    BARK(3);
+    VERY_RARE(0), // Channels effects
+
+    RARE1(1), // hypnotic
+    RARE2(2), // hypnotic
+    RARE3(3), // hypnotic
+
+    OAK(4),
+    BIRCH(5),
+    SPRUCE(6),
+    DARK_OAK(7),
+    CHERRY(8),
+    JUNGLE(9);
 
     private static final MothVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
             comparingInt(MothVariant::getId)).toArray(MothVariant[]::new);
