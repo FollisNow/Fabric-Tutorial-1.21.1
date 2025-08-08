@@ -32,8 +32,6 @@ public class MothRenderer extends MobEntityRenderer<MothEntity, MothModel<MothEn
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
                 map.put(MothVariant.DARK_OAK,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
-                map.put(MothVariant.PALE_OAK,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
                 map.put(MothVariant.JUNGLE,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
             });
