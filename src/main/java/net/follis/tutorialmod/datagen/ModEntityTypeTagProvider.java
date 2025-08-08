@@ -22,6 +22,7 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
                 .add(ModEntities.AMETHYST_BEE)
                 .add(ModEntities.BEETLE)
                 .add(ModEntities.LOCUST)
-                .add(ModEntities.MANTIS);
+                .add(ModEntities.MANTIS)
+                .add(ModEntities.MOTH);
     }
 }

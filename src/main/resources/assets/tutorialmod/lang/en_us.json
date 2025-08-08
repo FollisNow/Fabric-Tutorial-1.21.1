@@ -66,6 +66,7 @@
 
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
   "item.tutorialmod.beetle_spawn_egg": "Beetle Spawn Egg",
+  "item.tutorialmod.moth_spawn_egg": "Moth Spawn Egg",
   "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
   "item.tutorialmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
 
@@ -211,6 +212,7 @@
 
   "entity.tutorialmod.mantis": "Mantis",
   "entity.tutorialmod.beetle": "Beetle",
+  "entity.tutorialmod.moth": "Moth",
   "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.amethyst_bee": "Amethyst Bee",
   "entity.tutorialmod.tomahawk": "Tomahawk"

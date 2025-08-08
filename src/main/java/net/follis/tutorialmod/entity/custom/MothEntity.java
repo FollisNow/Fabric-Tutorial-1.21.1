@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
@@ -134,26 +135,22 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
     @Override
     public void tick() {
         super.tick();
-        if (this.isRoosting()) {
-            this.setVelocity(Vec3d.ZERO);
-            this.getNavigation().stop();
-        }
 
-//        if (this.getNavigation().getTargetPos() != null && this.getWorld() instanceof ServerWorld serverWorld) {
-//            Vec3d target = this.getNavigation().getTargetPos().toBottomCenterPos();
-//
-//            serverWorld.spawnParticles(ModParticles.PINK_GARNET_PARTICLE,
-//                    target.x, target.y,
-//                    target.z, 1, 0, 0, 0, 0);
-//        }
+
+        //spawnParticlesToTarget();
 
 
         this.updateAnimations();
     }
 
-    @Override
-    protected void mobTick() {
+    private void spawnParticlesToTarget() {
+        if (this.getNavigation().getTargetPos() != null && this.getWorld() instanceof ServerWorld serverWorld) {
+            Vec3d target = this.getNavigation().getTargetPos().toBottomCenterPos();
 
+            serverWorld.spawnParticles(ModParticles.PINK_GARNET_PARTICLE,
+                    target.x, target.y,
+                    target.z, 1, 0, 0, 0, 0);
+        }
     }
 
     @Override
@@ -479,8 +476,9 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
                     vec3d = getRandomValidTreePos(serverWorld, this.mob.getBlockPos());
                 }
             }
-            return vec3d == null ? FuzzyTargeting.find(this.mob, this.horizontalRange, this.verticalRange) : vec3d;
+            return vec3d == null ? RandomPosition(this.mob) : vec3d;
         }
+
         @Nullable
         private Vec3d getRandomValidTreePos(ServerWorld world, BlockPos originalPos) {
             HashSet<BlockPos> validPositions = new HashSet<>();
@@ -521,6 +519,12 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
                 validTreeSides++;
             }
             return validTreeSides > 0 && validTreeSides < 4;
+        }
+        private Vec3d RandomPosition(MothEntity moth) {
+            return BlockPos.ofFloored(
+                    moth.getX() + (double)moth.random.nextInt(7) - (double)moth.random.nextInt(7),
+                    moth.getY() - (double)moth.random.nextInt(6) + (double)2.0F,
+                    moth.getZ() + (double)moth.random.nextInt(7) - (double)moth.random.nextInt(7)).toBottomCenterPos();
         }
     }
 
@@ -564,6 +568,14 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
                 this.mob.setPosition(this.mob.getBlockPos().toBottomCenterPos().add(offset));
                 alignForwardToDirection(this.latchDirection, this.mob);
             }
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+            this.mob.setVelocity(Vec3d.ZERO);
+            alignForwardToDirection(this.latchDirection, this.mob); // the wiggle
+
         }
 
         private Direction getLatchPos(ServerWorld serverWorld) {
@@ -649,6 +661,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
                 MothEntity.this.setRoosting(false);
         }
     }
+
     static {
         ANGER = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
         ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);

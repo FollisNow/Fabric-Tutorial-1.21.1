@@ -129,7 +129,7 @@ public class ModItems {
             new SpawnEggItem(ModEntities.BEETLE, 0xf03232, 0x000000, new Item.Settings()));
 
     public static final Item MOTH_SPAWN_EGG = registerItem("moth_spawn_egg",
-            new SpawnEggItem(ModEntities.MOTH, 0xf03232, 0x000000, new Item.Settings()));
+            new SpawnEggItem(ModEntities.MOTH, 0x35210a, 0xffd83e, new Item.Settings()));
 
     public static final Item LOCUST_SPAWN_EGG = registerItem("locust_spawn_egg",
             new SpawnEggItem(ModEntities.LOCUST, 0x58f0b5, 0x4fd5a3, new Item.Settings()));
