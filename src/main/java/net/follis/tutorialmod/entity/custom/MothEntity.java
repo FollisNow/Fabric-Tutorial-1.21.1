@@ -219,7 +219,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         return this.dataTracker.get(IS_ROOSTING);
     }
 
-    protected void setRoosting(boolean bl) {
+    public void setRoosting(boolean bl) {
         this.dataTracker.set(IS_ROOSTING, bl);
 
     }

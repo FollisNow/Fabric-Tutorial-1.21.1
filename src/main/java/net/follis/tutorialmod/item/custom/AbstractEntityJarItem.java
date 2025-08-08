@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.follis.tutorialmod.entity.custom.MothEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;
@@ -81,6 +82,8 @@ public abstract class AbstractEntityJarItem extends Item {
         }
         // Refresh the entity's position and angles
         entity.refreshPositionAndAngles(blockPos2, entity.getYaw(), entity.getPitch());
+        if (entity instanceof MothEntity moth)
+            moth.setRoosting(false);
         return blockPos2;
     }
 
