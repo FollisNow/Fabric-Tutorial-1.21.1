@@ -2,21 +2,10 @@ package net.follis.tutorialmod.entity.client;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.custom.BambooTrapEntity;
-import net.follis.tutorialmod.entity.custom.ChairEntity;
-import net.follis.tutorialmod.entity.custom.GoldenNeedleProjectileEntity;
 import net.minecraft.client.render.*;
-import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.model.ArmorStandEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.Nullable;
 
 public class BambooTrapRenderer extends MobEntityRenderer<BambooTrapEntity, BambooTrapModel> {
