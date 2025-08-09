@@ -169,6 +169,8 @@
   "effect.tutorialmod.hatred": "Hatred",
   "effect.tutorialmod.love": "Love",
   "effect.tutorialmod.sporulation": "Sporulation",
+  "effect.tutorialmod.bleeding": "Bleeding",
+  "effect.tutorialmod.instant_bleeding": "Bleeding",
 
   "painting.tutorialmod.world.title": "World",
   "painting.tutorialmod.world.author": "NanoAttack",

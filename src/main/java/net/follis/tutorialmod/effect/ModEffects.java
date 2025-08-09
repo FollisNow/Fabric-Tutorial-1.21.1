@@ -36,6 +36,12 @@ public class ModEffects {
     public static final RegistryEntry<StatusEffect> SPORULATION = registerStatusEffect("sporulation",
             new SporulationEffect(StatusEffectCategory.NEUTRAL, 0xb36d0b));
 
+    public static final RegistryEntry<StatusEffect> BLEEDING = registerStatusEffect("bleeding",
+            new BleedStackingEffect(StatusEffectCategory.HARMFUL, 0x7d0000));
+
+    public static final RegistryEntry<StatusEffect> APPLY_BLEEDING = registerStatusEffect("instant_bleeding",
+            new InstantBleedEffect(StatusEffectCategory.HARMFUL, 0x7d0000));
+
 
     private static RegistryEntry<StatusEffect> registerStatusEffect(String name, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(TutorialMod.MOD_ID, name), statusEffect);
