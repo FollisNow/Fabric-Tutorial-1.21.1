@@ -3,7 +3,6 @@ package net.follis.tutorialmod.effect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.InstantStatusEffect;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import org.jetbrains.annotations.Nullable;
