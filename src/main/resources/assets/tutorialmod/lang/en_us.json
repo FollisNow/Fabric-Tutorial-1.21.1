@@ -194,6 +194,8 @@
   "item.tutorialmod.bug_jar": "Bug Jar",
   "item.tutorialmod.cursed_jar": "Cursed Jar",
 
+  "item.tutorialmod.bamboo_trap": "Bamboo Trap",
+
 
   "tooltip.tutorialmod.bug_jar.shift_down": "This item helps you catch fancy bugs!",
   "tooltip.tutorialmod.bug_jar": "§6Press §eShift§r§6 for content",
@@ -217,5 +219,6 @@
   "entity.tutorialmod.moth": "Moth",
   "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.amethyst_bee": "Amethyst Bee",
-  "entity.tutorialmod.tomahawk": "Tomahawk"
+  "entity.tutorialmod.tomahawk": "Tomahawk",
+  "entity.tutorialmod.bamboo-trap": "Bamboo Trap"
 }

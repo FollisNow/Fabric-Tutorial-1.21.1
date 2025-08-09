@@ -55,6 +55,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SPECTRE_STAFF);
                         entries.add(ModItems.BUG_JAR);
                         entries.add(ModItems.CURSED_JAR);
+                        entries.add(ModItems.BAMBOO_TRAP);
 
                         entries.add(ModItems.MANTIS_SPAWN_EGG);
                         entries.add(ModItems.BEETLE_SPAWN_EGG);

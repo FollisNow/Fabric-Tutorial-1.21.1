@@ -154,6 +154,9 @@ public class ModItems {
     public static final Item CURSED_JAR = registerItem("cursed_jar",
             new CursedJarItem(new Item.Settings().maxCount(1)));
 
+    public static final Item BAMBOO_TRAP = registerItem("bamboo_trap",
+            new BambooTrapItem(new Item.Settings().maxCount(8)));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(TutorialMod.MOD_ID, name), item);

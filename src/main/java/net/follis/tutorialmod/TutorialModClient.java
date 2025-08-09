@@ -58,11 +58,13 @@ public class TutorialModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(TomahawkProjectileModel.TOMAHAWK, TomahawkProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TOMAHAWK, TomahawkProjectileRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(BambooTrapModel.BAMBOO_TRAP, BambooTrapModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.BAMBOO_TRAP, BambooTrapRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(GoldenNeedleProjectileModel.GOLDEN_NEEDLE, GoldenNeedleProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLDEN_NEEDLE, GoldenNeedleProjectileRenderer::new);
 
         EntityRendererRegistry.register(ModEntities.CHAIR, ChairRenderer::new);
-        EntityRendererRegistry.register(ModEntities.LOCK, LockRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.PINK_GARNET_PARTICLE, PinkGarnetParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.GOLDEN_LEAVES_PARTICLE, GoldenLeavesParticle.Factory::new);
