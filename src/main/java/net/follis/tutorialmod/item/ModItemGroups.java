@@ -57,6 +57,8 @@ public class ModItemGroups {
                         entries.add(ModItems.CURSED_JAR);
                         entries.add(ModItems.BAMBOO_TRAP);
 
+                        entries.add(ModItems.CHITIN);
+
                         entries.add(ModItems.MANTIS_SPAWN_EGG);
                         entries.add(ModItems.BEETLE_SPAWN_EGG);
                         entries.add(ModItems.MOTH_SPAWN_EGG);

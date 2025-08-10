@@ -3,6 +3,7 @@ package net.follis.tutorialmod.entity.custom;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -39,7 +40,7 @@ public class BambooTrapEntity extends MobEntity {
     public static DefaultAttributeContainer.Builder setAttributes() {
         return LivingEntity.createLivingAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 1)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0f)
                 .add(EntityAttributes.GENERIC_ARMOR, 0.0f)
                 .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 15.0f);
@@ -123,6 +124,18 @@ public class BambooTrapEntity extends MobEntity {
             super.handleStatus(status);
         }
     }
+    public PistonBehavior getPistonBehavior() {
+        return  PistonBehavior.IGNORE;
+    }
+    public boolean canAvoidTraps() {
+        return true;
+    }
+
+    public boolean isMobOrPlayer() {
+        return false;
+    }
+
+
 
     private void onBreak(ServerWorld world, DamageSource damageSource) {
         this.playBreakSound();
