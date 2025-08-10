@@ -67,6 +67,8 @@ public class ModItemGroups {
                         entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
 
                         entries.add(ModItems.GOLDEN_NEEDLE);
+                        entries.add(ModItems.WOODEN_MACUAHUITL);
+                        entries.add(ModItems.GOLDEN_MACUAHUITL);
 
                     }).build());
 

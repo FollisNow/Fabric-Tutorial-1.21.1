@@ -164,6 +164,8 @@ public class ModModelProvider extends FabricModelProvider {
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
 
         itemModelGenerator.register(ModItems.GOLDEN_NEEDLE, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.WOODEN_MACUAHUITL, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.GOLDEN_MACUAHUITL, Models.HANDHELD);
 
     }
 }

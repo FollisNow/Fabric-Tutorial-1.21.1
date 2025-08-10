@@ -155,6 +155,8 @@
   "block.tutorialmod.gold_lantern": "Gold Lantern",
 
   "item.tutorialmod.golden_needle": "Golden Needle",
+  "item.tutorialmod.wooden_macuahuitl": "Wooden Macuahuitl",
+  "item.tutorialmod.golden_macuahuitl": "Golden Macuahuitl",
 
 
   "block.tutorialmod.chair": "Chair",
@@ -227,5 +229,5 @@
   "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.amethyst_bee": "Amethyst Bee",
   "entity.tutorialmod.tomahawk": "Tomahawk",
-  "entity.tutorialmod.bamboo-trap": "Bamboo Trap"
+  "entity.tutorialmod.bamboo_trap": "Bamboo Trap"
 }

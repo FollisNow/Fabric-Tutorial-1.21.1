@@ -3,9 +3,13 @@ package net.follis.tutorialmod.item;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
@@ -148,6 +152,34 @@ public class ModItems {
             new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()
                     .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 2, -1.4f))));
 
+    public static final Item WOODEN_MACUAHUITL = registerItem("wooden_macuahuitl",
+            new SwordItem(ToolMaterials.WOOD, new Item.Settings()
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 8, -3.2f))
+            ){
+                @Override
+                public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+                    if (!(attacker instanceof PlayerEntity) || ((PlayerEntity) attacker).getAttackCooldownProgress(0) >= 1.0F) {
+                        target.addStatusEffect(new StatusEffectInstance(ModEffects.APPLY_BLEEDING, 2, 0), attacker);
+                    }
+
+                    return super.postHit(stack, target, attacker);
+                }
+            });
+
+    public static final Item GOLDEN_MACUAHUITL = registerItem("golden_macuahuitl",
+            new SwordItem(ModToolMaterials.GOLDEN, new Item.Settings()
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 8, -3.2f))
+            ){
+                @Override
+                public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+                    if (!(attacker instanceof PlayerEntity) || ((PlayerEntity) attacker).getAttackCooldownProgress(0) >= 1.0F) {
+                        target.addStatusEffect(new StatusEffectInstance(ModEffects.APPLY_BLEEDING, 2, 0), attacker);
+                    }
+                    return super.postHit(stack, target, attacker);
+                }
+            });
+
+    //Will prolly add bleeding with the Macuahuitl
 
     public static final Item BUG_JAR = registerItem("bug_jar",
             new BugJarItem(new Item.Settings().maxCount(1)));
