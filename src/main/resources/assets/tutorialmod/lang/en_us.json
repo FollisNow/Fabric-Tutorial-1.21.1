@@ -72,6 +72,7 @@
 
   "item.tutorialmod.tomahawk": "Tomahawk",
   "item.tutorialmod.spectre_staff": "Spectre Staff",
+  "item.tutorialmod.vision_monocle": "Vision Monocle",
 
 
   "block.tutorialmod.pink_garnet_block": "Block of Pink Garnet",
@@ -206,6 +207,8 @@
 
   "tooltip.tutorialmod.cursed_jar.shift_down": "Not all knowledge should be given to everyone...",
   "tooltip.tutorialmod.cursed_jar": "§6Press §eShift§r§6 for content",
+
+  "tooltip.tutorialmod.vision_monocle": "Press §eShift§r for more Information!",
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
 

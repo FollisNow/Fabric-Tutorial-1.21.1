@@ -24,6 +24,7 @@ public class ModItems {
             new AliasedBlockItem(ModBlocks.GOLD_CHAIN, new Item.Settings()));
 
     public static final Item CHISEL = registerItem("chisel", new ChiselItem(new Item.Settings().maxDamage(32)));
+    public static final Item VISION_MONOCLE = registerItem("vision_monocle", new VisionMonocleItem(new Item.Settings().maxCount(1)));
 
     public static final Item CAULIFLOWER = registerItem("cauliflower", new Item(new Item.Settings().food(ModFoodComponents.CAULIFLOWER)) {
         @Override

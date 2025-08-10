@@ -56,6 +56,7 @@ public class ModItemGroups {
                         entries.add(ModItems.BUG_JAR);
                         entries.add(ModItems.CURSED_JAR);
                         entries.add(ModItems.BAMBOO_TRAP);
+                        entries.add(ModItems.VISION_MONOCLE);
 
                         entries.add(ModItems.CHITIN);
 

@@ -7,8 +7,6 @@ import net.follis.tutorialmod.sound.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.LoreComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -22,7 +20,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.MathHelper;
@@ -73,7 +70,7 @@ public class ChiselItem extends Item {
 
 
 
-                context.getStack().set(ModDataComponentTypes.COORDINATES, context.getBlockPos());
+                context.getStack().set(ModDataComponentTypes.COORDINATES_BLOCK, context.getBlockPos());
             }
         }
 
@@ -88,8 +85,8 @@ public class ChiselItem extends Item {
             tooltip.add(Text.translatable("tooltip.tutorialmod.chisel"));
         }
 
-        if(stack.get(ModDataComponentTypes.COORDINATES) != null) {
-            tooltip.add(Text.literal("Last Block Changed at " + stack.get(ModDataComponentTypes.COORDINATES)));
+        if(stack.get(ModDataComponentTypes.COORDINATES_BLOCK) != null) {
+            tooltip.add(Text.literal("Last Block Changed at " + stack.get(ModDataComponentTypes.COORDINATES_BLOCK)));
         }
 
         super.appendTooltip(stack, context, tooltip, type);
