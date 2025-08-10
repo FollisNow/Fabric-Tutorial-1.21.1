@@ -171,7 +171,8 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
     public static final Block GOLD_CHAIN = registerBlockWithoutBlockItem("gold_chain",
             new ChainBlock(AbstractBlock.Settings.copy(Blocks.CHAIN).nonOpaque()));
-
+    public static final Block GOLD_LANTERN = registerBlock("gold_lantern",
+            new LanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN)));
 
     public static final Block CHAIR = registerBlock("chair",
             new ChairBlock(AbstractBlock.Settings.create().nonOpaque()));

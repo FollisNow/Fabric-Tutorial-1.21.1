@@ -37,6 +37,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.SCULPTED_GOLD)
                 .add(ModBlocks.GOLD_LARGE_BRICKS)
                 .add(ModBlocks.GOLD_CHAIN)
+                .add(ModBlocks.GOLD_LANTERN)
 
                 .add(ModBlocks.GOLD_BRICKS)
                 .add(ModBlocks.GOLD_BRICK_STAIRS)

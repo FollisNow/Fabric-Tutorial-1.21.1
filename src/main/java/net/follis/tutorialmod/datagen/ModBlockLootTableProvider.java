@@ -112,6 +112,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.GOLD_FENCE);
         addDrop(ModBlocks.GOLD_FENCE_GATE);
         addDrop(ModBlocks.GOLD_CHAIN, ModItems.GOLD_CHAIN);
+        addDrop(ModBlocks.GOLD_LANTERN);
 
         addDrop(ModBlocks.GOLDEN_BRICK_STAIRS);
         addDrop(ModBlocks.GOLDEN_BRICK_SLAB, slabDrops(ModBlocks.GOLDEN_BRICK_SLAB));

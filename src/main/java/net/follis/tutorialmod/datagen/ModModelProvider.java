@@ -77,6 +77,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_LARGE_BRICKS);
         blockStateModelGenerator.registerItemModel(ModItems.GOLD_CHAIN);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.GOLD_CHAIN, ModelIds.getBlockModelId(ModBlocks.GOLD_CHAIN));
+        blockStateModelGenerator.registerLantern(ModBlocks.GOLD_LANTERN);
 
         BlockStateModelGenerator.BlockTexturePool goldPool = blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.GOLD_BLOCK);
         goldPool.stairs(ModBlocks.GOLD_STAIRS);

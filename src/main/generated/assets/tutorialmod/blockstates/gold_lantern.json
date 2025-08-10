@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "tutorialmod:block/gold_lantern"
+    },
+    "hanging=true": {
+      "model": "tutorialmod:block/gold_lantern_hanging"
+    }
+  }
+}

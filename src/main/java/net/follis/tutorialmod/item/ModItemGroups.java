@@ -146,7 +146,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SCULPTED_GOLD);
                         entries.add(ModBlocks.GOLD_LARGE_BRICKS);
                         entries.add(ModBlocks.GOLD_CHAIN);
-
+                        entries.add(ModBlocks.GOLD_LANTERN);
 
 
 
