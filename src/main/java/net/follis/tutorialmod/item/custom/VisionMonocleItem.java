@@ -2,6 +2,7 @@ package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.component.ComponentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,9 +15,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -68,16 +68,18 @@ public class VisionMonocleItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         if(Screen.hasShiftDown()) {
-            if(stack.get(ModDataComponentTypes.COORDINATES_BLOCK) != null) {
-                int x = stack.get(ModDataComponentTypes.COORDINATES_BLOCK).getX();
-                int y = stack.get(ModDataComponentTypes.COORDINATES_BLOCK).getY();
-                int z = stack.get(ModDataComponentTypes.COORDINATES_BLOCK).getZ();
+            BlockPos pos = stack.get(ModDataComponentTypes.COORDINATES_BLOCK);
+            if(pos != null) {
+                int x = pos.getX();
+                int y = pos.getY();
+                int z = pos.getZ();
                 tooltip.add(Text.literal("Block absolute position at x=" + x + ", y=" + y + ", z=" + z ));
             }
 
-            if(stack.get(ModDataComponentTypes.COORDINATES_CHUNK) != null) {
-                int x = stack.get(ModDataComponentTypes.COORDINATES_CHUNK).getX();
-                int z = stack.get(ModDataComponentTypes.COORDINATES_CHUNK).getZ();
+            Vec3i vec3i = stack.get(ModDataComponentTypes.COORDINATES_CHUNK);
+            if(vec3i != null) {
+                int x = vec3i.getX();
+                int z = vec3i.getZ();
                 tooltip.add(Text.literal("Chunk absolute position at x=" + x + ", z=" + z ));
             }
 
