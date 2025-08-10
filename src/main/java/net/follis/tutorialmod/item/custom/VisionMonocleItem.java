@@ -12,6 +12,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -72,23 +73,23 @@ public class VisionMonocleItem extends Item {
                 int x = pos.getX();
                 int y = pos.getY();
                 int z = pos.getZ();
-                tooltip.add(Text.literal("Block absolute position at x=" + x + ", y=" + y + ", z=" + z ));
+                tooltip.add(Text.literal("Block absolute position at x=" + x + ", y=" + y + ", z=" + z ).formatted(Formatting.GRAY));
             }
 
             Vec3i vec3i = stack.get(ModDataComponentTypes.COORDINATES_CHUNK);
             if(vec3i != null) {
                 int x = vec3i.getX();
                 int z = vec3i.getZ();
-                tooltip.add(Text.literal("Chunk absolute position at x=" + x + ", z=" + z ));
+                tooltip.add(Text.literal("Chunk absolute position at x=" + x + ", z=" + z ).formatted(Formatting.GRAY));
             }
 
             if(stack.get(ModDataComponentTypes.BIOME) != null) {
-                tooltip.add(Text.literal("Biome is " + stack.get(ModDataComponentTypes.BIOME)));
+                tooltip.add(Text.literal("Biome is " + stack.get(ModDataComponentTypes.BIOME)).formatted(Formatting.GRAY));
             }
 
             if(stack.get(ModDataComponentTypes.ENTITY_COUNT0) != null && stack.get(ModDataComponentTypes.ENTITY_COUNT1) != null) {
-                tooltip.add(Text.literal(stack.get(ModDataComponentTypes.ENTITY_COUNT0) + " entities are present within 16 blocks"));
-                tooltip.add(Text.literal(stack.get(ModDataComponentTypes.ENTITY_COUNT0) + " entities are present within 8 blocks"));
+                tooltip.add(Text.literal(stack.get(ModDataComponentTypes.ENTITY_COUNT0) + " entities are present within 16 blocks").formatted(Formatting.GRAY));
+                tooltip.add(Text.literal(stack.get(ModDataComponentTypes.ENTITY_COUNT0) + " entities are present within 8 blocks").formatted(Formatting.GRAY));
             }
         } else {
             tooltip.add(Text.translatable("tooltip.tutorialmod.vision_monocle"));
