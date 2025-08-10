@@ -15,6 +15,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.DamageTypeTags;
@@ -25,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class BambooTrapEntity extends MobEntity {
     public final AnimationState openState = new AnimationState();
@@ -32,6 +34,7 @@ public class BambooTrapEntity extends MobEntity {
     private static final TrackedData<Boolean> IS_CLOSED = DataTracker.registerData(BambooTrapEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private final StatusEffectInstance effect = new StatusEffectInstance(ModEffects.APPLY_BLEEDING, 1, 0); // 200 ticks, amplifier 0
     private long lastHitTime;
+    private static final Predicate<Entity> BAMBOO_TRAP_PREDICATE;
 
     public BambooTrapEntity(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
@@ -130,21 +133,22 @@ public class BambooTrapEntity extends MobEntity {
     public boolean canAvoidTraps() {
         return true;
     }
-
     public boolean isMobOrPlayer() {
         return false;
     }
-
-
-
-    private void onBreak(ServerWorld world, DamageSource damageSource) {
-        this.playBreakSound();
-        this.drop(world, damageSource);
+    public boolean isPushable() {
+        return false;
+    }
+    protected void pushAway(Entity entity) {
+    }
+    protected void tickCramming() {
+        for(Entity entity : this.getWorld().getOtherEntities(this, this.getBoundingBox(), BAMBOO_TRAP_PREDICATE)) {
+            if (this.squaredDistanceTo(entity) <= 0.2) {
+                entity.pushAwayFrom(this);
+            }
+        }
 
     }
-
-    public boolean isPushable() {return false;}
-
     @Override
     protected void mobTick() {
         super.mobTick();
@@ -163,6 +167,12 @@ public class BambooTrapEntity extends MobEntity {
             this.breakItem();
         }
 
+
+    }
+
+    private void onBreak(ServerWorld world, DamageSource damageSource) {
+        this.playBreakSound();
+        this.drop(world, damageSource);
 
     }
 
@@ -243,5 +253,9 @@ public class BambooTrapEntity extends MobEntity {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(IS_CLOSED, nbt.getBoolean("IsClosed"));
+    }
+
+    static {
+        BAMBOO_TRAP_PREDICATE = (entity) -> entity instanceof BambooTrapEntity;
     }
 }

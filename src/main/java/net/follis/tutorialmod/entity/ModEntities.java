@@ -43,7 +43,7 @@ public class ModEntities {
 
     public static final EntityType<BambooTrapEntity> BAMBOO_TRAP = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "bamboo_trap"),
-            EntityType.Builder.create(BambooTrapEntity::new, SpawnGroup.MISC).makeFireImmune()
+            EntityType.Builder.<BambooTrapEntity>create(BambooTrapEntity::new, SpawnGroup.MISC)
                     .dimensions(0.4f, 0.2f).build());
 
     public static final EntityType<GoldenNeedleProjectileEntity> GOLDEN_NEEDLE = Registry.register(Registries.ENTITY_TYPE,
@@ -60,9 +60,5 @@ public class ModEntities {
 
     public static void registerModEntities() {
         TutorialMod.LOGGER.info("Registering Mod Entities for " + TutorialMod.MOD_ID);
-        initialize();
-    }
-    static void initialize() {
-        FabricDefaultAttributeRegistry.register(ModEntities.BAMBOO_TRAP, BambooTrapEntity.setAttributes());
     }
 }

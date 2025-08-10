@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cobweb": {
+    "has_bamboo": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:cobweb"
+            "items": "minecraft:bamboo"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tutorialmod:bug_jar"
+        "recipe": "tutorialmod:bamboo_trap"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cobweb"
+      "has_bamboo"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tutorialmod:bug_jar"
+      "tutorialmod:bamboo_trap"
     ]
   }
 }

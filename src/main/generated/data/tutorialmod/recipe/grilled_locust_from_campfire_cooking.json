@@ -3,20 +3,9 @@
   "category": "food",
   "cookingtime": 100,
   "experience": 0.2,
-  "ingredient": [
-    {
-      "item": "tutorialmod:locust_gold"
-    },
-    {
-      "item": "tutorialmod:locust_dream"
-    },
-    {
-      "item": "tutorialmod:locust_grasshopper"
-    },
-    {
-      "item": "tutorialmod:locust_red"
-    }
-  ],
+  "ingredient": {
+    "tag": "tutorialmod:locust_items"
+  },
   "result": {
     "id": "tutorialmod:grilled_locust"
   }

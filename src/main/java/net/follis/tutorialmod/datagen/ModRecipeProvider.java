@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
@@ -35,23 +36,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         offerSmelting(exporter, PINK_GARNET_SMELTABLES, RecipeCategory.MISC, ModItems.PINK_GARNET, 0.25f, 200, "pink_garnet");
         offerBlasting(exporter, PINK_GARNET_SMELTABLES, RecipeCategory.MISC, ModItems.PINK_GARNET, 0.25f, 100, "pink_garnet");
-
-        offerSmelting(exporter, List.of(ModItems.LOCUST_GOLD, ModItems.LOCUST_DREAM, ModItems.LOCUST_GRASSHOPPER, ModItems.LOCUST_RED), RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.25f, 200, "food");
-        CookingRecipeJsonBuilder locustSmoker = CookingRecipeJsonBuilder.create(
-                Ingredient.ofItems(ModItems.LOCUST_GOLD, ModItems.LOCUST_DREAM, ModItems.LOCUST_GRASSHOPPER, ModItems.LOCUST_RED),
-                RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.2f, 100, RecipeSerializer.SMOKING, SmokingRecipe::new)
-                .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER));
-        locustSmoker.offerTo(exporter, getItemPath(ModItems.GRILLED_LOCUST) + "_from_" + "smoking");
-        CookingRecipeJsonBuilder locustCampfire = CookingRecipeJsonBuilder.create(
-                Ingredient.ofItems(ModItems.LOCUST_GOLD, ModItems.LOCUST_DREAM, ModItems.LOCUST_GRASSHOPPER, ModItems.LOCUST_RED),
-                RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.2f, 100, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new)
-                .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER));
-        locustCampfire.offerTo(exporter, getItemPath(ModItems.GRILLED_LOCUST) + "_from_" + "campfire_cooking");
-
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PINK_GARNET, RecipeCategory.DECORATIONS, ModBlocks.PINK_GARNET_BLOCK);
-
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.RAW_PINK_GARNET, RecipeCategory.DECORATIONS, ModBlocks.RAW_PINK_GARNET_BLOCK);
-
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RAW_PINK_GARNET, 32)
                 .input(ModBlocks.MAGIC_BLOCK)
                 .criterion(hasItem(ModBlocks.MAGIC_BLOCK), conditionsFromItem(ModBlocks.MAGIC_BLOCK))
@@ -70,15 +56,20 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Blocks.COBWEB), conditionsFromItem(Blocks.COBWEB))
                 .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUG_JAR)
-                .pattern(" #^")
-                .pattern(" ##")
-                .pattern("#  ")
-                .input('#', Items.STICK)
-                .input('^', Blocks.COBWEB)
-                .criterion(hasItem(Blocks.COBWEB), conditionsFromItem(Blocks.COBWEB))
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BAMBOO_TRAP)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.BAMBOO)
+                .input('^', Items.IRON_NUGGET)
+                .criterion(hasItem(Items.BAMBOO), conditionsFromItem(Items.BAMBOO))
                 .offerTo(exporter);
 
+
+
+        // LOCUSTS
+        Ingredient locustIngredients = Ingredient.fromTag(ModTags.Items.LOCUST_ITEMS);
+        List<ItemConvertible> locusts = List.of(ModItems.LOCUST_GOLD, ModItems.LOCUST_DREAM, ModItems.LOCUST_GRASSHOPPER, ModItems.LOCUST_RED);
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.SLIME_BALL, 1)
                 .input(ModItems.LOCUST_DREAM)
                 .criterion(hasItem(ModItems.LOCUST_DREAM), conditionsFromItem(ModItems.LOCUST_DREAM))
@@ -91,6 +82,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input(ModItems.LOCUST_RED)
                 .criterion(hasItem(ModItems.LOCUST_RED), conditionsFromItem(ModItems.LOCUST_RED))
                 .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "red_dye_from_locust_red"));
+
+        offerSmelting(exporter, locusts, RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.25f, 200, "food");
+        CookingRecipeJsonBuilder locustSmoker = CookingRecipeJsonBuilder.create(
+                        locustIngredients, RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.2f, 100, RecipeSerializer.SMOKING, SmokingRecipe::new)
+                .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER));
+        locustSmoker.offerTo(exporter, getItemPath(ModItems.GRILLED_LOCUST) + "_from_" + "smoking");
+        CookingRecipeJsonBuilder locustCampfire = CookingRecipeJsonBuilder.create(
+                        locustIngredients, RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.2f, 100, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new)
+                .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER));
+        locustCampfire.offerTo(exporter, getItemPath(ModItems.GRILLED_LOCUST) + "_from_" + "campfire_cooking");
+
 
 
         // GOLDEN WOOD

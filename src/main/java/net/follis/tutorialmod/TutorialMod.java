@@ -130,6 +130,7 @@ public class TutorialMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.MOTH, MothEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.BAMBOO_TRAP, BambooTrapEntity.setAttributes());
 
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
