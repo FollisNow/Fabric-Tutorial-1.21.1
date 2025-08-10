@@ -23,7 +23,7 @@ public class InstantBleedEffect extends InstantStatusEffect {
             // Just apply the effect normally
             entity.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 1200, amplifier, true, false, true));
         }
-        entity.damage(entity.getDamageSources().magic(), (float)(6 << amplifier));
+        entity.damage(entity.getDamageSources().magic(), (float)(3 << amplifier));
         return true;
     }
 
@@ -38,9 +38,9 @@ public class InstantBleedEffect extends InstantStatusEffect {
             target.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 1200, amplifier, true, false, true));
         }
         if (source == null) {
-            target.damage(target.getDamageSources().magic(), (float)((6 << amplifier) + (double)0.5F));
+            target.damage(target.getDamageSources().magic(), (float)((3 << amplifier) + (double)0.5F));
         } else {
-            target.damage(target.getDamageSources().indirectMagic(source, attacker), (float)((6 << amplifier) + (double)0.5F));
+            target.damage(target.getDamageSources().indirectMagic(source, attacker), (float)((3 << amplifier) + (double)0.5F));
         }
     }
 }

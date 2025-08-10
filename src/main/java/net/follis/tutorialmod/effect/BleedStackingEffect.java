@@ -23,9 +23,4 @@ public class BleedStackingEffect extends StatusEffect {
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         return duration % 80 == 0;
     }
-
-    @Override
-    public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
-
-    }
 }
