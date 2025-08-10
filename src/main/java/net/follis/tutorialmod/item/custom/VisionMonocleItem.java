@@ -2,7 +2,6 @@ package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.component.ComponentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
