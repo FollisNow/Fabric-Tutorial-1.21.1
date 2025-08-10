@@ -1,6 +1,5 @@
 package net.follis.tutorialmod.entity;
 
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.custom.*;
 import net.minecraft.entity.EntityType;

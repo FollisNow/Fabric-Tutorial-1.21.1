@@ -2,7 +2,6 @@ package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
