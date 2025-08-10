@@ -1,10 +1,8 @@
 package net.follis.tutorialmod.effect;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import org.jetbrains.annotations.Nullable;
 
 public class BleedStackingEffect extends StatusEffect {
     protected BleedStackingEffect(StatusEffectCategory category, int color) {
@@ -12,15 +10,16 @@ public class BleedStackingEffect extends StatusEffect {
     }
 
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (entity.getHealth() > amplifier) {
-            entity.damage(entity.getDamageSources().magic(), amplifier);
-        } else if (entity.getHealth() > 1) {
+        if (entity.getHealth() > amplifier + 1) {
+            entity.damage(entity.getDamageSources().magic(), amplifier + 1);
+        } else if (entity.getHealth() > 1.0F) {
             entity.damage(entity.getDamageSources().magic(), entity.getHealth() - 1);
         }
+
         return true;
     }
 
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-        return duration % 80 == 0;
+        return duration % 10 == 0;
     }
 }

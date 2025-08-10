@@ -18,10 +18,10 @@ public class InstantBleedEffect extends InstantStatusEffect {
         if (existingEffect != null) {
             int newAmplifier = existingEffect.getAmplifier() + amplifier + 1; // +1 to account for the current level
             entity.removeStatusEffect(ModEffects.BLEEDING); // Remove the existing effect
-            entity.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 1200, newAmplifier, true, false, true));
+            entity.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 100, newAmplifier, true, false, true));
         } else {
             // Just apply the effect normally
-            entity.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 1200, amplifier, true, false, true));
+            entity.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 100, amplifier, true, false, true));
         }
         entity.damage(entity.getDamageSources().magic(), (float)(3 << amplifier));
         return true;
@@ -32,10 +32,10 @@ public class InstantBleedEffect extends InstantStatusEffect {
         if (existingEffect != null) {
             int newAmplifier = existingEffect.getAmplifier() + amplifier + 1; // +1 to account for the current level
             target.removeStatusEffect(ModEffects.BLEEDING); // Remove the existing effect
-            target.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 1200, newAmplifier, true, false, true));
+            target.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 100, newAmplifier, true, false, true));
         } else {
             // Just apply the effect normally
-            target.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 1200, amplifier, true, false, true));
+            target.addStatusEffect(new StatusEffectInstance(ModEffects.BLEEDING, 100, amplifier, true, false, true));
         }
         if (source == null) {
             target.damage(target.getDamageSources().magic(), (float)((3 << amplifier) + (double)0.5F));
