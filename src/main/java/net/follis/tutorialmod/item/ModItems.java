@@ -152,6 +152,9 @@ public class ModItems {
             new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()
                     .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 2, -1.4f))));
 
+    public static final Item MINI_SUN = registerItem("mini_sun",
+            new MiniSunItem(new Item.Settings().maxCount(1)));
+
     public static final Item WOODEN_MACUAHUITL = registerItem("wooden_macuahuitl",
             new SwordItem(ToolMaterials.WOOD, new Item.Settings()
                     .attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 8, -3.2f))

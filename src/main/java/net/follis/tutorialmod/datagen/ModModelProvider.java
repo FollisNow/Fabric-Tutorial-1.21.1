@@ -167,5 +167,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.WOODEN_MACUAHUITL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.GOLDEN_MACUAHUITL, Models.HANDHELD);
 
+        itemModelGenerator.register(ModItems.MINI_SUN, Models.GENERATED);
     }
 }

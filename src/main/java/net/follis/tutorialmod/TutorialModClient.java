@@ -65,6 +65,9 @@ public class TutorialModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GoldenNeedleProjectileModel.GOLDEN_NEEDLE, GoldenNeedleProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLDEN_NEEDLE, GoldenNeedleProjectileRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(MiniSunProjectileModel.MINI_SUN, MiniSunProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MINI_SUN, MiniSunProjectileRenderer::new);
+
         EntityRendererRegistry.register(ModEntities.CHAIR, ChairRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.PINK_GARNET_PARTICLE, PinkGarnetParticle.Factory::new);

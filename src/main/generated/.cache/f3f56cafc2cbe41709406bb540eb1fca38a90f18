@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-10T17:44:35.4712875	Tutorial Mod/Tags for minecraft:item
+// 1.21.1	2025-11-27T00:37:28.366756	Tutorial Mod/Tags for minecraft:item
 3785ccf2250da2396658a0921bd6f81beb1f7be9 data\minecraft\tags\item\trim_templates.json
 840726859672b531edb33e064e2e0943de7fc82d data\minecraft\tags\item\pickaxes.json
 4a86b6a6b50a249765e637a8e93fd0e09c01b1a7 data\tutorialmod\tags\item\golden_items.json
@@ -9,6 +9,6 @@
 092261f42ebfb549fb26de57a2f4a5a8b86bc6b9 data\tutorialmod\tags\item\transformable_items.json
 1a39dedd310f06bf1a624b4363f683ebe3b2905b data\minecraft\tags\item\trimmable_armor.json
 12cf5431bc9ea78c0c2e54481ae8cbf7ed7c1231 data\tutorialmod\tags\item\locust_items.json
-8ced195f504be266fa1818b0cfbd2ee244987195 data\minecraft\tags\item\axes.json
 c37c59c248077e113454f301d855aa3bbdbb721d data\minecraft\tags\item\swords.json
+8ced195f504be266fa1818b0cfbd2ee244987195 data\minecraft\tags\item\axes.json
 a83d7a926074b69c0b715a6d7e603b0fc4c78d11 data\minecraft\tags\item\hoes.json

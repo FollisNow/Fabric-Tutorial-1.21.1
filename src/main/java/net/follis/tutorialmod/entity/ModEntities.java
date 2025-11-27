@@ -50,6 +50,11 @@ public class ModEntities {
             EntityType.Builder.<GoldenNeedleProjectileEntity>create(GoldenNeedleProjectileEntity::new, SpawnGroup.MISC)
                     .dimensions(0.5f, 0.5f).build());
 
+    public static final EntityType<MiniSunProjectileEntity> MINI_SUN = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "mini_sun"),
+            EntityType.Builder.<MiniSunProjectileEntity>create(MiniSunProjectileEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.25f, 0.25f).build());
+
     public static final EntityType<ChairEntity> CHAIR = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "chair_entity"),
             EntityType.Builder.create(ChairEntity::new, SpawnGroup.MISC)
