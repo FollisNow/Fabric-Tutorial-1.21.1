@@ -1,7 +1,6 @@
 package net.follis.tutorialmod.entity.client;
 
 import net.follis.tutorialmod.TutorialMod;
-import net.follis.tutorialmod.entity.custom.GoldenNeedleProjectileEntity;
 import net.follis.tutorialmod.entity.custom.MiniSunProjectileEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
@@ -11,7 +10,6 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
 public class MiniSunProjectileRenderer extends EntityRenderer<MiniSunProjectileEntity> {
