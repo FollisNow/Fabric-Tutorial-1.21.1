@@ -27,9 +27,9 @@ import java.util.function.Predicate;
 public class MiniSunProjectileEntity extends PersistentProjectileEntity {
     private float rotation;
     private int fireballCount = 0; // Track the number of fireballs shot in the current burst
-    private int maxFireballCount = 3;
-    private int burstCooldown = 5; // Cooldown between fireball shot in the same burst
-    private int resetBurstCooldown = 20; // Cooldown after three fireballs
+    private final int maxFireballCount = 3;
+    private final int burstCooldown = 5; // Cooldown between fireball shot in the same burst
+    private final int resetBurstCooldown = 20; // Cooldown after three fireballs
 
     private static final TrackedData<Integer> DATA_ID_TYPE_DURATION =
             DataTracker.registerData(MiniSunProjectileEntity.class, TrackedDataHandlerRegistry.INTEGER);
