@@ -6,12 +6,15 @@ import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -153,11 +156,44 @@ public class ModItems {
 
     public static final Item WOODEN_MACUAHUITL = registerItem("wooden_macuahuitl",
             new SwordItem(ToolMaterials.WOOD, new Item.Settings()
-                    .attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 8, -3.2f))));
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 8, -3.2f))) {
+                @Override
+                public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+                    tooltip.add(Text.translatable("tooltip.tutorialmod.wooden_macuahuitl"));
+                    if(Screen.hasShiftDown()) {
+                        tooltip.add(Text.translatable("tooltip.tutorialmod.wooden_macuahuitl.shift_down"));
+                    } else {
+                        tooltip.add(Text.translatable("tooltip.tutorialmod.shift_info"));
+                    }
+                    super.appendTooltip(stack, context, tooltip, type);
+                }
+            });
 
     public static final Item GOLDEN_MACUAHUITL = registerItem("golden_macuahuitl",
             new SwordItem(ModToolMaterials.GOLDEN, new Item.Settings()
-                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 8, -3.2f))));
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 8, -3.2f))) {
+                TextColor darkGold = TextColor.fromRgb(0xBC7F04); // Custom gold-like color
+
+                @Override
+                public Text getName() {
+                    return Text.translatable(this.getTranslationKey()).formatted(Formatting.GOLD);
+                }
+                @Override
+                public Text getName(ItemStack stack) {
+                    return Text.translatable(this.getTranslationKey(stack)).formatted(Formatting.GOLD);
+                }
+
+                @Override
+                public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+                    tooltip.add(Text.translatable("tooltip.tutorialmod.golden_macuahuitl"));
+                    if(Screen.hasShiftDown()) {
+                        tooltip.add(Text.translatable("tooltip.tutorialmod.golden_macuahuitl.shift_down").withColor(darkGold.getRgb()));
+                    } else {
+                        tooltip.add(Text.translatable("tooltip.tutorialmod.shift_info"));
+                    }
+                    super.appendTooltip(stack, context, tooltip, type);
+                }
+            });
 
 
     public static final Item BUG_JAR = registerItem("bug_jar",

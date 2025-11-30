@@ -157,6 +157,15 @@
   "item.tutorialmod.golden_needle": "Golden Needle",
   "item.tutorialmod.wooden_macuahuitl": "Wooden Macuahuitl",
   "item.tutorialmod.golden_macuahuitl": "Golden Macuahuitl",
+
+  "tooltip.tutorialmod.golden_macuahuitl.shift_down": "§7Apply §4Bleeding§r §7on strong hits",
+  "tooltip.tutorialmod.golden_macuahuitl": "§6Cover me in obsidian glass shanks§r",
+
+  "tooltip.tutorialmod.wooden_macuahuitl.shift_down": "§7Apply §4Bleeding§r §7on strong hits",
+  "tooltip.tutorialmod.wooden_macuahuitl": "§7Cover me in obsidian glass shanks§r",
+
+  "tooltip.tutorialmod.shift_info": "§7Press §r§eShift§r§7 for info",
+
   "item.tutorialmod.mini_sun": "Mini Sun",
 
 
