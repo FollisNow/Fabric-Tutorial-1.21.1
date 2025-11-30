@@ -172,7 +172,7 @@ public class ModItems {
     public static final Item GOLDEN_MACUAHUITL = registerItem("golden_macuahuitl",
             new SwordItem(ModToolMaterials.GOLDEN, new Item.Settings()
                     .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 8, -3.2f))) {
-                TextColor darkGold = TextColor.fromRgb(0xBC7F04); // Custom gold-like color
+                final TextColor darkGold = TextColor.fromRgb(0xBC7F04); // Custom gold-like color
 
                 @Override
                 public Text getName() {
