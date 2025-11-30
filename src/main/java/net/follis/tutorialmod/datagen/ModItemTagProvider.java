@@ -1,5 +1,6 @@
 package net.follis.tutorialmod.datagen;
 
+import dev.architectury.platform.Mod;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.follis.tutorialmod.block.ModBlocks;
@@ -65,6 +66,10 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(Items.GOLDEN_CHESTPLATE)
                 .add(Items.GOLDEN_LEGGINGS)
                 .add(Items.GOLDEN_BOOTS);
+
+        getOrCreateTagBuilder(ModTags.Items.MACUAHUITL)
+                .add(ModItems.WOODEN_MACUAHUITL)
+                .add(ModItems.GOLDEN_MACUAHUITL);
 
         getOrCreateTagBuilder(ModTags.Items.LOCUST_ITEMS)
                 .add(ModItems.LOCUST_GOLD)

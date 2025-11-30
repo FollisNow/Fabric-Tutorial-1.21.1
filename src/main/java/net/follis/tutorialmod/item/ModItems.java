@@ -1,14 +1,18 @@
 package net.follis.tutorialmod.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.loader.impl.util.log.Log;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
@@ -16,9 +20,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ModItems {
     public static final Item PINK_GARNET = registerItem("pink_garnet", new Item(new Item.Settings()));
@@ -157,32 +165,12 @@ public class ModItems {
 
     public static final Item WOODEN_MACUAHUITL = registerItem("wooden_macuahuitl",
             new SwordItem(ToolMaterials.WOOD, new Item.Settings()
-                    .attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 8, -3.2f))
-            ){
-                @Override
-                public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-                    if (!(attacker instanceof PlayerEntity) || ((PlayerEntity) attacker).getAttackCooldownProgress(0) >= 1.0F) {
-                        target.addStatusEffect(new StatusEffectInstance(ModEffects.APPLY_BLEEDING, 2, 0), attacker);
-                    }
-
-                    return super.postHit(stack, target, attacker);
-                }
-            });
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 8, -3.2f))));
 
     public static final Item GOLDEN_MACUAHUITL = registerItem("golden_macuahuitl",
             new SwordItem(ModToolMaterials.GOLDEN, new Item.Settings()
-                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 8, -3.2f))
-            ){
-                @Override
-                public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-                    if (!(attacker instanceof PlayerEntity) || ((PlayerEntity) attacker).getAttackCooldownProgress(0) >= 1.0F) {
-                        target.addStatusEffect(new StatusEffectInstance(ModEffects.APPLY_BLEEDING, 2, 0), attacker);
-                    }
-                    return super.postHit(stack, target, attacker);
-                }
-            });
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 8, -3.2f))));
 
-    //Will prolly add bleeding with the Macuahuitl
 
     public static final Item BUG_JAR = registerItem("bug_jar",
             new BugJarItem(new Item.Settings().maxCount(1)));
