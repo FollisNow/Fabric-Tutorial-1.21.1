@@ -1,32 +1,20 @@
 package net.follis.tutorialmod.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.loader.impl.util.log.Log;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
-import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class ModItems {
     public static final Item PINK_GARNET = registerItem("pink_garnet", new Item(new Item.Settings()));

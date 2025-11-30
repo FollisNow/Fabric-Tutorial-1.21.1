@@ -1,9 +1,7 @@
 package net.follis.tutorialmod.mixin;
 
 
-import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.effect.ModEffects;
-import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
