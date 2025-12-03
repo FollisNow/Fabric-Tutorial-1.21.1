@@ -45,6 +45,11 @@ public class ModEntities {
             EntityType.Builder.<BambooTrapEntity>create(BambooTrapEntity::new, SpawnGroup.MISC)
                     .dimensions(0.4f, 0.2f).build());
 
+    public static final EntityType<DartEntity> DART = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "dart"),
+            EntityType.Builder.<DartEntity>create(DartEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.25f, 0.2f).build());
+
     public static final EntityType<GoldenNeedleProjectileEntity> GOLDEN_NEEDLE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "golden_needle"),
             EntityType.Builder.<GoldenNeedleProjectileEntity>create(GoldenNeedleProjectileEntity::new, SpawnGroup.MISC)

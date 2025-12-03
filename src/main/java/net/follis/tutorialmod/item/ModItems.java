@@ -7,6 +7,7 @@ import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
@@ -203,8 +204,16 @@ public class ModItems {
     public static final Item CURSED_JAR = registerItem("cursed_jar",
             new CursedJarItem(new Item.Settings().maxCount(1)));
 
+    public static final Item DART_SHOOTER = registerItem("dart_shooter",
+            new DartShooterItem(new Item.Settings().maxCount(1).maxDamage(16)));
+    //.component(DataComponentTypes.DAMAGE, 16) added to get the empty dart shooter
+
+    public static final Item DART = registerItem("dart",
+            new DartItem(new Item.Settings().maxCount(16)));
+
     public static final Item BAMBOO_TRAP = registerItem("bamboo_trap",
             new BambooTrapItem(new Item.Settings().maxCount(8)));
+
 
     public static final Item CHITIN = registerItem("chitin", new Item(new Item.Settings()));
 

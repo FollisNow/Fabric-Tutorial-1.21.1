@@ -59,6 +59,8 @@ public class TutorialModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(TomahawkProjectileModel.TOMAHAWK, TomahawkProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TOMAHAWK, TomahawkProjectileRenderer::new);
 
+        EntityRendererRegistry.register(ModEntities.DART, DartEntityRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(BambooTrapModel.BAMBOO_TRAP, BambooTrapModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.BAMBOO_TRAP, BambooTrapRenderer::new);
 

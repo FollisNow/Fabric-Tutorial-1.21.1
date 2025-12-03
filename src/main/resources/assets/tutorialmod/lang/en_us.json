@@ -71,6 +71,8 @@
   "item.tutorialmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
 
   "item.tutorialmod.tomahawk": "Tomahawk",
+  "item.tutorialmod.dart": "Dart",
+  "item.tutorialmod.dart_shooter": "Dart Shooter",
   "item.tutorialmod.spectre_staff": "Spectre Staff",
   "item.tutorialmod.vision_monocle": "Vision Monocle",
   "item.tutorialmod.zampona": "Zampoña",
@@ -240,5 +242,6 @@
   "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.amethyst_bee": "Amethyst Bee",
   "entity.tutorialmod.tomahawk": "Tomahawk",
+  "entity.tutorialmod.dart": "Dart",
   "entity.tutorialmod.bamboo_trap": "Bamboo Trap"
 }
