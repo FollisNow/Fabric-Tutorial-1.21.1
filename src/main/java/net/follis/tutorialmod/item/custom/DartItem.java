@@ -16,7 +16,7 @@ public class DartItem extends Item implements ProjectileItem {
     }
 
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        DartEntity dartEntity = new DartEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1), (ItemStack)null);
+        DartEntity dartEntity = new DartEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1), null);
         dartEntity.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED;
         return dartEntity;
     }

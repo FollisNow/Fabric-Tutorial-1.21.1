@@ -1,15 +1,9 @@
 package net.follis.tutorialmod.item.custom;
 
-import dev.architectury.platform.Mod;
-import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.DartEntity;
 import net.follis.tutorialmod.item.ModItems;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
