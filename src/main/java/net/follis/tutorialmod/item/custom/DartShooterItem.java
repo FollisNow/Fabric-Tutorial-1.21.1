@@ -48,13 +48,11 @@ public class DartShooterItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (world instanceof ServerWorld && entity instanceof PlayerEntity player && player.getInventory().contains(ModItems.DART.getDefaultStack())) {
-            int dartSlot = player.getInventory().getSlotWithStack(ModItems.DART.getDefaultStack());
-            for (int i = 0; i < dartSlot; i++) {
-                if (stack.getDamage() > 0) {
-                    stack.setDamage(stack.getDamage() - 1);
-                    player.getInventory().removeStack(dartSlot, 1);
-                }
+        if (stack.getDamage() > 0 && world instanceof ServerWorld && entity instanceof PlayerEntity player) {
+            if (player.getInventory().contains(ModItems.DART.getDefaultStack())) {
+                int dartSlot = player.getInventory().getSlotWithStack(ModItems.DART.getDefaultStack());
+                stack.setDamage(stack.getDamage() - 1);
+                player.getInventory().removeStack(dartSlot, 1);
             }
         }
         super.inventoryTick(stack, world, entity, slot, selected);
