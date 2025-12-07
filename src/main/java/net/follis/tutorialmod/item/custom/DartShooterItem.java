@@ -8,6 +8,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -38,6 +40,7 @@ public class DartShooterItem extends Item {
             itemStack.setDamage(itemStack.getDamage()+1);
             user.getItemCooldownManager().set(this, 10);
             user.incrementStat(Stats.USED.getOrCreateStat(this));
+            world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_NETHER_WART_BREAK, SoundCategory.PLAYERS, 1f, 1.6f / (world.getRandom().nextFloat() * 0.4f + 0.4f));
 
         }
         return super.use(world, user, hand);
