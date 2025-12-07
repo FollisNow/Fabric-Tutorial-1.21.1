@@ -571,7 +571,12 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
 
             if (this.mob.getWorld() instanceof ServerWorld serverWorld) {
                 this.latchDirection = getLatchPos(serverWorld);
-                Vec3d offset = new Vec3d(this.latchDirection.getOffsetX() * 0.25f, 0, this.latchDirection.getOffsetZ() * 0.25f);
+                Vec3d offset;
+                if (this.mob.isBaby()) {
+                    offset = new Vec3d(this.latchDirection.getOffsetX() * 0.4f, 0, this.latchDirection.getOffsetZ() * 0.4f);
+                } else {
+                    offset = new Vec3d(this.latchDirection.getOffsetX() * 0.3f, 0, this.latchDirection.getOffsetZ() * 0.3f);
+                }
                 this.mob.setPosition(this.mob.getBlockPos().toBottomCenterPos().add(offset));
                 alignForwardToDirection(this.latchDirection, this.mob);
             }
