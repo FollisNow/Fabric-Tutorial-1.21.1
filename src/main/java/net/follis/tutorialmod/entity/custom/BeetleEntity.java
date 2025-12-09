@@ -328,7 +328,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
 
         Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
         BeetleVariant variant;
-        if (this.random.nextInt(100) == 0) {
+        if (this.random.nextInt(100) >= 5) {
             variant = BeetleVariant.OMEN;
         }
         else if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
