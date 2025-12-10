@@ -60,7 +60,7 @@ public class LocustEntity extends AnimalEntity {
 
         this.goalSelector.add(3, new AnimalMateGoal(this, 1.15D));
         this.goalSelector.add(4, new TemptGoal(this, 1.25D, Ingredient.ofItems(Items.WHEAT), false));
-        this.goalSelector.add(5, new WanderNearTargetGoal(this, 1.0D, 2));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
     }
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
@@ -256,7 +256,7 @@ public class LocustEntity extends AnimalEntity {
 
         @Override
         public boolean canStart() {
-            return LocustEntity.this.getRandom().nextInt(10) == 0 && LocustEntity.this.getHarvestTicks() <= 0;
+            return LocustEntity.this.getHarvestTicks() <= 0 && LocustEntity.this.getRandom().nextInt(10) == 0;
         }
 
         @Override
