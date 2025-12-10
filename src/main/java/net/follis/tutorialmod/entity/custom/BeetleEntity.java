@@ -328,7 +328,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
 
         Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
         BeetleVariant variant;
-        if (this.random.nextInt(100) >= 5) {
+        if (this.random.nextInt(100) <= 5) {
             variant = BeetleVariant.OMEN;
         }
         else if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
@@ -341,13 +341,15 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
     }
 
     private static final Map<RegistryKey<Biome>, BeetleVariant> biomeMap = new HashMap<>() {{
-        put(BiomeKeys.PLAINS, BeetleVariant.LADYBUG);
+        put(BiomeKeys.PLAINS, BeetleVariant.ROSE_CHAFER);
         put(BiomeKeys.SUNFLOWER_PLAINS, BeetleVariant.LADYBUG);
         put(BiomeKeys.FLOWER_FOREST, BeetleVariant.LADYBUG);
         put(BiomeKeys.CHERRY_GROVE, BeetleVariant.LADYBUG);
         put(BiomeKeys.FOREST, BeetleVariant.BARK);
+        put(BiomeKeys.DARK_FOREST, BeetleVariant.RHINOCEROS);
+        put(BiomeKeys.MUSHROOM_FIELDS, BeetleVariant.OMEN);
         put(BiomeKeys.GROVE, BeetleVariant.BARK);
-        put(BiomeKeys.MEADOW, BeetleVariant.SCARAB);
+        put(BiomeKeys.MEADOW, BeetleVariant.ROSE_CHAFER);
     }};
 
     /* SOUNDS */

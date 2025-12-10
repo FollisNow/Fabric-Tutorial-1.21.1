@@ -5,9 +5,10 @@ import java.util.Comparator;
 
 public enum BeetleVariant {
     OMEN(0),
-    SCARAB(1),
+    ROSE_CHAFER(1),
     LADYBUG(2),
-    BARK(3);
+    BARK(3),
+    RHINOCEROS(4);
 
     private static final BeetleVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
             comparingInt(BeetleVariant::getId)).toArray(BeetleVariant[]::new);
