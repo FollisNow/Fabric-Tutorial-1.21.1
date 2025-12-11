@@ -150,6 +150,15 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
                     target.z, 1, 0, 0, 0, 0);
         }
     }
+    private void spawnParticlesAtPos(BlockPos pos) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            Vec3d target = pos.toBottomCenterPos();
+
+            serverWorld.spawnParticles(ModParticles.GOLDEN_CHAIN_PARTICLE,
+                    target.x, target.y,
+                    target.z, 1, 0, 0, 0, 0);
+        }
+    }
 
     @Override
     public void tickMovement() {
@@ -535,6 +544,13 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         }
     }
 
+    @Override
+    public void pushAwayFrom(Entity entity) {
+        super.pushAwayFrom(entity);
+        if (!(entity instanceof MothEntity))
+            this.setRoosting(false);
+    }
+
     static class LatchGoal extends Goal {
         protected final MothEntity mob;
         protected Direction latchDirection;
@@ -556,7 +572,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
             boolean bl = false;
             if (this.mob.getWorld() instanceof ServerWorld serverWorld){
                  bl = this.mob.getRandom().nextInt(6000) != 0 && !serverWorld.getBlockState(this.mob.getBlockPos().offset(this.latchDirection)).isAir()
-                         && !this.mob.hasControllingPassenger();
+                         && !this.mob.hasControllingPassenger() && this.mob.getVelocity().length() < 0.05f;
             }
             if (!bl) {
                 this.mob.setRoosting(false);
