@@ -150,25 +150,53 @@ public class ModBlocks {
     public static final Block GOLD_BRICK_WALL = registerBlock("gold_brick_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
-    //GOLD MISC
+    // COBBLED GOLD
     public static final Block COBBLED_GOLD = registerBlock("cobbled_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.COBBLESTONE).strength(4).requiresTool()));
+    public static final Block COBBLED_GOLD_STAIRS = registerBlock("cobbled_gold_stairs",
+            new SittableStairsBlock(ModBlocks.COBBLED_GOLD.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block COBBLED_GOLD_SLAB = registerBlock("cobbled_gold_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block COBBLED_GOLD_WALL = registerBlock("cobbled_gold_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
+    // CUT GOLD
+    public static final Block CUT_GOLD = registerBlock("cut_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.CUT_COPPER).strength(4).requiresTool()));
+    public static final Block CUT_GOLD_STAIRS = registerBlock("cut_gold_stairs",
+            new SittableStairsBlock(ModBlocks.CUT_GOLD.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block CUT_GOLD_SLAB = registerBlock("cut_gold_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block CUT_GOLD_WALL = registerBlock("cut_gold_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
+    // GOLD LARGE BRICKS
+    public static final Block GOLD_LARGE_BRICKS = registerBlock("gold_large_bricks",
+            new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
+    public static final Block GOLD_LARGE_BRICK_STAIRS = registerBlock("gold_large_brick_stairs",
+            new SittableStairsBlock(ModBlocks.GOLD_LARGE_BRICKS.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_LARGE_BRICK_SLAB = registerBlock("gold_large_brick_slab",
+            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block GOLD_LARGE_BRICK_WALL = registerBlock("gold_large_brick_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
+    //GOLD MISC
     public static final Block CRUMBLED_GOLD = registerBlock("crumbled_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.COBBLED_DEEPSLATE).strength(4).requiresTool()));
     public static final Block CHISELED_GOLD = registerBlock("chiseled_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF).strength(4).requiresTool()));
     public static final Block CHISELED_GOLD_BRICKS = registerBlock("chiseled_gold_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF_BRICKS).strength(4).requiresTool()));
-    public static final Block CUT_GOLD = registerBlock("cut_gold",
-            new Block(AbstractBlock.Settings.copy(Blocks.CUT_COPPER).strength(4).requiresTool()));
+
     public static final Block SHAPED_GOLD = registerBlock("shaped_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.SANDSTONE).strength(4).requiresTool()));
     public static final Block ENGRAVED_GOLD = registerBlock("engraved_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_SANDSTONE).strength(4).requiresTool()));
     public static final Block SCULPTED_GOLD = registerBlock("sculpted_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.CUT_SANDSTONE).strength(4).requiresTool()));
-    public static final Block GOLD_LARGE_BRICKS = registerBlock("gold_large_bricks",
-            new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
     public static final Block GOLD_CHAIN = registerBlockWithoutBlockItem("gold_chain",
             new ChainBlock(AbstractBlock.Settings.copy(Blocks.CHAIN).nonOpaque()));
     public static final Block GOLD_LANTERN = registerBlock("gold_lantern",

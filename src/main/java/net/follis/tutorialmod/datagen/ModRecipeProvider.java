@@ -6,6 +6,7 @@ import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.ModTags;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
@@ -22,6 +23,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -140,14 +142,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerFenceGateRecipe(exporter, ModBlocks.GOLDEN_FENCE_GATE, ModBlocks.GOLDEN_PLANKS);
 
         // GOLDEN
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICKS)
-                .pattern(" # ")
-                .pattern("#^#")
-                .pattern(" # ")
-                .input('#', Items.GOLD_NUGGET)
-                .input('^', Items.STONE_BRICKS)
-                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
-                .offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_DIRT)
                 .pattern(" # ")
                 .pattern("#^#")
@@ -164,38 +158,50 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('^', Items.SAND)
                 .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
                 .offerTo(exporter);
-        offerStairsRecipe(exporter, ModBlocks.GOLDEN_BRICK_STAIRS, ModBlocks.GOLDEN_BRICKS);
-        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICK_SLAB, ModBlocks.GOLDEN_BRICKS);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICK_STAIRS, ModBlocks.GOLDEN_BRICKS);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICK_SLAB, ModBlocks.GOLDEN_BRICKS, 2);
-        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICK_WALL, ModBlocks.GOLDEN_BRICKS);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICK_WALL, ModBlocks.GOLDEN_BRICKS);
+
+        // GOLDEN BRICKS
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICKS)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.STONE_BRICKS)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+        registerBlockRecipes(exporter, "GOLDEN_BRICKS");
 
         // GOLD BRICKS
         offer2x2CompactingRecipe(exporter,RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICKS, Items.GOLD_INGOT);
-        offerStairsRecipe(exporter, ModBlocks.GOLD_BRICK_STAIRS, ModBlocks.GOLD_BRICKS);
-        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICK_SLAB, ModBlocks.GOLD_BRICKS);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICK_STAIRS, ModBlocks.GOLD_BRICKS);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICK_SLAB, ModBlocks.GOLD_BRICKS, 2);
-        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICK_WALL, ModBlocks.GOLD_BRICKS);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICK_WALL, ModBlocks.GOLD_BRICKS);
+        registerBlockRecipes(exporter, "GOLD_BRICKS");
 
-        // GOLD
+        // COBBLED GOLD
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_GOLD, Items.GOLD_BLOCK);
+        registerBlockRecipes(exporter, "COBBLED_GOLD");
+
+        // CUT GOLD
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Items.GOLD_BLOCK, 4);
+        registerBlockRecipes(exporter, "CUT_GOLD");
+
+        // GOLD LARGE BRICKS
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_LARGE_BRICKS, Items.GOLD_BLOCK);
+        registerBlockRecipes(exporter, "GOLD_LARGE_BRICKS");
+
+        // GOLD MISC
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRUMBLED_GOLD, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_GOLD, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_GOLD_BRICKS, Items.GOLD_BLOCK);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Items.GOLD_BLOCK, 4);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHAPED_GOLD, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ENGRAVED_GOLD, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCULPTED_GOLD, Items.GOLD_BLOCK);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_LARGE_BRICKS, Items.GOLD_BLOCK);
+
+        // GOLD
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_STAIRS, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_SLAB, Items.GOLD_BLOCK, 2);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BUTTON, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE_GATE, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
+
         offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
         offerCutCopperRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Blocks.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_CHAIN, Items.GOLD_BLOCK, 8);
@@ -223,6 +229,40 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
         offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(TutorialMod.MOD_ID, "kaupen"));
+    }
+
+    public void registerBlockRecipes(RecipeExporter exporter, String inputName) {
+        String singularName = inputName.endsWith("S") ? inputName.substring(0, inputName.length() - 1) : inputName;
+
+        Block inputBlock = getBlockByName(inputName);
+
+        // Deriving block names based on plurality
+        Block stairsBlock = getBlockByName(singularName + "_STAIRS"); // For singular
+        Block slabBlock = getBlockByName(singularName + "_SLAB");
+        Block wallBlock = getBlockByName(singularName + "_WALL");
+
+        // Offer recipes for stairs
+        offerStairsRecipe(exporter, stairsBlock, inputBlock);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stairsBlock, inputBlock);
+
+        // Offer recipes for slabs
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, slabBlock, inputBlock);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, slabBlock, inputBlock, 2);
+
+        // Offer recipes for walls
+        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, wallBlock, inputBlock);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, wallBlock, inputBlock);
+    }
+
+    private Block getBlockByName(String name) {
+        // Return the corresponding block from ModBlocks using reflection or a mapping strategy
+        // This example assumes you have a static way to retrieve blocks by name, adjust as necessary
+        try {
+            Field field = ModBlocks.class.getField(name);
+            return (Block) field.get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Block not found: " + name, e);
+        }
     }
 
     public static void offerStairsRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {

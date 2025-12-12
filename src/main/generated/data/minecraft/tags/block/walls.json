@@ -3,6 +3,9 @@
     "tutorialmod:gold_wall",
     "tutorialmod:golden_brick_wall",
     "tutorialmod:gold_brick_wall",
+    "tutorialmod:cobbled_gold_wall",
+    "tutorialmod:cut_gold_wall",
+    "tutorialmod:gold_large_brick_wall",
     "tutorialmod:pink_garnet_wall"
   ]
 }

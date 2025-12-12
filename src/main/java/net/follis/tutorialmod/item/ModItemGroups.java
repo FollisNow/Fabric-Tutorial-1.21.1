@@ -143,22 +143,33 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_BRICK_SLAB);
                         entries.add(ModBlocks.GOLD_BRICK_WALL);
 
-                        //GOLD MISC
+                        //COBBLED GOLD
                         entries.add(ModBlocks.COBBLED_GOLD);
+                        entries.add(ModBlocks.COBBLED_GOLD_STAIRS);
+                        entries.add(ModBlocks.COBBLED_GOLD_SLAB);
+                        entries.add(ModBlocks.COBBLED_GOLD_WALL);
+
+                        //CUT GOLD
+                        entries.add(ModBlocks.CUT_GOLD);
+                        entries.add(ModBlocks.CUT_GOLD_STAIRS);
+                        entries.add(ModBlocks.CUT_GOLD_SLAB);
+                        entries.add(ModBlocks.CUT_GOLD_WALL);
+
+                        //GOLD LARGE BRICKS
+                        entries.add(ModBlocks.GOLD_LARGE_BRICKS);
+                        entries.add(ModBlocks.GOLD_LARGE_BRICK_STAIRS);
+                        entries.add(ModBlocks.GOLD_LARGE_BRICK_SLAB);
+                        entries.add(ModBlocks.GOLD_LARGE_BRICK_WALL);
+
+                        //GOLD MISC
                         entries.add(ModBlocks.CRUMBLED_GOLD);
                         entries.add(ModBlocks.CHISELED_GOLD);
                         entries.add(ModBlocks.CHISELED_GOLD_BRICKS);
-                        entries.add(ModBlocks.CUT_GOLD);
                         entries.add(ModBlocks.SHAPED_GOLD);
                         entries.add(ModBlocks.ENGRAVED_GOLD);
                         entries.add(ModBlocks.SCULPTED_GOLD);
-                        entries.add(ModBlocks.GOLD_LARGE_BRICKS);
                         entries.add(ModBlocks.GOLD_CHAIN);
                         entries.add(ModBlocks.GOLD_LANTERN);
-
-
-
-
 
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);
                         entries.add(ModBlocks.CHAIR);

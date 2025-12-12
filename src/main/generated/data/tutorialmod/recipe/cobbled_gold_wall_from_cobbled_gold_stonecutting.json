@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tutorialmod:cobbled_gold"
+  },
+  "result": {
+    "count": 1,
+    "id": "tutorialmod:cobbled_gold_wall"
+  }
+}

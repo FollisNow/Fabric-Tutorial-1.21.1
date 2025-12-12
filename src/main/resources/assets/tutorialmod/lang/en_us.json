@@ -141,14 +141,27 @@
   "block.tutorialmod.gold_brick_wall": "Gold Brick Wall",
 
   "block.tutorialmod.cobbled_gold": "Cobbled Gold",
+  "block.tutorialmod.cobbled_gold_stairs": "Cobbled Gold Stairs",
+  "block.tutorialmod.cobbled_gold_slab": "Cobbled Gold Slab",
+  "block.tutorialmod.cobbled_gold_wall": "Cobbled Gold Wall",
+
+  "block.tutorialmod.cut_gold": "Cut Gold",
+  "block.tutorialmod.cut_gold_stairs": "Cut Gold Stairs",
+  "block.tutorialmod.cut_gold_slab": "Cut Gold Slab",
+  "block.tutorialmod.cut_gold_wall": "Cut Gold Wall",
+
+  "block.tutorialmod.gold_large_bricks": "Gold Large Bricks",
+  "block.tutorialmod.gold_large_brick_stairs": "Gold Large Brick Stairs",
+  "block.tutorialmod.gold_large_brick_slab": "Gold Large Brick Slab",
+  "block.tutorialmod.gold_large_brick_wall": "Gold Large Brick Wall",
+
+
   "block.tutorialmod.crumbled_gold": "Crumbled Gold",
   "block.tutorialmod.chiseled_gold": "Chiseled Gold",
   "block.tutorialmod.chiseled_gold_bricks": "Chiseled Gold Bricks",
-  "block.tutorialmod.cut_gold": "Cut Gold",
   "block.tutorialmod.shaped_gold": "Shaped Gold",
   "block.tutorialmod.engraved_gold": "Engraved Gold",
   "block.tutorialmod.sculpted_gold": "Sculpted Gold",
-  "block.tutorialmod.gold_large_bricks": "Gold Large Bricks",
 
 
   "item.tutorialmod.gold_chain": "Gold Chain",

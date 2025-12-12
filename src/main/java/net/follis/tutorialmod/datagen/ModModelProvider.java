@@ -7,11 +7,13 @@ import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.block.custom.PinkGarnetLampBlock;
 import net.follis.tutorialmod.item.ModItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 
+import java.lang.reflect.Field;
 import java.util.Optional;
 
 public class ModModelProvider extends FabricModelProvider {
@@ -65,16 +67,13 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSingleton(ModBlocks.GOLDEN_LEAVES, TexturedModel.LEAVES);
         blockStateModelGenerator.registerTintableCross(ModBlocks.GOLDEN_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.COBBLED_GOLD);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLED_GOLD);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_SAND);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD_BRICKS, TexturedModel.CUBE_COLUMN);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CUT_GOLD);
         blockStateModelGenerator.registerSingleton(ModBlocks.SHAPED_GOLD, TexturedModel.CUBE_BOTTOM_TOP);
         blockStateModelGenerator.registerSingleton(ModBlocks.ENGRAVED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.SCULPTED_GOLD, TexturedModel.CUBE_COLUMN);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_LARGE_BRICKS);
         blockStateModelGenerator.registerItemModel(ModItems.GOLD_CHAIN);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.GOLD_CHAIN, ModelIds.getBlockModelId(ModBlocks.GOLD_CHAIN));
         blockStateModelGenerator.registerLantern(ModBlocks.GOLD_LANTERN);
@@ -87,15 +86,11 @@ public class ModModelProvider extends FabricModelProvider {
         goldPool.fenceGate(ModBlocks.GOLD_FENCE_GATE);
         goldPool.wall(ModBlocks.GOLD_WALL);
 
-        BlockStateModelGenerator.BlockTexturePool goldenBricksPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_BRICKS);
-        goldenBricksPool.stairs(ModBlocks.GOLDEN_BRICK_STAIRS);
-        goldenBricksPool.slab(ModBlocks.GOLDEN_BRICK_SLAB);
-        goldenBricksPool.wall(ModBlocks.GOLDEN_BRICK_WALL);
-
-        BlockStateModelGenerator.BlockTexturePool goldBricksPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLD_BRICKS);
-        goldBricksPool.stairs(ModBlocks.GOLD_BRICK_STAIRS);
-        goldBricksPool.slab(ModBlocks.GOLD_BRICK_SLAB);
-        goldBricksPool.wall(ModBlocks.GOLD_BRICK_WALL);
+        registerBlockModels(blockStateModelGenerator, "GOLDEN_BRICKS");
+        registerBlockModels(blockStateModelGenerator, "GOLD_BRICKS");
+        registerBlockModels(blockStateModelGenerator, "COBBLED_GOLD");
+        registerBlockModels(blockStateModelGenerator, "CUT_GOLD");
+        registerBlockModels(blockStateModelGenerator, "GOLD_LARGE_BRICKS");
 
         BlockStateModelGenerator.BlockTexturePool goldenWoodPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_PLANKS);
         goldenWoodPool.stairs(ModBlocks.GOLDEN_STAIRS);
@@ -110,6 +105,29 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerBeehive(ModBlocks.AMETHYST_BEE_HIVE, TextureMap::sideFrontEnd);
 
 
+    }
+    public void registerBlockModels(BlockStateModelGenerator blockStateModelGenerator, String inputName) {
+        String singularName = inputName.endsWith("S") ? inputName.substring(0, inputName.length() - 1) : inputName;
+
+        Block inputBlock = getBlockByName(inputName);
+
+        // Register the cube all model texture pool for the input block
+        BlockStateModelGenerator.BlockTexturePool texturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(inputBlock);
+
+        // Register stairs, slab, and wall models
+        texturePool.stairs(getBlockByName(singularName + "_STAIRS"));
+        texturePool.slab(getBlockByName(singularName + "_SLAB"));
+        texturePool.wall(getBlockByName(singularName + "_WALL"));
+    }
+
+    private Block getBlockByName(String name) {
+        // Return the corresponding block from ModBlocks using reflection or a mapping strategy
+        try {
+            Field field = ModBlocks.class.getField(name);
+            return (Block) field.get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Block not found: " + name, e);
+        }
     }
 
     @Override
