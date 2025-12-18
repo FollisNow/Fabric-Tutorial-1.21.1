@@ -1,7 +1,6 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.component.DataComponentTypes;

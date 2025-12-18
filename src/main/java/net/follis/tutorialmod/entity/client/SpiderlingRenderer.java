@@ -2,18 +2,13 @@ package net.follis.tutorialmod.entity.client;
 
 import com.google.common.collect.Maps;
 import net.follis.tutorialmod.TutorialMod;
-import net.follis.tutorialmod.entity.custom.MothEntity;
 import net.follis.tutorialmod.entity.custom.SpiderlingEntity;
 import net.follis.tutorialmod.entity.custom.SpiderlingVariant;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.SpiderEyesFeatureRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.SpiderEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
