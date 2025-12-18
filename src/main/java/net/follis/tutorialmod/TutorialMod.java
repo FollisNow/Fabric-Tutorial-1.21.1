@@ -127,6 +127,7 @@ public class TutorialMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(ModEntities.MANTIS, MantisEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.BEETLE, BeetleEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.SPIDERLING, SpiderlingEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.MOTH, MothEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());

@@ -66,6 +66,7 @@
 
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
   "item.tutorialmod.beetle_spawn_egg": "Beetle Spawn Egg",
+  "item.tutorialmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
   "item.tutorialmod.moth_spawn_egg": "Moth Spawn Egg",
   "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
   "item.tutorialmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
@@ -173,12 +174,16 @@
   "item.tutorialmod.golden_needle": "Golden Needle",
   "item.tutorialmod.wooden_macuahuitl": "Wooden Macuahuitl",
   "item.tutorialmod.golden_macuahuitl": "Golden Macuahuitl",
+  "item.tutorialmod.golden_knife": "Golden Knife",
 
   "tooltip.tutorialmod.golden_macuahuitl.shift_down": "§7Apply §4Bleeding§r §7on strong hits",
   "tooltip.tutorialmod.golden_macuahuitl": "§6Cover me in obsidian glass shanks§r",
 
   "tooltip.tutorialmod.wooden_macuahuitl.shift_down": "§7Apply §4Bleeding§r §7on strong hits",
   "tooltip.tutorialmod.wooden_macuahuitl": "§7Cover me in obsidian glass shanks§r",
+
+  "tooltip.tutorialmod.golden_knife.shift_down": "§7Life from §4death§r",
+  "tooltip.tutorialmod.golden_knife": "§6Used for rituals§r",
 
   "tooltip.tutorialmod.shift_info": "§7Press §r§eShift§r§7 for info",
 
@@ -251,6 +256,7 @@
 
   "entity.tutorialmod.mantis": "Mantis",
   "entity.tutorialmod.beetle": "Beetle",
+  "entity.tutorialmod.spiderling": "Spiderling",
   "entity.tutorialmod.moth": "Moth",
   "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.amethyst_bee": "Amethyst Bee",

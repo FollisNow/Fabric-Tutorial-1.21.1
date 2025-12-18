@@ -175,6 +175,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BEETLE_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
 
+        itemModelGenerator.register(ModItems.SPIDERLING_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+
       itemModelGenerator.register(ModItems.MOTH_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
 
@@ -187,6 +190,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.GOLDEN_NEEDLE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.WOODEN_MACUAHUITL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.GOLDEN_MACUAHUITL, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.GOLDEN_KNIFE, Models.HANDHELD);
 
         itemModelGenerator.register(ModItems.MINI_SUN, Models.GENERATED);
     }

@@ -66,6 +66,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.MANTIS_SPAWN_EGG);
                         entries.add(ModItems.BEETLE_SPAWN_EGG);
+                        entries.add(ModItems.SPIDERLING_SPAWN_EGG);
                         entries.add(ModItems.MOTH_SPAWN_EGG);
                         entries.add(ModItems.LOCUST_SPAWN_EGG);
                         entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
@@ -74,6 +75,7 @@ public class ModItemGroups {
                         entries.add(ModItems.MINI_SUN);
                         entries.add(ModItems.WOODEN_MACUAHUITL);
                         entries.add(ModItems.GOLDEN_MACUAHUITL);
+                        entries.add(ModItems.GOLDEN_KNIFE);
 
                     }).build());
 

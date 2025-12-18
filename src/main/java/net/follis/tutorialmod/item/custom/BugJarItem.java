@@ -66,6 +66,10 @@ public class BugJarItem extends AbstractEntityJarItem {
                         TextColor color = LocustColors.getOrDefault(bugData.entityData().copyNbt().getInt("Variant"), TextColor.fromFormatting(Formatting.GRAY));
                         tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()));
 
+                    } else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.SPIDERLING) {
+                        tooltip.add(Text.translatable(convertToKey(bugData))
+                                .append(" ")
+                                .append(Text.literal(String.valueOf(bugData.entityData().copyNbt().getFloat("GrowthSize")))));
                     } else {
                         tooltip.add(Text.translatable(convertToKey(bugData)).formatted(formatting));
                     }

@@ -21,6 +21,7 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
         getOrCreateTagBuilder(EntityTypeTags.ARTHROPOD)
                 .add(ModEntities.AMETHYST_BEE)
                 .add(ModEntities.BEETLE)
+                .add(ModEntities.SPIDERLING)
                 .add(ModEntities.LOCUST)
                 .add(ModEntities.MANTIS)
                 .add(ModEntities.MOTH);

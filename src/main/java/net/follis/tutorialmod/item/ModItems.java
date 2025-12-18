@@ -7,14 +7,21 @@ import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -133,6 +140,9 @@ public class ModItems {
     public static final Item BEETLE_SPAWN_EGG = registerItem("beetle_spawn_egg",
             new SpawnEggItem(ModEntities.BEETLE, 0xf03232, 0x000000, new Item.Settings()));
 
+    public static final Item SPIDERLING_SPAWN_EGG = registerItem("spiderling_spawn_egg",
+            new SpawnEggItem(ModEntities.SPIDERLING, 0x4a3321, 0x2f2115, new Item.Settings()));
+
     public static final Item MOTH_SPAWN_EGG = registerItem("moth_spawn_egg",
             new SpawnEggItem(ModEntities.MOTH, 0x35210a, 0xffd83e, new Item.Settings()));
 
@@ -195,6 +205,11 @@ public class ModItems {
                     super.appendTooltip(stack, context, tooltip, type);
                 }
             });
+
+
+    public static final Item GOLDEN_KNIFE = registerItem("golden_knife",
+            new GoldenKnifeItem(ModToolMaterials.GOLDEN, new Item.Settings()
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 4, -1.5f))));
 
 
     public static final Item BUG_JAR = registerItem("bug_jar",

@@ -29,6 +29,11 @@ public class ModEntities {
             EntityType.Builder.create(BeetleEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.5f, 0.5f).build());
 
+    public static final EntityType<SpiderlingEntity> SPIDERLING = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "spiderling"),
+            EntityType.Builder.create(SpiderlingEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.7f, 0.7f).build());
+
     public static final EntityType<MothEntity> MOTH = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "moth"),
             EntityType.Builder.create(MothEntity::new, SpawnGroup.CREATURE)
