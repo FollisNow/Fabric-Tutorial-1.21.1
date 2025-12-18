@@ -112,10 +112,10 @@ public class SpiderlingEntity extends TameableEntity implements Angerable {
 
     protected void updateAttributesForTamed() {
         if (this.isTamed()) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue((double)40.0F);
+            this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(40.0F);
             this.setHealth(40.0F);
         } else {
-            this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue((double)8.0F);
+            this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(8.0F);
         }
     }
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -290,11 +290,11 @@ public class SpiderlingEntity extends TameableEntity implements Angerable {
         return this.isClimbingWall();
     }
     public boolean isClimbingWall() {
-        return ((Byte)this.dataTracker.get(SPIDER_FLAGS) & 1) != 0;
+        return (this.dataTracker.get(SPIDER_FLAGS) & 1) != 0;
     }
 
     public void setClimbingWall(boolean climbing) {
-        byte b = (Byte)this.dataTracker.get(SPIDER_FLAGS);
+        byte b = this.dataTracker.get(SPIDER_FLAGS);
         if (climbing) {
             b = (byte)(b | 1);
         } else {
@@ -390,12 +390,12 @@ public class SpiderlingEntity extends TameableEntity implements Angerable {
         }
 
         public void start() {
-            SpiderlingEntity.this.setTarget((LivingEntity)null);
+            SpiderlingEntity.this.setTarget(null);
             super.start();
         }
 
         public void tick() {
-            SpiderlingEntity.this.setTarget((LivingEntity)null);
+            SpiderlingEntity.this.setTarget(null);
             super.tick();
         }
     }
