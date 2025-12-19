@@ -2,9 +2,6 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.util.IVariant;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public enum LocustVariant implements IVariant {
     GOLD(0, "Gold"),
     DREAM(1, "Dream"),

@@ -1,12 +1,10 @@
 package net.follis.tutorialmod.component;
 
 import com.mojang.serialization.Codec;
-import com.sun.jna.platform.win32.WinDef;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
 import net.minecraft.component.ComponentType;
-import net.minecraft.entity.EntityType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
