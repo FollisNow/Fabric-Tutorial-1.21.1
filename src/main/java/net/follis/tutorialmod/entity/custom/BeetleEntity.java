@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
@@ -54,7 +55,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
+public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, IBugVariants {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public static final int field_28638 = MathHelper.ceil(1.4959966F);
@@ -292,7 +293,8 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable {
         return BeetleVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
+    @Override
+    public int getTypeVariant() {
         return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 

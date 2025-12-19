@@ -64,12 +64,12 @@
   "item.minecraft.lingering_potion.effect.sporulation_potion": "Lingering Potion of Sporulation",
   "item.minecraft.tipped_arrow.effect.sporulation_potion": "Arrow of Sporulation",
 
-  "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
-  "item.tutorialmod.beetle_spawn_egg": "Beetle Spawn Egg",
-  "item.tutorialmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
-  "item.tutorialmod.moth_spawn_egg": "Moth Spawn Egg",
-  "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
   "item.tutorialmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
+  "item.tutorialmod.beetle_spawn_egg": "Beetle Spawn Egg",
+  "item.tutorialmod.locust_spawn_egg": "Locust Spawn Egg",
+  "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
+  "item.tutorialmod.moth_spawn_egg": "Moth Spawn Egg",
+  "item.tutorialmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
 
   "item.tutorialmod.tomahawk": "Tomahawk",
   "item.tutorialmod.dart": "Dart",
@@ -242,6 +242,7 @@
   "tooltip.tutorialmod.cursed_jar": "§6Press §eShift§r§6 for content",
 
   "tooltip.tutorialmod.vision_monocle": "Press §eShift§r for more Information!",
+  "tooltip.tutorialmod.entity_of": "Entity type is of",
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
 
@@ -254,12 +255,12 @@
   "trim_material.tutorialmod.pink_garnet": "Pink Garnet Material",
   "trim_pattern.tutorialmod.kaupen": "Kaupen Armor Pattern",
 
-  "entity.tutorialmod.mantis": "Mantis",
-  "entity.tutorialmod.beetle": "Beetle",
-  "entity.tutorialmod.spiderling": "Spiderling",
-  "entity.tutorialmod.moth": "Moth",
-  "entity.tutorialmod.locust": "Locust",
   "entity.tutorialmod.amethyst_bee": "Amethyst Bee",
+  "entity.tutorialmod.beetle": "Beetle",
+  "entity.tutorialmod.locust": "Locust",
+  "entity.tutorialmod.mantis": "Mantis",
+  "entity.tutorialmod.moth": "Moth",
+  "entity.tutorialmod.spiderling": "Spiderling",
   "entity.tutorialmod.tomahawk": "Tomahawk",
   "entity.tutorialmod.dart": "Dart",
   "entity.tutorialmod.bamboo_trap": "Bamboo Trap"

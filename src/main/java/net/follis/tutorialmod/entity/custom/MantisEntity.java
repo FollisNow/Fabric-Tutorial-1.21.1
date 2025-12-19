@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.util.IBugVariants;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -33,7 +34,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class MantisEntity extends AnimalEntity {
+public class MantisEntity extends AnimalEntity implements IBugVariants {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
@@ -113,7 +114,8 @@ public class MantisEntity extends AnimalEntity {
         return MantisVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
+    @Override
+    public int getTypeVariant() {
         return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 

@@ -1,10 +1,12 @@
 package net.follis.tutorialmod.component;
 
 import com.mojang.serialization.Codec;
+import com.sun.jna.platform.win32.WinDef;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
 import net.minecraft.component.ComponentType;
+import net.minecraft.entity.EntityType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -38,6 +40,12 @@ public class ModDataComponentTypes {
     public static final ComponentType<List<AbstractEntityJarItem.BugData>> BUGS =
             register("bugs", builder -> builder.codec(AbstractEntityJarItem.BugData.LIST_CODEC)
                     .packetCodec(AbstractEntityJarItem.BugData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
+
+    public static final ComponentType<Integer> BUG_VARIANT =
+            register("bug_variant", builder -> builder.codec(Codec.INT));
+    public static final ComponentType<String> ENTITY_TYPE =
+            register("entity_type", builder -> builder.codec(Codec.STRING));
+
 
     public static final ComponentType<Integer> ENTITY_ID_CODEC =
             register("golden_needle_target", builder -> builder.codec(Codec.INT));

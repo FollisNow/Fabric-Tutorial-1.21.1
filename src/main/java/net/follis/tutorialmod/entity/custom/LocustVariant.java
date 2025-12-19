@@ -1,27 +1,35 @@
 package net.follis.tutorialmod.entity.custom;
 
+import net.follis.tutorialmod.util.IVariant;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
-public enum LocustVariant {
-    GOLD(0),
-    DREAM(1),
-    GRASSHOPPER(2),
-    RED(3);
+public enum LocustVariant implements IVariant {
+    GOLD(0, "Gold"),
+    DREAM(1, "Dream"),
+    GRASSHOPPER(2, "Grasshopper"),
+    RED(3, "Red");
 
-    private static final LocustVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
-            comparingInt(LocustVariant::getId)).toArray(LocustVariant[]::new);
     private final int id;
+    private final String name; // Associated name
 
-    LocustVariant(int id) {
+    LocustVariant(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
+    @Override
     public int getId() {
         return this.id;
     }
 
+    @Override
+    public String getName() {
+        return this.name; // Return the associated name
+    }
+
     public static LocustVariant byId(int id) {
-        return BY_ID[id % BY_ID.length];
+        return IVariant.byId(LocustVariant.class, id); // Call the generic method
     }
 }

@@ -3,6 +3,7 @@ package net.follis.tutorialmod.entity.custom;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
+import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
@@ -45,7 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
+public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IBugVariants {
     public final AnimationState flyingAnimationState = new AnimationState();
     public final AnimationState roostingAnimationState = new AnimationState();
 
@@ -222,7 +223,8 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable {
         return MothVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
+    @Override
+    public int getTypeVariant() {
         return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 

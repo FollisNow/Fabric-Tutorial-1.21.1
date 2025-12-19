@@ -1,35 +1,38 @@
 package net.follis.tutorialmod.entity.custom;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import net.follis.tutorialmod.util.IVariant;
 
-public enum MothVariant {
-    VERY_RARE(0), // Channels effects
+public enum MothVariant implements IVariant {
+    VERY_RARE(0, "Very Rare"), // Channels effects
+    RARE1(1, "Rare 1"),       // Hypnotic
+    RARE2(2, "Rare 2"),       // Hypnotic
+    RARE3(3, "Rare 3"),       // Hypnotic
+    OAK(4, "Oak"),
+    BIRCH(5, "Birch"),
+    SPRUCE(6, "Spruce"),
+    DARK_OAK(7, "Dark Oak"),
+    CHERRY(8, "Cherry"),
+    JUNGLE(9, "Jungle");
 
-    RARE1(1), // hypnotic
-    RARE2(2), // hypnotic
-    RARE3(3), // hypnotic
-
-    OAK(4),
-    BIRCH(5),
-    SPRUCE(6),
-    DARK_OAK(7),
-    CHERRY(8),
-    JUNGLE(9);
-
-    private static final MothVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
-            comparingInt(MothVariant::getId)).toArray(MothVariant[]::new);
     private final int id;
+    private final String name; // Associated name
 
-    MothVariant(int id) {
+    MothVariant(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
+    @Override
     public int getId() {
         return this.id;
     }
 
+    @Override
+    public String getName() {
+        return this.name; // Return the associated name
+    }
+
     public static MothVariant byId(int id) {
-        return BY_ID[id % BY_ID.length];
+        return IVariant.byId(MothVariant.class, id); // Call the generic method
     }
 }

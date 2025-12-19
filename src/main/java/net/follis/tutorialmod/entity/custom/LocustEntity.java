@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.util.IBugVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -40,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class LocustEntity extends AnimalEntity {
+public class LocustEntity extends AnimalEntity implements IBugVariants {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
@@ -161,7 +162,8 @@ public class LocustEntity extends AnimalEntity {
         return LocustVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
+    @Override
+    public int getTypeVariant() {
         return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 

@@ -23,6 +23,9 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.follis.tutorialmod.util.IBugVariants.*;
+
+
 public class BugJarItem extends AbstractEntityJarItem {
     private World world;
 
@@ -84,7 +87,6 @@ public class BugJarItem extends AbstractEntityJarItem {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         this.world = user.getWorld();
         if (world instanceof ServerWorld && entity.getType().isIn(EntityTypeTags.ARTHROPOD)) {
-            //Add logic for entityType or tag here
             captureEntity(entity, user);
             return ActionResult.SUCCESS;
         }

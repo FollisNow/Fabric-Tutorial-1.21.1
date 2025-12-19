@@ -16,7 +16,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -27,23 +26,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public abstract class AbstractEntityJarItem extends Item {
-    TextColor darkGold = TextColor.fromRgb(0xBC7F04); // Custom gold-like color
-
-    Map<Integer, TextColor> BeetleColors = Map.of(
-            0, darkGold,
-            1, TextColor.fromRgb(0x55FF55),
-            2, TextColor.fromRgb(0xFF5555),
-            3, TextColor.fromRgb(0x8A4A09)
-    );
-    Map<Integer, TextColor> LocustColors = Map.of(
-            0, darkGold,
-            1, TextColor.fromRgb(0x4DCF9F),
-            2, TextColor.fromRgb(0x55FF55),
-            3, TextColor.fromRgb(0xFF5555)
-    );
 
     public AbstractEntityJarItem(Settings settings) {
         super(settings);

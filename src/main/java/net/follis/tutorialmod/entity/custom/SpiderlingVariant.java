@@ -1,24 +1,29 @@
 package net.follis.tutorialmod.entity.custom;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import net.follis.tutorialmod.util.IVariant;
 
-public enum SpiderlingVariant {
-    DEFAULT(0);
+public enum SpiderlingVariant implements IVariant {
+    DEFAULT(0, "Default");
 
-    private static final SpiderlingVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
-            comparingInt(SpiderlingVariant::getId)).toArray(SpiderlingVariant[]::new);
     private final int id;
+    private final String name; // Associated name
 
-    SpiderlingVariant(int id) {
+    SpiderlingVariant(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
+    @Override
     public int getId() {
         return this.id;
     }
 
+    @Override
+    public String getName() {
+        return this.name; // Return the associated name
+    }
+
     public static SpiderlingVariant byId(int id) {
-        return BY_ID[id % BY_ID.length];
+        return IVariant.byId(SpiderlingVariant.class, id); // Call the generic method
     }
 }

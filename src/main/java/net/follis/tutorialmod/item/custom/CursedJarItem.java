@@ -27,6 +27,9 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.follis.tutorialmod.util.IBugVariants.*;
+
+
 public class CursedJarItem extends AbstractEntityJarItem {
     private World world;
     private static final int maxPoisonLevel = 10;

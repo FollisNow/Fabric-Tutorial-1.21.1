@@ -1,25 +1,30 @@
 package net.follis.tutorialmod.entity.custom;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import net.follis.tutorialmod.util.IVariant;
 
-public enum MantisVariant {
-    DEFAULT(0),
-    ORCHID(1);
+public enum MantisVariant implements IVariant{
+    DEFAULT(0, "Default"),
+    ORCHID(1, "Orchid");
 
-    private static final MantisVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
-            comparingInt(MantisVariant::getId)).toArray(MantisVariant[]::new);
     private final int id;
+    private final String name; // Associated name
 
-    MantisVariant(int id) {
+    MantisVariant(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
+    @Override
     public int getId() {
         return this.id;
     }
 
+    @Override
+    public String getName() {
+        return this.name; // Return the associated name
+    }
+
     public static MantisVariant byId(int id) {
-        return BY_ID[id % BY_ID.length];
+        return IVariant.byId(MantisVariant.class, id); // Call the generic method
     }
 }

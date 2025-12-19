@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
+import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FoodComponent;
@@ -43,7 +44,7 @@ import java.util.UUID;
 
 import static net.minecraft.entity.passive.WolfEntity.FOLLOW_TAMED_PREDICATE;
 
-public class SpiderlingEntity extends TameableEntity implements Angerable {
+public class SpiderlingEntity extends TameableEntity implements Angerable, IBugVariants {
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(SpiderlingEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> ANGER;
@@ -307,9 +308,11 @@ public class SpiderlingEntity extends TameableEntity implements Angerable {
         return SpiderlingVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
+    @Override
+    public int getTypeVariant() {
         return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
+
     private void setVariant(SpiderlingVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }

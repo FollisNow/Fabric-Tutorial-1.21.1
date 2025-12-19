@@ -1,28 +1,33 @@
 package net.follis.tutorialmod.entity.custom;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import net.follis.tutorialmod.util.IVariant;
 
-public enum BeetleVariant {
-    OMEN(0),
-    ROSE_CHAFER(1),
-    LADYBUG(2),
-    BARK(3),
-    RHINOCEROS(4);
+public enum BeetleVariant implements IVariant{
+    OMEN(0, "Omen"),
+    ROSE_CHAFER(1, "Rose Chafer"),
+    LADYBUG(2, "Ladybug"),
+    BARK(3, "Bark"),
+    RHINOCEROS(4, "Rhinoceros");
 
-    private static final BeetleVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
-            comparingInt(BeetleVariant::getId)).toArray(BeetleVariant[]::new);
     private final int id;
+    private final String name; // Associated name
 
-    BeetleVariant(int id) {
+    BeetleVariant(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
+    @Override
     public int getId() {
         return this.id;
     }
 
+    @Override
+    public String getName() {
+        return this.name; // Return the associated name
+    }
+
     public static BeetleVariant byId(int id) {
-        return BY_ID[id % BY_ID.length];
+        return IVariant.byId(BeetleVariant.class, id); // Call the generic method
     }
 }
