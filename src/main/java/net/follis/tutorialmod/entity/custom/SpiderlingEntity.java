@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
+import net.follis.tutorialmod.item.custom.VisionMonocleItem;
 import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.component.DataComponentTypes;
@@ -9,6 +10,7 @@ import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -121,42 +123,59 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     }
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
-        if (!this.getWorld().isClient || this.isBaby() && this.isBreedingItem(itemStack)) {
-            if (this.isTamed()) {
-                if (this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                    itemStack.decrementUnlessCreative(1, player);
-                    FoodComponent foodComponent = itemStack.get(DataComponentTypes.FOOD);
-                    float f = foodComponent != null ? (float)foodComponent.nutrition() : 1.0F;
-                    this.heal(2.0F * f);
-                    return ActionResult.success(this.getWorld().isClient());
-                } else if (!itemStack.isOf(Items.SHEARS) || !this.isOwner(player)) {
-                    ActionResult actionResult = super.interactMob(player, hand);
-                    if (!actionResult.isAccepted() && this.isOwner(player)) {
-                        this.setSitting(!this.isSitting());
-                        this.jumping = false;
-                        this.navigation.stop();
-                        this.setTarget(null);
-                        return ActionResult.SUCCESS_NO_ITEM_USED;
-                    } else {
-                        return actionResult;
-                    }
-                } else {
-                    return ActionResult.SUCCESS;
-                }
-            } else if (itemStack.isIn(ModTags.Items.LOCUST_ITEMS) && !this.hasAngerTime()) {
-                itemStack.decrementUnlessCreative(1, player);
-                this.tryTame(player);
-                return ActionResult.SUCCESS;
-            } else if (itemStack.getItem() instanceof AbstractEntityJarItem) {
-                return ActionResult.PASS;
-            }
-            else {
-                return super.interactMob(player, hand);
-            }
-        } else {
-            boolean bl = this.isOwner(player) || this.isTamed() || itemStack.isIn(ModTags.Items.LOCUST_ITEMS) && !this.isTamed() && !this.hasAngerTime();
-            return bl ? ActionResult.CONSUME : ActionResult.PASS;
+
+        // Early return for client-side or condition where mob cannot be interacted with
+        if (this.getWorld().isClient) {
+            boolean shouldConsume =
+                    this.isOwner(player) ||
+                    this.isTamed() ||
+                    (itemStack.isIn(ModTags.Items.LOCUST_ITEMS) && !this.isTamed() && !this.hasAngerTime());
+            return shouldConsume ? ActionResult.CONSUME : ActionResult.PASS;
         }
+
+        // Check if the mob is tamed
+        if (this.isTamed()) {
+            // Check for breeding and health
+            if (this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
+                itemStack.decrementUnlessCreative(1, player);
+                FoodComponent foodComponent = itemStack.get(DataComponentTypes.FOOD);
+                float nutrition = foodComponent != null ? (float) foodComponent.nutrition() : 1.0F;
+                this.heal(2.0F * nutrition);
+                return ActionResult.success(this.getWorld().isClient());
+            }
+
+            // Handling for shears and owner
+            if (!itemStack.isOf(Items.SHEARS) || !this.isOwner(player)) {
+                ActionResult actionResult = super.interactMob(player, hand);
+                if (!actionResult.isAccepted() && this.isOwner(player)
+                        && !(itemStack.getItem() instanceof AbstractEntityJarItem) && !(itemStack.getItem() instanceof VisionMonocleItem)) {
+                    this.toggleSitting();
+                    return ActionResult.SUCCESS_NO_ITEM_USED;
+                }
+                if (itemStack.getItem() instanceof AbstractEntityJarItem || itemStack.getItem() instanceof VisionMonocleItem) {
+                    return ActionResult.PASS;
+                }
+                return actionResult;
+            }
+
+            return ActionResult.SUCCESS; // Default action for tamed mobs
+        }
+
+        // Handle taming for unowned mobs
+        if (itemStack.isIn(ModTags.Items.LOCUST_ITEMS) && !this.hasAngerTime()) {
+            itemStack.decrementUnlessCreative(1, player);
+            this.tryTame(player);
+            return ActionResult.SUCCESS;
+        }
+
+        return (itemStack.getItem() instanceof AbstractEntityJarItem) || (itemStack.getItem() instanceof VisionMonocleItem) ? ActionResult.PASS : super.interactMob(player, hand);
+    }
+
+    private void toggleSitting() {
+        this.setSitting(!this.isSitting());
+        this.jumping = false;
+        this.navigation.stop();
+        this.setTarget(null);
     }
 
     public void tickMovement() {
@@ -245,11 +264,11 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         return baby;
     }
 
-//    @Override
-//    public float getScale() {
-//        AttributeContainer attributeContainer = this.getAttributes();
-//        return attributeContainer == null ? 1.0F : this.clampScale((float)attributeContainer.getValue(EntityAttributes.GENERIC_SCALE) * this.getGrowthSize());
-//    }
+    @Override
+    public float getScale() {
+        AttributeContainer attributeContainer = this.getAttributes();
+        return attributeContainer == null ? 1.0F : this.clampScale((float)attributeContainer.getValue(EntityAttributes.GENERIC_SCALE) * this.getGrowthSize());
+    }
 
 
     @Override
