@@ -113,6 +113,33 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER));
         locustCampfire.offerTo(exporter, getItemPath(ModItems.GRILLED_LOCUST) + "_from_" + "campfire_cooking");
 
+        // GOLDEN FOOD
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_GLOW_BERRIES)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.GLOW_BERRIES)
+                .criterion(hasItem(Items.GLOW_BERRIES), conditionsFromItem(Items.GLOW_BERRIES))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_SWEET_BERRIES)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.SWEET_BERRIES)
+                .criterion(hasItem(Items.SWEET_BERRIES), conditionsFromItem(Items.SWEET_BERRIES))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_SPIDER_EYE)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.SPIDER_EYE)
+                .criterion(hasItem(Items.SPIDER_EYE), conditionsFromItem(Items.SPIDER_EYE))
+                .offerTo(exporter);
+
+
 
 
         // GOLDEN WOOD

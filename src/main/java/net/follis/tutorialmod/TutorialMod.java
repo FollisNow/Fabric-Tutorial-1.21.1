@@ -114,6 +114,9 @@ public class TutorialMod implements ModInitializer {
 		CompostingChanceRegistry.INSTANCE.add(ModItems.LOCUST_RED, 0.25f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.GRILLED_LOCUST, 0.15f);
 
+		CompostingChanceRegistry.INSTANCE.add(ModItems.GOLDEN_GLOW_BERRIES, 1f);
+		CompostingChanceRegistry.INSTANCE.add(ModItems.GOLDEN_SWEET_BERRIES, 1f);
+
 
 		StrippableBlockRegistry.register(ModBlocks.GOLDEN_LOG, ModBlocks.STRIPPED_GOLDEN_LOG);
 		StrippableBlockRegistry.register(ModBlocks.GOLDEN_WOOD, ModBlocks.STRIPPED_GOLDEN_WOOD);

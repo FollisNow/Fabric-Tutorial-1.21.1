@@ -20,6 +20,14 @@ public class ModFoodComponents {
             .statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 3), 1f).snack().build();
     public static final FoodComponent GRILLED_LOCUST = new FoodComponent.Builder().nutrition(4).saturationModifier(0.35f).snack().build();
 
+    public static final FoodComponent GOLDEN_GLOW_BERRIES = new FoodComponent.Builder().nutrition(2).saturationModifier(0.15f)
+            .snack().build();
+    public static final FoodComponent GOLDEN_SWEET_BERRIES = new FoodComponent.Builder().nutrition(2).saturationModifier(0.15f)
+            .snack().build();
+    public static final FoodComponent GOLDEN_SPIDER_EYE = new FoodComponent.Builder().nutrition(2).saturationModifier(0.15f)
+            .snack().build();
+
+
     public static final FoodComponent HONEY_BERRY = new FoodComponent.Builder().nutrition(2).saturationModifier(0.15f)
             .snack().build();
 

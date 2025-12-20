@@ -66,6 +66,10 @@ public class ModItems {
         }
     });
 
+    public static final Item GOLDEN_GLOW_BERRIES = registerItem("golden_glow_berries", new Item(new Item.Settings().food(ModFoodComponents.GOLDEN_GLOW_BERRIES)));
+    public static final Item GOLDEN_SWEET_BERRIES = registerItem("golden_sweet_berries", new Item(new Item.Settings().food(ModFoodComponents.GOLDEN_SWEET_BERRIES)));
+    public static final Item GOLDEN_SPIDER_EYE = registerItem("golden_spider_eye", new Item(new Item.Settings().food(ModFoodComponents.GOLDEN_SPIDER_EYE)));
+
 
     public static final Item GRILLED_LOCUST = registerItem("grilled_locust", new Item(new Item.Settings().food(ModFoodComponents.GRILLED_LOCUST)) {
         @Override

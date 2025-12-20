@@ -27,6 +27,10 @@ public class ModItemGroups {
                         entries.add(ModItems.LOCUST_RED);
                         entries.add(ModItems.GRILLED_LOCUST);
 
+                        entries.add(ModItems.GOLDEN_GLOW_BERRIES);
+                        entries.add(ModItems.GOLDEN_SWEET_BERRIES);
+                        entries.add(ModItems.GOLDEN_SPIDER_EYE);
+
                         entries.add(ModItems.STARLIGHT_ASHES);
 
                         entries.add(ModItems.PINK_GARNET_SWORD);

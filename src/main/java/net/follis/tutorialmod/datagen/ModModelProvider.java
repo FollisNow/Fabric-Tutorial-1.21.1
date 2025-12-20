@@ -141,6 +141,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.LOCUST_GRASSHOPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.LOCUST_RED, Models.GENERATED);
         itemModelGenerator.register(ModItems.GRILLED_LOCUST, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.GOLDEN_GLOW_BERRIES, Models.GENERATED);
+        itemModelGenerator.register(ModItems.GOLDEN_SWEET_BERRIES, Models.GENERATED);
+        itemModelGenerator.register(ModItems.GOLDEN_SPIDER_EYE, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.BUG_JAR, Models.GENERATED);
         itemModelGenerator.register(ModItems.CURSED_JAR, Models.GENERATED);
         itemModelGenerator.register(ModItems.BAMBOO_TRAP, Models.GENERATED);
