@@ -1,6 +1,5 @@
 package net.follis.tutorialmod.entity.custom;
 
-import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
