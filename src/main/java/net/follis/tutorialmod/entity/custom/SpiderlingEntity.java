@@ -1,6 +1,7 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
 import net.follis.tutorialmod.item.custom.VisionMonocleItem;
 import net.follis.tutorialmod.util.IBugVariants;
@@ -25,6 +26,7 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -66,6 +68,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(1, new TameableEntity.TameableEscapeDangerGoal(1.5F, DamageTypeTags.PANIC_ENVIRONMENTAL_CAUSES));
         this.goalSelector.add(2, new SitGoal(this));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25D, this::foodSelector, false));
         this.goalSelector.add(3, new AvoidLlamaGoal<>(this, LlamaEntity.class, 24.0F, 1.5F, 1.5F));
         this.goalSelector.add(4, new PounceAtTargetGoal(this, 0.4F));
         this.goalSelector.add(5, new MeleeAttackGoal(this, 1.0F, true));
@@ -82,6 +85,14 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         this.targetSelector.add(6, new UntamedActiveTargetGoal<>(this, TurtleEntity.class, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
         this.targetSelector.add(7, new ActiveTargetGoal<>(this, AbstractSkeletonEntity.class, false));
         this.targetSelector.add(8, new UniversalAngerGoal<>(this, true));
+    }
+
+    private boolean foodSelector(ItemStack stack) {
+        if(this.getVariant() != SpiderlingVariant.DEFAULT) {
+            return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
+        } else {
+            return stack.isIn(ItemTags.MEAT) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD);
+        }
     }
 
     private void tryTame(PlayerEntity player) {

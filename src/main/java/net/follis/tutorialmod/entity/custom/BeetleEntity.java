@@ -98,7 +98,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
         if(this.getVariant() == BeetleVariant.OMEN) {
             return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
         } else {
-            return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD);
+            return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST);
         }
     }
 

@@ -77,6 +77,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.LOCUST_GRASSHOPPER)
                 .add(ModItems.LOCUST_RED);
 
+        getOrCreateTagBuilder(ItemTags.MEAT)
+                .addTag(ModTags.Items.LOCUST_ITEMS);
+
 
     }
 }
