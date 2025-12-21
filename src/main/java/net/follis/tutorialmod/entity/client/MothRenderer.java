@@ -18,22 +18,24 @@ public class MothRenderer extends MobEntityRenderer<MothEntity, MothModel<MothEn
             Util.make(Maps.newEnumMap(MothVariant.class), map -> {
                 map.put(MothVariant.VERY_RARE,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
-                map.put(MothVariant.RARE1,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
+                map.put(MothVariant.OAK_HYPNO,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_oak_hypno.png"));
                 map.put(MothVariant.RARE2,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
                 map.put(MothVariant.RARE3,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
                 map.put(MothVariant.OAK,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_oak.png"));
                 map.put(MothVariant.BIRCH,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_birch.png"));
                 map.put(MothVariant.SPRUCE,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
                 map.put(MothVariant.DARK_OAK,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
+                map.put(MothVariant.CHERRY,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
                 map.put(MothVariant.JUNGLE,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
             });
 
     public MothRenderer(EntityRendererFactory.Context context) {

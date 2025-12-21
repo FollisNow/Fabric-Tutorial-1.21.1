@@ -4,7 +4,7 @@ import net.follis.tutorialmod.util.IVariant;
 
 public enum MothVariant implements IVariant {
     VERY_RARE(0, "Very Rare"), // Channels effects
-    RARE1(1, "Rare 1"),       // Hypnotic
+    OAK_HYPNO(1, "Hypnotic Oak"),       // Hypnotic
     RARE2(2, "Rare 2"),       // Hypnotic
     RARE3(3, "Rare 3"),       // Hypnotic
     OAK(4, "Oak"),

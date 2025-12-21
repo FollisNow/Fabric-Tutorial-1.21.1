@@ -6,6 +6,7 @@ import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
 import net.follis.tutorialmod.item.custom.VisionMonocleItem;
 import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
+import net.minecraft.block.BlockState;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.*;
@@ -29,10 +30,12 @@ import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TimeHelper;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -91,8 +94,13 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         if(this.getVariant() != SpiderlingVariant.DEFAULT) {
             return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
         } else {
-            return stack.isIn(ItemTags.MEAT) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD);
+            return stack.isIn(ItemTags.MEAT);
         }
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.isIn(ItemTags.MEAT);
     }
 
     private void tryTame(PlayerEntity player) {
@@ -248,11 +256,6 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
 
 
     @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.isIn(ModTags.Items.LOCUST_ITEMS);
-    }
-
-    @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         SpiderlingEntity baby = ModEntities.SPIDERLING.create(world);
         if (baby != null && entity instanceof SpiderlingEntity spiderling) {
@@ -377,6 +380,27 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         this.dataTracker.set(GROWTH_SIZE, nbt.getFloat("GrowthSize"));
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
+    /* SOUNDS */
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_SPIDER_AMBIENT;
+    }
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_SPIDER_HURT;
+    }
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_SPIDER_DEATH;
+    }
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
+
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,

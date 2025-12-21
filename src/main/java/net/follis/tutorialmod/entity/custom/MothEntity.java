@@ -1,5 +1,6 @@
 package net.follis.tutorialmod.entity.custom;
 
+import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.particle.ModParticles;
@@ -108,6 +109,28 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0F).add(EntityAttributes.GENERIC_FLYING_SPEED, 1F).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2F).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0F);
     }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                 @Nullable EntityData entityData) {
+
+        Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
+        MothVariant variant;
+        if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
+            variant = biomeMap.get(currentBiomeKey.get());
+        } else {
+            variant = MothVariant.byId(this.random.nextBetween(0, MothVariant.values().length - 1));
+        }
+        this.setVariant(variant);
+        return super.initialize(world, difficulty, spawnReason, entityData);
+    }
+
+    private static final Map<RegistryKey<Biome>, MothVariant> biomeMap = new HashMap<>() {{
+        put(BiomeKeys.FOREST, MothVariant.OAK);
+        put(BiomeKeys.MEADOW, MothVariant.OAK_HYPNO);
+        put(BiomeKeys.BIRCH_FOREST, MothVariant.BIRCH);
+        put(BiomeKeys.OLD_GROWTH_BIRCH_FOREST, MothVariant.BIRCH);
+    }};
 
     @Nullable
     @Override
@@ -259,33 +282,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
 
-    @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                 @Nullable EntityData entityData) {
-
-        Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
-        MothVariant variant;
-        if (this.random.nextInt(100) == 0) {
-            variant = MothVariant.VERY_RARE;
-        }
-        else if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
-            variant = biomeMap.get(currentBiomeKey.get());
-        } else {
-            variant = MothVariant.byId(this.random.nextBetween(1, MothVariant.values().length - 1));
-        }
-        this.setVariant(MothVariant.OAK);
-        return super.initialize(world, difficulty, spawnReason, entityData);
-    }
-
-    private static final Map<RegistryKey<Biome>, MothVariant> biomeMap = new HashMap<>() {{
-        put(BiomeKeys.PLAINS, MothVariant.RARE2);
-        put(BiomeKeys.SUNFLOWER_PLAINS, MothVariant.RARE2);
-        put(BiomeKeys.FLOWER_FOREST, MothVariant.RARE2);
-        put(BiomeKeys.CHERRY_GROVE, MothVariant.RARE2);
-        put(BiomeKeys.FOREST, MothVariant.RARE3);
-        put(BiomeKeys.GROVE, MothVariant.RARE3);
-        put(BiomeKeys.MEADOW, MothVariant.RARE1);
-    }};
 
     /* SOUNDS */
     @Nullable
@@ -304,6 +300,11 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_PANDA_DEATH;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.15F, 2.0F);
     }
 
     private void updateAnimations() {
