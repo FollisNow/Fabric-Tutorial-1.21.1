@@ -50,8 +50,13 @@ public class ModDataComponentTypes {
     public static final ComponentType<Integer> GOLDEN_NEEDLE_STACKS_CODEC =
             register("golden_needle_stacks", builder -> builder.codec(Codec.INT));
 
-    public static final ComponentType<Integer> POISON_TRACKING =
-            register("poison_tracking", builder -> builder.codec(Codec.INT));
+    public static final ComponentType<Integer> STACKS_TRACKING =
+            register("stacks_tracking", builder -> builder.codec(Codec.INT));
+
+    public static final ComponentType<Boolean> IS_USING =
+            register("is_using", builder -> builder.codec(Codec.BOOL));
+    public static final ComponentType<Boolean> IS_TRIGGERED =
+            register("is_triggered", builder -> builder.codec(Codec.BOOL));
 
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

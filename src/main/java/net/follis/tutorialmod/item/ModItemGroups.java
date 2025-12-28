@@ -59,6 +59,7 @@ public class ModItemGroups {
                         entries.add(ModItems.DART);
                         entries.add(ModItems.DART_SHOOTER);
                         entries.add(ModItems.SPECTRE_STAFF);
+                        entries.add(ModItems.CURSED_EYE);
 
                         entries.add(ModItems.BUG_JAR);
                         entries.add(ModItems.CURSED_JAR);

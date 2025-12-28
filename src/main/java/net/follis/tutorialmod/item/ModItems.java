@@ -159,6 +159,9 @@ public class ModItems {
             new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()
                     .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 2, -1.4f))));
 
+    public static final Item CURSED_EYE = registerItem("cursed_eye",
+            new CursedEyeItem(new Item.Settings().maxDamage(500)));
+
     public static final Item MINI_SUN = registerItem("mini_sun",
             new MiniSunItem(new Item.Settings().maxCount(1)));
 

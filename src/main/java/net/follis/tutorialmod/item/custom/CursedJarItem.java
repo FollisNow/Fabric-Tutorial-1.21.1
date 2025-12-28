@@ -112,13 +112,13 @@ public class CursedJarItem extends AbstractEntityJarItem {
                 if (entity instanceof PlayerEntity player) {
                     if (tryKillBug(player, slot)) {
                         entity.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.BLOCKS, 0.7F, 0.3F);
-                        int poisonLevel = player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.POISON_TRACKING, 1);
+                        int poisonLevel = player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.STACKS_TRACKING, 1);
                         poisonLevel++;
                         if (poisonLevel >= maxPoisonLevel) {
-                            player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, 0);
+                            player.getInventory().getStack(slot).set(ModDataComponentTypes.STACKS_TRACKING, 0);
                             player.dropItem(ModItems.LOCUST_RED);
                         } else {
-                            player.getInventory().getStack(slot).set(ModDataComponentTypes.POISON_TRACKING, poisonLevel);
+                            player.getInventory().getStack(slot).set(ModDataComponentTypes.STACKS_TRACKING, poisonLevel);
                         }
                     }
                 }
