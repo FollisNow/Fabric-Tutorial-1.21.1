@@ -1,10 +1,7 @@
 package net.follis.tutorialmod.mixin;
 
 import com.mojang.authlib.GameProfile;
-import dev.architectury.platform.Mod;
 import net.follis.tutorialmod.item.ModItems;
-import net.follis.tutorialmod.item.custom.AbstractCursedEye;
-import net.follis.tutorialmod.item.custom.CursedEyeItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
