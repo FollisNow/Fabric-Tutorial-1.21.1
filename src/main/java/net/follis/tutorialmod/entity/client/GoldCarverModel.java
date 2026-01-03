@@ -10,7 +10,6 @@ import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
 public class GoldCarverModel<T extends GoldCarverEntity> extends SinglePartEntityModel<T> implements ModelWithArms {
