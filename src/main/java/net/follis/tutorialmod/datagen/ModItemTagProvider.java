@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.ModTags;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
@@ -60,6 +61,47 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         getOrCreateTagBuilder(ItemTags.PLANKS)
                 .add(ModBlocks.GOLDEN_PLANKS.asItem());
+
+        getOrCreateTagBuilder(ModTags.Items.GOLD_BLOCKS)
+                .add(Blocks.GOLD_BLOCK.asItem())
+                .add(ModBlocks.GOLD_STAIRS.asItem())
+                .add(ModBlocks.GOLD_SLAB.asItem())
+                .add(ModBlocks.GOLD_BUTTON.asItem())
+                .add(ModBlocks.GOLD_FENCE.asItem())
+                .add(ModBlocks.GOLD_FENCE_GATE.asItem())
+                .add(ModBlocks.GOLD_WALL.asItem())
+
+                .add(ModBlocks.GOLDEN_BRICKS.asItem())
+                .add(ModBlocks.GOLDEN_BRICK_STAIRS.asItem())
+                .add(ModBlocks.GOLDEN_BRICK_SLAB.asItem())
+                .add(ModBlocks.GOLDEN_BRICK_WALL.asItem())
+
+                .add(ModBlocks.GOLD_BRICKS.asItem())
+                .add(ModBlocks.GOLD_BRICK_STAIRS.asItem())
+                .add(ModBlocks.GOLD_BRICK_SLAB.asItem())
+                .add(ModBlocks.GOLD_BRICK_WALL.asItem())
+
+                .add(ModBlocks.COBBLED_GOLD.asItem())
+                .add(ModBlocks.COBBLED_GOLD_STAIRS.asItem())
+                .add(ModBlocks.COBBLED_GOLD_SLAB.asItem())
+                .add(ModBlocks.COBBLED_GOLD_WALL.asItem())
+
+                .add(ModBlocks.CUT_GOLD.asItem())
+                .add(ModBlocks.CUT_GOLD_STAIRS.asItem())
+                .add(ModBlocks.CUT_GOLD_SLAB.asItem())
+                .add(ModBlocks.CUT_GOLD_WALL.asItem())
+
+                .add(ModBlocks.GOLD_LARGE_BRICKS.asItem())
+                .add(ModBlocks.GOLD_LARGE_BRICK_STAIRS.asItem())
+                .add(ModBlocks.GOLD_LARGE_BRICK_SLAB.asItem())
+                .add(ModBlocks.GOLD_LARGE_BRICK_WALL.asItem())
+
+                .add(ModBlocks.CRUMBLED_GOLD.asItem())
+                .add(ModBlocks.CHISELED_GOLD.asItem())
+                .add(ModBlocks.CHISELED_GOLD_BRICKS.asItem())
+                .add(ModBlocks.SHAPED_GOLD.asItem())
+                .add(ModBlocks.ENGRAVED_GOLD.asItem())
+                .add(ModBlocks.SCULPTED_GOLD.asItem());
 
         getOrCreateTagBuilder(ModTags.Items.GOLDEN_ITEMS)
                 .add(Items.GOLDEN_HELMET)

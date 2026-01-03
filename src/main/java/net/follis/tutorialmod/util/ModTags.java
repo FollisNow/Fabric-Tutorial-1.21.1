@@ -30,6 +30,9 @@ public class ModTags {
         public static final TagKey<Item> MACUAHUITL = createTag("macuahuitl");
 
         public static final TagKey<Item> LOCUST_ITEMS = createTag("locust_items");
+
+        public static final TagKey<Item> GOLD_BLOCKS = createTag("gold_blocks");
+
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(TutorialMod.MOD_ID, name));
         }
