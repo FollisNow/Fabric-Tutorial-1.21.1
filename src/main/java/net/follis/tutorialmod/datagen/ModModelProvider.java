@@ -193,6 +193,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.AMETHYST_BEE_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
 
+        itemModelGenerator.register(ModItems.GOLD_CARVER_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+
         itemModelGenerator.register(ModItems.GOLDEN_NEEDLE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.WOODEN_MACUAHUITL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.GOLDEN_MACUAHUITL, Models.HANDHELD);

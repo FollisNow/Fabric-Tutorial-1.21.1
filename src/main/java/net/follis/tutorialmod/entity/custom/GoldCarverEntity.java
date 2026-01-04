@@ -81,9 +81,18 @@ public class GoldCarverEntity extends PathAwareEntity implements InventoryOwner{
                 }
                 return false;
             }
+            @Override
+            public boolean canStart() {
+                return super.canStart() && GoldCarverEntity.this.getCurrentState() != States.CRAFT;
+            }
         });
 
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.5F));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.5F) {
+            @Override
+            public boolean canStart() {
+                return super.canStart() && GoldCarverEntity.this.getCurrentState() != States.CRAFT;
+            }
+        });
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
         this.goalSelector.add(7, new LookAroundGoal(this));
     }
@@ -130,7 +139,6 @@ public class GoldCarverEntity extends PathAwareEntity implements InventoryOwner{
                 this.pickupAnimationTimeout--;
             }
             case CRAFT -> {
-
                 if ((inventoryStack.isEmpty() || inventoryStack.getCount() < pickAmount) && !this.getWorld().isClient()) {
                     this.idleAnimationTimeout = idleCooldown;
                     this.setCurrentState(States.IDLE);
@@ -150,8 +158,6 @@ public class GoldCarverEntity extends PathAwareEntity implements InventoryOwner{
                     if (this.getWorld() instanceof ServerWorld serverWorld) {
                         addParticles(serverWorld);
                     }
-
-
                     this.craftAnimationTimeout = craftCooldown;
                 }
                 this.craftAnimationTimeout--;
@@ -162,6 +168,7 @@ public class GoldCarverEntity extends PathAwareEntity implements InventoryOwner{
             }
         }
     }
+
     public static void playThrowSound(LivingEntity entity, ItemStack stack, Vec3d target) {
         Vec3d vec3d = new Vec3d(0.2F, 0.3F, 0.2F);
         LookTargetUtil.give(entity, stack, target, vec3d, 0.2F);
@@ -171,8 +178,8 @@ public class GoldCarverEntity extends PathAwareEntity implements InventoryOwner{
 
     private void addParticles(ServerWorld serverWorld) {
         serverWorld.spawnParticles(ParticleTypes.POOF,
-                this.getPos().getX(), this.getPos().getY() + 2F,
-                this.getPos().getZ(), 20, 0.25F, 0.25F, 0.25F, 0.1F);
+                this.getPos().getX(), this.getPos().getY() + 2F, this.getPos().getZ(),
+                20, 0.25F, 0.25F, 0.25F, 0.1F);
     }
 
     @Override
