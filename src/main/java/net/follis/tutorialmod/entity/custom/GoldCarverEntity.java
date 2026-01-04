@@ -266,12 +266,11 @@ public class GoldCarverEntity extends PathAwareEntity implements InventoryOwner{
     @Override
     public boolean canGather(ItemStack stack) {
         ItemStack itemStack = this.getStackInHand(Hand.MAIN_HAND);
-        boolean gatherable = !itemStack.isEmpty() &&
+        return !itemStack.isEmpty() &&
                 this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) &&
                 this.inventory.canInsert(stack) &&
                 !this.areItemsEqual(itemStack, stack) &&
                 stack.isIn(ModTags.Items.GOLD_BLOCKS);
-        return gatherable;
     }
     @Override
     public boolean canPickUpLoot() {
@@ -315,23 +314,6 @@ public class GoldCarverEntity extends PathAwareEntity implements InventoryOwner{
         stack.decrementUnlessCreative(1, player);
     }
 
-    private ItemEntity findClosestItem(ServerWorld world, Entity self, double radius, TagKey<Item> tagKey) {
-        double closestDistanceSquared = radius * radius; // Ensure using squared distance for comparison
-        ItemEntity closestItem = null;
-
-        // Define a predicate to filter item entities with tag
-        Predicate<Entity> predicate = entity -> entity instanceof ItemEntity itemEntity && itemEntity.getStack().isIn(tagKey) && !this.areItemsEqual(itemEntity.getStack(), this.getMainHandStack());
-
-        // Get all ItemEntity instances within the specified radius
-        for (ItemEntity item : world.getEntitiesByClass(ItemEntity.class, self.getBoundingBox().expand(radius), predicate)) {
-            double distanceSquared = self.squaredDistanceTo(item); // Calculate squared distance to the mob
-            if (distanceSquared < closestDistanceSquared) {
-                closestDistanceSquared = distanceSquared;
-                closestItem = item; // Update the closest hostile entity
-            }
-        }
-        return closestItem; // Return the closest hostile entity found
-    }
     private boolean findIfPosHasItem(ServerWorld world, BlockPos pos, TagKey<Item> tagKey) {
 
         // Define a predicate to filter item entities with tag
