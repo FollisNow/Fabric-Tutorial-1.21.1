@@ -7,9 +7,12 @@ import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.world.tree.ModSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.TallBlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -77,7 +80,8 @@ public class ModBlocks {
     public static final Block HONEY_BERRY_BUSH = registerBlockWithoutBlockItem("honey_berry_bush",
             new HoneyBerryBushBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)));
 
-    public static final Block CRYSTAL_MUSHROOM = registerBlock("crystal_mushroom", new MushroomPlantBlock(TreeConfiguredFeatures.HUGE_BROWN_MUSHROOM, AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance((state) -> 1).postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block CRYSTAL_MUSHROOM = registerBlock("crystal_mushroom",
+            new MushroomPlantBlock(TreeConfiguredFeatures.HUGE_BROWN_MUSHROOM, AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).luminance((state) -> 1).postProcess(Blocks::always).pistonBehavior(PistonBehavior.DESTROY)));
 
 
     // The Goldening
@@ -202,6 +206,25 @@ public class ModBlocks {
     public static final Block GOLD_LANTERN = registerBlock("gold_lantern",
             new LanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN)));
 
+    public static final Block YELLOW_MARIGOLD = registerBlock("yellow_marigold",
+            new FlowerBlock(StatusEffects.ABSORPTION, 100, AbstractBlock.Settings.copy(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block POTTED_YELLOW_MARIGOLD = registerBlockWithoutBlockItem("potted_yellow_marigold",
+            new FlowerPotBlock(YELLOW_MARIGOLD, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM).nonOpaque()));
+
+    public static final Block AURORA_FIRE_MARIGOLD = registerBlock("aurora_fire_marigold",
+            new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 200, AbstractBlock.Settings.copy(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block POTTED_AURORA_FIRE_MARIGOLD = registerBlockWithoutBlockItem("potted_aurora_fire_marigold",
+            new FlowerPotBlock(AURORA_FIRE_MARIGOLD, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM).nonOpaque()));
+
+    public static final Block BLUE_MARIGOLD = registerBlock("blue_marigold",
+            new FlowerBlock(StatusEffects.WATER_BREATHING, 200, AbstractBlock.Settings.copy(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block POTTED_BLUE_MARIGOLD = registerBlockWithoutBlockItem("potted_blue_marigold",
+            new FlowerPotBlock(BLUE_MARIGOLD, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM).nonOpaque()));
+
+    public static final Block GOLD_ROSE_BUSH = registerBlock("gold_rose_bush",
+            new TallFlowerBlock(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH)));
+
+
     public static final Block CHAIR = registerBlock("chair",
             new ChairBlock(AbstractBlock.Settings.create().nonOpaque()));
 
@@ -231,6 +254,11 @@ public class ModBlocks {
     private static void registerBlockItem(String name, Block block) {
         Registry.register(Registries.ITEM, Identifier.of(TutorialMod.MOD_ID, name),
                 new BlockItem(block, new Item.Settings()));
+    }
+
+    private static void registerTallBlockItem(String name, Block block) {
+        Registry.register(Registries.ITEM, Identifier.of(TutorialMod.MOD_ID, name),
+                new TallBlockItem(block, new Item.Settings()));
     }
 
     public static void registerModBlocks() {

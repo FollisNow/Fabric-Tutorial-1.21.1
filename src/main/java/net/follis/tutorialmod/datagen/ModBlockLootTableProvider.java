@@ -8,6 +8,8 @@ import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.TallPlantBlock;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
@@ -78,8 +80,13 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                                 .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE))))));
 
         addDrop(ModBlocks.CRYSTAL_MUSHROOM);
-
-
+        addDrop(ModBlocks.YELLOW_MARIGOLD);
+        addPottedPlantDrops(ModBlocks.POTTED_YELLOW_MARIGOLD);
+        addDrop(ModBlocks.AURORA_FIRE_MARIGOLD);
+        addPottedPlantDrops(ModBlocks.POTTED_AURORA_FIRE_MARIGOLD);
+        addDrop(ModBlocks.BLUE_MARIGOLD);
+        addPottedPlantDrops(ModBlocks.POTTED_BLUE_MARIGOLD);
+        this.addDrop(ModBlocks.GOLD_ROSE_BUSH, block -> this.dropsWithProperty(block, TallPlantBlock.HALF, DoubleBlockHalf.LOWER));
 
         addDrop(ModBlocks.PINK_GARNET_END_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_END_ORE, ModItems.RAW_PINK_GARNET, 4, 9));
         addDrop(ModBlocks.PINK_GARNET_NETHER_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_NETHER_ORE, ModItems.RAW_PINK_GARNET, 3, 8));

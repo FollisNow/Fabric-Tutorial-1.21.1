@@ -31,6 +31,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.TimeHelper;
@@ -291,19 +292,24 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
 
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_ALLAY_HURT;
-    }
-
-    @Nullable
-    @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_PANDA_DEATH;
+        return SoundEvents.ENTITY_ALLAY_DEATH;
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.15F, 2.0F);
+    public SoundCategory getSoundCategory() {
+        return SoundCategory.NEUTRAL;
+    }
+
+    @Override
+    protected void playHurtSound(DamageSource damageSource) {
+        super.playHurtSound(damageSource);
+        this.playSound(SoundEvents.ENTITY_ALLAY_HURT, 0.5F, 0.5F);
+    }
+
+    @Override
+    protected void addFlapEffects() {
+        this.playSound(SoundEvents.ENTITY_PARROT_FLY, 0.1F, 1.0F);
     }
 
     private void updateAnimations() {
@@ -317,8 +323,10 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     }
 
     public boolean isFlappingWings() {
-        return this.isInAir() && this.age % field_28638 == 0;
+        return this.isInAir() && this.age % field_28638 == 0 && !this.isRoosting();
     }
+
+
     @Override
     public boolean isInAir() {
         return !this.isOnGround();

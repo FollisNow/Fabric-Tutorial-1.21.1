@@ -57,7 +57,10 @@ public class ModModelProvider extends FabricModelProvider {
                 HoneyBerryBushBlock.AGE, 0, 1, 2, 3);
 
         blockStateModelGenerator.registerTintableCross(ModBlocks.CRYSTAL_MUSHROOM, BlockStateModelGenerator.TintType.NOT_TINTED);
-
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.YELLOW_MARIGOLD, ModBlocks.POTTED_YELLOW_MARIGOLD, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.AURORA_FIRE_MARIGOLD, ModBlocks.POTTED_AURORA_FIRE_MARIGOLD, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.BLUE_MARIGOLD, ModBlocks.POTTED_BLUE_MARIGOLD, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerDoubleBlock(ModBlocks.GOLD_ROSE_BUSH, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_DIRT);
 
