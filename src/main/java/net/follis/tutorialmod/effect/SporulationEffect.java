@@ -1,5 +1,6 @@
 package net.follis.tutorialmod.effect;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -9,6 +10,7 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +44,12 @@ public class SporulationEffect extends StatusEffect {
             }
         }
         for (BlockPos mushroomPos : this.positions){
-            if (world.random.nextInt(5) == 0)
-                world.setBlockState(mushroomPos, Blocks.BROWN_MUSHROOM.getDefaultState());
-        }
+            if (world.random.nextInt(5) == 0) {
+                world.setBlockState(mushroomPos, Blocks.BROWN_MUSHROOM.getDefaultState(), Block.NOTIFY_ALL);
+                world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, mushroomPos, 0);
+            }
 
+        }
     }
 
     @Override
