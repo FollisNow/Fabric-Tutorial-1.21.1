@@ -184,6 +184,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.YELLOW_MARIGOLD);
                         entries.add(ModBlocks.AURORA_FIRE_MARIGOLD);
                         entries.add(ModBlocks.BLUE_MARIGOLD);
+                        entries.add(ModBlocks.FOLLY_DIANTHUS);
+                        entries.add(ModBlocks.PINK_DIANTHUS);
                         entries.add(ModBlocks.GOLD_ROSE_BUSH);
 
                         entries.add(ModBlocks.CHAIR);

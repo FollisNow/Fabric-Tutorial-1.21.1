@@ -220,6 +220,16 @@ public class ModBlocks {
     public static final Block POTTED_BLUE_MARIGOLD = registerBlockWithoutBlockItem("potted_blue_marigold",
             new FlowerPotBlock(BLUE_MARIGOLD, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM).nonOpaque()));
 
+    public static final Block FOLLY_DIANTHUS = registerBlock("folly_dianthus",
+            new FlowerBlock(StatusEffects.INSTANT_HEALTH, 20, AbstractBlock.Settings.copy(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block POTTED_FOLLY_DIANTHUS = registerBlockWithoutBlockItem("potted_folly_dianthus",
+            new FlowerPotBlock(FOLLY_DIANTHUS, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM).nonOpaque()));
+
+    public static final Block PINK_DIANTHUS = registerBlock("pink_dianthus",
+            new FlowerBlock(StatusEffects.REGENERATION, 100, AbstractBlock.Settings.copy(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block POTTED_PINK_DIANTHUS = registerBlockWithoutBlockItem("potted_pink_dianthus",
+            new FlowerPotBlock(PINK_DIANTHUS, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM).nonOpaque()));
+
     public static final Block GOLD_ROSE_BUSH = registerBlock("gold_rose_bush",
             new TallFlowerBlock(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH)));
 

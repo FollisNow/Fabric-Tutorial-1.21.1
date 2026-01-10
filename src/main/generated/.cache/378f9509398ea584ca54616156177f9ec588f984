@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-09T23:47:32.8208162	Tutorial Mod/Block Loot Tables
+// 1.21.1	2026-01-10T02:01:03.1181611	Tutorial Mod/Block Loot Tables
 64c3df15b6e946537414a0cc30f320d8b8019264 data\tutorialmod\loot_table\blocks\pink_garnet_stairs.json
 bb4295bb26b608113d9469f979cd894f59bb83a7 data\tutorialmod\loot_table\blocks\cobbled_gold.json
 d5563207c0a35cafffee72bb03d4673f5560b966 data\tutorialmod\loot_table\blocks\gold_fence_gate.json
@@ -24,7 +24,9 @@ a58d266a4d5d489ce2eb0fc0bfa5b8f8bb281146 data\tutorialmod\loot_table\blocks\gold
 484d35493c4d13f5e5c4b2a70ef2b24e3d7a6260 data\tutorialmod\loot_table\blocks\crystal_mushroom.json
 5890edf16b837ce2004fd0e37808eb4d9df03b8f data\tutorialmod\loot_table\blocks\gold_large_brick_stairs.json
 187fcfc9fe51ec01122b82abb82fd7ffe989b8f1 data\tutorialmod\loot_table\blocks\gold_brick_stairs.json
+f9457b888b0aa1ecbe414ae9113c887f5854dfa0 data\tutorialmod\loot_table\blocks\folly_dianthus.json
 8689509b2741303b769d4d42ef80b7df442e7c89 data\tutorialmod\loot_table\blocks\golden_stairs.json
+276874e8fc6c94df9e1730425a23898e548f511d data\tutorialmod\loot_table\blocks\potted_pink_dianthus.json
 fe67ddbb57200b0f7a06f41dad6e78c2b317c133 data\tutorialmod\loot_table\blocks\gold_slab.json
 cbb358d78cd57da58c907a35212d486fa6f68efa data\tutorialmod\loot_table\blocks\magic_block.json
 b8b5a48962caee4b5f70be160e5068f092535d4d data\tutorialmod\loot_table\blocks\cobbled_gold_wall.json
@@ -43,6 +45,7 @@ e124986a361a8f61388c4de6ebddc0305e9a1058 data\tutorialmod\loot_table\blocks\gold
 4dc890dda040d4c27f7b9453cfcfe71169f5c3b3 data\tutorialmod\loot_table\blocks\gold_large_brick_slab.json
 fb5422fcbf5e55bf91fde1ca2eafa4c2ae4c06ef data\tutorialmod\loot_table\blocks\aurora_fire_marigold.json
 d5016c7c1b4ddca19ffb40309ba3611cd7625649 data\tutorialmod\loot_table\blocks\cut_gold_wall.json
+1c4f350de35fae9cc175b10505471e9c04b524d7 data\tutorialmod\loot_table\blocks\potted_folly_dianthus.json
 1cd854af430f76a34ae73983cb6997e7aa9b9b85 data\tutorialmod\loot_table\blocks\blue_marigold.json
 1382e8045641fe6784d8535d113c80a6028a5ace data\tutorialmod\loot_table\blocks\pink_garnet_pressure_plate.json
 a579a65bcd9b7d54b5114989a6009a332a13055e data\tutorialmod\loot_table\blocks\amethyst_bee_hive.json
@@ -52,6 +55,7 @@ a579a65bcd9b7d54b5114989a6009a332a13055e data\tutorialmod\loot_table\blocks\amet
 bc5743811c62bdebf742ccfeca03ce7bb72c9d8a data\tutorialmod\loot_table\blocks\yellow_marigold.json
 03b059b9fa4270f71820d657eab61f9cab9f798b data\tutorialmod\loot_table\blocks\chiseled_gold_bricks.json
 dc6563740b307762c85af2c4bd6e5d28a3f7dac9 data\tutorialmod\loot_table\blocks\gold_chain.json
+3f3d10225874d9cb1966e642ed64f87473caec2e data\tutorialmod\loot_table\blocks\pink_dianthus.json
 0d55ac70a945eb517a54deb66350f7753896b85c data\tutorialmod\loot_table\blocks\golden_brick_slab.json
 cc83e2229fad97f8acf6f044289879d7dd314d53 data\tutorialmod\loot_table\blocks\stripped_golden_wood.json
 b3eb752b0d3e03e264dd8ffc8bf07bdf2ed57aee data\tutorialmod\loot_table\blocks\cobbled_gold_slab.json

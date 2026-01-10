@@ -86,6 +86,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addPottedPlantDrops(ModBlocks.POTTED_AURORA_FIRE_MARIGOLD);
         addDrop(ModBlocks.BLUE_MARIGOLD);
         addPottedPlantDrops(ModBlocks.POTTED_BLUE_MARIGOLD);
+        addDrop(ModBlocks.FOLLY_DIANTHUS);
+        addPottedPlantDrops(ModBlocks.POTTED_FOLLY_DIANTHUS);
+        addDrop(ModBlocks.PINK_DIANTHUS);
+        addPottedPlantDrops(ModBlocks.POTTED_PINK_DIANTHUS);
         this.addDrop(ModBlocks.GOLD_ROSE_BUSH, block -> this.dropsWithProperty(block, TallPlantBlock.HALF, DoubleBlockHalf.LOWER));
 
         addDrop(ModBlocks.PINK_GARNET_END_ORE, multipleOreDrops(ModBlocks.PINK_GARNET_END_ORE, ModItems.RAW_PINK_GARNET, 4, 9));
