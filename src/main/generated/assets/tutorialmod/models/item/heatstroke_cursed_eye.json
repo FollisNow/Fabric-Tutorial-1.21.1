@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "tutorialmod:item/cursed_eye"
+    "layer0": "tutorialmod:item/heatstroke_cursed_eye"
   }
 }

@@ -162,8 +162,10 @@ public class ModItems {
             new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()
                     .attributeModifiers(GoldenNeedleItem.createAttributeModifiers(ModToolMaterials.GOLDEN, 2, -1.4f))));
 
-    public static final Item CURSED_EYE = registerItem("cursed_eye",
-            new CursedEyeItem(new Item.Settings().maxDamage(500)));
+    public static final Item HEATSTROKE_CURSED_EYE = registerItem("heatstroke_cursed_eye",
+            new HeatstrokeCursedEyeItem(new Item.Settings().maxDamage(500)));
+    public static final Item PHANTASMAL_CURSED_EYE = registerItem("phantasmal_cursed_eye",
+            new PhantasmalCursedEyeItem(new Item.Settings().maxDamage(500)));
 
     public static final Item MINI_SUN = registerItem("mini_sun",
             new MiniSunItem(new Item.Settings().maxCount(1)));

@@ -2,6 +2,7 @@ package net.follis.tutorialmod.mixin;
 
 import com.mojang.authlib.GameProfile;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.item.custom.AbstractCursedEye;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -41,7 +42,7 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
     private void getFovEyeMultiplierMixin(CallbackInfoReturnable<Float> info, float f) {
         Item item = this.getActiveItem().getItem();
         ItemStack itemStack = this.getActiveItem();
-        if (this.isUsingItem() && itemStack.isOf(ModItems.CURSED_EYE)) {
+        if (this.isUsingItem() && itemStack.getItem() instanceof AbstractCursedEye) {
             int i = this.getItemUseTime();
             float g = (float)i / 100.0f;
             g = g > 1.0f ? 1.0f : g * g;
