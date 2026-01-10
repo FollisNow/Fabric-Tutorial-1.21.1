@@ -78,8 +78,11 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                                 ).with(ItemEntry.builder(ModItems.HONEY_BERRIES))
                                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                                                 .apply(ApplyBonusLootFunction.uniformBonusCount(impl.getOrThrow(Enchantments.FORTUNE))))));
-
         addDrop(ModBlocks.CRYSTAL_MUSHROOM);
+
+        addDrop(ModBlocks.GOLDEN_SAPLING);
+        addPottedPlantDrops(ModBlocks.POTTED_GOLDEN_SAPLING);
+
         addDrop(ModBlocks.YELLOW_MARIGOLD);
         addPottedPlantDrops(ModBlocks.POTTED_YELLOW_MARIGOLD);
         addDrop(ModBlocks.AURORA_FIRE_MARIGOLD);
@@ -102,7 +105,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.STRIPPED_GOLDEN_LOG);
         addDrop(ModBlocks.STRIPPED_GOLDEN_WOOD);
         addDrop(ModBlocks.GOLDEN_PLANKS);
-        addDrop(ModBlocks.GOLDEN_SAPLING);
         addDrop(ModBlocks.GOLDEN_LEAVES, leavesDrops(ModBlocks.GOLDEN_LEAVES, ModBlocks.GOLDEN_SAPLING, 0.0625f));
         addDrop(ModBlocks.GOLD_BRICKS);
         addDrop(ModBlocks.COBBLED_GOLD);

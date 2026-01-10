@@ -90,8 +90,6 @@ public class ModBlocks {
     public static final Block GOLDEN_SAND = registerBlock("golden_sand",
             new ColoredFallingBlock(new ColorCode(14406560),AbstractBlock.Settings.copy(Blocks.SAND)));
 
-    public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
-            new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
     public static final Block GOLDEN_LEAVES = registerBlock("golden_leaves",
             new GoldenLeavesBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_LEAVES)));
 
@@ -204,6 +202,11 @@ public class ModBlocks {
             new ChainBlock(AbstractBlock.Settings.copy(Blocks.CHAIN).nonOpaque()));
     public static final Block GOLD_LANTERN = registerBlock("gold_lantern",
             new LanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN)));
+
+    public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
+            new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
+    public static final Block POTTED_GOLDEN_SAPLING = registerBlockWithoutBlockItem("potted_golden_sapling",
+            new FlowerPotBlock(GOLDEN_SAPLING, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM)));
 
     public static final Block YELLOW_MARIGOLD = registerBlock("yellow_marigold",
             new FlowerBlock(StatusEffects.ABSORPTION, 100, AbstractBlock.Settings.copy(Blocks.ALLIUM).nonOpaque().noCollision()));

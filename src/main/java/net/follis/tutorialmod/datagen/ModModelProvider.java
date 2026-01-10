@@ -57,6 +57,9 @@ public class ModModelProvider extends FabricModelProvider {
                 HoneyBerryBushBlock.AGE, 0, 1, 2, 3);
 
         blockStateModelGenerator.registerTintableCross(ModBlocks.CRYSTAL_MUSHROOM, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.GOLDEN_SAPLING, ModBlocks.POTTED_GOLDEN_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.YELLOW_MARIGOLD, ModBlocks.POTTED_YELLOW_MARIGOLD, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.AURORA_FIRE_MARIGOLD, ModBlocks.POTTED_AURORA_FIRE_MARIGOLD, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.BLUE_MARIGOLD, ModBlocks.POTTED_BLUE_MARIGOLD, BlockStateModelGenerator.TintType.NOT_TINTED);
@@ -70,7 +73,6 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_GOLDEN_LOG).log(ModBlocks.STRIPPED_GOLDEN_LOG).wood(ModBlocks.STRIPPED_GOLDEN_WOOD);
 
         blockStateModelGenerator.registerSingleton(ModBlocks.GOLDEN_LEAVES, TexturedModel.LEAVES);
-        blockStateModelGenerator.registerTintableCross(ModBlocks.GOLDEN_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLED_GOLD);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_SAND);
