@@ -82,7 +82,11 @@ public class SpiderlingModel<T extends SpiderlingEntity> extends SinglePartEntit
 
         if (entity.isInSittingPose()) {
             this.head.pitch = 25f / 180f * 3.14f; // lower the head if sitted (just for debugging)
-        } else {
+        } else if (entity.isInAir()) {
+            this.head.pitch = headPitch * ((float) Math.PI / 180F);
+
+        } else
+        {
             this.head.pitch = headPitch * ((float) Math.PI / 180F);
 
             float i = -(MathHelper.cos(limbAngle * 0.6662F * 2.0F + 0.0F) * 0.4F) * limbDistance;

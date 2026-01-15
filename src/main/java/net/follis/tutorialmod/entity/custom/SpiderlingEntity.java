@@ -7,6 +7,7 @@ import net.follis.tutorialmod.item.custom.VisionMonocleItem;
 import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.*;
@@ -28,14 +29,17 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.ServerConfigHandler;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TimeHelper;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -51,15 +55,31 @@ import java.util.UUID;
 
 import static net.minecraft.entity.passive.WolfEntity.FOLLOW_TAMED_PREDICATE;
 
-public class SpiderlingEntity extends TameableEntity implements Angerable, IBugVariants {
+public class SpiderlingEntity extends TameableEntity implements Angerable, IBugVariants, JumpingMount {
+    protected int soundTicks;
+    protected float jumpStrength;
+    protected boolean inAir;
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(SpiderlingEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> ANGER;
     private static final TrackedData<Byte> SPIDER_FLAGS;
     private static final TrackedData<Float> GROWTH_SIZE = DataTracker.registerData(SpiderlingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Float> MAX_HEALTH = DataTracker.registerData(SpiderlingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Float> MOVEMENT_SPEED = DataTracker.registerData(SpiderlingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Float> JUMP_STRENGTH = DataTracker.registerData(SpiderlingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    public static final float MAXIMUM_SIZE = 2F;
+    public static final float MINIMUM_SIZE = 0.25F;
+    public static final float MAXIMUM_HEALTH = 32F;
+    public static final float MINIMUM_HEALTH = 1F;
+    public static final float MAXIMUM_SPEED = 0.7F;
+    public static final float MINIMUM_SPEED = 0.05F;
+    public static final float MAXIMUM_JUMP = 1F;
+    public static final float MINIMUM_JUMP = 0.4F;
+
     @Nullable
     private UUID angryAt;
     private static final UniformIntProvider ANGER_TIME_RANGE;
+    private UUID ownerUuid;
 
     public SpiderlingEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -132,14 +152,6 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         }
     }
 
-    protected void updateAttributesForTamed() {
-        if (this.isTamed()) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(40.0F);
-            this.setHealth(40.0F);
-        } else {
-            this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(8.0F);
-        }
-    }
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
 
@@ -166,7 +178,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
             // Handling for shears and owner
             if (!itemStack.isOf(Items.SHEARS) || !this.isOwner(player)) {
                 ActionResult actionResult = super.interactMob(player, hand);
-                if (!actionResult.isAccepted() && this.isOwner(player)
+                if (!actionResult.isAccepted() && this.isOwner(player) && player.isSneaking()
                         && !(itemStack.getItem() instanceof AbstractEntityJarItem) && !(itemStack.getItem() instanceof VisionMonocleItem)) {
                     this.toggleSitting();
                     return ActionResult.SUCCESS_NO_ITEM_USED;
@@ -174,10 +186,15 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
                 if (itemStack.getItem() instanceof AbstractEntityJarItem || itemStack.getItem() instanceof VisionMonocleItem) {
                     return ActionResult.PASS;
                 }
-                return actionResult;
             }
 
-            return ActionResult.SUCCESS; // Default action for tamed mobs
+            if (this.hasPassengers() || this.isBaby()) {
+                return super.interactMob(player, hand);
+            }
+            if (this.getGrowthSize() >= 1.5F) {
+                this.putPlayerOnBack(player);
+            }
+            return ActionResult.success(this.getWorld().isClient);
         }
 
         // Handle taming for unowned mobs
@@ -204,13 +221,199 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
             this.tickAngerLogic((ServerWorld)this.getWorld(), true);
         }
 
+        if (!this.getWorld().isClient && this.isAlive()) {
+            if (this.age % 20 == 0 && this.deathTime == 0) {
+                this.heal(1.0F);
+            }
+        }
+
     }
+
+    @Override
+    protected void tickControlled(PlayerEntity controllingPlayer, Vec3d movementInput) {
+        super.tickControlled(controllingPlayer, movementInput);
+        Vec2f vec2f = this.getControlledRotation(controllingPlayer);
+        this.setRotation(vec2f.y, vec2f.x);
+        this.prevYaw = this.bodyYaw = this.headYaw = this.getYaw();
+        if (this.isLogicalSideForUpdatingMovement() && !this.isInSittingPose()) {
+            if (movementInput.z <= 0.0) {
+                this.soundTicks = 0;
+            }
+
+            if (this.isOnGround()) {
+                this.setInAir(false);
+                if (this.jumpStrength > 0.0F && !this.isInAir()) {
+                    this.jump(this.jumpStrength, movementInput);
+                }
+
+                this.jumpStrength = 0.0F;
+            }
+
+            this.setClimbingWall(this.horizontalCollision);
+
+        }
+    }
+    @Override
+    protected float getSaddledSpeed(PlayerEntity controllingPlayer) {
+        return (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED
+        );
+    }
+    protected Vec2f getControlledRotation(LivingEntity controllingPassenger) {
+        return new Vec2f(controllingPassenger.getPitch() * 0.5F, controllingPassenger.getYaw());
+    }
+    @Override
+    protected Vec3d getControlledMovementInput(PlayerEntity controllingPlayer, Vec3d movementInput) {
+        if (!this.isInSittingPose()) {
+            float f = controllingPlayer.sidewaysSpeed * 0.5F;
+            float g = controllingPlayer.forwardSpeed;
+            if (g <= 0.0F) {
+                g *= 0.25F;
+            }
+            return new Vec3d(f, 0.0, g);
+        }
+        return Vec3d.ZERO;
+    }
+
+    @Override
+    protected void updatePassengerPosition(Entity passenger, Entity.PositionUpdater positionUpdater) {
+        super.updatePassengerPosition(passenger, positionUpdater);
+        if (passenger instanceof LivingEntity) {
+            ((LivingEntity)passenger).bodyYaw = this.bodyYaw;
+        }
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getControllingPassenger() { //validated
+        Entity var2 = this.getFirstPassenger();
+           if (var2 instanceof PlayerEntity) {
+               return (PlayerEntity)var2;
+           }
+        return super.getControllingPassenger();
+    }
+
+    @Override
+    public boolean isImmobile() {
+        return super.isImmobile() && this.hasPassengers();
+    }
+
+    @Nullable
+    @Override
+    public UUID getOwnerUuid() {
+        return this.ownerUuid;
+    }
+
+    public void setOwnerUuid(@Nullable UUID ownerUuid) {
+        this.ownerUuid = ownerUuid;
+    }
+
+    @Nullable
+    private Vec3d locateSafeDismountingPos(Vec3d offset, LivingEntity passenger) {
+        double d = this.getX() + offset.x;
+        double e = this.getBoundingBox().minY;
+        double f = this.getZ() + offset.z;
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+
+        for (EntityPose entityPose : passenger.getPoses()) {
+            mutable.set(d, e, f);
+            double g = this.getBoundingBox().maxY + 0.75;
+
+            do {
+                double h = this.getWorld().getDismountHeight(mutable);
+                if ((double)mutable.getY() + h > g) {
+                    break;
+                }
+
+                if (Dismounting.canDismountInBlock(h)) {
+                    Box box = passenger.getBoundingBox(entityPose);
+                    Vec3d vec3d = new Vec3d(d, (double)mutable.getY() + h, f);
+                    if (Dismounting.canPlaceEntityAt(this.getWorld(), passenger, box.offset(vec3d))) {
+                        passenger.setPose(entityPose);
+                        return vec3d;
+                    }
+                }
+
+                mutable.move(Direction.UP);
+            } while (!((double)mutable.getY() < g));
+        }
+
+        return null;
+    }
+
+    @Override
+    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+        Vec3d vec3d = getPassengerDismountOffset(
+                (double)this.getWidth(), (double)passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.RIGHT ? 90.0F : -90.0F)
+        );
+        Vec3d vec3d2 = this.locateSafeDismountingPos(vec3d, passenger);
+        if (vec3d2 != null) {
+            return vec3d2;
+        } else {
+            Vec3d vec3d3 = getPassengerDismountOffset(
+                    (double)this.getWidth(), (double)passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.LEFT ? 90.0F : -90.0F)
+            );
+            Vec3d vec3d4 = this.locateSafeDismountingPos(vec3d3, passenger);
+            return vec3d4 != null ? vec3d4 : this.getPos();
+        }
+    }
+
+    @Override
+    public void setJumpStrength(int strength) {
+        if (strength < 0) {
+            strength = 0;
+        } else {
+            this.jumping = true;
+        }
+
+        if (strength >= 90) {
+            this.jumpStrength = 1.0F;
+        } else {
+            this.jumpStrength = 0.4F + 0.4F * (float)strength / 90.0F;
+        }
+
+    }
+
+    @Override
+    public boolean canJump() {
+        return this.hasPassengers() && !this.isInSittingPose();
+    }
+
+    @Override
+    public void startJumping(int height) {
+        this.jumping = true;
+        this.playJumpSound();
+    }
+
+    @Override
+    public void stopJumping() {
+    }
+    protected void jump(float strength, Vec3d movementInput) {
+        double d = (double)this.getJumpVelocity(strength);
+        Vec3d vec3d = this.getVelocity();
+        this.setVelocity(vec3d.x, d, vec3d.z);
+        this.setInAir(true);
+        this.velocityDirty = true;
+        if (movementInput.z > 0.0) {
+            float f = MathHelper.sin(this.getYaw() * (float) (Math.PI / 180.0));
+            float g = MathHelper.cos(this.getYaw() * (float) (Math.PI / 180.0));
+            this.setVelocity(this.getVelocity().add((double)(-1F * f * strength), 0.0, (double)(1F * g * strength)));
+        }
+    }
+
+    public void setInAir(boolean inAir) {
+        this.inAir = inAir;
+    }
+    public boolean isInAir() {
+        return this.inAir;
+    }
+
 
     public void tick() {
         super.tick();
         if (!this.getWorld().isClient) {
             this.setClimbingWall(this.horizontalCollision);
         }
+        this.jumping = false;
 
     }
     public boolean damage(DamageSource source, float amount) {
@@ -270,12 +473,55 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
                 world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
             }
 
-            //growth is inherited from the parents average size + variance centered on 0, +/- 10%
-            float babySize = (this.getGrowthSize() + spiderling.getGrowthSize()) / 2 + (random.nextFloat() * 2f - 1f) * 0.1f;
+            //attributes are inherited from the parents average size + variance centered on 0, +/- 10%
+            float babySize = (float) ((this.getGrowthSize() + spiderling.getGrowthSize()) / 2 * getVariationInPercent(10, 1));
+            babySize = Math.clamp(babySize, MINIMUM_SIZE, MAXIMUM_SIZE);
+            double babyHealth = (getBaseHealth(this) + getBaseHealth(spiderling)) / 2 * getVariationInPercent(10, 1);
+            babyHealth = Math.clamp(babyHealth, MINIMUM_HEALTH, MAXIMUM_HEALTH);
+            double babySpeed = (getBaseSpeed(this) + getBaseSpeed(spiderling)) / 2 * getVariationInPercent(10, 1);
+            babySpeed = Math.clamp(babySpeed, MINIMUM_SPEED, MAXIMUM_SPEED);
+            double babyJump = (getBaseJump(this) + getBaseJump(spiderling)) / 2 * getVariationInPercent(5, 1);
+            babyJump = Math.clamp(babyJump, MINIMUM_JUMP, MAXIMUM_JUMP);
             baby.setGrowthSize(babySize);
-
+            baby.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(babyHealth);
+            baby.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(babySpeed);
+            baby.getAttributeInstance(EntityAttributes.GENERIC_JUMP_STRENGTH).setBaseValue(babyJump);
         }
         return baby;
+    }
+
+    double getBaseHealth(SpiderlingEntity spiderling) {
+        return spiderling.getAttributeBaseValue(EntityAttributes.GENERIC_MAX_HEALTH);
+    }
+    double getBaseSpeed(SpiderlingEntity spiderling) {
+        return spiderling.getAttributeBaseValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+    }
+    double getBaseJump(SpiderlingEntity spiderling) {
+        return spiderling.getAttributeBaseValue(EntityAttributes.GENERIC_JUMP_STRENGTH);
+    }
+    double getVariationInPercent(float percentage, int iterations) {
+        float variation = 0;
+        for (int i = 0; i < iterations; i++) {
+            variation += random.nextFloat();
+        }
+        variation /= iterations;
+        variation = variation * percentage - percentage;
+        return 1 + variation/100;
+    }
+
+    public void increaseAllStats() {
+        float size = this.getGrowthSize() * 1.1F;
+        size = Math.clamp(size, MINIMUM_SIZE, MAXIMUM_SIZE);
+        double health = this.getBaseHealth(this) * 1.1F;
+        health = Math.clamp(health, MINIMUM_HEALTH, MAXIMUM_HEALTH);
+        double speed = this.getBaseSpeed(this) * 1.1F;
+        speed = Math.clamp(speed, MINIMUM_SPEED, MAXIMUM_SPEED);
+        double jump = this.getBaseJump(this) * 1.1F;
+        jump = Math.clamp(jump, MINIMUM_JUMP, MAXIMUM_JUMP);
+        this.setGrowthSize(size);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(health);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(speed);
+        this.getAttributeInstance(EntityAttributes.GENERIC_JUMP_STRENGTH).setBaseValue(jump);
     }
 
     @Override
@@ -317,8 +563,10 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         builder.add(DATA_ID_TYPE_VARIANT, 0);
         builder.add(ANGER, 0);
         builder.add(SPIDER_FLAGS, (byte)0);
-        builder.add(GROWTH_SIZE, 1f);
-
+        builder.add(GROWTH_SIZE, 1F);
+        builder.add(MAX_HEALTH, 8F);
+        builder.add(MOVEMENT_SPEED, 0.35F);
+        builder.add(JUMP_STRENGTH, 0.7F);
     }
     public boolean isClimbing() {
         return this.isClimbingWall();
@@ -359,10 +607,17 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 7.0F)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
+                .add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.7)
+                .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 6.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
+    }
+
+    @Override
+    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        return true;
     }
 
     @Override
@@ -370,6 +625,14 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Variant", this.getTypeVariant());
         nbt.putFloat("GrowthSize", this.getGrowthSize());
+        nbt.putFloat("MaxHealth", (float) this.getAttributeBaseValue(EntityAttributes.GENERIC_MAX_HEALTH));
+        nbt.putFloat("MovementSpeed", (float) this.getAttributeBaseValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+        nbt.putFloat("JumpStrength", (float) this.getAttributeBaseValue(EntityAttributes.GENERIC_JUMP_STRENGTH));
+
+        if (this.getOwnerUuid() != null) {
+            nbt.putUuid("Owner", this.getOwnerUuid());
+        }
+
         this.writeAngerToNbt(nbt);
     }
 
@@ -378,6 +641,21 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
         this.dataTracker.set(GROWTH_SIZE, nbt.getFloat("GrowthSize"));
+        this.dataTracker.set(MAX_HEALTH, nbt.getFloat("MaxHealth"));
+        this.dataTracker.set(MOVEMENT_SPEED, nbt.getFloat("MovementSpeed"));
+        this.dataTracker.set(JUMP_STRENGTH, nbt.getFloat("JumpStrength"));
+
+        UUID uUID;
+        if (nbt.containsUuid("Owner")) {
+            uUID = nbt.getUuid("Owner");
+        } else {
+            String string = nbt.getString("Owner");
+            uUID = ServerConfigHandler.getPlayerUuidByName(this.getServer(), string);
+        }
+
+        if (uUID != null) {
+            this.setOwnerUuid(uUID);
+        }
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
     /* SOUNDS */
@@ -398,7 +676,41 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     }
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+        if (!state.isLiquid()) {
+            BlockState blockState = this.getWorld().getBlockState(pos.up());
+            BlockSoundGroup blockSoundGroup = state.getSoundGroup();
+            if (blockState.isOf(Blocks.SNOW)) {
+                blockSoundGroup = blockState.getSoundGroup();
+            }
+
+            if (this.hasPassengers()) {
+                this.soundTicks++;
+                if (this.soundTicks > 5 && this.soundTicks % 3 == 0) {
+                    this.playWalkSound(blockSoundGroup);
+                } else if (this.soundTicks <= 5) {
+                    this.playSound(SoundEvents.ENTITY_SPIDER_STEP, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
+                }
+            } else if (this.isWooden(blockSoundGroup)) {
+                this.playSound(SoundEvents.ENTITY_SPIDER_STEP, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
+            } else {
+                this.playSound(SoundEvents.ENTITY_SPIDER_STEP, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
+            }
+        }
+    }
+
+    protected void playWalkSound(BlockSoundGroup group) {
+        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, group.getVolume() * 0.15F, group.getPitch());
+    }
+    protected void playJumpSound() {
+        this.playSound(SoundEvents.ENTITY_SPIDER_HURT, 0.4F, 1.0F);
+    }
+
+    private boolean isWooden(BlockSoundGroup soundGroup) {
+        return soundGroup == BlockSoundGroup.WOOD
+                || soundGroup == BlockSoundGroup.NETHER_WOOD
+                || soundGroup == BlockSoundGroup.NETHER_STEM
+                || soundGroup == BlockSoundGroup.CHERRY_WOOD
+                || soundGroup == BlockSoundGroup.BAMBOO_WOOD;
     }
 
 
@@ -418,6 +730,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         }
         this.setVariant(variant);
         this.setGrowthSize((this.random.nextFloat() * 2f - 1)*0.05f + 1);
+
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
@@ -425,6 +738,15 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         put(BiomeKeys.PLAINS, SpiderlingVariant.DEFAULT);
     }};
 
+
+    protected void putPlayerOnBack(PlayerEntity player) {
+//        this.setAngry(false);
+        if (!this.getWorld().isClient) {
+            player.setYaw(this.getYaw());
+            player.setPitch(this.getPitch());
+            player.startRiding(this);
+        }
+    }
 
     class AvoidLlamaGoal<T extends LivingEntity> extends FleeEntityGoal<T> {
         private final SpiderlingEntity spiderling;
