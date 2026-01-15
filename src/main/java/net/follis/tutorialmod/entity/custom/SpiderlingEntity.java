@@ -343,14 +343,14 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         Vec3d vec3d = getPassengerDismountOffset(
-                (double)this.getWidth(), (double)passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.RIGHT ? 90.0F : -90.0F)
+                this.getWidth(), passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.RIGHT ? 90.0F : -90.0F)
         );
         Vec3d vec3d2 = this.locateSafeDismountingPos(vec3d, passenger);
         if (vec3d2 != null) {
             return vec3d2;
         } else {
             Vec3d vec3d3 = getPassengerDismountOffset(
-                    (double)this.getWidth(), (double)passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.LEFT ? 90.0F : -90.0F)
+                    this.getWidth(), passenger.getWidth(), this.getYaw() + (passenger.getMainArm() == Arm.LEFT ? 90.0F : -90.0F)
             );
             Vec3d vec3d4 = this.locateSafeDismountingPos(vec3d3, passenger);
             return vec3d4 != null ? vec3d4 : this.getPos();
@@ -388,7 +388,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     public void stopJumping() {
     }
     protected void jump(float strength, Vec3d movementInput) {
-        double d = (double)this.getJumpVelocity(strength);
+        double d = this.getJumpVelocity(strength);
         Vec3d vec3d = this.getVelocity();
         this.setVelocity(vec3d.x, d, vec3d.z);
         this.setInAir(true);
@@ -396,7 +396,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         if (movementInput.z > 0.0) {
             float f = MathHelper.sin(this.getYaw() * (float) (Math.PI / 180.0));
             float g = MathHelper.cos(this.getYaw() * (float) (Math.PI / 180.0));
-            this.setVelocity(this.getVelocity().add((double)(-1F * f * strength), 0.0, (double)(1F * g * strength)));
+            this.setVelocity(this.getVelocity().add(-1F * f * strength, 0.0, 1F * g * strength));
         }
     }
 
