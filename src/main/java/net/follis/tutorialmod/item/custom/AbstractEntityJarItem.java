@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.BeetleEntity;
 import net.follis.tutorialmod.entity.custom.BeetleVariant;
@@ -16,6 +17,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -50,7 +52,14 @@ import static net.follis.tutorialmod.util.IBugVariants.*;
 
 public abstract class AbstractEntityJarItem extends Item {
     protected World world;
-
+    List<StatusEffect> exceptions = List.of(
+            StatusEffects.HERO_OF_THE_VILLAGE.value(),
+            StatusEffects.RAID_OMEN.value(),
+            StatusEffects.TRIAL_OMEN.value(),
+            StatusEffects.LUCK.value(),
+            StatusEffects.UNLUCK.value(),
+            ModEffects.APPLY_BLEEDING.value()
+    );
     public AbstractEntityJarItem(Settings settings) {
         super(settings);
     }
@@ -151,9 +160,7 @@ public abstract class AbstractEntityJarItem extends Item {
     protected static @NotNull String convertToKey(BugData bugData) {
         return "entity." + bugData.entityData.copyNbt().getString("id").replace(":", ".");
     }
-    protected List<BugData> getMutableBugDataList(PlayerEntity player) {
-        return new ArrayList<>(player.getMainHandStack().getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
-    }
+
     protected List<BugData> getMutableBugDataList(PlayerEntity player, int slot) {
         return new ArrayList<>(player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
     }
@@ -260,9 +267,9 @@ public abstract class AbstractEntityJarItem extends Item {
                 newList.add(spiderlingEntity);
             } else if (entity instanceof BeetleEntity beetle && beetle.getVariant().equals(BeetleVariant.OMEN)) {
                 if (beetle.getPotionGene() == null) {
-                    List<StatusEffect> allEffects = Registries.STATUS_EFFECT.stream().toList();
-                    if (!allEffects.isEmpty()) {
-                        StatusEffect randomEffect = allEffects.get(player.getRandom().nextBetween(0, allEffects.size()-1));
+                    List<StatusEffect> filteredEffects = Registries.STATUS_EFFECT.stream().filter(statusEffect -> !statusEffect.isInstant() || !exceptions.contains(statusEffect)).toList();
+                    if (!filteredEffects.isEmpty()) {
+                        StatusEffect randomEffect = filteredEffects.get(player.getRandom().nextBetween(0, filteredEffects.size()-1));
                         beetle.setPotionGene(randomEffect);
                     }
 
@@ -275,13 +282,9 @@ public abstract class AbstractEntityJarItem extends Item {
         bugDataList.clear();
         player.getInventory().getStack(slot).set(ModDataComponentTypes.BUGS, bugDataList);
 
-
         List<BugData> newBugDataList = getMutableBugDataList(player, slot);
-        newList.forEach(entity -> {
-            newBugDataList.add(BugData.of(entity));
-        });
+        newList.forEach(entity -> newBugDataList.add(BugData.of(entity)));
         player.getInventory().getStack(slot).set(ModDataComponentTypes.BUGS, newBugDataList);
-
     }
 
 
