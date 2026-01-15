@@ -1,8 +1,9 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.util.IVariant;
+import net.minecraft.util.StringIdentifiable;
 
-public enum SpiderlingVariant implements IVariant {
+public enum SpiderlingVariant implements IVariant, StringIdentifiable {
     DEFAULT(0, "Default");
 
     private final int id;
@@ -25,5 +26,10 @@ public enum SpiderlingVariant implements IVariant {
 
     public static SpiderlingVariant byId(int id) {
         return IVariant.byId(SpiderlingVariant.class, id); // Call the generic method
+    }
+
+    @Override
+    public String asString() {
+        return this.name;
     }
 }

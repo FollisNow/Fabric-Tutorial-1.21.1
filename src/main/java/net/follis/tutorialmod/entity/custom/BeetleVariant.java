@@ -1,8 +1,9 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.util.IVariant;
+import net.minecraft.util.StringIdentifiable;
 
-public enum BeetleVariant implements IVariant{
+public enum BeetleVariant implements IVariant, StringIdentifiable {
     OMEN(0, "Omen"),
     ROSE_CHAFER(1, "Rose Chafer"),
     LADYBUG(2, "Ladybug"),
@@ -29,5 +30,10 @@ public enum BeetleVariant implements IVariant{
 
     public static BeetleVariant byId(int id) {
         return IVariant.byId(BeetleVariant.class, id); // Call the generic method
+    }
+
+    @Override
+    public String asString() {
+        return this.name;
     }
 }

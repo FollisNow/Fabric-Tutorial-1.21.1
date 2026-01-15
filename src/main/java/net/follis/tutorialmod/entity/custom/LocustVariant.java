@@ -1,8 +1,9 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.util.IVariant;
+import net.minecraft.util.StringIdentifiable;
 
-public enum LocustVariant implements IVariant {
+public enum LocustVariant implements IVariant, StringIdentifiable {
     GOLD(0, "Gold"),
     DREAM(1, "Dream"),
     GRASSHOPPER(2, "Grasshopper"),
@@ -28,5 +29,10 @@ public enum LocustVariant implements IVariant {
 
     public static LocustVariant byId(int id) {
         return IVariant.byId(LocustVariant.class, id); // Call the generic method
+    }
+
+    @Override
+    public String asString() {
+        return this.name;
     }
 }

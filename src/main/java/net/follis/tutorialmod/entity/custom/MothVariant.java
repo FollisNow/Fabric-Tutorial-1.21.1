@@ -1,8 +1,9 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.util.IVariant;
+import net.minecraft.util.StringIdentifiable;
 
-public enum MothVariant implements IVariant {
+public enum MothVariant implements IVariant, StringIdentifiable {
     VERY_RARE(0, "Very Rare"), // Channels effects
     OAK_HYPNO(1, "Hypnotic Oak"),       // Hypnotic
     RARE2(2, "Rare 2"),       // Hypnotic
@@ -34,5 +35,10 @@ public enum MothVariant implements IVariant {
 
     public static MothVariant byId(int id) {
         return IVariant.byId(MothVariant.class, id); // Call the generic method
+    }
+
+    @Override
+    public String asString() {
+        return this.name;
     }
 }

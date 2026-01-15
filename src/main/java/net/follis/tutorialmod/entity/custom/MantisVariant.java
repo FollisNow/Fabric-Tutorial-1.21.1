@@ -1,8 +1,9 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.util.IVariant;
+import net.minecraft.util.StringIdentifiable;
 
-public enum MantisVariant implements IVariant{
+public enum MantisVariant implements IVariant, StringIdentifiable {
     DEFAULT(0, "Default"),
     ORCHID(1, "Orchid");
 
@@ -26,5 +27,10 @@ public enum MantisVariant implements IVariant{
 
     public static MantisVariant byId(int id) {
         return IVariant.byId(MantisVariant.class, id); // Call the generic method
+    }
+
+    @Override
+    public String asString() {
+        return this.name;
     }
 }
