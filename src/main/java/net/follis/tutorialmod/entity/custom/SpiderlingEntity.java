@@ -21,6 +21,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
@@ -533,7 +534,8 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
 
     @Override
     public boolean addStatusEffect(StatusEffectInstance effect, @Nullable Entity source) {
-        boolean isBeneficial = effect.getEffectType().value().isBeneficial();
+        StatusEffectCategory category = effect.getEffectType().value().getCategory();
+        boolean isBeneficial = category == StatusEffectCategory.NEUTRAL || category == StatusEffectCategory.BENEFICIAL;
 
         if (isBeneficial) {
             StatusEffectInstance infiniteEffect = new StatusEffectInstance(effect.getEffectType(), StatusEffectInstance.INFINITE, effect.getAmplifier(), effect.isAmbient(), effect.shouldShowParticles());
