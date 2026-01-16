@@ -11,10 +11,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
+
+import static net.minecraft.data.client.BlockStateModelGenerator.createSingletonBlockState;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -99,6 +102,8 @@ public class ModModelProvider extends FabricModelProvider {
         registerBlockModels(blockStateModelGenerator, "CUT_GOLD");
         registerBlockModels(blockStateModelGenerator, "GOLD_LARGE_BRICKS");
 
+        registerGoldPiles(blockStateModelGenerator);
+
         BlockStateModelGenerator.BlockTexturePool goldenWoodPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_PLANKS);
         goldenWoodPool.stairs(ModBlocks.GOLDEN_STAIRS);
         goldenWoodPool.slab(ModBlocks.GOLDEN_SLAB);
@@ -125,6 +130,24 @@ public class ModModelProvider extends FabricModelProvider {
         texturePool.stairs(getBlockByName(singularName + "_STAIRS"));
         texturePool.slab(getBlockByName(singularName + "_SLAB"));
         texturePool.wall(getBlockByName(singularName + "_WALL"));
+    }
+
+    private void registerGoldPiles(BlockStateModelGenerator blockStateModelGenerator) {
+        TextureMap textureMap = TextureMap.all(ModBlocks.GOLD_PILE);
+        Identifier identifier = Models.CUBE_ALL.upload(ModBlocks.GOLD_PILE_BLOCK, textureMap, blockStateModelGenerator.modelCollector);
+        blockStateModelGenerator.blockStateCollector
+                .accept(
+                        VariantsBlockStateSupplier.create(ModBlocks.GOLD_PILE)
+                                .coordinate(
+                                        BlockStateVariantMap.create(Properties.LAYERS)
+                                                .register(
+                                                        height -> BlockStateVariant.create()
+                                                                .put(VariantSettings.MODEL, height < 8 ? ModelIds.getBlockSubModelId(ModBlocks.GOLD_PILE, "_height" + height * 2) : identifier)
+                                                )
+                                )
+                );
+        blockStateModelGenerator.registerParentedItemModel(ModBlocks.GOLD_PILE, ModelIds.getBlockSubModelId(ModBlocks.GOLD_PILE, "_height2"));
+        blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(ModBlocks.GOLD_PILE_BLOCK, identifier));
     }
 
     private Block getBlockByName(String name) {

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
+import net.follis.tutorialmod.block.custom.GoldPileBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
@@ -13,13 +14,18 @@ import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
+import net.minecraft.loot.condition.EntityPropertiesLootCondition;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.registry.RegistryKeys;
@@ -152,7 +158,33 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.GOLDEN_FENCE);
         addDrop(ModBlocks.GOLDEN_FENCE_GATE);
 
-
+        this.addDrop(
+                ModBlocks.GOLD_PILE,
+                block -> LootTable.builder()
+                        .pool(
+                                LootPool.builder()
+                                        .conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS))
+                                        .with(
+                                                AlternativeEntry.builder(
+                                                        AlternativeEntry.builder(
+                                                                        GoldPileBlock.LAYERS.getValues(),
+                                                                        integer -> ItemEntry.builder(Items.GOLD_NUGGET)
+                                                                                .conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().exactMatch(GoldPileBlock.LAYERS, integer)))
+                                                                                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create((float)integer.intValue())))
+                                                                )
+                                                                .conditionally(this.createWithoutSilkTouchCondition()),
+                                                        AlternativeEntry.builder(
+                                                                GoldPileBlock.LAYERS.getValues(),
+                                                                integer -> integer == 8
+                                                                        ? ItemEntry.builder(ModBlocks.GOLD_PILE)
+                                                                        : ItemEntry.builder(Blocks.SNOW)
+                                                                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create((float)integer.intValue())))
+                                                                        .conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().exactMatch(GoldPileBlock.LAYERS, integer)))
+                                                        )
+                                                )
+                                        )
+                        )
+        );
     }
 
     public LootTable.Builder multipleOreDrops(Block drop, Item item, float minDrops, float maxDrops) {

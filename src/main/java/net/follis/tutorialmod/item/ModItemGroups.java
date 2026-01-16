@@ -180,6 +180,9 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_CHAIN);
                         entries.add(ModBlocks.GOLD_LANTERN);
 
+                        entries.add(ModBlocks.GOLD_PILE_BLOCK);
+                        entries.add(ModBlocks.GOLD_PILE);
+
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);
                         entries.add(ModBlocks.YELLOW_MARIGOLD);
                         entries.add(ModBlocks.AURORA_FIRE_MARIGOLD);

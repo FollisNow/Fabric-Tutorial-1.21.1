@@ -114,5 +114,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.LEAVES)
                 .add(ModBlocks.GOLDEN_LEAVES);
+
+        getOrCreateTagBuilder(BlockTags.COMBINATION_STEP_SOUND_BLOCKS)
+                .add(ModBlocks.GOLD_PILE);
     }
 }

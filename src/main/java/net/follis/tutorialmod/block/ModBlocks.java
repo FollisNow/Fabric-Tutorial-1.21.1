@@ -202,6 +202,17 @@ public class ModBlocks {
     public static final Block GOLD_LANTERN = registerBlock("gold_lantern",
             new LanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN)));
 
+    public static final Block GOLD_PILE = registerBlock("gold_pile",
+            new GoldPileBlock(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).notSolid().sounds(BlockSoundGroup.CHAIN)
+                    .strength(0.1F).blockVision((state, world, pos) ->
+                            state.get(GoldPileBlock.LAYERS) >= 8).pistonBehavior(PistonBehavior.DESTROY)
+            )
+    );
+    public static final Block GOLD_PILE_BLOCK = registerBlock("gold_pile_block",
+            new Block(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).strength(0.2F).sounds(BlockSoundGroup.CHAIN))
+    );
+
+    // Nature
     public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
             new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));
     public static final Block POTTED_GOLDEN_SAPLING = registerBlockWithoutBlockItem("potted_golden_sapling",
@@ -251,6 +262,10 @@ public class ModBlocks {
 
     public static final Block AMETHYST_BEE_HIVE = registerBlock("amethyst_bee_hive",
             new AmethystBeeHiveBlock(AbstractBlock.Settings.create().strength(4f).requiresTool()));
+
+    private static Block registerLayerBlock(String name, Block block) {
+        return Registry.register(Registries.BLOCK, Identifier.of(TutorialMod.MOD_ID, name), block);
+    }
 
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
