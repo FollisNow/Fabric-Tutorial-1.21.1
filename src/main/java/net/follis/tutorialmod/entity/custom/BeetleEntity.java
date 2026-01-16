@@ -199,12 +199,13 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
     // ATTACK PERKS
     @Override
     public boolean tryAttack(Entity target) {
+        boolean bl = super.tryAttack(target);
         DamageSource damageSource = this.getDamageSources().sting(this);
         float damage = (float) this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
         target.timeUntilRegen = 0;
         if (target.damage(damageSource, damage)) {
-            if (this.getPotionGene() != null && target instanceof LivingEntity livingEntity) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(RegistryEntry.of(this.getPotionGene()), 5 * 20), this);
+            if (bl && this.getPotionGene() != null && this.getPotionGene() instanceof StatusEffect effect && target instanceof LivingEntity livingEntity) {
+                livingEntity.addStatusEffect(new StatusEffectInstance(Registries.STATUS_EFFECT.getEntry(effect), 5 * 20), this);
             }
             this.onAttacking(target);
             return true;

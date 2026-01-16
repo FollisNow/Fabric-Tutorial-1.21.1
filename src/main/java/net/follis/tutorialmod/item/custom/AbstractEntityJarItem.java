@@ -52,10 +52,11 @@ import static net.follis.tutorialmod.util.IBugVariants.*;
 
 public abstract class AbstractEntityJarItem extends Item {
     protected World world;
-    List<StatusEffect> exceptions = List.of(
+    protected static final List<StatusEffect> exceptions = List.of(
             StatusEffects.HERO_OF_THE_VILLAGE.value(),
             StatusEffects.RAID_OMEN.value(),
             StatusEffects.TRIAL_OMEN.value(),
+            StatusEffects.BAD_OMEN.value(),
             StatusEffects.LUCK.value(),
             StatusEffects.UNLUCK.value(),
             ModEffects.APPLY_BLEEDING.value()
@@ -267,7 +268,7 @@ public abstract class AbstractEntityJarItem extends Item {
                 newList.add(spiderlingEntity);
             } else if (entity instanceof BeetleEntity beetle && beetle.getVariant().equals(BeetleVariant.OMEN)) {
                 if (beetle.getPotionGene() == null) {
-                    List<StatusEffect> filteredEffects = Registries.STATUS_EFFECT.stream().filter(statusEffect -> !statusEffect.isInstant() || !exceptions.contains(statusEffect)).toList();
+                    List<StatusEffect> filteredEffects = Registries.STATUS_EFFECT.stream().filter(statusEffect -> !(statusEffect.isInstant() || exceptions.contains(statusEffect))).toList();
                     if (!filteredEffects.isEmpty()) {
                         StatusEffect randomEffect = filteredEffects.get(player.getRandom().nextBetween(0, filteredEffects.size()-1));
                         beetle.setPotionGene(randomEffect);
