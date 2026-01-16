@@ -21,11 +21,15 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.ItemTags;
@@ -296,6 +300,12 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     public boolean isImmobile() {
         return super.isImmobile() && this.hasPassengers();
     }
+    @Override
+    public void slowMovement(BlockState state, Vec3d multiplier) {
+        if (!state.isOf(Blocks.COBWEB)) {
+            super.slowMovement(state, multiplier);
+        }
+    }
 
     @Nullable
     @Override
@@ -525,11 +535,27 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     }
 
     @Override
+    public boolean addStatusEffect(StatusEffectInstance effect, @Nullable Entity source) {
+        boolean isBeneficial = effect.getEffectType().value().isBeneficial();
+
+        if (isBeneficial) {
+            StatusEffectInstance infiniteEffect = new StatusEffectInstance(effect.getEffectType(), StatusEffectInstance.INFINITE, effect.getAmplifier(), effect.isAmbient(), effect.shouldShowParticles());
+            this.playSound(SoundEvents.BLOCK_BREWING_STAND_BREW, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+            return super.addStatusEffect(infiniteEffect, source);
+        }
+        return super.addStatusEffect(effect, source);
+    }
+
+    public void washEntity () {
+        this.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+        this.clearStatusEffects();
+    }
+
+    @Override
     public float getScale() {
         AttributeContainer attributeContainer = this.getAttributes();
         return attributeContainer == null ? 1.0F : this.clampScale((float)attributeContainer.getValue(EntityAttributes.GENERIC_SCALE) * this.getGrowthSize());
     }
-
 
     @Override
     public int getAngerTime() {
