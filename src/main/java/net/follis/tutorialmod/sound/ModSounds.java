@@ -24,6 +24,16 @@ public class ModSounds {
     public static final BlockSoundGroup MAGIC_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
             MAGIC_BLOCK_BREAK, MAGIC_BLOCK_STEP, MAGIC_BLOCK_PLACE, MAGIC_BLOCK_HIT, MAGIC_BLOCK_FALL);
 
+    public static final SoundEvent GOLD_PILE_BREAK = registerSoundEvent("gold_pile_break");
+    public static final SoundEvent GOLD_PILE_STEP = registerSoundEvent("gold_pile_step");
+    public static final SoundEvent GOLD_PILE_PLACE = registerSoundEvent("gold_pile_place");
+    public static final SoundEvent GOLD_PILE_HIT = registerSoundEvent("gold_pile_hit");
+    public static final SoundEvent GOLD_PILE_FALL = registerSoundEvent("gold_pile_fall");
+
+    public static final BlockSoundGroup GOLD_PILE_SOUNDS = new BlockSoundGroup(1f, 1f,
+            GOLD_PILE_BREAK, GOLD_PILE_STEP, GOLD_PILE_PLACE, GOLD_PILE_HIT, GOLD_PILE_FALL);
+
+
     public static final SoundEvent BAR_BRAWL = registerSoundEvent("bar_brawl");
     public static final RegistryKey<JukeboxSong> BAR_BRAWL_KEY =
             RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(TutorialMod.MOD_ID, "bar_brawl"));
