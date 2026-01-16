@@ -28,9 +28,9 @@ public class HatredEffect extends StatusEffect {
             for (Entity neighbour : neighbours){
                 if (neighbour instanceof MobEntity mob) {
                     mob.setTarget(entity);
-                    if (neighbour instanceof Angerable) {
-                        ((Angerable) neighbour).setAngryAt(entity.getUuid());
-                        ((Angerable) neighbour).setAngerTime(Objects.requireNonNull(entity.getStatusEffect(ModEffects.HATRED)).getDuration());
+                    if (neighbour instanceof Angerable angerable && entity.hasStatusEffect(ModEffects.HATRED)) {
+                        angerable.setAngryAt(entity.getUuid());
+                        angerable.setAngerTime(entity.getStatusEffect(ModEffects.HATRED).getDuration());
                     } else if (neighbour instanceof WardenEntity warden) {
                         Optional<LivingEntity> currentPrimeSuspect = warden.getPrimeSuspect();
                         if (currentPrimeSuspect.isPresent() && currentPrimeSuspect.get() != entity) {
