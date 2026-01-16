@@ -4,8 +4,6 @@ package net.follis.tutorialmod.mixin;
 import net.follis.tutorialmod.entity.custom.SpiderlingEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.util.math.Box;
