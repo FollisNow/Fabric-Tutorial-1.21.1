@@ -11,7 +11,6 @@ import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.Box;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class HatredEffect extends StatusEffect {
