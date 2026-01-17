@@ -7,14 +7,20 @@ import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -234,7 +240,18 @@ public class ModItems {
             new BambooTrapItem(new Item.Settings().maxCount(8)));
 
 
-    public static final Item CHITIN = registerItem("chitin", new Item(new Item.Settings()));
+    public static final Item CHITIN = registerItem("chitin", new Item(new Item.Settings()){
+        @Override
+        public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+            if (entity.getType().isIn(EntityTypeTags.ARTHROPOD) && entity.getHealth() < entity.getMaxHealth()) {
+                entity.heal(2F);
+                entity.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 0.7F, 1.5F);
+                stack.decrementUnlessCreative(1, user);
+                return ActionResult.SUCCESS;
+            }
+            return super.useOnEntity(stack, user, entity, hand);
+        }
+    });
 
 
     private static Item registerItem(String name, Item item) {
