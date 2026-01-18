@@ -73,7 +73,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     public static final float MINIMUM_SIZE = 0.25F;
     public static final float MAXIMUM_HEALTH = 32F;
     public static final float MINIMUM_HEALTH = 1F;
-    public static final float MAXIMUM_SPEED = 0.7F;
+    public static final float MAXIMUM_SPEED = 0.50F;
     public static final float MINIMUM_SPEED = 0.05F;
     public static final float MAXIMUM_JUMP = 1F;
     public static final float MINIMUM_JUMP = 0.4F;
@@ -224,7 +224,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         }
 
         if (!this.getWorld().isClient && this.isAlive()) {
-            if (this.age % 20 == 0 && this.deathTime == 0) {
+            if (this.age % 200 == 0 && this.deathTime == 0) {
                 this.heal(1.0F);
             }
         }

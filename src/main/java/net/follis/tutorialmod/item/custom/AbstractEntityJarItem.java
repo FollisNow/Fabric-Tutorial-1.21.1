@@ -124,24 +124,24 @@ public abstract class AbstractEntityJarItem extends Item {
                         tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()));
 
                     } else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.SPIDERLING) {
-                        String formattedGrowthSize = String.format("%.3f", getNbt(bugData).getFloat("GrowthSize")); // Format to 3 decimal places
+                        String formattedGrowthSize = String.format("%.2f", getNbt(bugData).getFloat("GrowthSize")); // Format to 3 decimal places
                         int growthSizeColor = interpolateColor(getNbt(bugData).getFloat("GrowthSize"), SpiderlingEntity.MINIMUM_SIZE, SpiderlingEntity.MAXIMUM_SIZE);
 
-                        String formattedMaxHealth = String.format("%.3f", getNbt(bugData).getFloat("MaxHealth")); // Format to 3 decimal places
+                        String formattedMaxHealth = String.format("%.2f", getNbt(bugData).getFloat("MaxHealth")); // Format to 3 decimal places
                         int maxHealthColor = interpolateColor(getNbt(bugData).getFloat("MaxHealth"), SpiderlingEntity.MINIMUM_HEALTH, SpiderlingEntity.MAXIMUM_HEALTH);
 
-                        String formattedSpeed = String.format("%.3f", getNbt(bugData).getFloat("MovementSpeed")); // Format to 3 decimal places
+                        String formattedSpeed = String.format("%.2f", getNbt(bugData).getFloat("MovementSpeed")); // Format to 3 decimal places
                         int speedColor = interpolateColor(getNbt(bugData).getFloat("MovementSpeed"), SpiderlingEntity.MINIMUM_SPEED, SpiderlingEntity.MAXIMUM_SPEED);
 
-                        String formattedJumpStrength = String.format("%.3f", getNbt(bugData).getFloat("JumpStrength")); // Format to 3 decimal places
+                        String formattedJumpStrength = String.format("%.2f", getNbt(bugData).getFloat("JumpStrength")); // Format to 3 decimal places
                         int jumpStrengthColor = interpolateColor(getNbt(bugData).getFloat("JumpStrength"), SpiderlingEntity.MINIMUM_JUMP, SpiderlingEntity.MAXIMUM_JUMP);
 
                         tooltip.add(Text.translatable(convertToKey(bugData))
                                 .append(" ")
-                                .append(Text.literal("Size: " + formattedGrowthSize + " ").withColor(growthSizeColor))
-                                .append(Text.literal("Health: " + formattedMaxHealth + " ").withColor(maxHealthColor))
-                                .append(Text.literal("Speed: " + formattedSpeed + " ").withColor(speedColor))
-                                .append(Text.literal("Jump: " + formattedJumpStrength).withColor(jumpStrengthColor))
+                                .append(Text.literal("⇵" + formattedGrowthSize + "⇵  ").withColor(growthSizeColor))
+                                .append(Text.literal("♥" + formattedMaxHealth + "♥  ").withColor(maxHealthColor))
+                                .append(Text.literal("»" + formattedSpeed + "»  ").withColor(speedColor))
+                                .append(Text.literal("⏶" + formattedJumpStrength + "⏶").withColor(jumpStrengthColor))
                         );
                     } else {
                         tooltip.add(Text.translatable(convertToKey(bugData)).formatted(formatting));
