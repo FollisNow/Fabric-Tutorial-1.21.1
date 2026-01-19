@@ -140,6 +140,17 @@ public class LocustEntity extends AnimalEntity implements IBugVariants {
         return SoundEvents.ENTITY_GUARDIAN_AMBIENT_LAND;
     }
 
+    @Override
+    public void playAmbientSound() {
+        this.playSound(this.getAmbientSound(), 0.3F, 2F);
+    }
+
+    @Override
+    protected void playHurtSound(DamageSource damageSource) {
+        this.ambientSoundChance = -this.getMinAmbientSoundDelay();
+        this.playSound(this.getHurtSound(damageSource), 0.6F, 2F);
+    }
+
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
