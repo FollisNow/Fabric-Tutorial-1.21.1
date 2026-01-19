@@ -293,6 +293,12 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
            }
         return super.getControllingPassenger();
     }
+    @Override
+    protected Vec3d getPassengerAttachmentPos(Entity passenger, EntityDimensions dimensions, float scaleFactor) {
+        return super.getPassengerAttachmentPos(passenger, dimensions, scaleFactor)
+                .add(0.0, -0.25, 0.0);
+    }
+
 
     @Override
     public boolean isImmobile() {
@@ -636,7 +642,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
                 .add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.7)
                 .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 6.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
     }
 
