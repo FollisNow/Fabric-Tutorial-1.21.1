@@ -2,8 +2,6 @@ package net.follis.tutorialmod.entity.client;
 
 import com.google.common.collect.Maps;
 import net.follis.tutorialmod.TutorialMod;
-import net.follis.tutorialmod.entity.custom.LocustEntity;
-import net.follis.tutorialmod.entity.custom.LocustVariant;
 import net.follis.tutorialmod.entity.custom.ScorpionEntity;
 import net.follis.tutorialmod.entity.custom.ScorpionVariant;
 import net.minecraft.client.render.VertexConsumerProvider;
