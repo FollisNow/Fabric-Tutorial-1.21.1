@@ -61,6 +61,7 @@ public interface IBugVariants {
             ModEntities.LOCUST.getName().getString(), LocustVariant.class,
             ModEntities.MANTIS.getName().getString(), MantisVariant.class,
             ModEntities.MOTH.getName().getString(), MothVariant.class,
-            ModEntities.SPIDERLING.getName().getString(), SpiderlingVariant.class
+            ModEntities.SPIDERLING.getName().getString(), SpiderlingVariant.class,
+            ModEntities.SCORPION.getName().getString(), ScorpionVariant.class
     );
 }

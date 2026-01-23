@@ -70,6 +70,10 @@ public class TutorialModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(LocustModel.LOCUST, LocustModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.LOCUST, LocustRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ScorpionModel.SCORPION, ScorpionModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SCORPION, ScorpionRenderer::new);
+
+
         EntityModelLayerRegistry.registerModelLayer(AmethystBeeModel.AMETHYST_BEE, AmethystBeeModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeRenderer::new);
 

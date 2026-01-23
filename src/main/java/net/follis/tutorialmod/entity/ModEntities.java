@@ -39,6 +39,10 @@ public class ModEntities {
             EntityType.Builder.create(MothEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.35f, 0.75f).build());
 
+    public static final EntityType<ScorpionEntity> SCORPION = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "scorpion"),
+            EntityType.Builder.create(ScorpionEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.5f, 0.5f).build());
 
     // GOLD
     public static final EntityType<GoldCarverEntity> GOLD_CARVER = Registry.register(Registries.ENTITY_TYPE,

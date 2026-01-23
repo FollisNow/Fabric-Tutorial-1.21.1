@@ -76,6 +76,7 @@
   "item.tutorialmod.mantis_spawn_egg": "Mantis Spawn Egg",
   "item.tutorialmod.moth_spawn_egg": "Moth Spawn Egg",
   "item.tutorialmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
+  "item.tutorialmod.scorpion_spawn_egg": "Scorpion Spawn Egg",
 
   "item.tutorialmod.tomahawk": "Tomahawk",
   "item.tutorialmod.dart": "Dart",
@@ -285,6 +286,7 @@
   "entity.tutorialmod.mantis": "Mantis",
   "entity.tutorialmod.moth": "Moth",
   "entity.tutorialmod.spiderling": "Spiderling",
+  "entity.tutorialmod.scorpion": "Scorpion",
   "entity.tutorialmod.tomahawk": "Tomahawk",
   "entity.tutorialmod.dart": "Dart",
   "entity.tutorialmod.bamboo_trap": "Bamboo Trap"

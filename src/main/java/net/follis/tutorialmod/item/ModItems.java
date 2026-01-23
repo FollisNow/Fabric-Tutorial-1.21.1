@@ -146,6 +146,9 @@ public class ModItems {
     public static final Item SPIDERLING_SPAWN_EGG = registerItem("spiderling_spawn_egg",
             new SpawnEggItem(ModEntities.SPIDERLING, 0x4a3321, 0x2f2115, new Item.Settings()));
 
+    public static final Item SCORPION_SPAWN_EGG = registerItem("scorpion_spawn_egg",
+            new SpawnEggItem(ModEntities.SCORPION, 0xffffff, 0x000000, new Item.Settings()));
+
     public static final Item MOTH_SPAWN_EGG = registerItem("moth_spawn_egg",
             new SpawnEggItem(ModEntities.MOTH, 0x35210a, 0xffd83e, new Item.Settings()));
 
