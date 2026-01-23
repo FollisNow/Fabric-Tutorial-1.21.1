@@ -15,7 +15,6 @@ import java.util.List;
 
 public class ScorpionModel<T extends ScorpionEntity> extends SinglePartEntityModel<T> {
     public static final EntityModelLayer SCORPION = new EntityModelLayer(Identifier.of(TutorialMod.MOD_ID, "scorpion"), "main");
-    private int internalTimer = 0;
     private final ModelPart scorpion;
     private final ModelPart legs;
     private final ModelPart L_legs;
