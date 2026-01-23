@@ -23,6 +23,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -299,7 +300,6 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
                 .add(0.0, -0.25, 0.0);
     }
 
-
     @Override
     public boolean isImmobile() {
         return super.isImmobile() && this.hasPassengers();
@@ -441,6 +441,42 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
             return super.damage(source, amount);
         }
     }
+
+    @Override
+    public boolean tryAttack(Entity target) {
+        boolean bl = super.tryAttack(target);
+        if (bl && target instanceof LivingEntity livingEntity) {
+            switch (this.getVariant()) {
+                case DEFAULT -> {}
+                case POISON -> {
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 5 * 20), this);
+                }
+                case WITHER -> {
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 5 * 20), this);
+                }
+                case FIRE -> {
+                    livingEntity.setOnFireForTicks(5 * 20);
+                }
+                case LUNGING -> {
+
+                }
+                case WEAVER -> {
+                    World world = this.getWorld();
+                    BlockPos pos = livingEntity.getBlockPos();
+                    if (world.getBlockState(pos).isReplaceable()) {
+                        world.setBlockState(pos, Blocks.COBWEB.getDefaultState());
+                    }
+                }
+                default -> {}
+            }
+            this.onAttacking(target);
+            return true;
+        }
+
+
+        return bl;
+    }
+
     public boolean canAttackWithOwner(LivingEntity target, LivingEntity owner) {
         if (!(target instanceof CreeperEntity) && !(target instanceof GhastEntity) && !(target instanceof ArmorStandEntity)) {
             if (target instanceof SpiderlingEntity spiderlingEntity) {
@@ -588,17 +624,6 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
 
     }
 
-    @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(DATA_ID_TYPE_VARIANT, 0);
-        builder.add(ANGER, 0);
-        builder.add(SPIDER_FLAGS, (byte)0);
-        builder.add(GROWTH_SIZE, 1F);
-        builder.add(MAX_HEALTH, 8F);
-        builder.add(MOVEMENT_SPEED, 0.35F);
-        builder.add(JUMP_STRENGTH, 0.7F);
-    }
     public boolean isClimbing() {
         return this.isClimbingWall();
     }
@@ -616,8 +641,21 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
 
         this.dataTracker.set(SPIDER_FLAGS, b);
     }
+
     public SpiderlingVariant getVariant() {
         return SpiderlingVariant.byId(this.getTypeVariant() & 255);
+    }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
+        builder.add(ANGER, 0);
+        builder.add(SPIDER_FLAGS, (byte)0);
+        builder.add(GROWTH_SIZE, 1F);
+        builder.add(MAX_HEALTH, 8F);
+        builder.add(MOVEMENT_SPEED, 0.35F);
+        builder.add(JUMP_STRENGTH, 0.7F);
     }
 
     @Override
@@ -634,21 +672,6 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     }
     private void setGrowthSize(float growthSize) {
         this.dataTracker.set(GROWTH_SIZE, growthSize);
-    }
-
-    public static DefaultAttributeContainer.Builder createAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
-                .add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.7)
-                .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 6.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
-    }
-
-    @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        return true;
     }
 
     @Override
@@ -689,6 +712,22 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         }
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
+
+    public static DefaultAttributeContainer.Builder createAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
+                .add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.7)
+                .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 6.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
+    }
+
+    @Override
+    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        return true;
+    }
+
     /* SOUNDS */
     @Nullable
     @Override
@@ -751,14 +790,15 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
 
         Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
         SpiderlingVariant variant;
-        if (this.random.nextInt(100) <= 5) {
-            variant = SpiderlingVariant.DEFAULT;
-        }
-        else if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
-            variant = biomeMap.get(currentBiomeKey.get());
-        } else {
-            variant = SpiderlingVariant.byId(this.random.nextBetween(0, SpiderlingVariant.values().length - 1));
-        }
+//        if (this.random.nextInt(100) <= 5) {
+//            variant = SpiderlingVariant.DEFAULT;
+//        }
+//        else if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
+//            variant = biomeMap.get(currentBiomeKey.get());
+//        } else {
+//            variant = SpiderlingVariant.byId(this.random.nextBetween(0, SpiderlingVariant.values().length - 1));
+//        }
+        variant = SpiderlingVariant.DEFAULT;
         this.setVariant(variant);
         this.setGrowthSize((this.random.nextFloat() * 2f - 1)*0.05f + 1);
 

@@ -19,6 +19,16 @@ public class SpiderlingRenderer<T extends SpiderlingEntity> extends MobEntityRen
             Util.make(Maps.newEnumMap(SpiderlingVariant.class), map -> {
                 map.put(SpiderlingVariant.DEFAULT,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/spiderling/spiderling.png"));
+                map.put(SpiderlingVariant.POISON,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/spiderling/spiderling.png"));
+                map.put(SpiderlingVariant.WITHER,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/spiderling/spiderling.png"));
+                map.put(SpiderlingVariant.FIRE,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/spiderling/spiderling.png"));
+                map.put(SpiderlingVariant.LUNGING,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/spiderling/spiderling.png"));
+                map.put(SpiderlingVariant.WEAVER,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/spiderling/spiderling.png"));
             });
 
     public SpiderlingRenderer(EntityRendererFactory.Context context) {

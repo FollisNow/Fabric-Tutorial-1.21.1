@@ -4,7 +4,12 @@ import net.follis.tutorialmod.util.IVariant;
 import net.minecraft.util.StringIdentifiable;
 
 public enum SpiderlingVariant implements IVariant, StringIdentifiable {
-    DEFAULT(0, "Default");
+    DEFAULT(0, "Default"),
+    POISON(1, "Poison"),
+    WITHER(2, "Wither"),
+    FIRE(3, "Fire"),
+    LUNGING(4, "Lunging"),
+    WEAVER(5, "Weaver");
 
     private final int id;
     private final String name; // Associated name
