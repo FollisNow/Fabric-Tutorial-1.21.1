@@ -46,7 +46,7 @@ public class ScorpionAttackGoal extends MeleeAttackGoal {
     }
 
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
-        return this.entity.distanceTo(pEnemy) <= 3f;
+        return this.entity.distanceTo(pEnemy) <= 1.5f + pEnemy.getBoundingBox().getAverageSideLength() / 2;
     }
 
     protected void resetAttackCooldown() {

@@ -6,6 +6,7 @@ import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -55,6 +56,8 @@ public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVaria
 
     public ScorpionEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
+        this.setPathfindingPenalty(PathNodeType.POWDER_SNOW, -1.0F);
+        this.setPathfindingPenalty(PathNodeType.DANGER_POWDER_SNOW, -1.0F);
     }
 
     @Override
@@ -83,7 +86,12 @@ public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVaria
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 7.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0F)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0F)
+                .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 6.0);
+    }
+    @Override
+    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        return true;
     }
 
     @Nullable
