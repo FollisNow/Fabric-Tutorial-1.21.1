@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.ai.ScorpionAttackGoal;
+import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.entity.*;
@@ -23,6 +24,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.ItemTags;
@@ -78,7 +80,16 @@ public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVaria
     }
 
     private boolean foodSelector(ItemStack stack) {
-        return stack.isIn(ItemTags.BEE_FOOD);
+        if(this.getVariant() == ScorpionVariant.DEF3) {
+            return stack.isOf(ModItems.GOLDEN_SPIDER_EYE);
+        } else {
+            return stack.isIn(ItemTags.MEAT);
+        }
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return foodSelector(stack);
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
@@ -109,11 +120,6 @@ public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVaria
         super.breed(world, other);
         this.setBreedingAge(1200);
         other.setBreedingAge(1200);
-    }
-
-    @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.isIn(ItemTags.BEE_FOOD);
     }
 
     @Override

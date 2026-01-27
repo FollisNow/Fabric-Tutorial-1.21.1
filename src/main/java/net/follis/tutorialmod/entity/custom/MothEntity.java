@@ -100,10 +100,14 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
 
     private boolean foodSelector(ItemStack stack) {
         if(this.getVariant() == MothVariant.VERY_RARE) {
-            return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
+            return stack.isIn(ModTags.Items.GOLDEN_VEGETAL_FOOD);
         } else {
-            return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST) || stack.isIn(ItemTags.BEE_FOOD);
+            return stack.isIn(ItemTags.BEE_FOOD);
         }
+    }
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return foodSelector(stack);
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
@@ -152,10 +156,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
         super.breed(world, other);
         this.setBreedingAge(1200);
         other.setBreedingAge(1200);
-    }
-    @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.isIn(ItemTags.BEE_FOOD);
     }
 
     @Override

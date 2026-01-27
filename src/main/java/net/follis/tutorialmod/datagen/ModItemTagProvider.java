@@ -120,7 +120,19 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.LOCUST_RED);
 
         getOrCreateTagBuilder(ItemTags.MEAT)
-                .addTag(ModTags.Items.LOCUST_ITEMS);
+                .addTag(ModTags.Items.LOCUST_ITEMS)
+                .add(ModItems.GRILLED_LOCUST);
+
+        getOrCreateTagBuilder(ModTags.Items.GOLDEN_VEGETAL_FOOD)
+                .add(ModItems.GOLDEN_SWEET_BERRIES)
+                .add(ModItems.GOLDEN_GLOW_BERRIES)
+                .add(Items.GOLDEN_APPLE)
+                .add(Items.GOLDEN_CARROT)
+                .add(Items.GLISTERING_MELON_SLICE);
+
+        getOrCreateTagBuilder(ModTags.Items.GOLDEN_FOOD)
+                .addTag(ModTags.Items.GOLDEN_VEGETAL_FOOD)
+                .add(ModItems.GOLDEN_SPIDER_EYE);
 
 
     }

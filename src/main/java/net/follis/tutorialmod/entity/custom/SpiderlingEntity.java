@@ -114,16 +114,12 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     }
 
     private boolean foodSelector(ItemStack stack) {
-        if(this.getVariant() != SpiderlingVariant.DEFAULT) {
-            return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
-        } else {
-            return stack.isIn(ItemTags.MEAT);
-        }
+        return stack.isIn(ItemTags.MEAT);
     }
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isIn(ItemTags.MEAT);
+        return foodSelector(stack);
     }
 
     private void tryTame(PlayerEntity player) {

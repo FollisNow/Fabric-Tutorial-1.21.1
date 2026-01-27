@@ -31,6 +31,10 @@ public class ModTags {
 
         public static final TagKey<Item> LOCUST_ITEMS = createTag("locust_items");
 
+        public static final TagKey<Item> GOLDEN_VEGETAL_FOOD = createTag("golden_vegetal_food");
+
+        public static final TagKey<Item> GOLDEN_FOOD = createTag("golden_food");
+
         public static final TagKey<Item> GOLD_BLOCKS = createTag("gold_blocks");
 
         private static TagKey<Item> createTag(String name) {

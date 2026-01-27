@@ -96,10 +96,15 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
 
     private boolean foodSelector(ItemStack stack) {
         if(this.getVariant() == BeetleVariant.OMEN) {
-            return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
+            return stack.isIn(ModTags.Items.GOLDEN_FOOD) || stack.isIn(ItemTags.MEAT);
         } else {
-            return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST);
+            return stack.isIn(ItemTags.BEE_FOOD);
         }
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return foodSelector(stack);
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
@@ -153,12 +158,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
         other.setBreedingAge(1200);
     }
 
-    @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        if (this.getVariant() == BeetleVariant.OMEN)
-            return stack.isOf(Items.GOLDEN_APPLE) || stack.isOf(ModItems.GRILLED_LOCUST);
-        return stack.isIn(ItemTags.BEE_FOOD) || stack.isIn(ModTags.Items.LOCUST_ITEMS) || stack.isOf(ModItems.GRILLED_LOCUST);
-    }
+
 
     public StatusEffect getPotionGene() {
         if (this.dataTracker.get(POTION_GENE) == -1) {

@@ -3,6 +3,7 @@ package net.follis.tutorialmod.entity.custom;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.util.IBugVariants;
+import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,6 +27,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -52,17 +54,30 @@ public class LocustEntity extends AnimalEntity implements IBugVariants {
         super(entityType, world);
     }
 
-
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new HarvestBlockGoal(this)); // Specify the block to harvest
+        this.goalSelector.add(1, new HarvestBlockGoal(this));
 
         this.goalSelector.add(3, new AnimalMateGoal(this, 1.15D));
-        this.goalSelector.add(4, new TemptGoal(this, 1.25D, Ingredient.ofItems(Items.WHEAT), false));
+        this.goalSelector.add(4, new TemptGoal(this, 1.25D, this::foodSelector, false));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
     }
+
+    private boolean foodSelector(ItemStack stack) {
+        if(this.getVariant() == LocustVariant.GOLD) {
+            return stack.isIn(ModTags.Items.GOLDEN_VEGETAL_FOOD);
+        } else {
+            return stack.isIn(ItemTags.BEE_FOOD);
+        }
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return foodSelector(stack);
+    }
+
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 4)
@@ -89,11 +104,6 @@ public class LocustEntity extends AnimalEntity implements IBugVariants {
         }
     }
 
-
-    @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.WHEAT);
-    }
 
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
