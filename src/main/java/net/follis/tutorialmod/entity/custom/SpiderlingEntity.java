@@ -442,7 +442,6 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
         boolean bl = super.tryAttack(target);
         if (bl && target instanceof LivingEntity livingEntity) {
             switch (this.getVariant()) {
-                case DEFAULT -> {}
                 case POISON -> {
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 5 * 20), this);
                 }
