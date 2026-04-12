@@ -1,6 +1,7 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
 import net.follis.tutorialmod.item.custom.VisionMonocleItem;
 import net.follis.tutorialmod.util.IBugVariants;
@@ -28,6 +29,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.ItemTags;
@@ -48,6 +50,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -153,56 +156,113 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
 
-        // Early return for client-side or condition where mob cannot be interacted with
-        if (this.getWorld().isClient) {
-            boolean shouldConsume =
-                    this.isOwner(player) ||
-                    this.isTamed() ||
-                    (itemStack.isIn(ModTags.Items.LOCUST_ITEMS) && !this.isTamed() && !this.hasAngerTime());
-            return shouldConsume ? ActionResult.CONSUME : ActionResult.PASS;
-        }
+        // if server or baby+food (because client has particles)
+        if (!this.getWorld().isClient || this.isBaby() && this.isBreedingItem(itemStack)) {
 
-        // Check if the mob is tamed
-        if (this.isTamed()) {
-            // Check for breeding and health
-            if (this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                itemStack.decrementUnlessCreative(1, player);
-                FoodComponent foodComponent = itemStack.get(DataComponentTypes.FOOD);
-                float nutrition = foodComponent != null ? (float) foodComponent.nutrition() : 1.0F;
-                this.heal(2.0F * nutrition);
-                return ActionResult.success(this.getWorld().isClient());
-            }
+            // Check if the mob is tamed
+            if (this.isTamed()) {
 
-            // Handling for shears and owner
-            if (!itemStack.isOf(Items.SHEARS) || !this.isOwner(player)) {
-                ActionResult actionResult = super.interactMob(player, hand);
-                if (!actionResult.isAccepted() && this.isOwner(player) && player.isSneaking()
-                        && !(itemStack.getItem() instanceof AbstractEntityJarItem) && !(itemStack.getItem() instanceof VisionMonocleItem)) {
-                    this.toggleSitting();
-                    return ActionResult.SUCCESS_NO_ITEM_USED;
+                // Check for breeding and health
+                if (this.isBreedingItem(itemStack)) {
+                    boolean bl = this.receiveFood(player, itemStack);
+                    if (bl) {
+                        itemStack.decrementUnlessCreative(1, player);
+                    }
+
+                    if (this.getWorld().isClient) {
+                        return ActionResult.CONSUME;
+                    } else {
+                        return bl ? ActionResult.SUCCESS : ActionResult.PASS;
+                    }
                 }
+
+
                 if (itemStack.getItem() instanceof AbstractEntityJarItem || itemStack.getItem() instanceof VisionMonocleItem) {
                     return ActionResult.PASS;
                 }
-            }
 
-            if (this.hasPassengers() || this.isBaby()) {
+                ActionResult actionResult = super.interactMob(player, hand);
+                if (!actionResult.isAccepted() && this.isOwner(player) && player.isSneaking()) {
+                    this.toggleSitting();
+                    return ActionResult.SUCCESS_NO_ITEM_USED;
+                }
+
+                if (this.hasPassengers() || this.isBaby()) {
+                    return super.interactMob(player, hand);
+                }
+
+                if (!actionResult.isAccepted() && this.getGrowthSize() >= 1.5F && !this.isBreedingItem(itemStack)) {
+                    this.putPlayerOnBack(player);
+                    return ActionResult.SUCCESS_NO_ITEM_USED;
+                }
+
+                return actionResult;
+            } else if (this.isBreedingItem(itemStack) && !this.hasAngerTime()) {
+                    itemStack.decrementUnlessCreative(1, player);
+                    this.tryTame(player);
+                    return ActionResult.SUCCESS;
+            } else {
                 return super.interactMob(player, hand);
             }
-            if (this.getGrowthSize() >= 1.5F) {
-                this.putPlayerOnBack(player);
+        } else {
+            boolean shouldConsume = this.isOwner(player) || this.isTamed() || this.isBreedingItem(itemStack) && !this.isTamed() && !this.hasAngerTime();
+            return shouldConsume ? ActionResult.CONSUME : ActionResult.PASS;
+        }
+    }
+
+    private boolean receiveFood(PlayerEntity player, ItemStack itemStack) {
+        boolean bl = false;
+        float f;
+        int i;
+        if (itemStack.isOf(ModItems.LOCUST_GOLD)) {
+            f = 12.0F;
+            i = 240;
+            if (!this.getWorld().isClient && this.isTamed() && this.getBreedingAge() == 0 && !this.isInLove()) {
+                bl = true;
+                this.lovePlayer(player);
             }
-            return ActionResult.success(this.getWorld().isClient);
+        } else if (itemStack.isIn(ModTags.Items.LOCUST_ITEMS)) {
+            f = 4.0F;
+            i = 60;
+            if (!this.getWorld().isClient && this.isTamed() && this.getBreedingAge() == 0 && !this.isInLove()) {
+                bl = true;
+                this.lovePlayer(player);
+            }
+        } else {
+            f = 2.0F;
+            i = 20;
         }
 
-        // Handle taming for unowned mobs
-        if (itemStack.isIn(ModTags.Items.LOCUST_ITEMS) && !this.hasAngerTime()) {
-            itemStack.decrementUnlessCreative(1, player);
-            this.tryTame(player);
-            return ActionResult.SUCCESS;
+        if (this.getHealth() < this.getMaxHealth()) {
+            this.heal(f);
+            bl = true;
         }
 
-        return (itemStack.getItem() instanceof AbstractEntityJarItem) || (itemStack.getItem() instanceof VisionMonocleItem) ? ActionResult.PASS : super.interactMob(player, hand);
+        if (this.isBaby()) {
+            this.getWorld().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getParticleX(1.0), this.getRandomBodyY() + 0.5, this.getParticleZ(1.0), 0.0, 0.0, 0.0);
+            if (!this.getWorld().isClient) {
+                this.growUp(i);
+                bl = true;
+            }
+        }
+
+        if (bl) {
+            this.playEatingAnimation();
+            this.emitGameEvent(GameEvent.EAT);
+        }
+
+        return bl;
+    }
+    private void playEatingAnimation() {
+        if (!this.isSilent()) {
+            SoundEvent soundEvent = this.getAmbientSound();
+            if (soundEvent != null) {
+                this.getWorld()
+                        .playSound(
+                                null, this.getX(), this.getY(), this.getZ(), soundEvent, this.getSoundCategory(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F
+                        );
+            }
+        }
     }
 
     private void toggleSitting() {
