@@ -132,7 +132,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         getOrCreateTagBuilder(ModTags.Items.GOLDEN_FOOD)
                 .addTag(ModTags.Items.GOLDEN_VEGETAL_FOOD)
-                .add(ModItems.GOLDEN_SPIDER_EYE);
+                .add(ModItems.GOLDEN_SPIDER_EYE)
+                .add(ModItems.LOCUST_GOLD);
 
 
     }
