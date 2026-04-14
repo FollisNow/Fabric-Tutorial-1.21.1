@@ -161,6 +161,9 @@ public class ModItems {
     public static final Item GOLD_CARVER_SPAWN_EGG = registerItem("gold_carver_spawn_egg",
             new SpawnEggItem(ModEntities.GOLD_CARVER, 0xf9bd23, 0x96f923, new Item.Settings()));
 
+    public static final Item GOLD_PANNER_SPAWN_EGG = registerItem("gold_panner_spawn_egg",
+            new SpawnEggItem(ModEntities.GOLD_PANNER, 0xffec4f, 0x96f923, new Item.Settings()));
+
     public static final Item TOMAHAWK = registerItem("tomahawk",
             new TomahawkItem(new Item.Settings().maxCount(16)));
 

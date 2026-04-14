@@ -77,6 +77,8 @@
   "item.tutorialmod.moth_spawn_egg": "Moth Spawn Egg",
   "item.tutorialmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
   "item.tutorialmod.scorpion_spawn_egg": "Scorpion Spawn Egg",
+  "item.tutorialmod.gold_carver_spawn_egg": "Gold Carver Spawn Egg",
+  "item.tutorialmod.gold_panner_spawn_egg": "Gold Panner Spawn Egg",
 
   "item.tutorialmod.tomahawk": "Tomahawk",
   "item.tutorialmod.dart": "Dart",
@@ -289,5 +291,7 @@
   "entity.tutorialmod.scorpion": "Scorpion",
   "entity.tutorialmod.tomahawk": "Tomahawk",
   "entity.tutorialmod.dart": "Dart",
-  "entity.tutorialmod.bamboo_trap": "Bamboo Trap"
+  "entity.tutorialmod.bamboo_trap": "Bamboo Trap",
+  "entity.tutorialmod.gold_carver": "Gold Carver",
+  "entity.tutorialmod.gold_panner": "Gold Panner"
 }

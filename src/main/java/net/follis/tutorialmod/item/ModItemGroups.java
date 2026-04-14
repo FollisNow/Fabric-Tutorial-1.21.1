@@ -78,6 +78,7 @@ public class ModItemGroups {
                         entries.add(ModItems.LOCUST_SPAWN_EGG);
                         entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
                         entries.add(ModItems.GOLD_CARVER_SPAWN_EGG);
+                        entries.add(ModItems.GOLD_PANNER_SPAWN_EGG);
 
                         entries.add(ModItems.GOLDEN_NEEDLE);
                         entries.add(ModItems.MINI_SUN);

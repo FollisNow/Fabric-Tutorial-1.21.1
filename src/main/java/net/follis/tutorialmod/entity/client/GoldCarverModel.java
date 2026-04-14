@@ -91,6 +91,8 @@ public class GoldCarverModel<T extends GoldCarverEntity> extends SinglePartEntit
         return root;
     }
 
+    public ModelPart getBodyPart() {return body;}
+
     @Override
     public void setArmAngle(Arm arm, MatrixStack matrices) {
         float f = 1.0F;

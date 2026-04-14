@@ -139,6 +139,7 @@ public class TutorialMod implements ModInitializer {
 
 		//Golden
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_CARVER, GoldCarverEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_PANNER, GoldPannerEntity.createAttributes());
 
 
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {

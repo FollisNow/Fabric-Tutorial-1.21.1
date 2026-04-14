@@ -1,7 +1,7 @@
 package net.follis.tutorialmod.entity.client;
 
 import net.follis.tutorialmod.TutorialMod;
-import net.follis.tutorialmod.entity.custom.GoldCarverEntity;
+import net.follis.tutorialmod.entity.custom.GoldPannerEntity;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -18,22 +18,22 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
-public class GoldCarverRenderer extends MobEntityRenderer<GoldCarverEntity, GoldCarverModel<GoldCarverEntity>> {
-    public static final Identifier TEXTURE = Identifier.of(TutorialMod.MOD_ID, "textures/entity/gold_carver/gold_carver.png");
+public class GoldPannerRenderer extends MobEntityRenderer<GoldPannerEntity, GoldPannerModel<GoldPannerEntity>> {
+    public static final Identifier TEXTURE = Identifier.of(TutorialMod.MOD_ID, "textures/entity/gold_panner/gold_panner.png");
     private float cachedBodyYaw;
 
-    public GoldCarverRenderer(EntityRendererFactory.Context context) {
-        super(context, new GoldCarverModel<>(context.getPart(GoldCarverModel.GOLD_CARVER)), 0.75f);
+    public GoldPannerRenderer(EntityRendererFactory.Context context) {
+        super(context, new GoldPannerModel<>(context.getPart(GoldPannerModel.GOLD_PANNER)), 0.75f);
 
     }
 
     @Override
-    public Identifier getTexture(GoldCarverEntity entity) {
+    public Identifier getTexture(GoldPannerEntity entity) {
         return TEXTURE;
     }
 
     @Override
-    public void render(GoldCarverEntity livingEntity, float f, float g, MatrixStack matrixStack,
+    public void render(GoldPannerEntity livingEntity, float f, float g, MatrixStack matrixStack,
                        VertexConsumerProvider vertexConsumerProvider, int i) {
         if(livingEntity.isBaby()) {
             matrixStack.scale(0.5f, 0.5f, 0.5f);
@@ -57,8 +57,9 @@ public class GoldCarverRenderer extends MobEntityRenderer<GoldCarverEntity, Gold
             matrices.push();
             cachedBodyYaw = MathHelper.lerpAngleDegrees(0.3F, cachedBodyYaw ,-entity.getBodyYaw());
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(cachedBodyYaw));
-            matrices.translate(0.09375F, 1.03125F, 0.25F);
-            matrices.scale(0.1875F, 0.1875F, 0.1875F);
+            matrices.translate(0.0F, 0.9375F, 0.3125F);
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90));
+            matrices.scale(0.375F, 0.375F, 0.375F);
             heldItemRenderer.renderItem(entity, stack, ModelTransformationMode.HEAD, false, matrices, vertexConsumers, light);
             matrices.pop();
         }

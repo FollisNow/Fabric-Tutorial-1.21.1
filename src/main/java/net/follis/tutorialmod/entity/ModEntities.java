@@ -50,6 +50,11 @@ public class ModEntities {
             EntityType.Builder.create(GoldCarverEntity::new, SpawnGroup.CREATURE)
                     .dimensions(1f, 2f).build());
 
+    public static final EntityType<GoldPannerEntity> GOLD_PANNER = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(TutorialMod.MOD_ID, "gold_panner"),
+            EntityType.Builder.create(GoldPannerEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(1f, 1.1f).build());
+
 
 
     public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,
