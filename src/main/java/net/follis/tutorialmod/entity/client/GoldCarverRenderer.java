@@ -52,7 +52,7 @@ public class GoldCarverRenderer extends MobEntityRenderer<GoldCarverEntity, Gold
     }
 
     protected void renderItem(LivingEntity entity, ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        HeldItemRenderer heldItemRenderer = this.dispatcher.getHeldItemRenderer();;
+        HeldItemRenderer heldItemRenderer = this.dispatcher.getHeldItemRenderer();
         if (!stack.isEmpty()) {
             matrices.push();
             cachedBodyYaw = MathHelper.lerpAngleDegrees(0.3F, cachedBodyYaw ,-entity.getBodyYaw());
