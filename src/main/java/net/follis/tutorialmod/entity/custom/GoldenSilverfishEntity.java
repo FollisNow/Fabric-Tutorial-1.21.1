@@ -1,8 +1,8 @@
 package net.follis.tutorialmod.entity.custom;
 
+import net.follis.tutorialmod.block.custom.InfestedGoldenBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.InfestedBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -80,11 +80,11 @@ public class GoldenSilverfishEntity extends SilverfishEntity {
                             BlockPos blockPos2 = blockPos.add(j, i, k);
                             BlockState blockState = world.getBlockState(blockPos2);
                             Block block = blockState.getBlock();
-                            if (block instanceof InfestedBlock) {
+                            if (block instanceof InfestedGoldenBlocks) {
                                 if (world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
                                     world.breakBlock(blockPos2, true, this.goldenSilverfish);
                                 } else {
-                                    world.setBlockState(blockPos2, ((InfestedBlock)block).toRegularState(world.getBlockState(blockPos2)), Block.NOTIFY_ALL);
+                                    world.setBlockState(blockPos2, ((InfestedGoldenBlocks)block).toRegularState(world.getBlockState(blockPos2)), Block.NOTIFY_ALL);
                                 }
 
                                 if (random.nextBoolean()) {
@@ -121,7 +121,7 @@ public class GoldenSilverfishEntity extends SilverfishEntity {
                     this.direction = Direction.random(random);
                     BlockPos blockPos = BlockPos.ofFloored(this.mob.getX(), this.mob.getY() + 0.5, this.mob.getZ()).offset(this.direction);
                     BlockState blockState = this.mob.getWorld().getBlockState(blockPos);
-                    if (InfestedBlock.isInfestable(blockState)) {
+                    if (InfestedGoldenBlocks.isInfestable(blockState)) {
                         this.canInfest = true;
                         return true;
                     }
@@ -145,8 +145,8 @@ public class GoldenSilverfishEntity extends SilverfishEntity {
                 WorldAccess worldAccess = this.mob.getWorld();
                 BlockPos blockPos = BlockPos.ofFloored(this.mob.getX(), this.mob.getY() + 0.5, this.mob.getZ()).offset(this.direction);
                 BlockState blockState = worldAccess.getBlockState(blockPos);
-                if (InfestedBlock.isInfestable(blockState)) {
-                    worldAccess.setBlockState(blockPos, InfestedBlock.fromRegularState(blockState), Block.NOTIFY_ALL);
+                if (InfestedGoldenBlocks.isInfestable(blockState)) {
+                    worldAccess.setBlockState(blockPos, InfestedGoldenBlocks.fromRegularState(blockState), Block.NOTIFY_ALL);
                     this.mob.playSpawnEffects();
                     this.mob.discard();
                 }
