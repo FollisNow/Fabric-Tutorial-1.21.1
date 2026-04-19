@@ -39,6 +39,17 @@
     "tutorialmod:chiseled_gold_bricks",
     "tutorialmod:shaped_gold",
     "tutorialmod:engraved_gold",
-    "tutorialmod:sculpted_gold"
+    "tutorialmod:sculpted_gold",
+    "tutorialmod:infested_golden_bricks",
+    "tutorialmod:infested_gold_bricks",
+    "tutorialmod:infested_cobbled_gold",
+    "tutorialmod:infested_cut_gold",
+    "tutorialmod:infested_gold_large_bricks",
+    "tutorialmod:infested_crumbled_gold",
+    "tutorialmod:infested_chiseled_gold",
+    "tutorialmod:infested_chiseled_gold_bricks",
+    "tutorialmod:infested_shaped_gold",
+    "tutorialmod:infested_engraved_gold",
+    "tutorialmod:infested_sculpted_gold"
   ]
 }

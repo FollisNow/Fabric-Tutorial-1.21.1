@@ -67,6 +67,19 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.ENGRAVED_GOLD)
                 .add(ModBlocks.SCULPTED_GOLD)
 
+                //Infested Gold
+                .add(ModBlocks.INFESTED_GOLDEN_BRICKS)
+                .add(ModBlocks.INFESTED_GOLD_BRICKS)
+                .add(ModBlocks.INFESTED_COBBLED_GOLD)
+                .add(ModBlocks.INFESTED_CUT_GOLD)
+                .add(ModBlocks.INFESTED_GOLD_LARGE_BRICKS)
+                .add(ModBlocks.INFESTED_CRUMBLED_GOLD)
+                .add(ModBlocks.INFESTED_CHISELED_GOLD)
+                .add(ModBlocks.INFESTED_CHISELED_GOLD_BRICKS)
+                .add(ModBlocks.INFESTED_SHAPED_GOLD)
+                .add(ModBlocks.INFESTED_ENGRAVED_GOLD)
+                .add(ModBlocks.INFESTED_SCULPTED_GOLD)
+
         ;
 
         getOrCreateTagBuilder(BlockTags.WALLS)

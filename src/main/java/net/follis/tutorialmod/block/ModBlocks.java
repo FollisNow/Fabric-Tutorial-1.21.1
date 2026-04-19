@@ -212,6 +212,30 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).strength(0.2F).sounds(BlockSoundGroup.CHAIN))
     );
 
+    //Golden Infested Blocks
+    public static final Block INFESTED_GOLDEN_BRICKS = registerBlock("infested_golden_bricks",
+            new InfestedGoldenBlocks(GOLDEN_BRICKS, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_GOLD_BRICKS = registerBlock("infested_gold_bricks",
+            new InfestedGoldenBlocks(GOLD_BRICKS, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_COBBLED_GOLD = registerBlock("infested_cobbled_gold",
+            new InfestedGoldenBlocks(COBBLED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_CUT_GOLD = registerBlock("infested_cut_gold",
+            new InfestedGoldenBlocks(CUT_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_GOLD_LARGE_BRICKS = registerBlock("infested_gold_large_bricks",
+            new InfestedGoldenBlocks(GOLD_LARGE_BRICKS, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_CRUMBLED_GOLD = registerBlock("infested_crumbled_gold",
+            new InfestedGoldenBlocks(CRUMBLED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_CHISELED_GOLD = registerBlock("infested_chiseled_gold",
+            new InfestedGoldenBlocks(CHISELED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_CHISELED_GOLD_BRICKS = registerBlock("infested_chiseled_gold_bricks",
+            new InfestedGoldenBlocks(CHISELED_GOLD_BRICKS, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_SHAPED_GOLD = registerBlock("infested_shaped_gold",
+            new InfestedGoldenBlocks(SHAPED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_ENGRAVED_GOLD = registerBlock("infested_engraved_gold",
+            new InfestedGoldenBlocks(ENGRAVED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_SCULPTED_GOLD = registerBlock("infested_sculpted_gold",
+            new InfestedGoldenBlocks(SCULPTED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+
     // Nature
     public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
             new ModSaplingBlock(ModSaplingGenerators.GOLDEN_TREE, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING), ModBlocks.GOLDEN_DIRT));

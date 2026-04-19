@@ -71,14 +71,18 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerDoubleBlock(ModBlocks.GOLD_ROSE_BUSH, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_DIRT);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_SAND);
 
         blockStateModelGenerator.registerLog(ModBlocks.GOLDEN_LOG).log(ModBlocks.GOLDEN_LOG).wood(ModBlocks.GOLDEN_WOOD);
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_GOLDEN_LOG).log(ModBlocks.STRIPPED_GOLDEN_LOG).wood(ModBlocks.STRIPPED_GOLDEN_WOOD);
-
         blockStateModelGenerator.registerSingleton(ModBlocks.GOLDEN_LEAVES, TexturedModel.LEAVES);
 
+        registerBlockModelsWithStairsSlabWall(blockStateModelGenerator, "GOLDEN_BRICKS");
+        registerBlockModelsWithStairsSlabWall(blockStateModelGenerator, "GOLD_BRICKS");
+        registerBlockModelsWithStairsSlabWall(blockStateModelGenerator, "COBBLED_GOLD");
+        registerBlockModelsWithStairsSlabWall(blockStateModelGenerator, "CUT_GOLD");
+        registerBlockModelsWithStairsSlabWall(blockStateModelGenerator, "GOLD_LARGE_BRICKS");
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLED_GOLD);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLDEN_SAND);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD_BRICKS, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.SHAPED_GOLD, TexturedModel.CUBE_BOTTOM_TOP);
@@ -88,6 +92,19 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerAxisRotated(ModBlocks.GOLD_CHAIN, ModelIds.getBlockModelId(ModBlocks.GOLD_CHAIN));
         blockStateModelGenerator.registerLantern(ModBlocks.GOLD_LANTERN);
 
+        blockStateModelGenerator.registerParented(ModBlocks.GOLDEN_BRICKS, ModBlocks.INFESTED_GOLDEN_BRICKS);
+        blockStateModelGenerator.registerParented(ModBlocks.GOLD_BRICKS, ModBlocks.INFESTED_GOLD_BRICKS);
+        blockStateModelGenerator.registerParented(ModBlocks.COBBLED_GOLD, ModBlocks.INFESTED_COBBLED_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.CUT_GOLD, ModBlocks.INFESTED_CUT_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.GOLD_LARGE_BRICKS, ModBlocks.INFESTED_GOLD_LARGE_BRICKS);
+        blockStateModelGenerator.registerParented(ModBlocks.CRUMBLED_GOLD, ModBlocks.INFESTED_CRUMBLED_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.CHISELED_GOLD, ModBlocks.INFESTED_CHISELED_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.CHISELED_GOLD_BRICKS, ModBlocks.INFESTED_CHISELED_GOLD_BRICKS);
+        blockStateModelGenerator.registerParented(ModBlocks.SHAPED_GOLD, ModBlocks.INFESTED_SHAPED_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.ENGRAVED_GOLD, ModBlocks.INFESTED_ENGRAVED_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.SCULPTED_GOLD, ModBlocks.INFESTED_SCULPTED_GOLD);
+
+
         BlockStateModelGenerator.BlockTexturePool goldPool = blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.GOLD_BLOCK);
         goldPool.stairs(ModBlocks.GOLD_STAIRS);
         goldPool.slab(ModBlocks.GOLD_SLAB);
@@ -96,19 +113,13 @@ public class ModModelProvider extends FabricModelProvider {
         goldPool.fenceGate(ModBlocks.GOLD_FENCE_GATE);
         goldPool.wall(ModBlocks.GOLD_WALL);
 
-        registerBlockModels(blockStateModelGenerator, "GOLDEN_BRICKS");
-        registerBlockModels(blockStateModelGenerator, "GOLD_BRICKS");
-        registerBlockModels(blockStateModelGenerator, "COBBLED_GOLD");
-        registerBlockModels(blockStateModelGenerator, "CUT_GOLD");
-        registerBlockModels(blockStateModelGenerator, "GOLD_LARGE_BRICKS");
-
-        registerGoldPiles(blockStateModelGenerator);
-
         BlockStateModelGenerator.BlockTexturePool goldenWoodPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_PLANKS);
         goldenWoodPool.stairs(ModBlocks.GOLDEN_STAIRS);
         goldenWoodPool.slab(ModBlocks.GOLDEN_SLAB);
         goldenWoodPool.fence(ModBlocks.GOLDEN_FENCE);
         goldenWoodPool.fenceGate(ModBlocks.GOLDEN_FENCE_GATE);
+
+        registerGoldPiles(blockStateModelGenerator);
 
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.CHAIR);
 
@@ -118,7 +129,7 @@ public class ModModelProvider extends FabricModelProvider {
 
 
     }
-    public void registerBlockModels(BlockStateModelGenerator blockStateModelGenerator, String inputName) {
+    public void registerBlockModelsWithStairsSlabWall(BlockStateModelGenerator blockStateModelGenerator, String inputName) {
         String singularName = inputName.endsWith("S") ? inputName.substring(0, inputName.length() - 1) : inputName;
 
         Block inputBlock = getBlockByName(inputName);

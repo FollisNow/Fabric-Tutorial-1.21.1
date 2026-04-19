@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-12T19:52:26.7529443	Tutorial Mod/Tags for minecraft:block
+// 1.21.1	2026-04-19T03:28:30.5493443	Tutorial Mod/Tags for minecraft:block
 6836c94b89a820103a614d955a3d59cc9c15333f data\minecraft\tags\block\logs_that_burn.json
 f30a6367dbc22bbef01d6bf2a992f645005f83b5 data\minecraft\tags\block\needs_diamond_tool.json
 8f5c49cdc462f390d0940e284ae601bef7bb8ce0 data\minecraft\tags\block\beehives.json
@@ -8,6 +8,6 @@ ede0f16d900d2768c202f6d7df4a6bd405645a1e data\minecraft\tags\block\fences.json
 8c409058688e69cf29c8343b355076da4a1318c0 data\minecraft\tags\block\fence_gates.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data\tutorialmod\tags\block\needs_golden_tool.json
 079e21ee82e19be3b06c0ad61d06e9bdce588108 data\minecraft\tags\block\needs_iron_tool.json
-38f3d5702050d0a864e01dd67924d561f793caa6 data\minecraft\tags\block\mineable\pickaxe.json
+bde9817f424a3ddd905fb49a84d335fe6591b477 data\minecraft\tags\block\mineable\pickaxe.json
 e3550efd11a380553ef62f8df9647c2ed4e6ab93 data\minecraft\tags\block\walls.json
 456c78b2474dd2e698d06f34981628652df1e04e data\minecraft\tags\block\combination_step_sound_blocks.json

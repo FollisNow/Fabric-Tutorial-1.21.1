@@ -182,6 +182,19 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_CHAIN);
                         entries.add(ModBlocks.GOLD_LANTERN);
 
+                        //INFESTED GOLD
+                        entries.add(ModBlocks.INFESTED_GOLDEN_BRICKS);
+                        entries.add(ModBlocks.INFESTED_GOLD_BRICKS);
+                        entries.add(ModBlocks.INFESTED_COBBLED_GOLD);
+                        entries.add(ModBlocks.INFESTED_CUT_GOLD);
+                        entries.add(ModBlocks.INFESTED_GOLD_LARGE_BRICKS);
+                        entries.add(ModBlocks.INFESTED_CRUMBLED_GOLD);
+                        entries.add(ModBlocks.INFESTED_CHISELED_GOLD);
+                        entries.add(ModBlocks.INFESTED_CHISELED_GOLD_BRICKS);
+                        entries.add(ModBlocks.INFESTED_SHAPED_GOLD);
+                        entries.add(ModBlocks.INFESTED_ENGRAVED_GOLD);
+                        entries.add(ModBlocks.INFESTED_SCULPTED_GOLD);
+
                         entries.add(ModBlocks.GOLD_PILE_BLOCK);
                         entries.add(ModBlocks.GOLD_PILE);
 

@@ -24,6 +24,8 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
                 .add(ModEntities.SPIDERLING)
                 .add(ModEntities.LOCUST)
                 .add(ModEntities.MANTIS)
-                .add(ModEntities.MOTH);
+                .add(ModEntities.MOTH)
+                .add(ModEntities.SCORPION)
+                .add(ModEntities.GOLDEN_SILVERFISH);
     }
 }

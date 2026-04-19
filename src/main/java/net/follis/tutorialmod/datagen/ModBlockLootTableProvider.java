@@ -124,6 +124,20 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.SCULPTED_GOLD);
         addDrop(ModBlocks.GOLD_LARGE_BRICKS);
 
+        addDropWithSilkTouch(ModBlocks.INFESTED_GOLD_BRICKS, ModBlocks.GOLD_BRICKS);
+        addDropWithSilkTouch(ModBlocks.INFESTED_COBBLED_GOLD, ModBlocks.COBBLED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_CRUMBLED_GOLD, ModBlocks.CRUMBLED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_CHISELED_GOLD, ModBlocks.CHISELED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_CHISELED_GOLD_BRICKS, ModBlocks.CHISELED_GOLD_BRICKS);
+        addDropWithSilkTouch(ModBlocks.INFESTED_CUT_GOLD, ModBlocks.CUT_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_GOLDEN_BRICKS, ModBlocks.GOLDEN_BRICKS);
+        addDropWithSilkTouch(ModBlocks.INFESTED_SHAPED_GOLD, ModBlocks.SHAPED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_ENGRAVED_GOLD, ModBlocks.ENGRAVED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_SCULPTED_GOLD, ModBlocks.SCULPTED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_GOLD_LARGE_BRICKS, ModBlocks.GOLD_LARGE_BRICKS);
+
+
+
         addDrop(ModBlocks.GOLD_STAIRS);
         addDrop(ModBlocks.GOLD_SLAB, slabDrops(ModBlocks.GOLD_SLAB));
         addDrop(ModBlocks.GOLD_BUTTON);

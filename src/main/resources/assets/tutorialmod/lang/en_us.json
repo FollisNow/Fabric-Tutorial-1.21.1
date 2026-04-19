@@ -187,6 +187,18 @@
   "block.tutorialmod.engraved_gold": "Engraved Gold",
   "block.tutorialmod.sculpted_gold": "Sculpted Gold",
 
+  "block.tutorialmod.infested_golden_bricks": "Infested Golden Bricks",
+  "block.tutorialmod.infested_gold_bricks": "Infested Gold Bricks",
+  "block.tutorialmod.infested_cobbled_gold": "Infested Cobbled Gold",
+  "block.tutorialmod.infested_cut_gold": "Infested Cut Gold",
+  "block.tutorialmod.infested_gold_large_bricks": "Infested Gold Large Bricks",
+  "block.tutorialmod.infested_crumbled_gold": "Infested Crumbled Gold",
+  "block.tutorialmod.infested_chiseled_gold": "Infested Chiseled Gold",
+  "block.tutorialmod.infested_chiseled_gold_bricks": "Infested Chiseled Gold Bricks",
+  "block.tutorialmod.infested_shaped_gold": "Infested Shaped Gold",
+  "block.tutorialmod.infested_engraved_gold": "Infested Engraved Gold",
+  "block.tutorialmod.infested_sculpted_gold": "Infested Sculpted Gold",
+
 
   "item.tutorialmod.gold_chain": "Gold Chain",
   "block.tutorialmod.gold_chain": "Gold Chain",

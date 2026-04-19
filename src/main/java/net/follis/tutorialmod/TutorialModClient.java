@@ -77,6 +77,9 @@ public class TutorialModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(AmethystBeeModel.AMETHYST_BEE, AmethystBeeModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(GoldenSilverfishModel.GOLDEN_SILVERFISH, GoldenSilverfishModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GOLDEN_SILVERFISH, GoldenSilverfishRenderer::new);
+
         //GOLD
         EntityModelLayerRegistry.registerModelLayer(GoldCarverModel.GOLD_CARVER, GoldCarverModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLD_CARVER, GoldCarverRenderer::new);
