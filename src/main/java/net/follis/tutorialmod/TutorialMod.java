@@ -79,8 +79,8 @@ public class TutorialMod implements ModInitializer {
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
-		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
-		EntitySleepEvents.STOP_SLEEPING.register(new DreamLocustEvent());
+
+		// EVENTS
 		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if(entity instanceof SheepEntity sheepEntity) {
 				if(player.getMainHandStack().getItem() == Items.END_ROD) {
@@ -92,6 +92,10 @@ public class TutorialMod implements ModInitializer {
 			}
             return ActionResult.PASS;
         });
+		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
+		EntitySleepEvents.STOP_SLEEPING.register(new DreamLocustEvent());
+
+
 
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.MUNDANE, Items.SLIME_BALL, ModPotions.SLIMEY_POTION);

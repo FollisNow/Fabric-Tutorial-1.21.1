@@ -22,7 +22,6 @@ public class ModDispenserBehaviourProvider implements DispenserBehavior {
         DispenserBlock.registerBehavior(Items.GOLDEN_PICKAXE.asItem(), new PickaxeDispenserBehavior());
         DispenserBlock.registerBehavior(Items.DIAMOND_PICKAXE.asItem(), new PickaxeDispenserBehavior());
         DispenserBlock.registerBehavior(Items.NETHERITE_PICKAXE.asItem(), new PickaxeDispenserBehavior());
-        DispenserBlock.registerBehavior(ModItems.PINK_GARNET_PICKAXE.asItem(), new PickaxeDispenserBehavior());
 
         DispenserBlock.registerBehavior(ModItems.BUG_JAR.asItem(), new JarDispenserBehavior());
         ItemDispenserBehavior itemDispenserBehavior = new ItemDispenserBehavior() {

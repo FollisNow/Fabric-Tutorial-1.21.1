@@ -2,7 +2,6 @@ package net.follis.tutorialmod.mixin;
 
 import com.mojang.authlib.GameProfile;
 import net.follis.tutorialmod.item.ModItems;
-import net.follis.tutorialmod.item.custom.AbstractCursedEye;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,19 +33,6 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
             float g = (float)i / 20.0f;
             g = g > 1.0f ? 1.0f : g * g;
             f *= 1.0f - g * 0.15f;
-            info.setReturnValue(MathHelper.lerp(MinecraftClient.getInstance().options.getFovEffectScale().getValue().floatValue(), 1.0f, f));
-        }
-    }
-
-    @Inject(method = "getFovMultiplier", at = @At(value = "TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
-    private void getFovEyeMultiplierMixin(CallbackInfoReturnable<Float> info, float f) {
-        Item item = this.getActiveItem().getItem();
-        ItemStack itemStack = this.getActiveItem();
-        if (this.isUsingItem() && itemStack.getItem() instanceof AbstractCursedEye) {
-            int i = this.getItemUseTime();
-            float g = (float)i / 100.0f;
-            g = g > 1.0f ? 1.0f : g * g;
-            f *= 1.0f - g * 0.35f;
             info.setReturnValue(MathHelper.lerp(MinecraftClient.getInstance().options.getFovEffectScale().getValue().floatValue(), 1.0f, f));
         }
     }

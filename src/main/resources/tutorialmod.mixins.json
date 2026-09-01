@@ -9,7 +9,6 @@
 		"PotionEntityMixin"
 	],
 	"client": [
-		"AbstractClientPlayerEntityMixin",
 		"ItemRendererMixin",
 		"ModelLoaderMixin"
 	],

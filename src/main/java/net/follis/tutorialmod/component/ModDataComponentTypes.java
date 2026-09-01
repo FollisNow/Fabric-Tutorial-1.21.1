@@ -28,9 +28,6 @@ public class ModDataComponentTypes {
             register("entity_count1", builder -> builder.codec(Codec.INT));
 
 
-
-
-
     public static final ComponentType<List<AmethystBeeHiveBlockEntity.AmethystBeeData>> AMETHYST_BEES =
             register("bees", (builder) -> builder.codec(AmethystBeeHiveBlockEntity.AmethystBeeData.LIST_CODEC)
                     .packetCodec(AmethystBeeHiveBlockEntity.AmethystBeeData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
@@ -38,6 +35,11 @@ public class ModDataComponentTypes {
     public static final ComponentType<List<AbstractEntityJarItem.BugData>> BUGS =
             register("bugs", builder -> builder.codec(AbstractEntityJarItem.BugData.LIST_CODEC)
                     .packetCodec(AbstractEntityJarItem.BugData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
+
+    public static final ComponentType<String> CURSED_TARGET  =
+            register("cursed_target", builder -> builder.codec(Codec.STRING));
+
+
 
     public static final ComponentType<Integer> BUG_VARIANT =
             register("bug_variant", builder -> builder.codec(Codec.INT));
