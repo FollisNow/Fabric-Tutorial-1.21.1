@@ -1,10 +1,13 @@
 package net.follis.tutorialmod.entity.custom;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.network.MesmerizePayload;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.*;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
@@ -25,9 +28,11 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.s2c.play.LookAtS2CPacket;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -45,6 +50,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
+import static net.minecraft.util.math.MathHelper.lerp;
+
 public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IBugVariants {
     public final AnimationState flyingAnimationState = new AnimationState();
     public final AnimationState roostingAnimationState = new AnimationState();
@@ -55,6 +62,15 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     public float prevMaxWingDeviation;
     public float prevFlapProgress;
     private float flapSpeed = 1.0F;
+
+    private final Set<UUID> mesmerizedPlayers = new HashSet<>();
+
+    private static final double MESMERIZE_RANGE = 24.0D;
+    private static final double MESMERIZE_RANGE_SQ = MESMERIZE_RANGE * MESMERIZE_RANGE;
+    private static final float MESMERIZE_CONE_THRESHOLD = 0.6F;     // wide cone (~84°) allowed before you break free
+    private static final float MESMERIZE_INCONSEQUENCIAL_THRESHOLD = 0.995F;     // small cone (~5°) deviation allowed
+    private static final int TRIGGER_SCAN_INTERVAL = 5;        // only look for NEW stares 4x/sec
+    private static final float MESMERIZE_TURN_SPEED_DEGREES = 3F; // tweak this — degrees turned per tick
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT;
     private static final TrackedData<Integer> ANGER;
@@ -161,6 +177,71 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
         super.tick();
         //spawnParticlesAtTarget();
         this.updateAnimations();
+        if (!this.getWorld().isClient) {
+            this.updateMesmerizedPlayers();
+            if (this.age % TRIGGER_SCAN_INTERVAL == 0) {
+                this.scanForNewStares();
+            }
+        }
+    }
+
+    private void updateMesmerizedPlayers() {
+        if (this.mesmerizedPlayers.isEmpty()) return;
+
+        Iterator<UUID> it = this.mesmerizedPlayers.iterator();
+        while (it.hasNext()) {
+            PlayerEntity player = this.getWorld().getPlayerByUuid(it.next());
+
+            if (!(player instanceof ServerPlayerEntity serverPlayer) || player.isRemoved()
+                    || player.squaredDistanceTo(this) > MESMERIZE_RANGE_SQ
+                    || !player.canSee(this)) {
+                if (player instanceof ServerPlayerEntity sp) sendMesmerizeState(sp, false);
+                it.remove();
+                continue;
+            }
+
+            if (!isTowardsMoth(serverPlayer)) {
+                sendMesmerizeState(serverPlayer, false);
+                it.remove();
+                continue;
+            }
+            if (isDirectlyLookingAtMoth(serverPlayer)) {
+                sendMesmerizeState(serverPlayer, false);
+                it.remove();
+                continue;
+            }
+
+            // client handles the actual rotating now — just keep it informed
+            sendMesmerizeState(serverPlayer, true);
+        }
+    }
+
+    private void sendMesmerizeState(ServerPlayerEntity player, boolean active) {
+        ServerPlayNetworking.send(player,
+                new MesmerizePayload(this.getId(), active, MESMERIZE_TURN_SPEED_DEGREES * 20)); // convert deg/tick to deg/sec
+    }
+
+    private void scanForNewStares() {
+        List<PlayerEntity> nearby = this.getWorld().getEntitiesByClass(PlayerEntity.class,
+                this.getBoundingBox().expand(MESMERIZE_RANGE),
+                player -> !player.isSpectator() && !player.isCreative()
+                        && !this.mesmerizedPlayers.contains(player.getUuid()));
+
+        for (PlayerEntity player : nearby) {
+            if (isTowardsMoth(player) && this.canSee(player)) {
+                this.mesmerizedPlayers.add(player.getUuid());
+            }
+        }
+    }
+    private boolean isTowardsMoth(PlayerEntity player) {
+        Vec3d lookVec = player.getRotationVec(1.0F).normalize();
+        Vec3d toMoth = this.getPos().subtract(player.getEyePos()).normalize();
+        return lookVec.dotProduct(toMoth) > MESMERIZE_CONE_THRESHOLD;
+    }
+    private boolean isDirectlyLookingAtMoth(PlayerEntity player) {
+        Vec3d lookVec = player.getRotationVec(1.0F).normalize();
+        Vec3d toMoth = this.getPos().subtract(player.getEyePos()).normalize();
+        return lookVec.dotProduct(toMoth) > MESMERIZE_INCONSEQUENCIAL_THRESHOLD;
     }
 
     private void spawnParticlesAtTarget() {

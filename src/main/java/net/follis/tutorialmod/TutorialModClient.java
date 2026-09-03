@@ -2,6 +2,7 @@ package net.follis.tutorialmod;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -9,8 +10,10 @@ import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.block.entity.renderer.GoldenHotelBlockEntityRenderer;
 import net.follis.tutorialmod.block.entity.renderer.GoldenPedestalBlockEntityRenderer;
+import net.follis.tutorialmod.client.MesmerizeClientState;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.client.*;
+import net.follis.tutorialmod.network.MesmerizePayload;
 import net.follis.tutorialmod.particle.GoldenChainParticle;
 import net.follis.tutorialmod.particle.GoldenLeavesParticle;
 import net.follis.tutorialmod.particle.ModParticles;
@@ -115,5 +118,13 @@ public class TutorialModClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.GOLDEN_HOTEL_SCREEN_HANDLER, GoldenHotelScreen::new);
 
         HandledScreens.register(ModScreenHandlers.GROWTH_CHAMBER_SCREEN_HANDLER, GrowthChamberScreen::new);
+
+        ClientPlayNetworking.registerGlobalReceiver(MesmerizePayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                MesmerizeClientState.active = payload.active();
+                MesmerizeClientState.targetEntityId = payload.targetEntityId();
+                MesmerizeClientState.degreesPerSecond = payload.degreesPerSecond();
+            });
+        });
     }
 }

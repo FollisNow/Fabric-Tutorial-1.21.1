@@ -10,7 +10,8 @@
 	],
 	"client": [
 		"ItemRendererMixin",
-		"ModelLoaderMixin"
+		"ModelLoaderMixin",
+		"MouseMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

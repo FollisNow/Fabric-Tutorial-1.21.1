@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.*;
@@ -19,6 +20,7 @@ import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.*;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.network.MesmerizePayload;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.potion.ModPotions;
 import net.follis.tutorialmod.recipe.ModRecipes;
@@ -76,6 +78,8 @@ public class TutorialMod implements ModInitializer {
 
 		ModRecipes.registerRecipes();
 		ModDispenserBehaviourProvider.registerDispenserBehaviour();
+
+		PayloadTypeRegistry.playS2C().register(MesmerizePayload.ID, MesmerizePayload.CODEC);
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
