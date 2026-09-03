@@ -18,7 +18,7 @@ public class MothRenderer extends MobEntityRenderer<MothEntity, MothModel<MothEn
             Util.make(Maps.newEnumMap(MothVariant.class), map -> {
                 map.put(MothVariant.VERY_RARE,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
-                map.put(MothVariant.OAK_HYPNO,
+                map.put(MothVariant.OAK_CRACKED,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_oak_hypno.png"));
                 map.put(MothVariant.RARE2,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));

@@ -5,7 +5,7 @@ import net.minecraft.util.StringIdentifiable;
 
 public enum MothVariant implements IVariant, StringIdentifiable {
     VERY_RARE(0, "Very Rare"), // Channels effects
-    OAK_HYPNO(1, "Hypnotic Oak"),       // Hypnotic
+    OAK_CRACKED(1, "Cracked Oak"),       // Hypnotic
     RARE2(2, "Rare 2"),       // Hypnotic
     RARE3(3, "Rare 3"),       // Hypnotic
     OAK(4, "Oak"),

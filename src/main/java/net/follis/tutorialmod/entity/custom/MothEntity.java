@@ -7,7 +7,6 @@ import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.*;
-import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
@@ -28,7 +27,6 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.packet.s2c.play.LookAtS2CPacket;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
@@ -145,7 +143,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
 
     private static final Map<RegistryKey<Biome>, MothVariant> biomeMap = new HashMap<>() {{
         put(BiomeKeys.FOREST, MothVariant.OAK);
-        put(BiomeKeys.MEADOW, MothVariant.OAK_HYPNO);
+        put(BiomeKeys.MEADOW, MothVariant.OAK_CRACKED);
         put(BiomeKeys.BIRCH_FOREST, MothVariant.BIRCH);
         put(BiomeKeys.OLD_GROWTH_BIRCH_FOREST, MothVariant.BIRCH);
     }};
