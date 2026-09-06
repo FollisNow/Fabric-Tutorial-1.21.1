@@ -6,10 +6,7 @@ import io.netty.buffer.ByteBuf;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.entity.custom.BeetleEntity;
-import net.follis.tutorialmod.entity.custom.BeetleVariant;
-import net.follis.tutorialmod.entity.custom.MothEntity;
-import net.follis.tutorialmod.entity.custom.SpiderlingEntity;
+import net.follis.tutorialmod.entity.custom.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.type.NbtComponent;
@@ -115,12 +112,17 @@ public abstract class AbstractEntityJarItem extends Item {
                                             .setStyle(Style.EMPTY)
                                             .withColor(statusEffect.getColor())));
                         } else {
-                            TextColor color = BeetleColors.getOrDefault(getNbt(bugData).getInt("Variant"), TextColor.fromFormatting(Formatting.GRAY));
+                            TextColor color = getColorOrDefault(BeetleColors, getNbt(bugData).getInt("Variant"));
                             tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()));
                         }
 
-                    } else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.LOCUST) {
-                        TextColor color = LocustColors.getOrDefault(getNbt(bugData).getInt("Variant"), TextColor.fromFormatting(Formatting.GRAY));
+                    } else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.MOTH) {
+                        TextColor color = getColorOrDefault(MothColors, getNbt(bugData).getInt("Variant"));
+                        tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()).append(" ").append(Text.literal(MothVariant.byId(getNbt(bugData).getInt("Variant")).getName())));
+
+                    }
+                    else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.LOCUST) {
+                        TextColor color = getColorOrDefault(LocustColors, getNbt(bugData).getInt("Variant"));
                         tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()));
 
                     } else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.SPIDERLING) {

@@ -34,5 +34,17 @@ public class ModEntitySpawns {
         SpawnRestriction.register(ModEntities.LOCUST, SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
 
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                        BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST, BiomeKeys.WINDSWEPT_FOREST,
+                        BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST,
+                        BiomeKeys.TAIGA, BiomeKeys.SNOWY_TAIGA, BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, BiomeKeys.OLD_GROWTH_PINE_TAIGA,
+                        BiomeKeys.DARK_FOREST,
+                        BiomeKeys.CHERRY_GROVE,
+                        BiomeKeys.MANGROVE_SWAMP,
+                        BiomeKeys.JUNGLE, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.SPARSE_JUNGLE,
+                        BiomeKeys.SAVANNA, BiomeKeys.SAVANNA_PLATEAU, BiomeKeys.WINDSWEPT_SAVANNA),
+                SpawnGroup.CREATURE, ModEntities.MOTH, 100, 1, 1);
+        SpawnRestriction.register(ModEntities.MOTH, SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
     }
 }

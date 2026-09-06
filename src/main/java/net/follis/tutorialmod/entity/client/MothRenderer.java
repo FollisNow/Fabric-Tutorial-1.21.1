@@ -16,26 +16,42 @@ import java.util.Map;
 public class MothRenderer extends MobEntityRenderer<MothEntity, MothModel<MothEntity>> {
     private static final Map<MothVariant, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(MothVariant.class), map -> {
-                map.put(MothVariant.VERY_RARE,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
-                map.put(MothVariant.OAK_CRACKED,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_oak_hypno.png"));
-                map.put(MothVariant.RARE2,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
-                map.put(MothVariant.RARE3,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
                 map.put(MothVariant.OAK,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_oak.png"));
+                map.put(MothVariant.OAK_CRACKED,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_oak_cracked.png"));
                 map.put(MothVariant.BIRCH,
                         Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_birch.png"));
+                map.put(MothVariant.BIRCH_RADIANT,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_birch_radiant.png"));
+                map.put(MothVariant.BIRCH_NEGATIVE,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_birch_negative.png"));
                 map.put(MothVariant.SPRUCE,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_spruce.png"));
+                map.put(MothVariant.SPRUCE_RUBY,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_spruce_ruby.png"));
                 map.put(MothVariant.DARK_OAK,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_dark_oak.png"));
+                map.put(MothVariant.DARK_OAK_EMERALD,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_dark_oak_emerald.png"));
                 map.put(MothVariant.CHERRY,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_cherry.png"));
+                map.put(MothVariant.CHERRY_BLOOM,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_cherry_bloom.png"));
+                map.put(MothVariant.MANGROVE,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_mangrove.png"));
+                map.put(MothVariant.MANGROVE_TANGLED,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_mangrove_tangled.png"));
                 map.put(MothVariant.JUNGLE,
-                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_test.png"));
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_jungle.png"));
+                map.put(MothVariant.JUNGLE_SPIDER,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_jungle_spider.png"));
+                map.put(MothVariant.ACACIA,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_acacia.png"));
+                map.put(MothVariant.ACACIA_SAPPHIRE,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth_acacia_sapphire.png"));
+                map.put(MothVariant.EYE,
+                        Identifier.of(TutorialMod.MOD_ID, "textures/entity/moth/moth.png"));
             });
 
     public MothRenderer(EntityRendererFactory.Context context) {

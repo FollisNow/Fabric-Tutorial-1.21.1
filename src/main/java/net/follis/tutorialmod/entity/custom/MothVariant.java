@@ -4,16 +4,24 @@ import net.follis.tutorialmod.util.IVariant;
 import net.minecraft.util.StringIdentifiable;
 
 public enum MothVariant implements IVariant, StringIdentifiable {
-    VERY_RARE(0, "Very Rare"), // Channels effects
-    OAK_CRACKED(1, "Cracked Oak"),       // Hypnotic
-    RARE2(2, "Rare 2"),       // Hypnotic
-    RARE3(3, "Rare 3"),       // Hypnotic
-    OAK(4, "Oak"),
-    BIRCH(5, "Birch"),
-    SPRUCE(6, "Spruce"),
+    OAK(0, "Oak"),
+    OAK_CRACKED(1, "Cracked Oak"),
+    BIRCH(2, "Birch"),
+    BIRCH_RADIANT(3, "Radiant Birch"),
+    BIRCH_NEGATIVE(4, "Anti Birch"),
+    SPRUCE(5, "Spruce"),
+    SPRUCE_RUBY(6, "Ruby Spruce"),
     DARK_OAK(7, "Dark Oak"),
-    CHERRY(8, "Cherry"),
-    JUNGLE(9, "Jungle");
+    DARK_OAK_EMERALD(8, "Dark Oak Emerald"),
+    CHERRY(9, "Cherry"),
+    CHERRY_BLOOM(10, "Bloom Cherry"),
+    MANGROVE(11, "Mangrove"),
+    MANGROVE_TANGLED(12, "Tangled Mangrove"),
+    JUNGLE(13, "Jungle"),
+    JUNGLE_SPIDER(14, "Spider Jungle"),
+    ACACIA(15, "Acacia"),
+    ACACIA_SAPPHIRE(16, "Sapphire Acacia"),
+    EYE(17, "Eye");
 
     private final int id;
     private final String name; // Associated name

@@ -48,8 +48,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static net.minecraft.util.math.MathHelper.lerp;
-
 public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IBugVariants {
     public final AnimationState flyingAnimationState = new AnimationState();
     public final AnimationState roostingAnimationState = new AnimationState();
@@ -66,7 +64,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     private static final double MESMERIZE_RANGE = 24.0D;
     private static final double MESMERIZE_RANGE_SQ = MESMERIZE_RANGE * MESMERIZE_RANGE;
     private static final float MESMERIZE_CONE_THRESHOLD = 0.6F;     // wide cone (~84°) allowed before you break free
-    private static final float MESMERIZE_INCONSEQUENCIAL_THRESHOLD = 0.995F;     // small cone (~5°) deviation allowed
+    private static final float MESMERIZE_INCONSEQUENTIAL_THRESHOLD = 0.995F;     // small cone (~5°) deviation allowed
     private static final int TRIGGER_SCAN_INTERVAL = 5;        // only look for NEW stares 4x/sec
     private static final float MESMERIZE_TURN_SPEED_DEGREES = 3F; // tweak this — degrees turned per tick
 
@@ -111,11 +109,12 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     }
 
     private boolean foodSelector(ItemStack stack) {
-        if(this.getVariant() == MothVariant.VERY_RARE) {
-            return stack.isIn(ModTags.Items.GOLDEN_VEGETAL_FOOD);
-        } else {
-            return stack.isIn(ItemTags.BEE_FOOD);
-        }
+//        if(this.getVariant() == MothVariant.VERY_RARE) {
+//            return stack.isIn(ModTags.Items.GOLDEN_VEGETAL_FOOD);
+//        } else {
+//            return stack.isIn(ItemTags.BEE_FOOD);
+//        }
+        return stack.isIn(ItemTags.BEE_FOOD);
     }
     @Override
     public boolean isBreedingItem(ItemStack stack) {
@@ -132,20 +131,49 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
 
         Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
         MothVariant variant;
-        if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get()) && this.random.nextFloat() < 0.5F){
+        if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get())){
             variant = biomeMap.get(currentBiomeKey.get());
         } else {
-            variant = MothVariant.byId(this.random.nextBetween(0, MothVariant.values().length - 1));
+            variant = MothVariant.OAK;
         }
-        this.setVariant(variant);
+
+        if (random.nextInt(100) == 0) {
+            switch (variant) {
+                case OAK -> this.setVariant(MothVariant.OAK_CRACKED);
+                case BIRCH -> this.setVariant(MothVariant.BIRCH_RADIANT);
+                case SPRUCE -> this.setVariant(MothVariant.SPRUCE_RUBY);
+                case DARK_OAK -> this.setVariant(MothVariant.DARK_OAK_EMERALD);
+                case CHERRY -> this.setVariant(MothVariant.CHERRY_BLOOM);
+                case MANGROVE -> this.setVariant(MothVariant.MANGROVE_TANGLED);
+                case JUNGLE -> this.setVariant(MothVariant.JUNGLE_SPIDER);
+                case ACACIA -> this.setVariant(MothVariant.ACACIA_SAPPHIRE);
+                default -> this.setVariant(variant);
+            }
+        } else {
+            this.setVariant(variant);
+        }
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     private static final Map<RegistryKey<Biome>, MothVariant> biomeMap = new HashMap<>() {{
         put(BiomeKeys.FOREST, MothVariant.OAK);
-        put(BiomeKeys.MEADOW, MothVariant.OAK_CRACKED);
+        put(BiomeKeys.FLOWER_FOREST, MothVariant.OAK);
+        put(BiomeKeys.WINDSWEPT_FOREST, MothVariant.OAK);
         put(BiomeKeys.BIRCH_FOREST, MothVariant.BIRCH);
         put(BiomeKeys.OLD_GROWTH_BIRCH_FOREST, MothVariant.BIRCH);
+        put(BiomeKeys.TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.SNOWY_TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.OLD_GROWTH_PINE_TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.DARK_FOREST, MothVariant.DARK_OAK);
+        put(BiomeKeys.CHERRY_GROVE, MothVariant.CHERRY);
+        put(BiomeKeys.MANGROVE_SWAMP, MothVariant.MANGROVE);
+        put(BiomeKeys.JUNGLE, MothVariant.JUNGLE);
+        put(BiomeKeys.BAMBOO_JUNGLE, MothVariant.JUNGLE);
+        put(BiomeKeys.SPARSE_JUNGLE, MothVariant.JUNGLE);
+        put(BiomeKeys.SAVANNA, MothVariant.ACACIA);
+        put(BiomeKeys.SAVANNA_PLATEAU, MothVariant.ACACIA);
+        put(BiomeKeys.WINDSWEPT_SAVANNA, MothVariant.ACACIA);
     }};
 
     @Nullable
@@ -153,13 +181,29 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         MothEntity baby = ModEntities.MOTH.create(world);
         if (baby != null && entity instanceof MothEntity moth) {
-            if (((this.getVariant() != MothVariant.VERY_RARE || moth.getVariant() != MothVariant.VERY_RARE) && random.nextInt(100) == 0) ||
-                    (this.getVariant() == MothVariant.VERY_RARE && moth.getVariant() == MothVariant.VERY_RARE)) {
-                baby.setVariant(MothVariant.VERY_RARE);
+
+            if (this.getVariant() == moth.getVariant()) {
+
+                baby.setVariant(this.getVariant());
+
+                if (random.nextInt(100) == 0) {
+                    switch (this.getVariant()) {
+                        case OAK -> baby.setVariant(MothVariant.OAK_CRACKED);
+                        case BIRCH -> baby.setVariant(MothVariant.BIRCH_RADIANT);
+                        case SPRUCE -> baby.setVariant(MothVariant.SPRUCE_RUBY);
+                        case DARK_OAK -> baby.setVariant(MothVariant.DARK_OAK_EMERALD);
+                        case CHERRY -> baby.setVariant(MothVariant.CHERRY_BLOOM);
+                        case MANGROVE -> baby.setVariant(MothVariant.MANGROVE_TANGLED);
+                        case JUNGLE -> baby.setVariant(MothVariant.JUNGLE_SPIDER);
+                        case ACACIA -> baby.setVariant(MothVariant.ACACIA_SAPPHIRE);
+                        default -> baby.setVariant(this.getVariant());
+                    }
+                }
+            } else if (random.nextInt(1) == 1) {
+                baby.setVariant(moth.getVariant());
             } else {
                 baby.setVariant(this.getVariant());
             }
-
         }
         return baby;
     }
@@ -239,7 +283,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     private boolean isDirectlyLookingAtMoth(PlayerEntity player) {
         Vec3d lookVec = player.getRotationVec(1.0F).normalize();
         Vec3d toMoth = this.getPos().subtract(player.getEyePos()).normalize();
-        return lookVec.dotProduct(toMoth) > MESMERIZE_INCONSEQUENCIAL_THRESHOLD;
+        return lookVec.dotProduct(toMoth) > MESMERIZE_INCONSEQUENTIAL_THRESHOLD;
     }
 
     private void spawnParticlesAtTarget() {

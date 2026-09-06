@@ -142,10 +142,10 @@ public class VisionMonocleItem extends Item {
 
     TextColor getColorVariant(String bugType, int variant){
         if (BugColors.containsKey(bugType)) {
-            Map<Integer, TextColor> colors = BugColors.get(bugType);
+            List<TextColor> colors = BugColors.get(bugType);
 
             if (colors != null) {
-                return colors.getOrDefault(variant, TextColor.fromFormatting(Formatting.GRAY));
+                return IBugVariants.getColorOrDefault(colors, variant);
             }
         }
         return TextColor.fromFormatting(Formatting.GRAY);
