@@ -2,6 +2,7 @@ package net.follis.tutorialmod.entity.custom;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.network.MesmerizeManager;
 import net.follis.tutorialmod.network.MesmerizePayload;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.IBugVariants;
@@ -228,7 +229,8 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     }
 
     private void updateMesmerizedPlayers() {
-        if (this.mesmerizedPlayers.isEmpty()) return;
+        if (this.getVariant().isNotMesmerizing() || this.mesmerizedPlayers.isEmpty()) return;
+
 
         Iterator<UUID> it = this.mesmerizedPlayers.iterator();
         while (it.hasNext()) {
@@ -237,17 +239,22 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
             if (!(player instanceof ServerPlayerEntity serverPlayer) || player.isRemoved()
                     || player.squaredDistanceTo(this) > MESMERIZE_RANGE_SQ
                     || !player.canSee(this)) {
-                if (player instanceof ServerPlayerEntity sp) sendMesmerizeState(sp, false);
+                if (player instanceof ServerPlayerEntity sp) {
+                    MesmerizeManager.release(sp, this);
+                    sendMesmerizeState(sp, false);
+                }
                 it.remove();
                 continue;
             }
 
             if (!isTowardsMoth(serverPlayer)) {
+                MesmerizeManager.release(serverPlayer, this);
                 sendMesmerizeState(serverPlayer, false);
                 it.remove();
                 continue;
             }
             if (isDirectlyLookingAtMoth(serverPlayer)) {
+                MesmerizeManager.release(serverPlayer, this);
                 sendMesmerizeState(serverPlayer, false);
                 it.remove();
                 continue;
@@ -264,13 +271,17 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     }
 
     private void scanForNewStares() {
+        if (this.getVariant().isNotMesmerizing()) return;
+
         List<PlayerEntity> nearby = this.getWorld().getEntitiesByClass(PlayerEntity.class,
                 this.getBoundingBox().expand(MESMERIZE_RANGE),
                 player -> !player.isSpectator() && !player.isCreative()
                         && !this.mesmerizedPlayers.contains(player.getUuid()));
 
         for (PlayerEntity player : nearby) {
-            if (isTowardsMoth(player) && this.canSee(player)) {
+            if (player instanceof ServerPlayerEntity serverPlayer
+                    && isTowardsMoth(player) && this.canSee(player)
+                    && MesmerizeManager.tryClaim(serverPlayer, this)) {
                 this.mesmerizedPlayers.add(player.getUuid());
             }
         }
@@ -321,6 +332,17 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
 
             return super.damage(source, amount);
         }
+    }
+    @Override
+    public void remove(RemovalReason reason) {
+        for (UUID uuid : this.mesmerizedPlayers) {
+            PlayerEntity player = this.getWorld().getPlayerByUuid(uuid);
+            if (player instanceof ServerPlayerEntity serverPlayer) {
+                MesmerizeManager.release(serverPlayer, this);
+                sendMesmerizeState(serverPlayer, false);
+            }
+        }
+        super.remove(reason);
     }
 
     @Override

@@ -49,4 +49,12 @@ public enum MothVariant implements IVariant, StringIdentifiable {
     public String asString() {
         return this.name;
     }
+
+    public boolean isNotMesmerizing() {
+        return !switch (this) {
+            case OAK_CRACKED, BIRCH_RADIANT, BIRCH_NEGATIVE, SPRUCE_RUBY, DARK_OAK_EMERALD,
+                 CHERRY_BLOOM, MANGROVE_TANGLED, JUNGLE_SPIDER, ACACIA_SAPPHIRE -> true;
+            default -> false;
+        };
+    }
 }
