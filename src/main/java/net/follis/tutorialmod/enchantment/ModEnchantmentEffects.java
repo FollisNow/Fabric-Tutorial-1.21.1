@@ -3,6 +3,7 @@ package net.follis.tutorialmod.enchantment;
 import com.mojang.serialization.MapCodec;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.enchantment.custom.LightningStrikerEnchantmentEffect;
+import net.follis.tutorialmod.enchantment.custom.LordOfTheFliesEnchantmentEffect;
 import net.minecraft.enchantment.effect.EnchantmentEntityEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -12,6 +13,8 @@ public class ModEnchantmentEffects {
     public static final MapCodec<? extends EnchantmentEntityEffect> LIGHTNING_STRIKER =
             registerEntityEffect("lightning_striker", LightningStrikerEnchantmentEffect.CODEC);
 
+    public static final MapCodec<? extends EnchantmentEntityEffect> LORD_OF_THE_FLIES =
+            registerEntityEffect("lord_of_the_flies", LordOfTheFliesEnchantmentEffect.CODEC);
 
     private static MapCodec<? extends EnchantmentEntityEffect> registerEntityEffect(String name,
                                                                                     MapCodec<? extends EnchantmentEntityEffect> codec) {

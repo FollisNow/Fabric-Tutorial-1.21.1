@@ -1,7 +1,13 @@
 package net.follis.tutorialmod.util;
 
+import net.follis.tutorialmod.enchantment.ModEnchantments;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.*;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 
@@ -87,4 +93,27 @@ public interface IBugVariants {
     static TextColor getColorOrDefault(List<TextColor> colors, int index) {
         return getColorOrDefault(colors, index, TextColor.fromFormatting(Formatting.GRAY));
     }
+
+    default boolean isWearingGoldOrImmune(LivingEntity entity) {
+        return isWearingGold(entity) || hasImmunityEnchant(entity);
+    }
+
+    default boolean isWearingGold(LivingEntity entity) {
+        for (ItemStack stack : entity.getAllArmorItems()) {
+            if (stack.isIn(ModTags.Items.GOLDEN_ITEMS)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    default boolean hasImmunityEnchant(LivingEntity entity) {
+        for (RegistryEntry<Enchantment> enchant : entity.getEquippedStack(EquipmentSlot.HEAD).getEnchantments().getEnchantments()) {
+            if (enchant.matchesKey(ModEnchantments.LORD_OF_THE_FLIES)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -88,7 +88,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
 
         this.targetSelector.add(1, (new BeetleRevengeGoal(this)).setGroupRevenge());
         this.targetSelector.add(2, new BiteTargetGoal(this));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 10, false, false, (entity) -> entity instanceof Monster && !(entity instanceof CreeperEntity) && !isWearingGold(entity)));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 10, false, false, (entity) -> entity instanceof Monster && !(entity instanceof CreeperEntity) && !isWearingGoldOrImmune(entity)));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 5, false, false, this::shouldAngerAt));
     }
 
@@ -236,16 +236,10 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
     public boolean canTarget(EntityType<?> type) {
         return type != EntityType.CREEPER;
     }
-    private boolean isWearingGold(LivingEntity entity) {
-        for(ItemStack stack : entity.getAllArmorItems()){
-            if (stack.isIn(ModTags.Items.GOLDEN_ITEMS))
-                return true;
-        }
-        return false;
-    }
+
     @Override
     public boolean shouldAngerAt(LivingEntity entity) {
-        if (!this.canTarget(entity) || isWearingGold(entity)) {
+        if (!this.canTarget(entity) || isWearingGoldOrImmune(entity)) {
             return false;
         } else {
             return entity.getType() == EntityType.PLAYER && this.isUniversallyAngry(entity.getWorld()) || entity.getUuid().equals(this.getAngryAt());
@@ -468,7 +462,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
         }
 
         protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
-            if (mob instanceof BeetleEntity && this.mob.canSee(target) && !((BeetleEntity) mob).isWearingGold(target)) {
+            if (mob instanceof BeetleEntity && this.mob.canSee(target) && !((BeetleEntity) mob).isWearingGoldOrImmune(target)) {
                 mob.setTarget(target);
             } else {
                 mob.setTarget(null);
@@ -488,7 +482,7 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
 
         public boolean shouldContinue() {
             boolean bl = this.canBite();
-            if (this.mob.getTarget() != null && mob instanceof BeetleEntity beetle && !beetle.isWearingGold(beetle.getTarget())) {
+            if (this.mob.getTarget() != null && mob instanceof BeetleEntity beetle && !beetle.isWearingGoldOrImmune(beetle.getTarget())) {
                 this.target = null;
                 return false;
             } else if (bl && this.mob.getTarget() != null ) {
