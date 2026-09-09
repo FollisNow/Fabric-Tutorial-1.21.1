@@ -4,6 +4,10 @@
     {
       "id": "tutorialmod:kaupen_poi",
       "required": false
+    },
+    {
+      "id": "tutorialmod:collector_poi",
+      "required": false
     }
   ]
 }

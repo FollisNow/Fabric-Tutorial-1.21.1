@@ -18,8 +18,11 @@ public class ModVillagers {
     public static final RegistryKey<PointOfInterestType> KAUPEN_POI_KEY = registerPoiKey("kaupen_poi");
     public static final PointOfInterestType KAUPEN_POI = registerPOI("kaupen_poi", ModBlocks.CHAIR);
 
+    public static final RegistryKey<PointOfInterestType> COLLECTOR_POI_KEY = registerPoiKey("collector_poi");
+    public static final PointOfInterestType COLLECTOR_POI = registerPOI("collector_poi", ModBlocks.GOLDEN_PEDESTAL);
+
     public static final VillagerProfession KAUPENGER = registerProfession("kaupenger", KAUPEN_POI_KEY);
-    
+    public static final VillagerProfession COLLECTOR = registerProfession("collector", COLLECTOR_POI_KEY);
 
     private static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type) {
         return Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(TutorialMod.MOD_ID, name),

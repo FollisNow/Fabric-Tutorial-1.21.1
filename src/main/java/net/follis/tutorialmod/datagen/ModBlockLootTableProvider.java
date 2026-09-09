@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.GoldPileBlock;
+import net.follis.tutorialmod.block.custom.GoldenCaratCropBlock;
 import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
@@ -70,6 +71,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         BlockStatePropertyLootCondition.Builder builder2 = BlockStatePropertyLootCondition.builder(ModBlocks.CAULIFLOWER_CROP)
                 .properties(StatePredicate.Builder.create().exactMatch(CauliflowerCropBlock.AGE, CauliflowerCropBlock.MAX_AGE));
         this.addDrop(ModBlocks.CAULIFLOWER_CROP, this.cropDrops(ModBlocks.CAULIFLOWER_CROP, ModItems.CAULIFLOWER, ModItems.CAULIFLOWER_SEEDS, builder2));
+
+        BlockStatePropertyLootCondition.Builder builder3 = BlockStatePropertyLootCondition.builder(ModBlocks.GOLDEN_CARAT_CROP)
+                .properties(StatePredicate.Builder.create().exactMatch(GoldenCaratCropBlock.AGE, GoldenCaratCropBlock.MAX_AGE));
+        this.addDrop(ModBlocks.GOLDEN_CARAT_CROP, this.cropDrops(ModBlocks.GOLDEN_CARAT_CROP, ModItems.GOLDEN_CARAT, ModItems.GOLDEN_CARAT, builder3));
 
         this.addDrop(ModBlocks.HONEY_BERRY_BUSH,
                 block -> this.applyExplosionDecay(

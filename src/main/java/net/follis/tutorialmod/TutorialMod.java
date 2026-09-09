@@ -115,6 +115,7 @@ public class TutorialMod implements ModInitializer {
 
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER, 0.5f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.CAULIFLOWER_SEEDS, 0.25f);
+		CompostingChanceRegistry.INSTANCE.add(ModItems.GOLDEN_CARAT, 0.5f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.HONEY_BERRIES, 0.15f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.LOCUST_GOLD, 1f);
 		CompostingChanceRegistry.INSTANCE.add(ModItems.LOCUST_DREAM, 0.8f);

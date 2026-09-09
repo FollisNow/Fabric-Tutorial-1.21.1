@@ -43,6 +43,16 @@ public class ModItems {
             super.appendTooltip(stack, context, tooltip, type);
         }
     });
+
+    public static final Item GOLDEN_CARAT = registerItem("golden_carat",
+            new AliasedBlockItem(ModBlocks.GOLDEN_CARAT_CROP, new Item.Settings().food(ModFoodComponents.GOLDEN_CARAT)) {
+                @Override
+                public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+                    tooltip.add(Text.translatable("tooltip.tutorialmod.golden_carat.tooltip"));
+                    super.appendTooltip(stack, context, tooltip, type);
+                }
+            });
+
     public static final Item LOCUST_GOLD = registerItem("locust_gold", new Item(new Item.Settings().food(ModFoodComponents.LOCUST_GOLD)) {
         @Override
         public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {

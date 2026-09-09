@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-07T18:49:34.9066626	Tutorial Mod/Block Loot Tables
+// 1.21.1	2026-09-09T21:27:03.1729884	Tutorial Mod/Block Loot Tables
 386888705830ff2b29d85d05e6673abb8ec95f36 data\tutorialmod\loot_table\blocks\potted_golden_sapling.json
 64c3df15b6e946537414a0cc30f320d8b8019264 data\tutorialmod\loot_table\blocks\pink_garnet_stairs.json
 bb4295bb26b608113d9469f979cd894f59bb83a7 data\tutorialmod\loot_table\blocks\cobbled_gold.json
@@ -73,6 +73,7 @@ b3eb752b0d3e03e264dd8ffc8bf07bdf2ed57aee data\tutorialmod\loot_table\blocks\cobb
 ceafa1ff35978685958c65113e4b2ca1aa0af771 data\tutorialmod\loot_table\blocks\stripped_golden_log.json
 bb5768901ea4b6419092ee2af7232612f45cfa7c data\tutorialmod\loot_table\blocks\engraved_gold.json
 64437e55bf71187a33357eb3b21c95f249e06041 data\tutorialmod\loot_table\blocks\gold_bricks.json
+47d64ccde9b886c8ad3a304afb0622a752d7487b data\tutorialmod\loot_table\blocks\golden_carat_crop.json
 788780f4b8edebc406c269e5932e01fdefb60440 data\tutorialmod\loot_table\blocks\cobbled_gold_stairs.json
 3ff2b37e2fef1cba2508c220a666e1d3893b36e5 data\tutorialmod\loot_table\blocks\golden_fence_gate.json
 92ec16b2c040df147a037084ad225bc48815b00d data\tutorialmod\loot_table\blocks\cut_gold_slab.json

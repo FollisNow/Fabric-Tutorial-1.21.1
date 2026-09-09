@@ -3,6 +3,7 @@
   "item.tutorialmod.raw_pink_garnet": "Raw Pink Garnet",
   "item.tutorialmod.chisel": "Chisel",
   "item.tutorialmod.cauliflower": "Cauliflower",
+  "item.tutorialmod.golden_carat": "Golden Carat",
   "item.tutorialmod.starlight_ashes": "Starlight Ashes",
 
   "item.tutorialmod.pink_garnet_sword": "Pink Garnet Sword",
@@ -116,6 +117,7 @@
   "block.tutorialmod.pink_garnet_lamp": "Pink Garnet Lamp",
 
   "block.tutorialmod.cauliflower_crop": "Cauliflower Crop",
+  "block.tutorialmod.golden_carat_crop": "Golden Carat Crop",
   "block.tutorialmod.honey_berry_bush": "Honey Berry Bush",
   "block.tutorialmod.crystal_mushroom": "Crystal Mushroom",
 
@@ -285,6 +287,7 @@
   "tooltip.tutorialmod.entity_of": "Entity type is of",
 
   "tooltip.tutorialmod.cauliflower.tooltip": "This is delicious!",
+  "tooltip.tutorialmod.golden_carat.tooltip": "§6Infinitely more valuable",
 
   "tooltip.tutorialmod.locust_gold.tooltip": "§8Maybe the key?..",
   "tooltip.tutorialmod.locust_dream.tooltip": "§8By night one way, \n§8By day another",

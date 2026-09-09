@@ -7,6 +7,11 @@ import net.minecraft.entity.effect.StatusEffects;
 public class ModFoodComponents {
     public static final FoodComponent CAULIFLOWER = new FoodComponent.Builder().nutrition(3).saturationModifier(0.25f)
             .statusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 200), 0.15f).build();
+    public static final FoodComponent GOLDEN_CARAT = new FoodComponent.Builder().nutrition(3).saturationModifier(0.25f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 200), 0.15f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 200, 1), 1f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 200), 1f)
+            .build();
 
     public static final FoodComponent LOCUST_GOLD = new FoodComponent.Builder().nutrition(2).saturationModifier(0.15f)
             .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 200, 2), 1f)
