@@ -9,6 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.VillagerProfession;
@@ -21,13 +22,13 @@ public class ModVillagers {
     public static final RegistryKey<PointOfInterestType> COLLECTOR_POI_KEY = registerPoiKey("collector_poi");
     public static final PointOfInterestType COLLECTOR_POI = registerPOI("collector_poi", ModBlocks.GOLDEN_PEDESTAL);
 
-    public static final VillagerProfession KAUPENGER = registerProfession("kaupenger", KAUPEN_POI_KEY);
-    public static final VillagerProfession COLLECTOR = registerProfession("collector", COLLECTOR_POI_KEY);
+    public static final VillagerProfession KAUPENGER = registerProfession("kaupenger", KAUPEN_POI_KEY, SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
+    public static final VillagerProfession COLLECTOR = registerProfession("collector", COLLECTOR_POI_KEY, SoundEvents.ENTITY_VILLAGER_WORK_SHEPHERD);
 
-    private static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type) {
+    private static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type, SoundEvent soundEvent) {
         return Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(TutorialMod.MOD_ID, name),
                 new VillagerProfession(name, entry -> entry.matchesKey(type), entry -> entry.matchesKey(type),
-                        ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN));
+                        ImmutableSet.of(), ImmutableSet.of(), soundEvent));
     }
 
     private static PointOfInterestType registerPOI(String name, Block block) {
