@@ -198,7 +198,7 @@ public class ModBlocks {
     public static final Block SHAPED_GOLD = registerBlock("shaped_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.SANDSTONE).strength(4).requiresTool()));
     public static final Block ENGRAVED_GOLD = registerBlock("engraved_gold",
-            new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_SANDSTONE).strength(4).requiresTool()));
+            new EngravedGoldBlock(AbstractBlock.Settings.copy(Blocks.CHISELED_SANDSTONE).strength(4).requiresTool()));
     public static final Block SCULPTED_GOLD = registerBlock("sculpted_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.CUT_SANDSTONE).strength(4).requiresTool()));
     public static final Block GOLD_CHAIN = registerBlockWithoutBlockItem("gold_chain",

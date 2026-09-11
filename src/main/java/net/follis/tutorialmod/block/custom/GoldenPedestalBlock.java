@@ -1,9 +1,14 @@
 package net.follis.tutorialmod.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.follis.tutorialmod.block.IMakeGolems;
+import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.custom.GoldenPedestalBlockEntity;
+import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.util.GolemRecipes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -18,7 +23,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class GoldenPedestalBlock extends BlockWithEntity implements BlockEntityProvider {
+import java.util.Map;
+
+public class GoldenPedestalBlock extends BlockWithEntity implements BlockEntityProvider, IMakeGolems {
     private static final VoxelShape SHAPE =
             Block.createCuboidShape(2, 0, 2, 14, 13, 14);
     public static final MapCodec<GoldenPedestalBlock> CODEC = GoldenPedestalBlock.createCodec(GoldenPedestalBlock::new);
@@ -85,5 +92,12 @@ public class GoldenPedestalBlock extends BlockWithEntity implements BlockEntityP
         }
 
         return ItemActionResult.SUCCESS;
+    }
+
+    @Override
+    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (!oldState.isOf(state.getBlock())) {
+            this.trySpawnEntity(world, pos, GolemRecipes.goldGolemMap());
+        }
     }
 }

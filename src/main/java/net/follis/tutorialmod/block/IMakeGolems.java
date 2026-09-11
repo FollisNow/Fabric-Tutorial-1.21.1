@@ -1,8 +1,12 @@
 package net.follis.tutorialmod.block;
 
+import net.follis.tutorialmod.entity.ModEntities;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.GrindstoneBlock;
+import net.minecraft.block.WallMountedBlock;
+import net.minecraft.block.enums.BlockFace;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
@@ -17,9 +21,12 @@ import java.util.Map;
 
 public interface IMakeGolems {
 
-    default void trySpawnEntity(World world, BlockPos pos, Map<Block, EntityType<?>> GOLEM_MAP) {
-        GOLEM_MAP.forEach((block, entityType) -> {
-            BlockPattern.Result result = this.getCorrespondingPattern(block).searchAround(world, pos);
+    record GolemBlockPair(Block headBlock, Block bodyBlock) {}
+
+
+    default void trySpawnEntity(World world, BlockPos pos, Map<GolemBlockPair, EntityType<?>> golemMap) {
+        golemMap.forEach((pair, entityType) -> {
+            BlockPattern.Result result = this.verticalGolemPattern(pair.headBlock(), pair.bodyBlock()).searchAround(world, pos);
             if (result != null) {
                 Entity entity = entityType.create(world);
                 if (entity != null) {
@@ -49,15 +56,27 @@ public interface IMakeGolems {
                 CachedBlockPosition cachedBlockPosition = patternResult.translate(i, j, 0);
                 world.updateNeighbors(cachedBlockPosition.getBlockPos(), Blocks.AIR);
             }
-        }    }
+        }
+    }
 
-    default BlockPattern getCorrespondingPattern(Block block) {
+    default BlockPattern verticalGolemPattern(Block top, Block middle){
         return BlockPatternBuilder.start().aisle(
-                "~^~",
-                        "###",
-                        "~#~").
-                where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(ModBlocks.MAGIC_BLOCK))).
-                where('#', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(block))).
+                        "~A~",
+                        "~B~",
+                        "~C~").
+                where('A', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(top))).
+                where('B', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(middle))).
+                where('C', CachedBlockPosition.matchesBlockState(
+                BlockStatePredicate.forBlock(Blocks.GRINDSTONE)
+                        .with(WallMountedBlock.FACE, value -> value == BlockFace.CEILING))).
                 where('~', (pos) -> pos.getBlockState().isAir()).build();
+    }
+    default BlockPattern buildFlatGolemPattern(Block headBlock, Block bodyBlock) {
+        return BlockPatternBuilder.start()
+                .aisle("~^~", "###", "~#~")
+                .where('^', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(headBlock)))
+                .where('#', CachedBlockPosition.matchesBlockState(BlockStatePredicate.forBlock(bodyBlock)))
+                .where('~', (statePos) -> statePos.getBlockState().isAir())
+                .build();
     }
 }
