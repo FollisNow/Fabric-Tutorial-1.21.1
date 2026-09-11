@@ -53,7 +53,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, IBugVariants {
+public class BeetleEntity extends AngerableBugEntity implements Flutterer {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public static final int field_28638 = MathHelper.ceil(1.4959966F);
@@ -61,10 +61,6 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(BeetleEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> POTION_GENE = DataTracker.registerData(BeetleEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> ANGER;
-    @Nullable
-    private UUID angryAt;
-    private static final UniformIntProvider ANGER_TIME_RANGE;
 
 
     public BeetleEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -222,30 +218,6 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
             return super.damage(source, amount);
         }
     }
-    @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        if (damageSource.isOf(DamageTypes.CACTUS) || damageSource.isOf(DamageTypes.SWEET_BERRY_BUSH) || damageSource.getAttacker() instanceof EnderDragonEntity || damageSource.isOf(DamageTypes.CRAMMING)) {
-            return true;
-        } else {
-            return super.isInvulnerableTo(damageSource);
-        }
-    }
-
-    // TARGETING
-    @Override
-    public boolean canTarget(EntityType<?> type) {
-        return type != EntityType.CREEPER;
-    }
-
-    @Override
-    public boolean shouldAngerAt(LivingEntity entity) {
-        if (!this.canTarget(entity) || isWearingGoldOrImmune(entity)) {
-            return false;
-        } else {
-            return entity.getType() == EntityType.PLAYER && this.isUniversallyAngry(entity.getWorld()) || entity.getUuid().equals(this.getAngryAt());
-        }
-    }
-
 
 
     // STATUS EFFECT
@@ -278,7 +250,6 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
         super.initDataTracker(builder);
         builder.add(DATA_ID_TYPE_VARIANT, 0);
         builder.add(POTION_GENE, -1);
-        builder.add(ANGER, 0);
 
     }
 
@@ -411,33 +382,6 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
         return world.getBlockState(pos).isAir() ? 10.0F : 0.0F;
     }
 
-    @Override
-    public int getAngerTime() {
-        return this.dataTracker.get(ANGER);
-    }
-
-    @Override
-    public void setAngerTime(int angerTime) {
-        this.dataTracker.set(ANGER, angerTime);
-
-    }
-
-    @Override
-    public @Nullable UUID getAngryAt() {
-        return this.angryAt;
-    }
-
-    @Override
-    public void setAngryAt(@Nullable UUID angryAt) {
-        this.angryAt = angryAt;
-
-    }
-
-    @Override
-    public void chooseRandomAngerTime() {
-        this.setAngerTime(ANGER_TIME_RANGE.get(this.random));
-    }
-
     class BiteGoal extends MeleeAttackGoal {
         BiteGoal(final PathAwareEntity mob, final double speed, final boolean pauseWhenMobIdle) {
             super(mob, speed, pauseWhenMobIdle);
@@ -557,10 +501,5 @@ public class BeetleEntity extends AnimalEntity implements Flutterer, Angerable, 
         public boolean shouldContinue() {
             return this.canBeetleContinue() && !BeetleEntity.this.hasAngerTime();
         }
-    }
-
-    static {
-        ANGER = DataTracker.registerData(BeetleEntity.class, TrackedDataHandlerRegistry.INTEGER);
-        ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
     }
 }

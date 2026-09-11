@@ -40,18 +40,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVariants {
+public class ScorpionEntity extends AngerableBugEntity {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public int attackAnimationTimeout = 0;
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(ScorpionEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> ANGER;
     private static final TrackedData<Byte> SCORPION_FLAGS;
-    @Nullable
-    private UUID angryAt;
-    private static final UniformIntProvider ANGER_TIME_RANGE;
+
 
 
     public ScorpionEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -188,36 +185,12 @@ public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVaria
             return super.damage(source, amount);
         }
     }
-    @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        if (damageSource.isOf(DamageTypes.CACTUS) || damageSource.isOf(DamageTypes.SWEET_BERRY_BUSH) || damageSource.getAttacker() instanceof EnderDragonEntity || damageSource.isOf(DamageTypes.CRAMMING)) {
-            return true;
-        } else {
-            return super.isInvulnerableTo(damageSource);
-        }
-    }
-
-    // TARGETING
-    @Override
-    public boolean canTarget(EntityType<?> type) {
-        return type != EntityType.CREEPER;
-    }
-
-    @Override
-    public boolean shouldAngerAt(LivingEntity entity) {
-        if (!this.canTarget(entity) || isWearingGoldOrImmune(entity)) {
-            return false;
-        } else {
-            return entity.getType() == EntityType.PLAYER && this.isUniversallyAngry(entity.getWorld()) || entity.getUuid().equals(this.getAngryAt());
-        }
-    }
 
     /* VARIANT & POTION EFFECT*/
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(DATA_ID_TYPE_VARIANT, 0);
-        builder.add(ANGER, 0);
         builder.add(SCORPION_FLAGS, (byte)0);
     }
     @Override
@@ -300,31 +273,6 @@ public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVaria
         return SoundEvents.ENTITY_PANDA_DEATH;
     }
 
-    @Override
-    public int getAngerTime() {
-        return this.dataTracker.get(ANGER);
-    }
-
-    @Override
-    public void setAngerTime(int angerTime) {
-        this.dataTracker.set(ANGER, angerTime);
-
-    }
-
-    @Override
-    public @Nullable UUID getAngryAt() {
-        return this.angryAt;
-    }
-
-    @Override
-    public void setAngryAt(@Nullable UUID angryAt) {
-        this.angryAt = angryAt;
-    }
-
-    @Override
-    public void chooseRandomAngerTime() {
-        this.setAngerTime(ANGER_TIME_RANGE.get(this.random));
-    }
 
     class ScorpionRevengeGoal extends RevengeGoal {
         ScorpionRevengeGoal(final ScorpionEntity scorpion) {
@@ -388,8 +336,6 @@ public class ScorpionEntity extends AnimalEntity implements Angerable, IBugVaria
     }
 
     static {
-        ANGER = DataTracker.registerData(ScorpionEntity.class, TrackedDataHandlerRegistry.INTEGER);
-        ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
         SCORPION_FLAGS = DataTracker.registerData(ScorpionEntity.class, TrackedDataHandlerRegistry.BYTE);
     }
 }

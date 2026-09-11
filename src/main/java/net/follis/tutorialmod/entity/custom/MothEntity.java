@@ -5,7 +5,6 @@ import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.network.MesmerizeManager;
 import net.follis.tutorialmod.network.MesmerizePayload;
 import net.follis.tutorialmod.particle.ModParticles;
-import net.follis.tutorialmod.util.IBugVariants;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.FuzzyTargeting;
@@ -35,9 +34,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -48,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IBugVariants {
+public class MothEntity extends AngerableBugEntity implements Flutterer {
     public final AnimationState flyingAnimationState = new AnimationState();
     public final AnimationState roostingAnimationState = new AnimationState();
 
@@ -69,12 +66,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     private static final float MESMERIZE_TURN_SPEED_DEGREES = 3F; // tweak this — degrees turned per tick
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT;
-    private static final TrackedData<Integer> ANGER;
     private static final TrackedData<Boolean> IS_ROOSTING;
-
-    @Nullable
-    private UUID angryAt;
-    private static final UniformIntProvider ANGER_TIME_RANGE;
 
 
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -109,11 +101,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     }
 
     private boolean foodSelector(ItemStack stack) {
-//        if(this.getVariant() == MothVariant.VERY_RARE) {
-//            return stack.isIn(ModTags.Items.GOLDEN_VEGETAL_FOOD);
-//        } else {
-//            return stack.isIn(ItemTags.BEE_FOOD);
-//        }
         return stack.isIn(ItemTags.BEE_FOOD);
     }
     @Override
@@ -344,30 +331,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
         super.remove(reason);
     }
 
-    @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        if (damageSource.isOf(DamageTypes.CACTUS) || damageSource.isOf(DamageTypes.SWEET_BERRY_BUSH) || damageSource.getAttacker() instanceof EnderDragonEntity || damageSource.isOf(DamageTypes.CRAMMING)) {
-            return true;
-        } else {
-            return super.isInvulnerableTo(damageSource);
-        }
-    }
-
-    // TARGETING
-    @Override
-    public boolean canTarget(EntityType<?> type) {
-        return type != EntityType.CREEPER;
-    }
-
-    @Override
-    public boolean shouldAngerAt(LivingEntity entity) {
-        if (!this.canTarget(entity) || isWearingGoldOrImmune(entity)) {
-            return false;
-        } else {
-            return entity.getType() == EntityType.PLAYER && this.isUniversallyAngry(entity.getWorld()) || entity.getUuid().equals(this.getAngryAt());
-        }
-    }
-
 
     /* VARIANT*/
     @Override
@@ -375,7 +338,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
         super.initDataTracker(builder);
         builder.add(DATA_ID_TYPE_VARIANT, 0);
         builder.add(IS_ROOSTING, false);
-        builder.add(ANGER, 0);
     }
 
     public MothVariant getVariant() {
@@ -488,33 +450,28 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
         this.flapProgress += this.flapSpeed * 2.0F;
     }
 
-    @Override
-    public int getAngerTime() {
-        return this.dataTracker.get(ANGER);
+
+
+    private static boolean isValidTreeStructure(ServerWorld world, BlockPos pos) {
+        if (!world.getBlockState(pos).isAir() || !world.getBlockState(pos.up()).isAir()) return false;
+        Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
+
+        int validTreeSides = 0;
+        for (Direction direction : Direction.Type.HORIZONTAL) {
+            BlockPos entry = pos.offset(direction);
+            if (!isTreeBlock.test(world.getBlockState(entry))) {
+                continue;
+            }
+            if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
+                continue;
+            }
+            if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
+                continue;
+            }
+            validTreeSides++;
+        }
+        return validTreeSides > 0 && validTreeSides < 4;
     }
-
-    @Override
-    public void setAngerTime(int angerTime) {
-        this.dataTracker.set(ANGER, angerTime);
-
-    }
-
-    @Override
-    public @Nullable UUID getAngryAt() {
-        return this.angryAt;
-    }
-
-    @Override
-    public void setAngryAt(@Nullable UUID angryAt) {
-        this.angryAt = angryAt;
-
-    }
-
-    @Override
-    public void chooseRandomAngerTime() {
-        this.setAngerTime(ANGER_TIME_RANGE.get(this.random));
-    }
-
     class MothBiteGoal extends MeleeAttackGoal {
         MothBiteGoal(final MothEntity mob, final double speed, final boolean pauseWhenMobIdle) {
             super(mob, speed, pauseWhenMobIdle);
@@ -600,9 +557,9 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
             this.setControls(EnumSet.of(Control.MOVE));
         }
         public boolean canStart() {
-            if (!this.mob.hasControllingPassenger() &&
-                    (this.mob.random.nextInt(1200) == 0) ||
-                    (!this.mob.isRoosting() && !this.mob.isRoosting() && this.mob.random.nextInt(15) == 0)) {
+            if (!this.mob.hasControllingPassenger()
+                    && (this.mob.random.nextInt(1200) == 0
+                    || (!this.mob.isRoosting() && this.mob.random.nextInt(15) == 0))) {
                 Vec3d vec3d = this.getWanderTarget();
                 if (vec3d == null) {
                     return false;
@@ -644,16 +601,14 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
         @Nullable
         private Vec3d getRandomValidTreePos(ServerWorld world, BlockPos originalPos) {
             HashSet<BlockPos> validPositions = new HashSet<>();
-            BlockPos.Mutable offsetPos = originalPos.mutableCopy();
 
             for (BlockPos targetPos : BlockPos.iterate(originalPos.add(-this.horizontalRange / 2, -this.verticalRange / 2, -this.horizontalRange / 2 ), originalPos.add(this.horizontalRange / 2, this.verticalRange / 2, this.horizontalRange / 2 ))) {
-                offsetPos.set(targetPos);
                 if (!isValidTreeStructure(world, targetPos)) continue;
                 validPositions.add(targetPos.toImmutable());
             }
             if (!validPositions.isEmpty()) {
                 if (validPositions.size() > 1) {
-                    return new ArrayList<>(validPositions).get(world.random.nextInt(validPositions.size()-1)).toImmutable().toBottomCenterPos();
+                    return new ArrayList<>(validPositions).get(world.random.nextInt(validPositions.size())).toImmutable().toBottomCenterPos();
                 } else
                 {
                     return new ArrayList<>(validPositions).getFirst().toImmutable().toBottomCenterPos();
@@ -661,26 +616,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
             } else {
                 return null;
             }
-        }
-        private static boolean isValidTreeStructure(ServerWorld world, BlockPos pos) {
-            if (!world.getBlockState(pos).isAir() || !world.getBlockState(pos.up()).isAir()) return false;
-            Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
-
-            int validTreeSides = 0;
-            for (Direction direction : Direction.Type.HORIZONTAL) {
-                BlockPos entry = pos.offset(direction);
-                if (!isTreeBlock.test(world.getBlockState(entry))) {
-                    continue;
-                }
-                if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
-                    continue;
-                }
-                if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
-                    continue;
-                }
-                validTreeSides++;
-            }
-            return validTreeSides > 0 && validTreeSides < 4;
         }
         private Vec3d RandomPosition(MothEntity moth) {
             return BlockPos.ofFloored(
@@ -787,27 +722,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
             }
             mob.setPitch(0.0F); // Set pitch to level (0 degrees)
         }
-
-        private static boolean isValidTreeStructure(ServerWorld world, BlockPos pos) {
-            if (!world.getBlockState(pos).isAir() || !world.getBlockState(pos.up()).isAir()) return false;
-            Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
-
-            int validTreeSides = 0;
-            for (Direction direction : Direction.Type.HORIZONTAL) {
-                BlockPos entry = pos.offset(direction);
-                if (!isTreeBlock.test(world.getBlockState(entry))) {
-                    continue;
-                }
-                if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
-                    continue;
-                }
-                if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
-                    continue;
-                }
-                validTreeSides++;
-            }
-            return validTreeSides > 0 && validTreeSides < 4;
-        }
     }
 
     class MothMateGoal extends AnimalMateGoal {
@@ -837,8 +751,6 @@ public class MothEntity extends AnimalEntity implements Flutterer, Angerable, IB
     }
 
     static {
-        ANGER = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
-        ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
         DATA_ID_TYPE_VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
         IS_ROOSTING = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     }
