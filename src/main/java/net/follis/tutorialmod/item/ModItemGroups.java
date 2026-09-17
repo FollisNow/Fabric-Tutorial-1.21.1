@@ -3,12 +3,16 @@ package net.follis.tutorialmod.item;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import static net.follis.tutorialmod.item.ModItems.CADDISFLY_COCOON;
+import static net.follis.tutorialmod.item.custom.CaddisflyCocoonItem.randomCocoonData;
 
 public class ModItemGroups {
     public static final ItemGroup PINK_GARNET_ITEMS_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -18,6 +22,10 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.PINK_GARNET);
                         entries.add(ModItems.RAW_PINK_GARNET);
+
+                        ItemStack cocoonStack = new ItemStack(CADDISFLY_COCOON);
+                        cocoonStack.set(ModDataComponentTypes.COCOON, randomCocoonData());
+                        entries.add(cocoonStack);
 
                         entries.add(ModItems.CHISEL);
                         entries.add(ModItems.CAULIFLOWER);
@@ -69,6 +77,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SCORPION_SPAWN_EGG);
                         entries.add(ModItems.MOTH_SPAWN_EGG);
                         entries.add(ModItems.LOCUST_SPAWN_EGG);
+                        entries.add(ModItems.LARVAE_SPAWN_EGG);
                         entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
                         entries.add(ModItems.GOLD_CARVER_SPAWN_EGG);
                         entries.add(ModItems.GOLD_PANNER_SPAWN_EGG);

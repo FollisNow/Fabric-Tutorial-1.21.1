@@ -142,6 +142,7 @@ public class TutorialMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.SPIDERLING, SpiderlingEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.SCORPION, ScorpionEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.MOTH, MothEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.LARVAE, LarvaeEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLDEN_SILVERFISH, GoldenSilverfishEntity.createAttributes());

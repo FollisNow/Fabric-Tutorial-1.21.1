@@ -35,6 +35,7 @@ public class ModItems {
     public static final Item CHISEL = registerItem("chisel", new ChiselItem(new Item.Settings().maxDamage(32)));
     public static final Item VISION_MONOCLE = registerItem("vision_monocle", new VisionMonocleItem(new Item.Settings().maxCount(1)));
     public static final Item ZAMPONA = registerItem("zampona", new Item(new Item.Settings().maxCount(1)));
+    public static final Item CADDISFLY_COCOON = registerItem("caddisfly_cocoon", new CaddisflyCocoonItem(new Item.Settings()));
 
     public static final Item CAULIFLOWER = registerItem("cauliflower", new Item(new Item.Settings().food(ModFoodComponents.CAULIFLOWER)) {
         @Override
@@ -148,6 +149,9 @@ public class ModItems {
 
     public static final Item LOCUST_SPAWN_EGG = registerItem("locust_spawn_egg",
             new SpawnEggItem(ModEntities.LOCUST, 0x58f0b5, 0x4fd5a3, new Item.Settings()));
+
+    public static final Item LARVAE_SPAWN_EGG = registerItem("larvae_spawn_egg",
+            new SpawnEggItem(ModEntities.LARVAE, 0xf7c431, 0x855b00, new Item.Settings()));
 
     public static final Item AMETHYST_BEE_SPAWN_EGG = registerItem("amethyst_bee_spawn_egg",
             new SpawnEggItem(ModEntities.AMETHYST_BEE, 0xc844be, 0x97278e, new Item.Settings()));

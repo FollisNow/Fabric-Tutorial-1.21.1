@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem;
+import net.follis.tutorialmod.item.custom.CaddisflyCocoonItem;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
@@ -27,6 +28,10 @@ public class ModDataComponentTypes {
     public static final ComponentType<Integer> ENTITY_COUNT1 =
             register("entity_count1", builder -> builder.codec(Codec.INT));
 
+
+    public static final ComponentType<CaddisflyCocoonItem.CocoonData> COCOON =
+            register("cocoon", builder -> builder.codec(CaddisflyCocoonItem.CocoonData.CODEC)
+                    .packetCodec(CaddisflyCocoonItem.CocoonData.PACKET_CODEC).cache());
 
     public static final ComponentType<List<AmethystBeeHiveBlockEntity.AmethystBeeData>> AMETHYST_BEES =
             register("bees", (builder) -> builder.codec(AmethystBeeHiveBlockEntity.AmethystBeeData.LIST_CODEC)
