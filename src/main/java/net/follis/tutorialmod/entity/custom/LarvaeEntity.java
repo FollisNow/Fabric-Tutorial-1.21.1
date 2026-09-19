@@ -1,14 +1,12 @@
 package net.follis.tutorialmod.entity.custom;
 
+import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.item.custom.CaddisflyCocoonItem;
 import net.follis.tutorialmod.util.IBugVariants;
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
@@ -22,10 +20,15 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -33,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LarvaeEntity extends AnimalEntity implements IBugVariants {
     public final AnimationState idleAnimationState = new AnimationState();
@@ -49,6 +53,23 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
     private static final List<TrackedData<Integer>> MATERIAL_SLOTS =
             List.of(MATERIAL_SLOT_0, MATERIAL_SLOT_1, MATERIAL_SLOT_2, MATERIAL_SLOT_3);
 
+    private static final int PICKUP_INTERVAL = 100; // ~5 seconds between attempts
+    private static final double PICKUP_RANGE = 1.5D;
+    private int materialPickupCooldown = 0;
+
+    private static final Map<Item, CocoonMaterial> MATERIAL_ITEMS = Map.ofEntries(
+            Map.entry(Items.DIAMOND, CocoonMaterial.DIAMOND),
+            Map.entry(Items.GLOWSTONE_DUST, CocoonMaterial.GLOWSTONE),
+            Map.entry(Items.LAPIS_LAZULI, CocoonMaterial.LAPIS),
+            Map.entry(Items.EMERALD, CocoonMaterial.EMERALD),
+            Map.entry(Items.IRON_NUGGET, CocoonMaterial.IRON),
+            Map.entry(Items.REDSTONE, CocoonMaterial.REDSTONE),
+            Map.entry(Items.OBSIDIAN, CocoonMaterial.OBSIDIAN),
+            Map.entry(Items.NETHERITE_SCRAP, CocoonMaterial.NETHERITE),
+            Map.entry(Items.PRISMARINE_SHARD, CocoonMaterial.PRISMARINE),
+            Map.entry(Items.COPPER_INGOT, CocoonMaterial.COPPER),
+            Map.entry(Items.ECHO_SHARD, CocoonMaterial.ECHO_SHARD)
+    );
     public LarvaeEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -93,8 +114,46 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
 
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
+        } else {
+            this.tickMaterialPickup();
         }
     }
+    private void tickMaterialPickup() {
+        if (this.materialPickupCooldown > 0) {
+            this.materialPickupCooldown--;
+            return;
+        }
+        this.materialPickupCooldown = PICKUP_INTERVAL;
+
+        int emptySlot = this.findEmptyCocoonSlot();
+        if (emptySlot == -1) return; // cocoon already full — nothing to fill
+
+        List<ItemEntity> nearbyItems = this.getWorld().getEntitiesByClass(ItemEntity.class,
+                this.getBoundingBox().expand(PICKUP_RANGE),
+                item -> !item.isRemoved() && MATERIAL_ITEMS.containsKey(item.getStack().getItem()));
+
+        if (nearbyItems.isEmpty()) return;
+
+        ItemEntity target = nearbyItems.getFirst();
+        CocoonMaterial material = MATERIAL_ITEMS.get(target.getStack().getItem());
+
+        this.setCocoonSegment(emptySlot, material);
+        target.getStack().decrement(1);
+        if (target.getStack().isEmpty()) {
+            target.discard();
+        }
+        this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.7F, 1.0F + (this.random.nextFloat() - 0.5F) * 0.2F);
+        this.playSound(SoundEvents.ENTITY_ALLAY_ITEM_TAKEN, 0.7F, 1.0F + (this.random.nextFloat() - 0.5F) * 0.2F);
+    }
+
+    private int findEmptyCocoonSlot() {
+        List<CocoonMaterial> segments = this.getCocoonSegments();
+        for (int i = 0; i < segments.size(); i++) {
+            if (segments.get(i) == null) return i;
+        }
+        return -1;
+    }
+
     public List<CocoonMaterial> getCocoonSegments() {
         List<CocoonMaterial> result = new ArrayList<>();
         for (TrackedData<Integer> slot : MATERIAL_SLOTS) {
@@ -106,6 +165,33 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
     public void setCocoonSegment(int index, @Nullable CocoonMaterial material) {
         this.dataTracker.set(MATERIAL_SLOTS.get(index), material == null ? NO_MATERIAL : material.ordinal());
     }
+    public static CaddisflyCocoonItem.CocoonData randomCocoonData() {
+        CocoonMaterial[] materials = CocoonMaterial.values();
+        Random random = Random.create();
+        int segmentCount = 4;
+
+        CaddisflyCocoonItem.CocoonData.Builder builder = CaddisflyCocoonItem.CocoonData.builder();
+        for (int i = 0; i < segmentCount; i++) {
+            builder.addMaterial(materials[random.nextInt(materials.length)]);
+        }
+        return builder.build();
+    }
+    public static CaddisflyCocoonItem.CocoonData randomCocoonData(int slots) {
+        CaddisflyCocoonItem.CocoonData.Builder builder = CaddisflyCocoonItem.CocoonData.builder();
+
+        if (slots == 0)
+            return builder.build();
+
+        int materialsNumber = MathHelper.clamp(slots, 0, 4);
+        CocoonMaterial[] materials = CocoonMaterial.values();
+        Random random = Random.create();
+
+        for (int i = 0; i < materialsNumber; i++) {
+            builder.addMaterial(materials[random.nextInt(materials.length)]);
+        }
+        return builder.build();
+    }
+
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
@@ -150,12 +236,6 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
-
-    @Override
-    protected void mobTick() {
-        super.mobTick();
-    }
-
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
@@ -185,6 +265,15 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
         variant = LarvaeVariant.REGULAR;
 
         this.setVariant(variant);
+
+
+        if (spawnReason == SpawnReason.COMMAND || spawnReason == SpawnReason.SPAWN_EGG) {
+            List<CocoonMaterial> materials = randomCocoonData(Random.createLocal().nextInt(4)).segments();
+            TutorialMod.LOGGER.info(materials.toString());
+            for (int i = 0; i < materials.size(); i++) {
+                this.setCocoonSegment(i, materials.get(i));
+            }
+        }
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
 }
