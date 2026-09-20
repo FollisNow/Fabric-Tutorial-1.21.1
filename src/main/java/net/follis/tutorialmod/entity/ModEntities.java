@@ -17,7 +17,7 @@ public class ModEntities {
     public static final EntityType<LarvaeEntity> LARVAE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "larvae"),
             EntityType.Builder.create(LarvaeEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(0.5f, 0.5f).build());
+                    .dimensions(0.35f, 0.35f).build());
 
     public static final EntityType<LocustEntity> LOCUST = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(TutorialMod.MOD_ID, "locust"),
