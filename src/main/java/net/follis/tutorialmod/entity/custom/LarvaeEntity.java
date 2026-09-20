@@ -80,7 +80,7 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
         
         this.goalSelector.add(3, new AnimalMateGoal(this, 0.3D));
         this.goalSelector.add(4, new TemptGoal(this, 0.35D, this::foodSelector, false));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.3D));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.35D));
     }
 
     private boolean foodSelector(ItemStack stack) {
@@ -102,7 +102,7 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 60;
+            this.idleAnimationTimeout = 40;
             this.idleAnimationState.start(this.age);
         } else {
             --this.idleAnimationTimeout;

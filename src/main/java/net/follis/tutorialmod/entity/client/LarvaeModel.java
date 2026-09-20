@@ -204,7 +204,7 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
         this.getPart().traverse().forEach(ModelPart::resetTransform);
 
         this.animateMovement(LarvaeAnimations.ANIM_LARVAE_CRAWL, limbSwing, limbSwingAmount, 2f, 2.5f);
-//        this.updateAnimation(entity.idleAnimationState, LarvaeAnimations.ANIM_LARVAE_IDLE, ageInTicks, 1f);
+        this.updateAnimation(entity.idleAnimationState, LarvaeAnimations.ANIM_LARVAE_IDLE, ageInTicks, 1f);
     }
 
     @Override
