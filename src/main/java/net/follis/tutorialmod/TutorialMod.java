@@ -20,6 +20,7 @@ import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.*;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.item.custom.CaddisflyCocoonItem;
 import net.follis.tutorialmod.network.MesmerizePayload;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.potion.ModPotions;
@@ -202,9 +203,58 @@ public class TutorialMod implements ModInitializer {
 					new TradedItem(Items.EMERALD, 4),
 					new ItemStack(ModItems.BUG_JAR, 1), 3, 12, 0.09f));
 		});
+
+		TradeOfferHelper.registerVillagerOffers(ModVillagers.COLLECTOR, 1, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(Items.EMERALD, 10),
+					new ItemStack(ModItems.WOODEN_MACUAHUITL, 1), 4, 7, 0.04f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.LOCUST_GRASSHOPPER, 4),
+					new ItemStack(Items.EMERALD, 1), 16, 7, 0.04f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(Items.EMERALD, 2),
+					new ItemStack(ModItems.CHITIN, 3), 4, 7, 0.04f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.BAMBOO_TRAP, 1),
+					new ItemStack(Items.EMERALD, 2), 16, 7, 0.04f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.CADDISFLY_COCOON, 1).withComponents(data -> data.add(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData())),
+					new ItemStack(Items.EMERALD, 16), 4, 12, 0.09f));
+		});
+		TradeOfferHelper.registerVillagerOffers(ModVillagers.COLLECTOR, 2, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.CADDISFLY_COCOON, 1).withComponents(data -> data.add(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData())),
+					new ItemStack(Items.EMERALD, 16), 4, 12, 0.09f));
+
+			ItemStack cocoon = new ItemStack(ModItems.CADDISFLY_COCOON, 1);
+			cocoon.set(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData());
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(Items.EMERALD, 1),
+					cocoon, 4, 12, 0.09f));
+		});
+
+		TradeOfferHelper.registerVillagerOffers(ModVillagers.COLLECTOR, 3, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.CADDISFLY_COCOON, 1).withComponents(data -> data.add(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData())),
+					new ItemStack(Items.EMERALD, 16), 4, 12, 0.09f));
+
+			ItemStack cocoon = new ItemStack(ModItems.CADDISFLY_COCOON, 1);
+			cocoon.set(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData());
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(Items.EMERALD, 1),
+					cocoon, 4, 12, 0.09f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(Items.EMERALD, 50),
+					new ItemStack(ModItems.BUG_JAR, 1), 4, 17, 0.13f));
+		});
+
 	}
 	//Les fourmies attrapents les objets par terre et peuvent construire des structures
 	// Structures: Gold temples, bosses in them: The king in yellow reference, King Midas, Adventurers with artifacts,
 	// A boss that @you to invite you to defeat them, Overgrown carnivore flora,
-	// Still missing a kodoku variant of the bug jar
 }
