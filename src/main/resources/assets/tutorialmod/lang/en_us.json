@@ -240,7 +240,8 @@
   "block.tutorialmod.amethyst_bee_hive": "Amethyst Bee Hive",
 
 
-  "entity.minecraft.villager.tutorialmod.kaupenger": "Kaupenger",
+  "entity.minecraft.villager.kaupenger": "Kaupenger",
+  "entity.minecraft.villager.collector": "Collector",
 
 
   "effect.tutorialmod.slimey": "Slimey",
