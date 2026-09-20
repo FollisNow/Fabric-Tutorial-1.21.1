@@ -11,6 +11,7 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.random.Random;
 
 import java.util.ArrayList;
@@ -21,6 +22,14 @@ public class CaddisflyCocoonItem extends Item {
 
     public CaddisflyCocoonItem(Settings settings) {
         super(settings);
+    }
+    @Override
+    public Text getName() {
+        return Text.translatable(this.getTranslationKey()).formatted(Formatting.GOLD);
+    }
+    @Override
+    public Text getName(ItemStack stack) {
+        return Text.translatable(this.getTranslationKey(stack)).formatted(Formatting.GOLD);
     }
 
     @Override
