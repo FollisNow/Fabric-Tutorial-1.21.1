@@ -7,7 +7,9 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
@@ -15,9 +17,11 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
     public static final EntityModelLayer LARVAE = new EntityModelLayer(Identifier.of(TutorialMod.MOD_ID, "larvae"), "main");
     private final ModelPart larvae;
     private final ModelPart body;
+    private final ModelPart main;
     private final ModelPart mandibule_L;
     private final ModelPart mandibule_R;
     private final ModelPart cocoon;
+    private final ModelPart outer;
     private final ModelPart gems;
     private final ModelPart material0;
     private final ModelPart gem20;
@@ -44,12 +48,15 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
     private final ModelPart gem12;
     private final ModelPart gem18;
     private final ModelPart gem2;
+    private final ModelPart gem21;
     public LarvaeModel(ModelPart root) {
-        this.larvae = root.getChild("Larvae");
+        this.larvae = root.getChild("larvae");
         this.body = this.larvae.getChild("body");
+        this.main = this.body.getChild("main");
         this.mandibule_L = this.body.getChild("mandibule_L");
         this.mandibule_R = this.body.getChild("mandibule_R");
         this.cocoon = this.larvae.getChild("cocoon");
+        this.outer = this.cocoon.getChild("outer");
         this.gems = this.cocoon.getChild("gems");
         this.material0 = this.gems.getChild("material0");
         this.gem20 = this.material0.getChild("gem20");
@@ -76,17 +83,16 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
         this.gem12 = this.material3.getChild("gem12");
         this.gem18 = this.material3.getChild("gem18");
         this.gem2 = this.material3.getChild("gem2");
-        material0.visible = false;
-        material1.visible = false;
-        material2.visible = false;
-        material3.visible = false;
+        this.gem21 = this.material3.getChild("gem21");
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData Larvae = modelPartData.addChild("Larvae", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData larvae = modelPartData.addChild("larvae", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-        ModelPartData body = Larvae.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -2.0F, -5.0F, 2.0F, 2.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData body = larvae.addChild("body", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+
+        ModelPartData main = body.addChild("main", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -2.0F, -5.0F, 2.0F, 2.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
         ModelPartData mandibule_L = body.addChild("mandibule_L", ModelPartBuilder.create(), ModelTransform.pivot(1.0F, -0.6F, -4.15F));
 
@@ -96,9 +102,11 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
 
         ModelPartData cube_r2 = mandibule_R.addChild("cube_r2", ModelPartBuilder.create().uv(18, 4).cuboid(0.0F, -1.0F, -1.5F, 0.0F, 2.0F, 3.0F, new Dilation(0.001F)), ModelTransform.of(0.0F, 0.0F, -1.8F, -0.5672F, 0.0F, 0.0F));
 
-        ModelPartData cocoon = Larvae.addChild("cocoon", ModelPartBuilder.create().uv(0, 18).cuboid(-2.0F, 0.0F, 3.0F, 3.0F, 1.0F, 4.0F, new Dilation(0.002F))
-                .uv(18, 0).cuboid(-2.0F, -1.2F, 3.0F, 3.0F, 2.0F, 2.0F, new Dilation(0.001F))
-                .uv(0, 9).cuboid(-2.0F, -2.0F, -3.0F, 3.0F, 3.0F, 6.0F, new Dilation(0.003F)), ModelTransform.pivot(0.5F, -0.8F, -1.0F));
+        ModelPartData cocoon = larvae.addChild("cocoon", ModelPartBuilder.create(), ModelTransform.pivot(0.5F, -0.8F, -1.0F));
+
+        ModelPartData outer = cocoon.addChild("outer", ModelPartBuilder.create().uv(0, 9).cuboid(-2.0F, -2.3F, -7.0F, 3.0F, 3.0F, 6.0F, new Dilation(0.003F))
+                .uv(0, 18).cuboid(-2.0F, -0.3F, -1.0F, 3.0F, 1.0F, 4.0F, new Dilation(0.002F))
+                .uv(18, 0).cuboid(-2.0F, -1.5F, -1.0F, 3.0F, 2.0F, 2.0F, new Dilation(0.001F)), ModelTransform.pivot(0.0F, 0.3F, 4.0F));
 
         ModelPartData gems = cocoon.addChild("gems", ModelPartBuilder.create(), ModelTransform.pivot(-1.55F, -1.8F, -1.85F));
 
@@ -144,7 +152,7 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
 
         ModelPartData gem11 = material1.addChild("gem11", ModelPartBuilder.create(), ModelTransform.of(1.5667F, -0.7167F, -3.0833F, -0.5465F, 0.2123F, 0.2087F));
 
-        ModelPartData cube_r12 = gem11.addChild("cube_r12", ModelPartBuilder.create().uv(0, 3).cuboid(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -0.7854F, 0.0F, 0.6155F));
+        ModelPartData cube_r12 = gem11.addChild("cube_r12", ModelPartBuilder.create().uv(1, 3).cuboid(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -0.7854F, 0.0F, 0.6155F));
 
         ModelPartData gem17 = material1.addChild("gem17", ModelPartBuilder.create(), ModelTransform.pivot(-0.2333F, 1.2833F, 3.8167F));
 
@@ -203,8 +211,19 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
     public void setAngles(LarvaeEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
 
-        this.animateMovement(LarvaeAnimations.ANIM_LARVAE_CRAWL, limbSwing, limbSwingAmount, 2f, 2.5f);
-        this.updateAnimation(entity.idleAnimationState, LarvaeAnimations.ANIM_LARVAE_IDLE, ageInTicks, 1f);
+        if (limbSwingAmount > 0.01F) {
+            float currentSpeed = (float) entity.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+            float speedMultiplier = MathHelper.clamp(currentSpeed / LarvaeEntity.BASE_MOVEMENT_SPEED, 0.25F, 3.0F);
+
+            entity.walkAnimationState.startIfNotRunning(entity.age);
+            this.updateAnimation(entity.walkAnimationState, LarvaeAnimations.ANIM_LARVAE_CRAWL, ageInTicks, speedMultiplier);
+        } else {
+            entity.walkAnimationState.stop();
+            this.updateAnimation(entity.idleAnimationState, LarvaeAnimations.ANIM_LARVAE_IDLE, ageInTicks, 1f);
+        }
+
+        float partialTick = ageInTicks - (float) entity.age;
+        cocoon.pivotZ += entity.getCocoonTrailOffset(partialTick) * 16.0F;
     }
 
     @Override

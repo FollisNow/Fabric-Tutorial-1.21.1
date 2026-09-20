@@ -40,6 +40,7 @@ import java.util.Map;
 
 public class LarvaeEntity extends AnimalEntity implements IBugVariants {
     public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState walkAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(LarvaeEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -78,9 +79,9 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         
-        this.goalSelector.add(3, new AnimalMateGoal(this, 0.3D));
-        this.goalSelector.add(4, new TemptGoal(this, 0.35D, this::foodSelector, false));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.35D));
+        this.goalSelector.add(3, new AnimalMateGoal(this, BASE_MOVEMENT_SPEED));
+        this.goalSelector.add(4, new TemptGoal(this, BASE_MOVEMENT_SPEED, this::foodSelector, false));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, BASE_MOVEMENT_SPEED));
     }
 
     private boolean foodSelector(ItemStack stack) {
@@ -91,11 +92,13 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
     public boolean isBreedingItem(ItemStack stack) {
         return foodSelector(stack);
     }
-    
+
+    public static final float BASE_MOVEMENT_SPEED = 0.35F;
+
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 4)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, BASE_MOVEMENT_SPEED)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20);
     }
@@ -108,16 +111,49 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
             --this.idleAnimationTimeout;
         }
     }
+
+
     @Override
     public void tick() {
         super.tick();
 
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
+            this.tickCocoonTrail();
         } else {
             this.tickMaterialPickup();
         }
     }
+
+    private double prevTickX;
+    private double prevTickZ;
+    private boolean trailInitialized = false;
+    private float prevCocoonTrailDistance = 0.0F;
+    private float cocoonTrailDistance = 0.0F;
+
+    private void tickCocoonTrail() {
+        if (!this.trailInitialized) {
+            this.prevTickX = this.getX();
+            this.prevTickZ = this.getZ();
+            this.trailInitialized = true;
+            return;
+        }
+
+        double dx = this.getX() - this.prevTickX;
+        double dz = this.getZ() - this.prevTickZ;
+        double movedThisTick = Math.sqrt(dx * dx + dz * dz);
+        this.prevTickX = this.getX();
+        this.prevTickZ = this.getZ();
+
+        this.prevCocoonTrailDistance = this.cocoonTrailDistance;
+        this.cocoonTrailDistance += (float) movedThisTick;
+        this.cocoonTrailDistance *= 0.80F;
+    }
+
+    public float getCocoonTrailOffset(float tickDelta) {
+        return MathHelper.lerp(tickDelta, this.prevCocoonTrailDistance, this.cocoonTrailDistance);
+    }
+
     private void tickMaterialPickup() {
         if (this.materialPickupCooldown > 0) {
             this.materialPickupCooldown--;
