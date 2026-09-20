@@ -204,14 +204,24 @@ public class TutorialMod implements ModInitializer {
 					new ItemStack(ModItems.BUG_JAR, 1), 3, 12, 0.09f));
 		});
 
+
+		//COLLECTOR'S TRADES
 		TradeOfferHelper.registerVillagerOffers(ModVillagers.COLLECTOR, 1, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 10),
 					new ItemStack(ModItems.WOODEN_MACUAHUITL, 1), 4, 7, 0.04f));
 
 			factories.add((entity, random) -> new TradeOffer(
-					new TradedItem(ModItems.LOCUST_GRASSHOPPER, 4),
+					new TradedItem(ModItems.LOCUST_GRASSHOPPER, 3),
 					new ItemStack(Items.EMERALD, 1), 16, 7, 0.04f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.LOCUST_RED, 4),
+					new ItemStack(Items.EMERALD, 1), 16, 7, 0.04f));
+
+			factories.add((entity, random) -> new TradeOffer(
+					new TradedItem(ModItems.LOCUST_DREAM, 1),
+					new ItemStack(Items.EMERALD, 2), 16, 7, 0.04f));
 
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(Items.EMERALD, 2),
@@ -223,29 +233,29 @@ public class TutorialMod implements ModInitializer {
 
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(ModItems.CADDISFLY_COCOON, 1).withComponents(data -> data.add(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData())),
-					new ItemStack(Items.EMERALD, 16), 4, 12, 0.09f));
+					new ItemStack(Items.EMERALD, 30), 4, 12, 0.09f));
 		});
 		TradeOfferHelper.registerVillagerOffers(ModVillagers.COLLECTOR, 2, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(ModItems.CADDISFLY_COCOON, 1).withComponents(data -> data.add(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData())),
-					new ItemStack(Items.EMERALD, 16), 4, 12, 0.09f));
+					new ItemStack(Items.EMERALD, 30), 4, 12, 0.09f));
 
 			ItemStack cocoon = new ItemStack(ModItems.CADDISFLY_COCOON, 1);
 			cocoon.set(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData());
 			factories.add((entity, random) -> new TradeOffer(
-					new TradedItem(Items.EMERALD, 1),
+					new TradedItem(Items.EMERALD, 16),
 					cocoon, 4, 12, 0.09f));
 		});
 
 		TradeOfferHelper.registerVillagerOffers(ModVillagers.COLLECTOR, 3, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 					new TradedItem(ModItems.CADDISFLY_COCOON, 1).withComponents(data -> data.add(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData())),
-					new ItemStack(Items.EMERALD, 16), 4, 12, 0.09f));
+					new ItemStack(Items.EMERALD, 30), 4, 12, 0.09f));
 
 			ItemStack cocoon = new ItemStack(ModItems.CADDISFLY_COCOON, 1);
 			cocoon.set(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.randomCocoonData());
 			factories.add((entity, random) -> new TradeOffer(
-					new TradedItem(Items.EMERALD, 1),
+					new TradedItem(Items.EMERALD, 16),
 					cocoon, 4, 12, 0.09f));
 
 			factories.add((entity, random) -> new TradeOffer(
