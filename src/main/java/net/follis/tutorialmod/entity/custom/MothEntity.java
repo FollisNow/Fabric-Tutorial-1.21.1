@@ -1,6 +1,7 @@
 package net.follis.tutorialmod.entity.custom;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.network.MesmerizeManager;
 import net.follis.tutorialmod.network.MesmerizePayload;
@@ -204,10 +205,12 @@ public class MothEntity extends AngerableBugEntity implements Flutterer {
         super.tick();
         //spawnParticlesAtTarget();
         this.updateAnimations();
-        if (!this.getWorld().isClient) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
             this.updateMesmerizedPlayers();
             if (this.age % TRIGGER_SCAN_INTERVAL == 0) {
                 this.scanForNewStares();
+                if (this.isRoosting() && !isValidTreeStructure(serverWorld, this.getBlockPos()))
+                    this.setRoosting(false);
             }
         }
     }
@@ -460,12 +463,12 @@ public class MothEntity extends AngerableBugEntity implements Flutterer {
             if (!isTreeBlock.test(world.getBlockState(entry))) {
                 continue;
             }
-            if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
-                continue;
-            }
-            if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
-                continue;
-            }
+//            if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
+//                continue;
+//            }
+//            if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
+//                continue;
+//            }
             validTreeSides++;
         }
         return validTreeSides > 0 && validTreeSides < 4;

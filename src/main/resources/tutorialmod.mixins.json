@@ -11,7 +11,8 @@
 	"client": [
 		"ItemRendererMixin",
 		"ModelLoaderMixin",
-		"MouseMixin"
+		"MouseMixin",
+		"MinecraftClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
