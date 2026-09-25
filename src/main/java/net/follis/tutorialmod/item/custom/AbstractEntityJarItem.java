@@ -102,43 +102,43 @@ public abstract class AbstractEntityJarItem extends Item {
             if(!bugDataList.isEmpty()) {
                 List<BugData> reversedList = bugDataList.reversed();
                 for (BugData bugData: reversedList) {
-                    if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.BEETLE) {
-                        var potionId = getNbt(bugData).getString("PotionGene");
+                    if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.BEETLE) {
+                        var potionId = bugData.getNbt().getString("PotionGene");
                         var statusEffect = Registries.STATUS_EFFECT.get(Identifier.of(potionId));
                         if (statusEffect != null) {
-                            tooltip.add(Text.translatable(convertToKey(bugData)).withColor(BeetleColors.get(0).getRgb())
+                            tooltip.add(Text.translatable(bugData.convertToKey()).withColor(BeetleColors.getFirst().getRgb())
                                     .append(" ")
                                     .append(Text.literal(Text.translatable(statusEffect.getTranslationKey()).getString().toLowerCase())
                                             .setStyle(Style.EMPTY)
                                             .withColor(statusEffect.getColor())));
                         } else {
-                            TextColor color = getColorOrDefault(BeetleColors, getNbt(bugData).getInt("Variant"));
-                            tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()));
+                            TextColor color = getColorOrDefault(BeetleColors, bugData.getNbt().getInt("Variant"));
+                            tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()));
                         }
 
-                    } else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.MOTH) {
-                        TextColor color = getColorOrDefault(MothColors, getNbt(bugData).getInt("Variant"));
-                        tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()).append(" ").append(Text.literal(MothVariant.byId(getNbt(bugData).getInt("Variant")).getName())));
+                    } else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.MOTH) {
+                        TextColor color = getColorOrDefault(MothColors, bugData.getNbt().getInt("Variant"));
+                        tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()).append(" ").append(Text.literal(MothVariant.byId(bugData.getNbt().getInt("Variant")).getName())));
 
                     }
-                    else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.LOCUST) {
-                        TextColor color = getColorOrDefault(LocustColors, getNbt(bugData).getInt("Variant"));
-                        tooltip.add(Text.translatable(convertToKey(bugData)).withColor(color.getRgb()));
+                    else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.LOCUST) {
+                        TextColor color = getColorOrDefault(LocustColors, bugData.getNbt().getInt("Variant"));
+                        tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()));
 
-                    } else if (Registries.ENTITY_TYPE.get(getIdentifier(bugData)) == ModEntities.SPIDERLING) {
-                        String formattedGrowthSize = String.format("%.2f", getNbt(bugData).getFloat("GrowthSize")); // Format to 3 decimal places
-                        int growthSizeColor = interpolateColor(getNbt(bugData).getFloat("GrowthSize"), SpiderlingEntity.MINIMUM_SIZE, SpiderlingEntity.MAXIMUM_SIZE);
+                    } else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.SPIDERLING) {
+                        String formattedGrowthSize = String.format("%.2f", bugData.getNbt().getFloat("GrowthSize")); // Format to 3 decimal places
+                        int growthSizeColor = interpolateColor(bugData.getNbt().getFloat("GrowthSize"), SpiderlingEntity.MINIMUM_SIZE, SpiderlingEntity.MAXIMUM_SIZE);
 
-                        String formattedMaxHealth = String.format("%.2f", getNbt(bugData).getFloat("MaxHealth")); // Format to 3 decimal places
-                        int maxHealthColor = interpolateColor(getNbt(bugData).getFloat("MaxHealth"), SpiderlingEntity.MINIMUM_HEALTH, SpiderlingEntity.MAXIMUM_HEALTH);
+                        String formattedMaxHealth = String.format("%.2f", bugData.getNbt().getFloat("MaxHealth")); // Format to 3 decimal places
+                        int maxHealthColor = interpolateColor(bugData.getNbt().getFloat("MaxHealth"), SpiderlingEntity.MINIMUM_HEALTH, SpiderlingEntity.MAXIMUM_HEALTH);
 
-                        String formattedSpeed = String.format("%.2f", getNbt(bugData).getFloat("MovementSpeed")); // Format to 3 decimal places
-                        int speedColor = interpolateColor(getNbt(bugData).getFloat("MovementSpeed"), SpiderlingEntity.MINIMUM_SPEED, SpiderlingEntity.MAXIMUM_SPEED);
+                        String formattedSpeed = String.format("%.2f", bugData.getNbt().getFloat("MovementSpeed")); // Format to 3 decimal places
+                        int speedColor = interpolateColor(bugData.getNbt().getFloat("MovementSpeed"), SpiderlingEntity.MINIMUM_SPEED, SpiderlingEntity.MAXIMUM_SPEED);
 
-                        String formattedJumpStrength = String.format("%.2f", getNbt(bugData).getFloat("JumpStrength")); // Format to 3 decimal places
-                        int jumpStrengthColor = interpolateColor(getNbt(bugData).getFloat("JumpStrength"), SpiderlingEntity.MINIMUM_JUMP, SpiderlingEntity.MAXIMUM_JUMP);
+                        String formattedJumpStrength = String.format("%.2f", bugData.getNbt().getFloat("JumpStrength")); // Format to 3 decimal places
+                        int jumpStrengthColor = interpolateColor(bugData.getNbt().getFloat("JumpStrength"), SpiderlingEntity.MINIMUM_JUMP, SpiderlingEntity.MAXIMUM_JUMP);
 
-                        tooltip.add(Text.translatable(convertToKey(bugData))
+                        tooltip.add(Text.translatable(bugData.convertToKey())
                                 .append(" ")
                                 .append(Text.literal("⇵" + formattedGrowthSize + "⇵  ").withColor(growthSizeColor))
                                 .append(Text.literal("♥" + formattedMaxHealth + "♥  ").withColor(maxHealthColor))
@@ -146,7 +146,7 @@ public abstract class AbstractEntityJarItem extends Item {
                                 .append(Text.literal("⏶" + formattedJumpStrength + "⏶").withColor(jumpStrengthColor))
                         );
                     } else {
-                        tooltip.add(Text.translatable(convertToKey(bugData)).formatted(formatting));
+                        tooltip.add(Text.translatable(bugData.convertToKey()).formatted(formatting));
                     }
                 }
             }
@@ -154,14 +154,6 @@ public abstract class AbstractEntityJarItem extends Item {
             tooltip.add(Text.translatable("tooltip.tutorialmod.bug_jar"));
         }
         super.appendTooltip(stack, context, tooltip, type);
-    }
-
-
-    protected static Identifier getIdentifier(BugData bugData) {
-        return Identifier.of(bugData.entityData.copyNbt().getString("id"));
-    }
-    protected static @NotNull String convertToKey(BugData bugData) {
-        return "entity." + bugData.entityData.copyNbt().getString("id").replace(":", ".");
     }
 
     protected List<BugData> getMutableBugDataList(PlayerEntity player, int slot) {
@@ -291,9 +283,6 @@ public abstract class AbstractEntityJarItem extends Item {
     }
 
 
-    protected static NbtCompound getNbt(BugData bugData) {
-        return bugData.entityData().copyNbt();
-    }
     protected int interpolateColor(float value, float minValue, float maxValue) {
         float clampedValue = MathHelper.clamp((value - minValue) / (maxValue - minValue), 0F, 1F);
 
@@ -320,10 +309,23 @@ public abstract class AbstractEntityJarItem extends Item {
             NbtCompound nbtCompound = entityData.copyNbt();
             return EntityType.loadEntityWithPassengers(nbtCompound, world, entityx -> entityx);
         }
+
+        public NbtCompound getNbt() {
+            return entityData.copyNbt();
+        }
+
+        public Identifier getIdentifier() {
+            return Identifier.of(getNbt().getString("id"));
+        }
+        public @NotNull String convertToKey() {
+            return "entity." + entityData.copyNbt().getString("id").replace(":", ".");
+        }
+        public int getVariantId() {
+            return getNbt().getInt("Variant");
+        }
         public static final Codec<List<BugData>> LIST_CODEC;
         public static final PacketCodec<ByteBuf, BugData> PACKET_CODEC;
         static {
-            // Static codec definitions
             LIST_CODEC = CODEC.listOf();
             PACKET_CODEC = PacketCodec.tuple(NbtComponent.PACKET_CODEC, BugData::entityData, BugData::new);
         }

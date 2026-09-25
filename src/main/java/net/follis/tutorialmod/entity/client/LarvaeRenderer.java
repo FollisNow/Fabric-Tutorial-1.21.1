@@ -32,6 +32,8 @@ public class LarvaeRenderer extends MobEntityRenderer<LarvaeEntity, LarvaeModel<
     public Identifier getTexture(LarvaeEntity entity) {
         return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
+    public static Identifier getTexture(LarvaeVariant variant) { return LOCATION_BY_VARIANT.get(variant); }
+
     public RenderLayer getCocoonRenderLayer(LarvaeEntity entity) {
         return this.getRenderLayer(entity, true, false, false);
     }

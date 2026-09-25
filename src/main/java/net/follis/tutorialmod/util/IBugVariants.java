@@ -3,9 +3,12 @@ package net.follis.tutorialmod.util;
 import net.follis.tutorialmod.enchantment.ModEnchantments;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.*;
+import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.TextColor;
@@ -81,7 +84,15 @@ public interface IBugVariants {
             ModEntities.SPIDERLING.getName().getString(), SpiderlingVariant.class,
             ModEntities.SCORPION.getName().getString(), ScorpionVariant.class
     );
-
+    Map<EntityType<?>, Item> bugItems = Map.ofEntries(
+            Map.entry(ModEntities.MOTH, ModItems.MOTH_ITEM),
+            Map.entry(ModEntities.BEETLE, ModItems.BEETLE_ITEM),
+            Map.entry(ModEntities.LOCUST, ModItems.LOCUST_ITEM),
+            Map.entry(ModEntities.MANTIS, ModItems.MANTIS_ITEM),
+            Map.entry(ModEntities.SPIDERLING, ModItems.SPIDERLING_ITEM),
+            Map.entry(ModEntities.SCORPION, ModItems.SCORPION_ITEM),
+            Map.entry(ModEntities.LARVAE, ModItems.LARVAE_ITEM)
+    );
     /**
      * List equivalent of Map.getOrDefault — returns the color at `index`,
      * or `fallback` if the index is out of bounds (negative or unassigned variant id).

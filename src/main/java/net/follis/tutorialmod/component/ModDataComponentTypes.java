@@ -41,6 +41,10 @@ public class ModDataComponentTypes {
             register("bugs", builder -> builder.codec(AbstractEntityJarItem.BugData.LIST_CODEC)
                     .packetCodec(AbstractEntityJarItem.BugData.PACKET_CODEC.collect(PacketCodecs.toList())).cache());
 
+    public static final ComponentType<AbstractEntityJarItem.BugData> CAPTURED_BUG =
+            register("captured_bug", builder -> builder.codec(AbstractEntityJarItem.BugData.CODEC)
+                    .packetCodec(AbstractEntityJarItem.BugData.PACKET_CODEC).cache());
+
     public static final ComponentType<String> CURSED_TARGET  =
             register("cursed_target", builder -> builder.codec(Codec.STRING));
 

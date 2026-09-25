@@ -6,7 +6,9 @@ import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
+import net.follis.tutorialmod.util.IBugVariants;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -22,6 +24,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -165,8 +169,57 @@ public class ModItems {
     public static final Item TOMAHAWK = registerItem("tomahawk",
             new TomahawkItem(new Item.Settings().maxCount(16)));
 
+    public static final Item  MOTH_ITEM = registerItem("moth_item",
+            new BugItem(new Item.Settings()));
+    public static final Item  BEETLE_ITEM = registerItem("beetle_item",
+            new BugItem(new Item.Settings()));
+    public static final Item  LOCUST_ITEM = registerItem("locust_item",
+            new BugItem(new Item.Settings()));
+    public static final Item  MANTIS_ITEM = registerItem("mantis_item",
+            new BugItem(new Item.Settings()));
+    public static final Item  SPIDERLING_ITEM = registerItem("spiderling_item",
+            new BugItem(new Item.Settings()));
+    public static final Item  SCORPION_ITEM = registerItem("scorpion_item",
+            new BugItem(new Item.Settings()));
+    public static final Item  LARVAE_ITEM = registerItem("larvae_item",
+            new BugItem(new Item.Settings()));
+
+
+
+
+
     public static final Item SPECTRE_STAFF = registerItem("spectre_staff",
-            new Item(new Item.Settings().maxCount(1)));
+            new Item(new Item.Settings().maxCount(1)){
+                @Override
+                public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+
+                    if (!(entity instanceof IBugVariants) || user.getWorld().isClient) {
+                        return super.useOnEntity(stack, user, entity, hand);
+                    }
+                    Item bugItem = IBugVariants.bugItems.get(entity.getType());
+                    if (bugItem == null) {
+                        return super.useOnEntity(stack, user, entity, hand);
+                    }
+
+                    ItemStack figurine = BugItem.createFigurine(bugItem, entity);
+                    Vec3d pos = entity.getPos();
+                    World world = user.getWorld();
+                    entity.discard();
+
+                    if (figurine.isEmpty()) {
+                        return null;
+                    } else if (user.getWorld().isClient) {
+                        return null;
+                    } else {
+                        ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), figurine);
+                        itemEntity.setThrower(user);
+                        itemEntity.setToDefaultPickupDelay();
+                        world.spawnEntity(itemEntity);
+                    }
+
+                    return ActionResult.SUCCESS;
+                }
+            });
 
     public static final Item GOLDEN_NEEDLE = registerItem("golden_needle",
             new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()

@@ -53,6 +53,7 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
 
     private static final List<TrackedData<Integer>> MATERIAL_SLOTS =
             List.of(MATERIAL_SLOT_0, MATERIAL_SLOT_1, MATERIAL_SLOT_2, MATERIAL_SLOT_3);
+    public static final int COCOON_SLOT_COUNT = 4;
 
     private static final int PICKUP_INTERVAL = 100; // ~5 seconds between attempts
     private static final double PICKUP_RANGE = 1.5D;
@@ -204,10 +205,9 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
     public static CaddisflyCocoonItem.CocoonData randomCocoonData() {
         CocoonMaterial[] materials = CocoonMaterial.values();
         Random random = Random.create();
-        int segmentCount = 4;
 
         CaddisflyCocoonItem.CocoonData.Builder builder = CaddisflyCocoonItem.CocoonData.builder();
-        for (int i = 0; i < segmentCount; i++) {
+        for (int i = 0; i < COCOON_SLOT_COUNT; i++) {
             builder.addMaterial(materials[random.nextInt(materials.length)]);
         }
         return builder.build();
@@ -218,7 +218,7 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
         if (slots == 0)
             return builder.build();
 
-        int materialsNumber = MathHelper.clamp(slots, 0, 4);
+        int materialsNumber = MathHelper.clamp(slots, 0, COCOON_SLOT_COUNT);
         CocoonMaterial[] materials = CocoonMaterial.values();
         Random random = Random.create();
 
@@ -304,7 +304,7 @@ public class LarvaeEntity extends AnimalEntity implements IBugVariants {
 
 
         if (spawnReason == SpawnReason.COMMAND || spawnReason == SpawnReason.SPAWN_EGG) {
-            List<CocoonMaterial> materials = randomCocoonData(Random.createLocal().nextInt(4)).segments();
+            List<CocoonMaterial> materials = randomCocoonData(Random.createLocal().nextInt(COCOON_SLOT_COUNT)).segments();
             TutorialMod.LOGGER.info(materials.toString());
             for (int i = 0; i < materials.size(); i++) {
                 this.setCocoonSegment(i, materials.get(i));

@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -15,9 +16,9 @@ import net.follis.tutorialmod.client.MesmerizeClientState;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.client.*;
-import net.follis.tutorialmod.entity.custom.CocoonMaterial;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.item.custom.CaddisflyCocoonItem;
+import net.follis.tutorialmod.item.render.*;
 import net.follis.tutorialmod.network.MesmerizePayload;
 import net.follis.tutorialmod.particle.GoldenChainParticle;
 import net.follis.tutorialmod.particle.GoldenLeavesParticle;
@@ -31,7 +32,6 @@ import net.follis.tutorialmod.util.ModModelPredicates;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.text.Text;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
@@ -146,5 +146,13 @@ public class TutorialModClient implements ClientModInitializer {
             }
             return data.segments().get(tintIndex - 1).getColor() | 0xFF000000;
         }, ModItems.CADDISFLY_COCOON);
+
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.MOTH_ITEM, new MothFigurineRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.BEETLE_ITEM, new BeetleFigurineRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.LOCUST_ITEM, new LocustFigurineRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.MANTIS_ITEM, new MantisFigurineRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SPIDERLING_ITEM, new SpiderlingFigurineRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SCORPION_ITEM, new ScorpionFigurineRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.LARVAE_ITEM, new LarvaeFigurineRenderer());
     }
 }

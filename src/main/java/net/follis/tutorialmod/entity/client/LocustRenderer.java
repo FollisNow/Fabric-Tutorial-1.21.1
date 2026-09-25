@@ -34,6 +34,7 @@ public class LocustRenderer extends MobEntityRenderer<LocustEntity, LocustModel<
     public Identifier getTexture(LocustEntity entity) {
         return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
+    public static Identifier getTexture(LocustVariant variant) { return LOCATION_BY_VARIANT.get(variant); }
 
     @Override
     public void render(LocustEntity livingEntity, float f, float g, MatrixStack matrixStack,

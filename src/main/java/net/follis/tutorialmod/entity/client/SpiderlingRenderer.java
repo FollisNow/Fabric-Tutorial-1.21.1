@@ -40,6 +40,7 @@ public class SpiderlingRenderer<T extends SpiderlingEntity> extends MobEntityRen
     public Identifier getTexture(SpiderlingEntity entity) {
         return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
+    public static Identifier getTexture(SpiderlingVariant variant) { return LOCATION_BY_VARIANT.get(variant); }
 
     protected float getLyingAngle(T spiderEntity) {
         return 180.0F;

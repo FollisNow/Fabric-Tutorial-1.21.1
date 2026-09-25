@@ -34,6 +34,7 @@ public class ScorpionRenderer extends MobEntityRenderer<ScorpionEntity, Scorpion
     public Identifier getTexture(ScorpionEntity entity) {
         return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
+    public static Identifier getTexture(ScorpionVariant variant) { return LOCATION_BY_VARIANT.get(variant); }
 
     @Override
     public void render(ScorpionEntity livingEntity, float f, float g, MatrixStack matrixStack,

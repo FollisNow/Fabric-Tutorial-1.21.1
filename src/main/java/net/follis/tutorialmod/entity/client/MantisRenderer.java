@@ -30,6 +30,7 @@ public class MantisRenderer extends MobEntityRenderer<MantisEntity, MantisModel<
     public Identifier getTexture(MantisEntity entity) {
         return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
+    public static Identifier getTexture(MantisVariant variant) { return LOCATION_BY_VARIANT.get(variant); }
 
     @Override
     public void render(MantisEntity livingEntity, float f, float g, MatrixStack matrixStack,

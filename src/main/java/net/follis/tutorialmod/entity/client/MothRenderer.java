@@ -62,7 +62,7 @@ public class MothRenderer extends MobEntityRenderer<MothEntity, MothModel<MothEn
     public Identifier getTexture(MothEntity entity) {
         return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
-
+    public static Identifier getTexture(MothVariant variant) { return LOCATION_BY_VARIANT.get(variant); }
     @Override
     public void render(MothEntity livingEntity, float yaw, float tickDelta, MatrixStack matrixStack,
                        VertexConsumerProvider vertexConsumerProvider, int light) {
