@@ -84,6 +84,11 @@ public class LarvaeModel<T extends LarvaeEntity> extends SinglePartEntityModel<T
         this.gem18 = this.material3.getChild("gem18");
         this.gem2 = this.material3.getChild("gem2");
         this.gem21 = this.material3.getChild("gem21");
+
+        material0.visible = false;
+        material1.visible = false;
+        material2.visible = false;
+        material3.visible = false;
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();

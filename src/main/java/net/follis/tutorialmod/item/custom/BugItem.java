@@ -2,8 +2,8 @@ package net.follis.tutorialmod.item.custom;
 
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
-import net.follis.tutorialmod.entity.custom.MothVariant;
-import net.follis.tutorialmod.entity.custom.SpiderlingEntity;
+import net.follis.tutorialmod.entity.custom.*;
+import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,24 @@ public class BugItem extends Item {
     public static ItemStack createFigurine(Item item, LivingEntity entity) {
         ItemStack stack = new ItemStack(item);
         stack.set(ModDataComponentTypes.CAPTURED_BUG, AbstractEntityJarItem.BugData.of(entity));
+        if (entity instanceof LarvaeEntity larvae) {
+            List<CocoonMaterial> segments = larvae.getCocoonSegments();
+            boolean hasAnyMaterial = segments.stream().anyMatch(m -> m != null);
+            if (hasAnyMaterial) {
+                stack.set(ModDataComponentTypes.COCOON, CaddisflyCocoonItem.CocoonData.fromEntitySegments(segments));
+            }
+        }
         return stack;
+    }
+
+    @Override
+    public Text getName(ItemStack stack) {
+        AbstractEntityJarItem.BugData bugData = stack.get(ModDataComponentTypes.CAPTURED_BUG);
+
+        if (bugData == null)
+            return super.getName();
+
+        return Registries.ENTITY_TYPE.get(bugData.getIdentifier()).getName();
     }
 
     @Override
@@ -50,7 +67,7 @@ public class BugItem extends Item {
                                     .withColor(statusEffect.getColor())));
                 } else {
                     TextColor color = getColorOrDefault(BeetleColors, bugData.getNbt().getInt("Variant"));
-                    tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()));
+                    tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()).append(" ").append(Text.literal(BeetleVariant.byId(bugData.getNbt().getInt("Variant")).getName())));
                 }
 
             } else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.MOTH) {
@@ -60,7 +77,7 @@ public class BugItem extends Item {
             }
             else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.LOCUST) {
                 TextColor color = getColorOrDefault(LocustColors, bugData.getNbt().getInt("Variant"));
-                tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()));
+                tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()).append(" ").append(Text.literal(LocustVariant.byId(bugData.getNbt().getInt("Variant")).getName())));
 
             } else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.SPIDERLING) {
                 String formattedGrowthSize = String.format("%.2f", bugData.getNbt().getFloat("GrowthSize")); // Format to 3 decimal places
@@ -82,6 +99,14 @@ public class BugItem extends Item {
                         .append(Text.literal("»" + formattedSpeed + "»  ").withColor(speedColor))
                         .append(Text.literal("⏶" + formattedJumpStrength + "⏶").withColor(jumpStrengthColor))
                 );
+            } else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.LARVAE) {
+                CaddisflyCocoonItem.CocoonData data = stack.get(ModDataComponentTypes.COCOON);
+                if (data != null) {
+                    for (CocoonMaterial material : data.segments()) {
+                        tooltip.add(Text.literal(material.asString())
+                                .withColor(material.getColor()));
+                    }
+                }
             } else {
                 tooltip.add(Text.translatable(bugData.convertToKey()).formatted(formatting));
             }

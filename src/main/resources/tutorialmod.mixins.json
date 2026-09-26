@@ -12,7 +12,8 @@
 		"ItemRendererMixin",
 		"ModelLoaderMixin",
 		"MouseMixin",
-		"MinecraftClientMixin"
+		"MinecraftClientMixin",
+		"EntityRenderDispatcherAccessorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

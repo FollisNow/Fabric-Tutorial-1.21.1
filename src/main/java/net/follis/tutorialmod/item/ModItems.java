@@ -169,19 +169,23 @@ public class ModItems {
     public static final Item TOMAHAWK = registerItem("tomahawk",
             new TomahawkItem(new Item.Settings().maxCount(16)));
 
-    public static final Item  MOTH_ITEM = registerItem("moth_item",
+    public static final Item MOTH_ITEM = registerItem("moth_item",
             new BugItem(new Item.Settings()));
-    public static final Item  BEETLE_ITEM = registerItem("beetle_item",
+    public static final Item BEETLE_ITEM = registerItem("beetle_item",
             new BugItem(new Item.Settings()));
-    public static final Item  LOCUST_ITEM = registerItem("locust_item",
+    public static final Item LOCUST_ITEM = registerItem("locust_item",
             new BugItem(new Item.Settings()));
-    public static final Item  MANTIS_ITEM = registerItem("mantis_item",
+    public static final Item MANTIS_ITEM = registerItem("mantis_item",
             new BugItem(new Item.Settings()));
-    public static final Item  SPIDERLING_ITEM = registerItem("spiderling_item",
+    public static final Item SPIDERLING_ITEM = registerItem("spiderling_item",
             new BugItem(new Item.Settings()));
-    public static final Item  SCORPION_ITEM = registerItem("scorpion_item",
+    public static final Item SCORPION_ITEM = registerItem("scorpion_item",
             new BugItem(new Item.Settings()));
-    public static final Item  LARVAE_ITEM = registerItem("larvae_item",
+    public static final Item LARVAE_ITEM = registerItem("larvae_item",
+            new BugItem(new Item.Settings()));
+    public static final Item BEE_ITEM = registerItem("bee_item",
+            new BugItem(new Item.Settings()));
+    public static final Item GENERIC_ARTHROPOD_FIGURINE = registerItem("generic_arthropod_figurine",
             new BugItem(new Item.Settings()));
 
 
@@ -193,10 +197,14 @@ public class ModItems {
                 @Override
                 public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
 
-                    if (!(entity instanceof IBugVariants) || user.getWorld().isClient) {
+                    if (user.getWorld().isClient) {
                         return super.useOnEntity(stack, user, entity, hand);
                     }
+
                     Item bugItem = IBugVariants.bugItems.get(entity.getType());
+                    if (bugItem == null && entity.getType().isIn(EntityTypeTags.ARTHROPOD)) {
+                        bugItem = GENERIC_ARTHROPOD_FIGURINE;
+                    }
                     if (bugItem == null) {
                         return super.useOnEntity(stack, user, entity, hand);
                     }

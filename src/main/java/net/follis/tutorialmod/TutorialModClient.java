@@ -2,6 +2,7 @@ package net.follis.tutorialmod;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -28,10 +29,12 @@ import net.follis.tutorialmod.screen.ModScreenHandlers;
 import net.follis.tutorialmod.screen.custom.GoldenHotelScreen;
 import net.follis.tutorialmod.screen.custom.GrowthChamberScreen;
 import net.follis.tutorialmod.screen.custom.GoldenPedestalScreen;
+import net.follis.tutorialmod.util.IBugVariants;
 import net.follis.tutorialmod.util.ModModelPredicates;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.item.Item;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
@@ -147,12 +150,13 @@ public class TutorialModClient implements ClientModInitializer {
             return data.segments().get(tintIndex - 1).getColor() | 0xFF000000;
         }, ModItems.CADDISFLY_COCOON);
 
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.MOTH_ITEM, new MothFigurineRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.BEETLE_ITEM, new BeetleFigurineRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.LOCUST_ITEM, new LocustFigurineRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.MANTIS_ITEM, new MantisFigurineRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SPIDERLING_ITEM, new SpiderlingFigurineRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SCORPION_ITEM, new ScorpionFigurineRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.LARVAE_ITEM, new LarvaeFigurineRenderer());
+
+        GenericBugFigurineRenderer figurineRenderer = new GenericBugFigurineRenderer();
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.GENERIC_ARTHROPOD_FIGURINE, figurineRenderer);
+        for (Item item : IBugVariants.bugItems.values()) {
+            BuiltinItemRendererRegistry.INSTANCE.register(item, figurineRenderer);
+        }
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->
+                GenericBugFigurineRenderer.clearCache());
     }
 }
