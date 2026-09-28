@@ -183,8 +183,6 @@ public class ModItems {
             new BugItem(new Item.Settings()));
     public static final Item LARVAE_ITEM = registerItem("larvae_item",
             new BugItem(new Item.Settings()));
-    public static final Item BEE_ITEM = registerItem("bee_item",
-            new BugItem(new Item.Settings()));
     public static final Item GENERIC_ARTHROPOD_FIGURINE = registerItem("generic_arthropod_figurine",
             new BugItem(new Item.Settings()));
 

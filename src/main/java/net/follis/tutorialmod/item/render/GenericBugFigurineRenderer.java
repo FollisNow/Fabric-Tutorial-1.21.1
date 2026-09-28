@@ -2,6 +2,7 @@ package net.follis.tutorialmod.item.render;
 
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.follis.tutorialmod.entity.custom.MothEntity;
 import net.follis.tutorialmod.item.custom.AbstractEntityJarItem.BugData;
 import net.follis.tutorialmod.mixin.EntityRenderDispatcherAccessorMixin;
 import net.minecraft.client.MinecraftClient;
@@ -37,11 +38,18 @@ public class GenericBugFigurineRenderer implements BuiltinItemRendererRegistry.D
                 entity.setPitch(0F);
                 entity.prevYaw = 0F;
                 entity.prevPitch = 0F;
+
                 if (entity instanceof LivingEntity living) {
                     living.setBodyYaw(0F);
                     living.setHeadYaw(0F);
                     living.prevBodyYaw = 0F;
                     living.prevHeadYaw = 0F;
+                    living.hurtTime = 0;
+                    living.deathTime = 0;
+                }
+
+                if (entity instanceof MothEntity moth) {
+                    moth.setRoosting(true);
                 }
             }
             return entity;

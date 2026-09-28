@@ -91,8 +91,7 @@ public interface IBugVariants {
             Map.entry(ModEntities.MANTIS, ModItems.MANTIS_ITEM),
             Map.entry(ModEntities.SPIDERLING, ModItems.SPIDERLING_ITEM),
             Map.entry(ModEntities.SCORPION, ModItems.SCORPION_ITEM),
-            Map.entry(ModEntities.LARVAE, ModItems.LARVAE_ITEM),
-            Map.entry(EntityType.BEE, ModItems.BEE_ITEM)
+            Map.entry(ModEntities.LARVAE, ModItems.LARVAE_ITEM)
     );
     /**
      * List equivalent of Map.getOrDefault — returns the color at `index`,

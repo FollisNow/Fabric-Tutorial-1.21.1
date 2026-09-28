@@ -4,18 +4,18 @@
   "display": {
     "thirdperson_righthand": {
       "rotation": [-15, 0, 0],
-      "translation": [0, 8, 0]
+      "translation": [0, 7.5, 0]
     },
     "thirdperson_lefthand": {
       "rotation": [-15, 0, 0],
-      "translation": [0, 8, 0]
+      "translation": [0, 7.5, 0]
     },
     "firstperson_righthand": {
-      "rotation": [ 90, 180, 0],
+      "rotation": [90, 180, 0],
       "translation": [5, 0, 5]
     },
     "firstperson_lefthand": {
-      "rotation": [ 90, 180, 0],
+      "rotation": [90, 180, 0],
       "translation": [5, 0, 5]
     },
     "ground": {

@@ -68,7 +68,14 @@ public class ModItemGroups {
                         entries.add(ModItems.BAMBOO_TRAP);
                         entries.add(ModItems.VISION_MONOCLE);
                         entries.add(ModItems.ZAMPONA);
+
                         entries.add(ModItems.MOTH_ITEM);
+                        entries.add(ModItems.BEETLE_ITEM);
+                        entries.add(ModItems.LOCUST_ITEM);
+                        entries.add(ModItems.MANTIS_ITEM);
+                        entries.add(ModItems.SPIDERLING_ITEM);
+                        entries.add(ModItems.SCORPION_ITEM);
+                        entries.add(ModItems.LARVAE_ITEM);
 
                         entries.add(ModItems.CHITIN);
 
