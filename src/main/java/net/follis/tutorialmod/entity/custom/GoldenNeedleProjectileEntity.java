@@ -64,10 +64,10 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
         builder.add(ENCHANTED, false);
     }
 
-    private int getTargetId() {
+    public int getTargetId() {
         return this.dataTracker.get(DATA_ID_TYPE_TARGETID);
     }
-    private int getDuration() {
+    public int getDuration() {
         return this.dataTracker.get(DATA_ID_TYPE_DURATION);
     }
 
@@ -169,11 +169,14 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
                     target.setVelocity(appliedForce);
                 }
                 if (world instanceof ServerWorld serverWorld){
-                    addParticles(this, target, serverWorld);
-                    addParticles(this, target, serverWorld);
-                    addParticles(this, target, serverWorld);
-                    addParticles(this, target, serverWorld);
+//                    addParticles(this, target, serverWorld);
+//                    addParticles(this, target, serverWorld);
+//                    addParticles(this, target, serverWorld);
+//                    addParticles(this, target, serverWorld);
                     setDuration(getDuration() - 1);
+                    if (getDuration() <= 0) {
+                        burst(serverWorld, target, 20);
+                    }
                 }
             }
         }
@@ -184,18 +187,24 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
         return true;
     }
 
-    private void addParticles(GoldenNeedleProjectileEntity needleProjectile, Entity target, ServerWorld serverWorld) {
-        Vec3d vec3d = Vec3Lerp((float) serverWorld.random.nextInt(20) / 20, target, needleProjectile.getPos());
-        serverWorld.spawnParticles(ModParticles.GOLDEN_CHAIN_PARTICLE,
-                vec3d.x, vec3d.y,
-                vec3d.z, 1, 0, 0, 0, 0);
-    }
+//    private void addParticles(GoldenNeedleProjectileEntity needleProjectile, Entity target, ServerWorld serverWorld) {
+//        Vec3d vec3d = Vec3Lerp((float) serverWorld.random.nextInt(20) / 20, target, needleProjectile.getPos());
+//        serverWorld.spawnParticles(ModParticles.GOLDEN_CHAIN_PARTICLE,
+//                vec3d.x, vec3d.y,
+//                vec3d.z, 1, 0, 0, 0, 0);
+//    }
+//
+//    public final Vec3d Vec3Lerp(float delta, Entity target, Vec3d selfPos) {
+//        double d = MathHelper.lerp(delta, selfPos.x, target.getPos().x);
+//        double e = MathHelper.lerp(delta, selfPos.y, target.getPos().y + target.getHeight() / 2);
+//        double f = MathHelper.lerp(delta, selfPos.z, target.getPos().z);
+//        return new Vec3d(d, e, f);
+//    }
 
-    public final Vec3d Vec3Lerp(float delta, Entity target, Vec3d selfPos) {
-        double d = MathHelper.lerp(delta, selfPos.x, target.getPos().x);
-        double e = MathHelper.lerp(delta, selfPos.y, target.getPos().y + target.getHeight() / 2);
-        double f = MathHelper.lerp(delta, selfPos.z, target.getPos().z);
-        return new Vec3d(d, e, f);
+    private void burst(ServerWorld world, Entity target, int count) {
+        Vec3d center = target.getPos().add(0, target.getHeight() / 2.0, 0);
+        world.spawnParticles(ModParticles.GOLDEN_CHAIN_PARTICLE,
+                center.x, center.y, center.z, count, 0.3, 0.3, 0.3, 0.05);
     }
 
     @Override
@@ -213,10 +222,14 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        if (entityHitResult.getEntity().getId() != getTargetId()){
-            setTarget(entityHitResult.getEntity().getId());
+        Entity hit = entityHitResult.getEntity();
+        if (hit.getId() != getTargetId()) {
+            setTarget(hit.getId());
             setDuration(90);
             setVelocity(this.getVelocity().multiply(0.4));
+            if (this.getWorld() instanceof ServerWorld serverWorld) {
+                burst(serverWorld, hit, 14);
+            }
         } else {
             setDuration(getDuration() + 90);
         }
