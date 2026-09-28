@@ -154,11 +154,10 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
                         appliedForce = diff.multiply(this.groundVelocityFactor);
                         if (!world.isClient && this.getPos().distanceTo(target.getPos()) >= 2.0 && this.inGroundTime > 20) {
                             setDuration(0);
-                            world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_CHAIN_BREAK, SoundCategory.PLAYERS, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+                            world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_COBWEB_BREAK, SoundCategory.PLAYERS, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
                         }
                     }
                 }
-
 
                 if (target instanceof PlayerEntity playerEntity) {
                     playerEntity.addVelocity(appliedForce);
@@ -222,17 +221,19 @@ public class GoldenNeedleProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
+        World world = this.getWorld();
         Entity hit = entityHitResult.getEntity();
         if (hit.getId() != getTargetId()) {
             setTarget(hit.getId());
             setDuration(90);
             setVelocity(this.getVelocity().multiply(0.4));
-            if (this.getWorld() instanceof ServerWorld serverWorld) {
+            if (world instanceof ServerWorld serverWorld) {
                 burst(serverWorld, hit, 14);
             }
         } else {
             setDuration(getDuration() + 90);
         }
+        world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_COBWEB_HIT, SoundCategory.PLAYERS, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
     }
 
     private byte getLoyalty(ItemStack stack) {
