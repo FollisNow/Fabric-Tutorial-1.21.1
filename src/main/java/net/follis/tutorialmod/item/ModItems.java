@@ -3,6 +3,7 @@ package net.follis.tutorialmod.item;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
+import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
@@ -169,26 +170,30 @@ public class ModItems {
     public static final Item TOMAHAWK = registerItem("tomahawk",
             new TomahawkItem(new Item.Settings().maxCount(16)));
 
+    private static Item.Settings bugSettings(String entityId, int variantId) {
+        return new Item.Settings().component(ModDataComponentTypes.CAPTURED_BUG,
+                AbstractEntityJarItem.BugData.ofDefault(Identifier.of(entityId), variantId));
+    }
+//    private static Item.Settings bugSettingsWithSize(String entityId, int variantId) {
+//        return new Item.Settings().component(ModDataComponentTypes.CAPTURED_BUG,
+//                AbstractEntityJarItem.BugData.ofDefault(Identifier.of(entityId), variantId));
+//    }
     public static final Item MOTH_ITEM = registerItem("moth_item",
-            new BugItem(new Item.Settings()));
+            new BugItem(bugSettings(TutorialMod.MOD_ID + ":moth", 0)));
     public static final Item BEETLE_ITEM = registerItem("beetle_item",
-            new BugItem(new Item.Settings()));
+            new BugItem(bugSettings(TutorialMod.MOD_ID + ":beetle", 0)));
     public static final Item LOCUST_ITEM = registerItem("locust_item",
-            new BugItem(new Item.Settings()));
+            new BugItem(bugSettings(TutorialMod.MOD_ID + ":locust", 0)));
     public static final Item MANTIS_ITEM = registerItem("mantis_item",
-            new BugItem(new Item.Settings()));
+            new BugItem(bugSettings(TutorialMod.MOD_ID + ":mantis", 0)));
     public static final Item SPIDERLING_ITEM = registerItem("spiderling_item",
-            new BugItem(new Item.Settings()));
+            new BugItem(bugSettings(TutorialMod.MOD_ID + ":spiderling", 0)));
     public static final Item SCORPION_ITEM = registerItem("scorpion_item",
-            new BugItem(new Item.Settings()));
+            new BugItem(bugSettings(TutorialMod.MOD_ID + ":scorpion", 0)));
     public static final Item LARVAE_ITEM = registerItem("larvae_item",
-            new BugItem(new Item.Settings()));
+            new BugItem(bugSettings(TutorialMod.MOD_ID + ":larvae", 0)));
     public static final Item GENERIC_ARTHROPOD_FIGURINE = registerItem("generic_arthropod_figurine",
-            new BugItem(new Item.Settings()));
-
-
-
-
+            new BugItem(bugSettings("minecraft:spider", 0)));
 
     public static final Item SPECTRE_STAFF = registerItem("spectre_staff",
             new Item(new Item.Settings().maxCount(1)){

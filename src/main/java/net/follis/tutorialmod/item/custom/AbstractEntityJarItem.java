@@ -309,11 +309,22 @@ public abstract class AbstractEntityJarItem extends Item {
             NbtCompound nbtCompound = entityData.copyNbt();
             return EntityType.loadEntityWithPassengers(nbtCompound, world, entityx -> entityx);
         }
-
+        public static BugData ofDefault(Identifier entityId, int variantId) {
+            NbtCompound nbt = new NbtCompound();
+            nbt.putString("id", entityId.toString());
+            nbt.putInt("Variant", variantId);
+            return new BugData(NbtComponent.of(nbt));
+        }
+        public static BugData ofDefaultWithSize(Identifier entityId, int variantId) {
+            NbtCompound nbt = new NbtCompound();
+            nbt.putString("id", entityId.toString());
+            nbt.putInt("Variant", variantId);
+            nbt.putFloat("GrowthSize", 1);
+            return new BugData(NbtComponent.of(nbt));
+        }
         public NbtCompound getNbt() {
             return entityData.copyNbt();
         }
-
         public Identifier getIdentifier() {
             return Identifier.of(getNbt().getString("id"));
         }
