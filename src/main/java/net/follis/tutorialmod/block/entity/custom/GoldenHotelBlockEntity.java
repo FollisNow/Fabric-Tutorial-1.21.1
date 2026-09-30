@@ -123,17 +123,6 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
         ritualProgress = 0;
     }
 
-    private void spawnTrailPulse(ServerWorld world, GoldenPedestalBlockEntity pedestal, float t) {
-        ItemStack stack = pedestal.getStack();
-        if (stack.isEmpty()) return;
-
-        Vec3d start = pedestal.getPos().toCenterPos();
-        Vec3d end = this.getPos().toCenterPos().add(0, 0.5, 0);
-        Vec3d point = start.lerp(end, MathHelper.clamp(t + world.random.nextFloat() * 0.15F, 0, 1));
-
-        world.spawnParticles(new ItemStackParticleEffect(ParticleTypes.ITEM, stack),
-                point.x, point.y, point.z, 2, 0.05, 0.05, 0.05, 0.0);
-    }
     private void spawnLinePulse(ServerWorld world, GoldenPedestalBlockEntity pedestal) {
         ItemStack stack = pedestal.getStack();
         if (stack.isEmpty()) return;
