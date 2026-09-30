@@ -19,6 +19,28 @@ public class ModRecipes {
                 }
             });
 
+    public static final RecipeSerializer<GoldenHotelRecipe> GOLDEN_HOTEL_SERIALIZER = Registry.register(
+            Registries.RECIPE_SERIALIZER, Identifier.of(TutorialMod.MOD_ID, "golden_hotel"),
+            new GoldenHotelRecipe.Serializer());
+    public static final RecipeType<GoldenHotelRecipe> GOLDEN_HOTEL_TYPE = Registry.register(
+            Registries.RECIPE_TYPE, Identifier.of(TutorialMod.MOD_ID, "golden_hotel"), new RecipeType<GoldenHotelRecipe>() {
+                @Override
+                public String toString() {
+                    return "golden_hotel";
+                }
+            });
+
+    public static final RecipeSerializer<GoldenHotelRevivalRecipe> GOLDEN_HOTEL_REVIVAL_SERIALIZER = Registry.register(
+            Registries.RECIPE_SERIALIZER, Identifier.of(TutorialMod.MOD_ID, "golden_hotel_revival"),
+            new GoldenHotelRevivalRecipe.Serializer());
+    public static final RecipeType<GoldenHotelRevivalRecipe> GOLDEN_HOTEL_REVIVAL_TYPE = Registry.register(
+            Registries.RECIPE_TYPE, Identifier.of(TutorialMod.MOD_ID, "golden_hotel_revival"), new RecipeType<GoldenHotelRevivalRecipe>() {
+                @Override
+                public String toString() {
+                    return "golden_hotel_revival";
+                }
+            });
+
     public static void registerRecipes() {
         TutorialMod.LOGGER.info("Registering Custom Recipes for " + TutorialMod.MOD_ID);
     }

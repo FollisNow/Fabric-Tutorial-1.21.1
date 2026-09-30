@@ -1,0 +1,7 @@
+{
+  "type": "tutorialmod:golden_hotel",
+  "catalyst": { "item": "minecraft:birch_planks" },
+  "ingredient1": { "item": "minecraft:dirt" },
+  "ingredient2": { "item": "minecraft:dirt" },
+  "result": { "id": "tutorialmod:grilled_locust", "count": 1 }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "tutorialmod:golden_hotel",
+  "catalyst": { "item": "minecraft:stick" },
+  "ingredient1": { "item": "tutorialmod:gold_chain" },
+  "ingredient2": { "item": "tutorialmod:gold_chain" },
+  "result": { "id": "tutorialmod:golden_needle", "count": 1 }
+}

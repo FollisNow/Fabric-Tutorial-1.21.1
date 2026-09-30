@@ -1,0 +1,7 @@
+{
+  "type": "tutorialmod:golden_hotel",
+  "catalyst": { "item": "minecraft:decorated_pot" },
+  "ingredient1": { "item": "minecraft:gold_block" },
+  "ingredient2": { "item": "tutorialmod:gold_fence_gate" },
+  "result": { "id": "tutorialmod:bug_jar", "count": 1 }
+}
