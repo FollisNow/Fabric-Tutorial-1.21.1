@@ -14,6 +14,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -41,16 +42,22 @@ public class DartEntity extends PersistentProjectileEntity {
     @Override
     protected void onHit(LivingEntity target) {
         super.onHit(target);
+        Entity entity = this.getEffectCause();
+        target.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 4 * 20), entity);
+        target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 30, 4), entity);
+    }
 
-        if (!this.getWorld().isClient) {
+    @Override
+    protected void onEntityHit(EntityHitResult entityHitResult) {
+        Entity hitEntity = entityHitResult.getEntity();
+
+        if (!this.getWorld().isClient && hitEntity instanceof LivingEntity target) {
             Item bugItem = IBugVariants.bugItems.get(target.getType());
             if (bugItem == null && target.getType().isIn(EntityTypeTags.ARTHROPOD)) {
                 bugItem = GENERIC_ARTHROPOD_FIGURINE;
             }
 
             if (bugItem != null) {
-                target.setHealth(target.getMaxHealth()); // undo the dart's own damage before snapshotting NBT
-
                 ItemStack figurine = BugItem.createFigurine(bugItem, target);
                 Vec3d pos = target.getPos();
                 World world = this.getWorld();
@@ -61,12 +68,10 @@ public class DartEntity extends PersistentProjectileEntity {
                     itemEntity.setToDefaultPickupDelay();
                     world.spawnEntity(itemEntity);
                 }
-                return;
+                return; // skip super.onEntityHit entirely — no damage call ever happens
             }
         }
 
-        Entity entity = this.getEffectCause();
-        target.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 4 * 20), entity);
-        target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 30, 4), entity);
+        super.onEntityHit(entityHitResult);
     }
 }
