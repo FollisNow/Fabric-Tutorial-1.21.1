@@ -101,6 +101,7 @@ public class GoldenHotelBlockEntity extends BlockEntity implements ImplementedIn
         if (!ritualActive) {
             ritualActive = true;
             ritualProgress = 0;
+            world.playSound(null, pos, SoundEvents.ENTITY_EVOKER_PREPARE_SUMMON, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
 
         if (world instanceof ServerWorld serverWorld) {

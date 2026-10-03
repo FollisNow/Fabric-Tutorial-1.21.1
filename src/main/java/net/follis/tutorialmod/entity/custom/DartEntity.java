@@ -14,7 +14,10 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -67,6 +70,7 @@ public class DartEntity extends PersistentProjectileEntity {
                     ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), figurine);
                     itemEntity.setToDefaultPickupDelay();
                     world.spawnEntity(itemEntity);
+                    world.playSound(null, BlockPos.ofFloored(pos), SoundEvents.ENTITY_ARROW_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
                 return; // skip super.onEntityHit entirely — no damage call ever happens
             }

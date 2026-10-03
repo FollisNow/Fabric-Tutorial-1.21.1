@@ -18,6 +18,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -25,6 +26,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -196,6 +198,9 @@ public class ModItems {
             new BugItem(bugSettings("minecraft:spider", 0)));
 
     public static final Item SPECTRE_STAFF = registerItem("spectre_staff",
+            new Item(new Item.Settings().maxCount(1)));
+
+    public static final Item BUG_NET = registerItem("bug_net",
             new Item(new Item.Settings().maxCount(1)){
                 @Override
                 public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
@@ -226,11 +231,13 @@ public class ModItems {
                         itemEntity.setThrower(user);
                         itemEntity.setToDefaultPickupDelay();
                         world.spawnEntity(itemEntity);
+                        world.playSound(null, BlockPos.ofFloored(pos), SoundEvents.BLOCK_COBWEB_FALL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     }
 
                     return ActionResult.SUCCESS;
                 }
             });
+
 
     public static final Item GOLDEN_NEEDLE = registerItem("golden_needle",
             new GoldenNeedleItem(ModToolMaterials.GOLDEN, new Item.Settings()
