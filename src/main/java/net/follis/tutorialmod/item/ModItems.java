@@ -43,6 +43,7 @@ public class ModItems {
     public static final Item VISION_MONOCLE = registerItem("vision_monocle", new VisionMonocleItem(new Item.Settings().maxCount(1)));
     public static final Item ZAMPONA = registerItem("zampona", new Item(new Item.Settings().maxCount(1)));
     public static final Item CADDISFLY_COCOON = registerItem("caddisfly_cocoon", new CaddisflyCocoonItem(new Item.Settings()));
+    public static final Item CADDISFLY_FLUTE = registerItem("caddisfly_flute", new CaddisflyFluteItem(new Item.Settings()));
 
     public static final Item CAULIFLOWER = registerItem("cauliflower", new Item(new Item.Settings().food(ModFoodComponents.CAULIFLOWER)) {
         @Override

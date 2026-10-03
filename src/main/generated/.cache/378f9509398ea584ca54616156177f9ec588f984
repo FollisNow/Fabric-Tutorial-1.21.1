@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-02T01:16:16.5665151	Tutorial Mod/Block Loot Tables
+// 1.21.1	2026-10-03T23:26:28.7919552	Tutorial Mod/Block Loot Tables
 386888705830ff2b29d85d05e6673abb8ec95f36 data\tutorialmod\loot_table\blocks\potted_golden_sapling.json
 64c3df15b6e946537414a0cc30f320d8b8019264 data\tutorialmod\loot_table\blocks\pink_garnet_stairs.json
 bb4295bb26b608113d9469f979cd894f59bb83a7 data\tutorialmod\loot_table\blocks\cobbled_gold.json
@@ -55,8 +55,8 @@ fb5422fcbf5e55bf91fde1ca2eafa4c2ae4c06ef data\tutorialmod\loot_table\blocks\auro
 d5016c7c1b4ddca19ffb40309ba3611cd7625649 data\tutorialmod\loot_table\blocks\cut_gold_wall.json
 1c4f350de35fae9cc175b10505471e9c04b524d7 data\tutorialmod\loot_table\blocks\potted_folly_dianthus.json
 1cd854af430f76a34ae73983cb6997e7aa9b9b85 data\tutorialmod\loot_table\blocks\blue_marigold.json
-a579a65bcd9b7d54b5114989a6009a332a13055e data\tutorialmod\loot_table\blocks\amethyst_bee_hive.json
 1382e8045641fe6784d8535d113c80a6028a5ace data\tutorialmod\loot_table\blocks\pink_garnet_pressure_plate.json
+a579a65bcd9b7d54b5114989a6009a332a13055e data\tutorialmod\loot_table\blocks\amethyst_bee_hive.json
 25dac4fd1cc106d369dcf2037935ee113732c42f data\tutorialmod\loot_table\blocks\golden_hotel.json
 696d88c0eeae1378696b067a0f0940ff5cc94b69 data\tutorialmod\loot_table\blocks\gold_stairs.json
 7d5f71746f44452ec113ecbcb54f8b7086644ace data\tutorialmod\loot_table\blocks\cut_gold_stairs.json

@@ -5,19 +5,14 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.item.ModItems;
+import net.follis.tutorialmod.recipe.CaddisflyFluteRecipe;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.CampfireCookingRecipe;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.SmokingRecipe;
+import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
@@ -53,6 +48,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('#', Items.STRING)
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
                 .offerTo(exporter);
+
+        ComplexRecipeJsonBuilder.create(CaddisflyFluteRecipe::new).offerTo(exporter, "crafting_special_caddisfly_flute");
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Items.STRING, 5)
                 .input(Blocks.COBWEB)

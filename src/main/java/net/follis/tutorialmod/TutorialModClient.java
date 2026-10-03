@@ -150,6 +150,17 @@ public class TutorialModClient implements ClientModInitializer {
             return data.segments().get(tintIndex - 1).getColor() | 0xFF000000;
         }, ModItems.CADDISFLY_COCOON);
 
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            CaddisflyCocoonItem.CocoonData data = stack.get(ModDataComponentTypes.COCOON);
+            if (tintIndex <= 0) {
+                return -1; // layer0, base texture, never tinted
+            }
+            if (data == null || tintIndex > data.segments().size()) {
+                return 0xFFB921 | 0xFF000000; // unfilled material slot — gold to match the base item
+            }
+            return data.segments().get(tintIndex - 1).getColor() | 0xFF000000;
+        }, ModItems.CADDISFLY_FLUTE);
+
 
         GenericBugFigurineRenderer figurineRenderer = new GenericBugFigurineRenderer();
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.GENERIC_ARTHROPOD_FIGURINE, figurineRenderer);

@@ -12,6 +12,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import static net.follis.tutorialmod.item.ModItems.CADDISFLY_COCOON;
+import static net.follis.tutorialmod.item.ModItems.CADDISFLY_FLUTE;
 import static net.follis.tutorialmod.item.custom.CaddisflyCocoonItem.randomCocoonData;
 
 public class ModItemGroups {
@@ -26,6 +27,10 @@ public class ModItemGroups {
                         ItemStack cocoonStack = new ItemStack(CADDISFLY_COCOON);
                         cocoonStack.set(ModDataComponentTypes.COCOON, randomCocoonData());
                         entries.add(cocoonStack);
+
+                        ItemStack fluteStack = new ItemStack(CADDISFLY_FLUTE);
+                        fluteStack.set(ModDataComponentTypes.COCOON, randomCocoonData());
+                        entries.add(fluteStack);
 
                         entries.add(ModItems.CHISEL);
                         entries.add(ModItems.CAULIFLOWER);
