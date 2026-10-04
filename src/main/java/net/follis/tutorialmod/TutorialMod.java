@@ -3,6 +3,7 @@ package net.follis.tutorialmod;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -11,6 +12,7 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.*;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
+import net.follis.tutorialmod.component.ModAttachments;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.datagen.ModDispenserBehaviourProvider;
 import net.follis.tutorialmod.component.ModPointOfInterestTypes;
@@ -35,6 +37,7 @@ import net.follis.tutorialmod.world.gen.ModWorldGeneration;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
@@ -98,8 +101,12 @@ public class TutorialMod implements ModInitializer {
             return ActionResult.PASS;
         });
 		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
+		ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
+			if (entity instanceof LocustEntity && damageSource.getAttacker() instanceof PlayerEntity player) {
+				player.setAttached(ModAttachments.KILLED_LOCUST, true);
+			}
+		});
 		EntitySleepEvents.STOP_SLEEPING.register(new DreamLocustEvent());
-
 
 
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {

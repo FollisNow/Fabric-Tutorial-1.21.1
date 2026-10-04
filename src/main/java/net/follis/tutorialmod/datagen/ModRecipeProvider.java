@@ -65,6 +65,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.BAMBOO), conditionsFromItem(Items.BAMBOO))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BUG_NET)
+                .pattern(" ~#")
+                .pattern(" ^~")
+                .pattern("^  ")
+                .input('#', Items.WHITE_WOOL)
+                .input('^', Items.STICK)
+                .input('~', Items.STRING)
+                .criterion(hasItem(Items.BAMBOO), conditionsFromItem(Items.BAMBOO))
+                .offerTo(exporter);
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.VISION_MONOCLE)
                 .pattern(" # ")
                 .pattern("#^#")
@@ -87,7 +97,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         // LOCUSTS
         Ingredient locustIngredients = Ingredient.fromTag(ModTags.Items.LOCUST_ITEMS);
         List<ItemConvertible> locusts = List.of(ModItems.LOCUST_GOLD, ModItems.LOCUST_DREAM, ModItems.LOCUST_GRASSHOPPER, ModItems.LOCUST_RED);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.SLIME_BALL, 1)
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.SLIME_BALL, 2)
                 .input(ModItems.LOCUST_DREAM)
                 .criterion(hasItem(ModItems.LOCUST_DREAM), conditionsFromItem(ModItems.LOCUST_DREAM))
                 .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "slime_ball_from_locust_dream"));
