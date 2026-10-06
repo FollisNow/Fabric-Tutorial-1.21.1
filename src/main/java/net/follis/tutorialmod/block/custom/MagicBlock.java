@@ -1,16 +1,10 @@
 package net.follis.tutorialmod.block.custom;
 
-import net.follis.tutorialmod.block.IMakeGolems;
-import net.follis.tutorialmod.block.ModBlocks;
-import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.particle.ModParticles;
 import net.follis.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -25,9 +19,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MagicBlock extends Block {
     public MagicBlock(Settings settings) {
