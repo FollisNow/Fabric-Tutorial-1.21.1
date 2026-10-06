@@ -20,6 +20,7 @@ import net.follis.tutorialmod.effect.ModEffects;
 import net.follis.tutorialmod.enchantment.ModEnchantmentEffects;
 import net.follis.tutorialmod.entity.ModEntities;
 import net.follis.tutorialmod.entity.custom.*;
+import net.follis.tutorialmod.entity.misc.FlySwarmManager;
 import net.follis.tutorialmod.item.ModItemGroups;
 import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.item.custom.CaddisflyCocoonItem;
@@ -82,6 +83,8 @@ public class TutorialMod implements ModInitializer {
 
 		ModRecipes.registerRecipes();
 		ModDispenserBehaviourProvider.registerDispenserBehaviour();
+
+		FlySwarmManager.register();
 
 		PayloadTypeRegistry.playS2C().register(MesmerizePayload.ID, MesmerizePayload.CODEC);
 

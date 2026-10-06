@@ -21,10 +21,7 @@ import net.follis.tutorialmod.item.ModItems;
 import net.follis.tutorialmod.item.custom.CaddisflyCocoonItem;
 import net.follis.tutorialmod.item.render.*;
 import net.follis.tutorialmod.network.MesmerizePayload;
-import net.follis.tutorialmod.particle.GoldenChainParticle;
-import net.follis.tutorialmod.particle.GoldenLeavesParticle;
-import net.follis.tutorialmod.particle.ModParticles;
-import net.follis.tutorialmod.particle.PinkGarnetParticle;
+import net.follis.tutorialmod.particle.*;
 import net.follis.tutorialmod.screen.ModScreenHandlers;
 import net.follis.tutorialmod.screen.custom.GoldenHotelScreen;
 import net.follis.tutorialmod.screen.custom.GrowthChamberScreen;
@@ -122,6 +119,7 @@ public class TutorialModClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.PINK_GARNET_PARTICLE, PinkGarnetParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.GOLDEN_LEAVES_PARTICLE, GoldenLeavesParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.GOLDEN_CHAIN_PARTICLE, GoldenChainParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.FLY_PARTICLE, FlyParticle.Factory::new);
 
         BlockEntityRendererFactories.register(ModBlockEntities.GOLDEN_PEDESTAL_BE, GoldenPedestalBlockEntityRenderer::new);
         HandledScreens.register(ModScreenHandlers.GOLDEN_PEDESTAL_SCREEN_HANDLER, GoldenPedestalScreen::new);

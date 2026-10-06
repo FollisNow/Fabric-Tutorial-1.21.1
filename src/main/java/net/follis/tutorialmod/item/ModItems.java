@@ -5,6 +5,7 @@ import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
+import net.follis.tutorialmod.entity.misc.FlySwarmManager;
 import net.follis.tutorialmod.item.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.util.IBugVariants;
@@ -18,14 +19,12 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -199,7 +198,19 @@ public class ModItems {
             new BugItem(bugSettings("minecraft:spider", 0)));
 
     public static final Item SPECTRE_STAFF = registerItem("spectre_staff",
-            new Item(new Item.Settings().maxCount(1)));
+            new Item(new Item.Settings().maxCount(1)) {
+                @Override
+                public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+                    if (world instanceof ServerWorld serverWorld) {
+                        Vec3d origin = user.getEyePos();
+                        Vec3d direction = user.getRotationVec(1.0F);
+                        FlySwarmManager.spawnSwarm(serverWorld, origin, direction, user.getUuid());
+                        world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_BEE_LOOP_AGGRESSIVE, SoundCategory.PLAYERS, 1.0F, 0.8F);
+                    }
+                    return TypedActionResult.success(user.getStackInHand(hand), world.isClient());
+                }
+            });
+
 
     public static final Item BUG_NET = registerItem("bug_net",
             new Item(new Item.Settings().maxCount(1)){

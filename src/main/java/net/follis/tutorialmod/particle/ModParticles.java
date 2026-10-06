@@ -11,6 +11,9 @@ public class ModParticles {
     public static final SimpleParticleType PINK_GARNET_PARTICLE =
             registerParticle("pink_garnet_particle", FabricParticleTypes.simple());
 
+    public static final SimpleParticleType FLY_PARTICLE =
+            registerParticle("fly_particle", FabricParticleTypes.simple());
+
     public static final SimpleParticleType GOLDEN_LEAVES_PARTICLE =
             registerParticle("golden_leaves_particle", FabricParticleTypes.simple());
 
