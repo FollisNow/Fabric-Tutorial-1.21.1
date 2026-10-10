@@ -25,6 +25,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.GROWTH_CHAMBER)
                 .add(ModBlocks.GOLDEN_PEDESTAL)
                 .add(ModBlocks.GOLDEN_HOTEL)
+                .add(ModBlocks.GOLD_REPULSOR)
                 .add(ModBlocks.AMETHYST_BEE_HIVE)
 
                 .add(ModBlocks.GOLD_CHAIN)
@@ -63,6 +64,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.CRUMBLED_GOLD)
                 .add(ModBlocks.CHISELED_GOLD)
                 .add(ModBlocks.CHISELED_GOLD_BRICKS)
+                .add(ModBlocks.ORNED_GOLD)
+                .add(ModBlocks.CONNECTED_GOLD)
                 .add(ModBlocks.SHAPED_GOLD)
                 .add(ModBlocks.ENGRAVED_GOLD)
                 .add(ModBlocks.SCULPTED_GOLD)
@@ -79,6 +82,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.INFESTED_SHAPED_GOLD)
                 .add(ModBlocks.INFESTED_ENGRAVED_GOLD)
                 .add(ModBlocks.INFESTED_SCULPTED_GOLD)
+                .add(ModBlocks.INFESTED_ORNED_GOLD)
 
         ;
 

@@ -49,6 +49,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.GOLDEN_PEDESTAL);
         addDrop(ModBlocks.GOLDEN_HOTEL);
+        addDrop(ModBlocks.GOLD_REPULSOR);
+
         addDrop(ModBlocks.GROWTH_CHAMBER);
         addDrop(ModBlocks.AMETHYST_BEE_HIVE);
 
@@ -122,6 +124,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.CRUMBLED_GOLD);
         addDrop(ModBlocks.CHISELED_GOLD);
         addDrop(ModBlocks.CHISELED_GOLD_BRICKS);
+        addDrop(ModBlocks.ORNED_GOLD);
+        addDrop(ModBlocks.CONNECTED_GOLD);
         addDrop(ModBlocks.CUT_GOLD);
         addDrop(ModBlocks.GOLDEN_BRICKS, Blocks.STONE_BRICKS);
         addDrop(ModBlocks.SHAPED_GOLD);
@@ -139,6 +143,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDropWithSilkTouch(ModBlocks.INFESTED_SHAPED_GOLD, ModBlocks.SHAPED_GOLD);
         addDropWithSilkTouch(ModBlocks.INFESTED_ENGRAVED_GOLD, ModBlocks.ENGRAVED_GOLD);
         addDropWithSilkTouch(ModBlocks.INFESTED_SCULPTED_GOLD, ModBlocks.SCULPTED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_ORNED_GOLD, ModBlocks.ORNED_GOLD);
+        addDropWithSilkTouch(ModBlocks.INFESTED_CONNECTED_GOLD, ModBlocks.CONNECTED_GOLD);
         addDropWithSilkTouch(ModBlocks.INFESTED_GOLD_LARGE_BRICKS, ModBlocks.GOLD_LARGE_BRICKS);
 
 

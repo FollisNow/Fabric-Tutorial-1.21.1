@@ -192,6 +192,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CRUMBLED_GOLD);
                         entries.add(ModBlocks.CHISELED_GOLD);
                         entries.add(ModBlocks.CHISELED_GOLD_BRICKS);
+                        entries.add(ModBlocks.ORNED_GOLD);
+                        entries.add(ModBlocks.CONNECTED_GOLD);
                         entries.add(ModBlocks.SHAPED_GOLD);
                         entries.add(ModBlocks.ENGRAVED_GOLD);
                         entries.add(ModBlocks.SCULPTED_GOLD);
@@ -210,6 +212,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.INFESTED_SHAPED_GOLD);
                         entries.add(ModBlocks.INFESTED_ENGRAVED_GOLD);
                         entries.add(ModBlocks.INFESTED_SCULPTED_GOLD);
+                        entries.add(ModBlocks.INFESTED_ORNED_GOLD);
 
                         entries.add(ModBlocks.GOLD_PILE_BLOCK);
                         entries.add(ModBlocks.GOLD_PILE);
@@ -225,6 +228,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CHAIR);
                         entries.add(ModBlocks.GOLDEN_PEDESTAL);
                         entries.add(ModBlocks.GOLDEN_HOTEL);
+                        entries.add(ModBlocks.GOLD_REPULSOR);
                         entries.add(ModBlocks.GROWTH_CHAMBER);
                         entries.add(ModBlocks.AMETHYST_BEE_HIVE);
 

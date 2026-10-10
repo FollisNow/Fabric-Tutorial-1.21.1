@@ -2,10 +2,7 @@ package net.follis.tutorialmod.block.entity;
 
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
-import net.follis.tutorialmod.block.entity.custom.AmethystBeeHiveBlockEntity;
-import net.follis.tutorialmod.block.entity.custom.GoldenHotelBlockEntity;
-import net.follis.tutorialmod.block.entity.custom.GrowthChamberBlockEntity;
-import net.follis.tutorialmod.block.entity.custom.GoldenPedestalBlockEntity;
+import net.follis.tutorialmod.block.entity.custom.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -19,6 +16,10 @@ public class ModBlockEntities {
     public static final BlockEntityType<GoldenHotelBlockEntity> GOLDEN_HOTEL_BE =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(TutorialMod.MOD_ID, "golden_hotel_be"),
                     BlockEntityType.Builder.create(GoldenHotelBlockEntity::new, ModBlocks.GOLDEN_HOTEL).build(null));
+
+    public static final BlockEntityType<GoldRepulsorBlockEntity> GOLD_REPULSOR_BE =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(TutorialMod.MOD_ID, "gold_repulsor_be"),
+                    BlockEntityType.Builder.create(GoldRepulsorBlockEntity::new, ModBlocks.GOLD_REPULSOR).build(null));
 
     public static final BlockEntityType<GrowthChamberBlockEntity> GROWTH_CHAMBER_BE =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(TutorialMod.MOD_ID, "growth_chamber_be"),

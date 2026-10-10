@@ -194,6 +194,10 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF).strength(4).requiresTool()));
     public static final Block CHISELED_GOLD_BRICKS = registerBlock("chiseled_gold_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF_BRICKS).strength(4).requiresTool()));
+    public static final Block ORNED_GOLD = registerBlock("orned_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF_BRICKS).strength(4).requiresTool()));
+    public static final Block CONNECTED_GOLD = registerBlock("connected_gold",
+            new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF_BRICKS).strength(4).requiresTool()));
 
     public static final Block SHAPED_GOLD = registerBlock("shaped_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.SANDSTONE).strength(4).requiresTool()));
@@ -239,6 +243,10 @@ public class ModBlocks {
             new InfestedGoldenBlocks(ENGRAVED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
     public static final Block INFESTED_SCULPTED_GOLD = registerBlock("infested_sculpted_gold",
             new InfestedGoldenBlocks(SCULPTED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_ORNED_GOLD = registerBlock("infested_orned_gold",
+            new InfestedGoldenBlocks(ORNED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
+    public static final Block INFESTED_CONNECTED_GOLD = registerBlock("infested_connected_gold",
+            new InfestedGoldenBlocks(CONNECTED_GOLD, AbstractBlock.Settings.create().mapColor(MapColor.GOLD)));
 
     // Nature
     public static final Block GOLDEN_SAPLING = registerBlock("golden_sapling",
@@ -274,7 +282,7 @@ public class ModBlocks {
     public static final Block GOLD_ROSE_BUSH = registerBlock("gold_rose_bush",
             new TallFlowerBlock(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH)));
 
-
+    // Gold furnitures
     public static final Block CHAIR = registerBlock("chair",
             new ChairBlock(AbstractBlock.Settings.create().nonOpaque()));
 
@@ -291,10 +299,13 @@ public class ModBlocks {
     public static final Block AMETHYST_BEE_HIVE = registerBlock("amethyst_bee_hive",
             new AmethystBeeHiveBlock(AbstractBlock.Settings.create().strength(4f).requiresTool()));
 
+    // Gold Components
+    public static final Block GOLD_REPULSOR = registerBlock("gold_repulsor",
+            new GoldRepulsorBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool()));
+
     private static Block registerLayerBlock(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(TutorialMod.MOD_ID, name), block);
     }
-
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(TutorialMod.MOD_ID, name), block);

@@ -13,6 +13,7 @@ import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.entity.ModBlockEntities;
 import net.follis.tutorialmod.block.entity.renderer.GoldenHotelBlockEntityRenderer;
 import net.follis.tutorialmod.block.entity.renderer.GoldenPedestalBlockEntityRenderer;
+import net.follis.tutorialmod.block.entity.renderer.GoldRepulsorBlockEntityRenderer;
 import net.follis.tutorialmod.client.MesmerizeClientState;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
 import net.follis.tutorialmod.entity.ModEntities;
@@ -126,6 +127,8 @@ public class TutorialModClient implements ClientModInitializer {
 
         BlockEntityRendererFactories.register(ModBlockEntities.GOLDEN_HOTEL_BE, GoldenHotelBlockEntityRenderer::new);
         HandledScreens.register(ModScreenHandlers.GOLDEN_HOTEL_SCREEN_HANDLER, GoldenHotelScreen::new);
+
+        BlockEntityRendererFactories.register(ModBlockEntities.GOLD_REPULSOR_BE, GoldRepulsorBlockEntityRenderer::new);
 
         HandledScreens.register(ModScreenHandlers.GROWTH_CHAMBER_SCREEN_HANDLER, GrowthChamberScreen::new);
 

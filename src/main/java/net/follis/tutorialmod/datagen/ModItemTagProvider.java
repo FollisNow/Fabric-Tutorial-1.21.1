@@ -91,6 +91,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModBlocks.CRUMBLED_GOLD.asItem())
                 .add(ModBlocks.CHISELED_GOLD.asItem())
                 .add(ModBlocks.CHISELED_GOLD_BRICKS.asItem())
+                .add(ModBlocks.ORNED_GOLD.asItem())
+                .add(ModBlocks.CONNECTED_GOLD.asItem())
                 .add(ModBlocks.SHAPED_GOLD.asItem())
                 .add(ModBlocks.ENGRAVED_GOLD.asItem())
                 .add(ModBlocks.SCULPTED_GOLD.asItem());

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=down,inversed=false":  { "model": "tutorialmod:block/gold_repulsor", "x": 90 },
+    "facing=down,inversed=true":   { "model": "tutorialmod:block/gold_repulsor_on", "x": 90 },
+    "facing=up,inversed=false":    { "model": "tutorialmod:block/gold_repulsor", "x": 270 },
+    "facing=up,inversed=true":     { "model": "tutorialmod:block/gold_repulsor_on", "x": 270 },
+    "facing=north,inversed=false": { "model": "tutorialmod:block/gold_repulsor" },
+    "facing=north,inversed=true":  { "model": "tutorialmod:block/gold_repulsor_on" },
+    "facing=east,inversed=false":  { "model": "tutorialmod:block/gold_repulsor", "y": 90 },
+    "facing=east,inversed=true":   { "model": "tutorialmod:block/gold_repulsor_on", "y": 90 },
+    "facing=south,inversed=false": { "model": "tutorialmod:block/gold_repulsor", "y": 180 },
+    "facing=south,inversed=true":  { "model": "tutorialmod:block/gold_repulsor_on", "y": 180 },
+    "facing=west,inversed=false":  { "model": "tutorialmod:block/gold_repulsor", "y": 270 },
+    "facing=west,inversed=true":   { "model": "tutorialmod:block/gold_repulsor_on", "y": 270 }
+  }
+}

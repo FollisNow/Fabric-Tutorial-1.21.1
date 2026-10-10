@@ -87,6 +87,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLED_GOLD);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.CHISELED_GOLD_BRICKS, TexturedModel.CUBE_COLUMN);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ORNED_GOLD);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CONNECTED_GOLD);
         blockStateModelGenerator.registerSingleton(ModBlocks.SHAPED_GOLD, TexturedModel.CUBE_BOTTOM_TOP);
         blockStateModelGenerator.registerSingleton(ModBlocks.ENGRAVED_GOLD, TexturedModel.CUBE_COLUMN);
         blockStateModelGenerator.registerSingleton(ModBlocks.SCULPTED_GOLD, TexturedModel.CUBE_COLUMN);
@@ -105,6 +107,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerParented(ModBlocks.SHAPED_GOLD, ModBlocks.INFESTED_SHAPED_GOLD);
         blockStateModelGenerator.registerParented(ModBlocks.ENGRAVED_GOLD, ModBlocks.INFESTED_ENGRAVED_GOLD);
         blockStateModelGenerator.registerParented(ModBlocks.SCULPTED_GOLD, ModBlocks.INFESTED_SCULPTED_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.ORNED_GOLD, ModBlocks.INFESTED_ORNED_GOLD);
+        blockStateModelGenerator.registerParented(ModBlocks.CONNECTED_GOLD, ModBlocks.INFESTED_CONNECTED_GOLD);
 
 
         BlockStateModelGenerator.BlockTexturePool goldPool = blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.GOLD_BLOCK);

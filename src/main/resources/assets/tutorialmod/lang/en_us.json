@@ -196,6 +196,8 @@
   "block.tutorialmod.crumbled_gold": "Crumbled Gold",
   "block.tutorialmod.chiseled_gold": "Chiseled Gold",
   "block.tutorialmod.chiseled_gold_bricks": "Chiseled Gold Bricks",
+  "block.tutorialmod.orned_gold": "Orned Gold",
+  "block.tutorialmod.connected_gold": "Connected Gold",
   "block.tutorialmod.shaped_gold": "Shaped Gold",
   "block.tutorialmod.engraved_gold": "Engraved Gold",
   "block.tutorialmod.sculpted_gold": "Sculpted Gold",
@@ -245,6 +247,7 @@
   "block.tutorialmod.chair": "Chair",
   "block.tutorialmod.golden_pedestal": "Golden Pedestal",
   "block.tutorialmod.golden_hotel": "Golden Hotel",
+  "block.tutorialmod.gold_repulsor": "Gold Repulsor",
   "block.tutorialmod.growth_chamber": "Growth Chamber",
   "block.tutorialmod.amethyst_bee_hive": "Amethyst Bee Hive",
 

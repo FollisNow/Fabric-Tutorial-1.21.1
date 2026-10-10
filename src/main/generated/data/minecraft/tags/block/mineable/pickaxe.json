@@ -8,6 +8,7 @@
     "tutorialmod:growth_chamber",
     "tutorialmod:golden_pedestal",
     "tutorialmod:golden_hotel",
+    "tutorialmod:gold_repulsor",
     "tutorialmod:amethyst_bee_hive",
     "tutorialmod:gold_chain",
     "tutorialmod:gold_lantern",
@@ -37,6 +38,8 @@
     "tutorialmod:crumbled_gold",
     "tutorialmod:chiseled_gold",
     "tutorialmod:chiseled_gold_bricks",
+    "tutorialmod:orned_gold",
+    "tutorialmod:connected_gold",
     "tutorialmod:shaped_gold",
     "tutorialmod:engraved_gold",
     "tutorialmod:sculpted_gold",
@@ -50,6 +53,7 @@
     "tutorialmod:infested_chiseled_gold_bricks",
     "tutorialmod:infested_shaped_gold",
     "tutorialmod:infested_engraved_gold",
-    "tutorialmod:infested_sculpted_gold"
+    "tutorialmod:infested_sculpted_gold",
+    "tutorialmod:infested_orned_gold"
   ]
 }
