@@ -1,15 +1,15 @@
-// 1.21.1	2026-10-11T17:25:57.2280723	Tutorial Mod/Tags for minecraft:item
+// 1.21.1	2026-10-11T22:52:46.0988211	Tutorial Mod/Tags for minecraft:item
 3785ccf2250da2396658a0921bd6f81beb1f7be9 data\minecraft\tags\item\trim_templates.json
+6ba665925c3e1e7b5501fa38ab3095b1987c0886 data\minecraft\tags\item\trim_materials.json
 2d100ff45d8a2daabb0b9725e8a83d09cb758001 data\tutorialmod\tags\item\golden_vegetal_food.json
+092261f42ebfb549fb26de57a2f4a5a8b86bc6b9 data\tutorialmod\tags\item\transformable_items.json
+1a39dedd310f06bf1a624b4363f683ebe3b2905b data\minecraft\tags\item\trimmable_armor.json
 4a86b6a6b50a249765e637a8e93fd0e09c01b1a7 data\tutorialmod\tags\item\golden_items.json
 c7ab283805851b07ba7ca23f4885db1ffa4d534d data\tutorialmod\tags\item\golden_food.json
 548e9669be7dab0c156413294f8872f2693705b3 data\tutorialmod\tags\item\macuahuitl.json
-033e17d581c130bfc481e72f4912eda6af94398e data\minecraft\tags\item\planks.json
-6836c94b89a820103a614d955a3d59cc9c15333f data\minecraft\tags\item\logs_that_burn.json
-3c6826e913bd8e055a0fc6f64c24b116f5443554 data\minecraft\tags\item\meat.json
-6ba665925c3e1e7b5501fa38ab3095b1987c0886 data\minecraft\tags\item\trim_materials.json
-092261f42ebfb549fb26de57a2f4a5a8b86bc6b9 data\tutorialmod\tags\item\transformable_items.json
-1a39dedd310f06bf1a624b4363f683ebe3b2905b data\minecraft\tags\item\trimmable_armor.json
 12cf5431bc9ea78c0c2e54481ae8cbf7ed7c1231 data\tutorialmod\tags\item\locust_items.json
 4b0ba03370339328c0427c9589a29b450a3e7323 data\minecraft\tags\item\swords.json
+033e17d581c130bfc481e72f4912eda6af94398e data\minecraft\tags\item\planks.json
 a949834cdc76397d1e2a35e4951fd0603c739994 data\tutorialmod\tags\item\gold_blocks.json
+6836c94b89a820103a614d955a3d59cc9c15333f data\minecraft\tags\item\logs_that_burn.json
+3c6826e913bd8e055a0fc6f64c24b116f5443554 data\minecraft\tags\item\meat.json
