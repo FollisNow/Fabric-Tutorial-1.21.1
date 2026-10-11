@@ -55,6 +55,7 @@
     "tutorialmod:infested_shaped_gold",
     "tutorialmod:infested_engraved_gold",
     "tutorialmod:infested_sculpted_gold",
-    "tutorialmod:infested_orned_gold"
+    "tutorialmod:infested_orned_gold",
+    "tutorialmod:infested_connected_gold"
   ]
 }

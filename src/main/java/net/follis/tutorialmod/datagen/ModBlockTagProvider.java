@@ -84,6 +84,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.INFESTED_ENGRAVED_GOLD)
                 .add(ModBlocks.INFESTED_SCULPTED_GOLD)
                 .add(ModBlocks.INFESTED_ORNED_GOLD)
+                .add(ModBlocks.INFESTED_CONNECTED_GOLD)
 
         ;
 

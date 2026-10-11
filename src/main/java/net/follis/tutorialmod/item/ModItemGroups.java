@@ -225,6 +225,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.INFESTED_ENGRAVED_GOLD);
                         entries.add(ModBlocks.INFESTED_SCULPTED_GOLD);
                         entries.add(ModBlocks.INFESTED_ORNED_GOLD);
+                        entries.add(ModBlocks.INFESTED_CONNECTED_GOLD);
 
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);
                         entries.add(ModBlocks.YELLOW_MARIGOLD);
