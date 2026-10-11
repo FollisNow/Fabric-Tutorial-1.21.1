@@ -304,6 +304,9 @@ public class ModBlocks {
     public static final Block GOLD_REPULSOR = registerBlock("gold_repulsor",
             new GoldRepulsorBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool()));
 
+    public static final Block JAW_TRAP_BLOCK = registerBlock("jaw_trap_block",
+            new JawTrapBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool()));
+
     public static final Block TRAPPED_SKELETON_SKULL = registerBlockWithoutBlockItem("trapped_skeleton_skull",
             new TrappedSkullBlock(SkullBlock.Type.SKELETON,
                     AbstractBlock.Settings.create().instrument(NoteBlockInstrument.SKELETON).strength(1.0F).pistonBehavior(PistonBehavior.DESTROY)));

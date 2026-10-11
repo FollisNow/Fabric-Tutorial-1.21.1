@@ -209,6 +209,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLDEN_PEDESTAL);
                         entries.add(ModBlocks.GOLDEN_HOTEL);
                         entries.add(ModBlocks.GOLD_REPULSOR);
+                        entries.add(ModBlocks.JAW_TRAP_BLOCK);
 
 
                         //INFESTED GOLD

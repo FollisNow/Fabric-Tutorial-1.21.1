@@ -26,6 +26,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.GOLDEN_PEDESTAL)
                 .add(ModBlocks.GOLDEN_HOTEL)
                 .add(ModBlocks.GOLD_REPULSOR)
+                .add(ModBlocks.JAW_TRAP_BLOCK)
                 .add(ModBlocks.AMETHYST_BEE_HIVE)
 
                 .add(ModBlocks.GOLD_CHAIN)

@@ -210,6 +210,8 @@
   "block.tutorialmod.infested_crumbled_gold": "Infested Crumbled Gold",
   "block.tutorialmod.infested_chiseled_gold": "Infested Chiseled Gold",
   "block.tutorialmod.infested_chiseled_gold_bricks": "Infested Chiseled Gold Bricks",
+  "block.tutorialmod.infested_orned_gold": "Infested Orned Gold",
+  "block.tutorialmod.infested_connected_gold": "Infested Connected Gold",
   "block.tutorialmod.infested_shaped_gold": "Infested Shaped Gold",
   "block.tutorialmod.infested_engraved_gold": "Infested Engraved Gold",
   "block.tutorialmod.infested_sculpted_gold": "Infested Sculpted Gold",
@@ -228,6 +230,7 @@
   "block.tutorialmod.trapped_skeleton_wall_skull": "Trapped Skeleton Skull",
   "block.tutorialmod.trapped_zombie_head": "Trapped Zombie Head",
   "block.tutorialmod.trapped_zombie_wall_head": "Trapped Zombie Head",
+  "block.tutorialmod.jaw_trap_block": "Jaw Trap Block",
 
 
   "item.tutorialmod.golden_needle": "Golden Needle",

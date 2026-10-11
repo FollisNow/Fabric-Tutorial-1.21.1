@@ -4,10 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
-import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
-import net.follis.tutorialmod.block.custom.GoldenCaratCropBlock;
-import net.follis.tutorialmod.block.custom.HoneyBerryBushBlock;
-import net.follis.tutorialmod.block.custom.PinkGarnetLampBlock;
+import net.follis.tutorialmod.block.custom.*;
 import net.follis.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -96,6 +93,11 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerItemModel(ModItems.GOLD_CHAIN);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.GOLD_CHAIN, ModelIds.getBlockModelId(ModBlocks.GOLD_CHAIN));
         blockStateModelGenerator.registerLantern(ModBlocks.GOLD_LANTERN);
+
+        Identifier armedModel = TexturedModel.CUBE_ALL.upload(ModBlocks.JAW_TRAP_BLOCK, blockStateModelGenerator.modelCollector);
+        Identifier disarmedModel = blockStateModelGenerator.createSubModel(ModBlocks.JAW_TRAP_BLOCK, "_disarmed", Models.CUBE_ALL, TextureMap::all);
+        blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(ModBlocks.JAW_TRAP_BLOCK)
+                .coordinate(BlockStateModelGenerator.createBooleanModelMap(JawTrapBlock.ARMED, armedModel, disarmedModel)));
 
         blockStateModelGenerator.registerParented(ModBlocks.GOLDEN_BRICKS, ModBlocks.INFESTED_GOLDEN_BRICKS);
         blockStateModelGenerator.registerParented(ModBlocks.GOLD_BRICKS, ModBlocks.INFESTED_GOLD_BRICKS);

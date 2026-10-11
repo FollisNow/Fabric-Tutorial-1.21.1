@@ -50,6 +50,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.GOLDEN_PEDESTAL);
         addDrop(ModBlocks.GOLDEN_HOTEL);
         addDrop(ModBlocks.GOLD_REPULSOR);
+        addDrop(ModBlocks.JAW_TRAP_BLOCK);
 
         addDrop(ModBlocks.GROWTH_CHAMBER);
         addDrop(ModBlocks.AMETHYST_BEE_HIVE);
