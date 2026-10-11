@@ -80,7 +80,7 @@ public class GenericBugFigurineRenderer implements BuiltinItemRendererRegistry.D
         }
 
         int effectiveLight = (mode == ModelTransformationMode.GUI) ? LightmapTextureManager.MAX_LIGHT_COORDINATE : light;
-        if (mode == ModelTransformationMode.GUI) DiffuseLighting.enableGuiDepthLighting();
+//        if (mode == ModelTransformationMode.GUI) DiffuseLighting.enableGuiDepthLighting();
 
         matrices.push();
         matrices.translate(0.5, 0.0, 0.5);
@@ -96,6 +96,6 @@ public class GenericBugFigurineRenderer implements BuiltinItemRendererRegistry.D
         }
 
         matrices.pop();
-        if (mode == ModelTransformationMode.GUI) DiffuseLighting.disableGuiDepthLighting();
+//        if (mode == ModelTransformationMode.GUI) DiffuseLighting.disableGuiDepthLighting();
     }
 }
