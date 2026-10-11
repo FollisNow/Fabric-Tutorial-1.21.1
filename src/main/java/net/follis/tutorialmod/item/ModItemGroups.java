@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.component.ModDataComponentTypes;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -132,7 +133,7 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.PINK_GARNET_LAMP);
 
-
+                        entries.add(Blocks.GOLD_BLOCK);
                         //GOLDEN NATURE
                         entries.add(ModBlocks.GOLDEN_DIRT);
                         entries.add(ModBlocks.GOLDEN_SAND);
@@ -199,6 +200,13 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SCULPTED_GOLD);
                         entries.add(ModBlocks.GOLD_CHAIN);
                         entries.add(ModBlocks.GOLD_LANTERN);
+                        entries.add(ModBlocks.GOLD_PILE_BLOCK);
+                        entries.add(ModBlocks.GOLD_PILE);
+
+                        //Gold Component
+                        entries.add(ModBlocks.GOLDEN_PEDESTAL);
+                        entries.add(ModBlocks.GOLDEN_HOTEL);
+                        entries.add(ModBlocks.GOLD_REPULSOR);
 
                         //INFESTED GOLD
                         entries.add(ModBlocks.INFESTED_GOLDEN_BRICKS);
@@ -214,9 +222,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.INFESTED_SCULPTED_GOLD);
                         entries.add(ModBlocks.INFESTED_ORNED_GOLD);
 
-                        entries.add(ModBlocks.GOLD_PILE_BLOCK);
-                        entries.add(ModBlocks.GOLD_PILE);
-
                         entries.add(ModBlocks.CRYSTAL_MUSHROOM);
                         entries.add(ModBlocks.YELLOW_MARIGOLD);
                         entries.add(ModBlocks.AURORA_FIRE_MARIGOLD);
@@ -226,9 +231,6 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_ROSE_BUSH);
 
                         entries.add(ModBlocks.CHAIR);
-                        entries.add(ModBlocks.GOLDEN_PEDESTAL);
-                        entries.add(ModBlocks.GOLDEN_HOTEL);
-                        entries.add(ModBlocks.GOLD_REPULSOR);
                         entries.add(ModBlocks.GROWTH_CHAMBER);
                         entries.add(ModBlocks.AMETHYST_BEE_HIVE);
 
