@@ -1,8 +1,8 @@
-// 1.21.1	2026-10-10T00:02:10.0306423	Tutorial Mod/Tags for minecraft:block
+// 1.21.1	2026-10-11T13:12:01.7997945	Tutorial Mod/Tags for minecraft:block
 6836c94b89a820103a614d955a3d59cc9c15333f data\minecraft\tags\block\logs_that_burn.json
 f30a6367dbc22bbef01d6bf2a992f645005f83b5 data\minecraft\tags\block\needs_diamond_tool.json
-8f5c49cdc462f390d0940e284ae601bef7bb8ce0 data\minecraft\tags\block\beehives.json
 23cf6570a961d27bd6b119bfec9cbe3fb844bf39 data\minecraft\tags\block\leaves.json
+8f5c49cdc462f390d0940e284ae601bef7bb8ce0 data\minecraft\tags\block\beehives.json
 c07c4c3be2f1e2228e70cca883d68ce9bd7ba47e data\tutorialmod\tags\block\needs_pink_garnet_tool.json
 ede0f16d900d2768c202f6d7df4a6bd405645a1e data\minecraft\tags\block\fences.json
 8c409058688e69cf29c8343b355076da4a1318c0 data\minecraft\tags\block\fence_gates.json

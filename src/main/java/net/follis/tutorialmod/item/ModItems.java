@@ -26,6 +26,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -335,6 +336,12 @@ public class ModItems {
         }
     });
 
+    public static final Item TRAPPED_SKELETON_SKULL = registerItem("trapped_skeleton_skull",
+            new VerticallyAttachableBlockItem(ModBlocks.TRAPPED_SKELETON_SKULL, ModBlocks.TRAPPED_SKELETON_WALL_SKULL,
+                    new Item.Settings(), Direction.DOWN));
+    public static final Item TRAPPED_ZOMBIE_HEAD = registerItem("trapped_zombie_head",
+            new VerticallyAttachableBlockItem(ModBlocks.TRAPPED_ZOMBIE_HEAD, ModBlocks.TRAPPED_ZOMBIE_WALL_HEAD,
+                    new Item.Settings(), Direction.DOWN));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(TutorialMod.MOD_ID, name), item);

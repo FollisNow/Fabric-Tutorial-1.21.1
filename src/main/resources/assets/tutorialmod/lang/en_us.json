@@ -224,6 +224,11 @@
   "block.tutorialmod.gold_pile": "Gold Pile",
   "block.tutorialmod.gold_pile_block": "Gold Pile Block",
 
+  "block.tutorialmod.trapped_skeleton_skull": "Trapped Skeleton Skull",
+  "block.tutorialmod.trapped_skeleton_wall_skull": "Trapped Skeleton Skull",
+  "block.tutorialmod.trapped_zombie_head": "Trapped Zombie Head",
+  "block.tutorialmod.trapped_zombie_wall_head": "Trapped Zombie Head",
+
 
   "item.tutorialmod.golden_needle": "Golden Needle",
   "item.tutorialmod.wooden_macuahuitl": "Wooden Macuahuitl",

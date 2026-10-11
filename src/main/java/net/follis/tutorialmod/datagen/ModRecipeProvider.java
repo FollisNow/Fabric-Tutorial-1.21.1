@@ -262,7 +262,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
                 .offerTo(exporter);
 
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.TRAPPED_SKELETON_SKULL, 1)
+                .input(Blocks.DISPENSER)
+                .input(Blocks.SKELETON_SKULL)
+                .criterion(hasItem(Blocks.DISPENSER), conditionsFromItem(Blocks.DISPENSER))
+                .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "trapped_skeleton_skull"));
 
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.TRAPPED_ZOMBIE_HEAD, 1)
+                .input(Blocks.DISPENSER)
+                .input(Blocks.ZOMBIE_HEAD)
+                .criterion(hasItem(Blocks.DISPENSER), conditionsFromItem(Blocks.DISPENSER))
+                .offerTo(exporter, Identifier.of(TutorialMod.MOD_ID, "trapped_zombie_head"));
 
         offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(TutorialMod.MOD_ID, "kaupen"));
     }

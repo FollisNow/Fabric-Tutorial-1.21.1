@@ -2,6 +2,7 @@ package net.follis.tutorialmod.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.follis.tutorialmod.TutorialMod;
 import net.follis.tutorialmod.block.ModBlocks;
 import net.follis.tutorialmod.block.custom.CauliflowerCropBlock;
 import net.follis.tutorialmod.block.custom.GoldenCaratCropBlock;
@@ -133,7 +134,20 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockStateModelGenerator.registerBeehive(ModBlocks.AMETHYST_BEE_HIVE, TextureMap::sideFrontEnd);
 
+        // Particle-only model, like vanilla's block/skull.json (the renderer draws the head itself)
+        Model skullModel = new Model(Optional.empty(), Optional.empty(), TextureKey.PARTICLE);
+        Identifier trappedSkullModelId = skullModel.upload(
+                Identifier.of(TutorialMod.MOD_ID, "block/trapped_skull"),
+                new TextureMap().put(TextureKey.PARTICLE, Identifier.of("block/soul_sand")),
+                blockStateModelGenerator.modelCollector);
 
+        blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(ModBlocks.TRAPPED_SKELETON_SKULL, trappedSkullModelId));
+        blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(ModBlocks.TRAPPED_SKELETON_WALL_SKULL, trappedSkullModelId));
+        blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(ModBlocks.TRAPPED_ZOMBIE_HEAD, trappedSkullModelId));
+        blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(ModBlocks.TRAPPED_ZOMBIE_WALL_HEAD, trappedSkullModelId));
+
+        blockStateModelGenerator.registerParentedItemModel(ModBlocks.TRAPPED_SKELETON_SKULL, Identifier.of("item/template_skull"));
+        blockStateModelGenerator.registerParentedItemModel(ModBlocks.TRAPPED_ZOMBIE_HEAD, Identifier.of("item/template_skull"));
     }
     public void registerBlockModelsWithStairsSlabWall(BlockStateModelGenerator blockStateModelGenerator, String inputName) {
         String singularName = inputName.endsWith("S") ? inputName.substring(0, inputName.length() - 1) : inputName;

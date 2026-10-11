@@ -6,6 +6,7 @@ import net.follis.tutorialmod.block.custom.*;
 import net.follis.tutorialmod.sound.ModSounds;
 import net.follis.tutorialmod.world.tree.ModSaplingGenerators;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -303,9 +304,23 @@ public class ModBlocks {
     public static final Block GOLD_REPULSOR = registerBlock("gold_repulsor",
             new GoldRepulsorBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool()));
 
-    private static Block registerLayerBlock(String name, Block block) {
-        return Registry.register(Registries.BLOCK, Identifier.of(TutorialMod.MOD_ID, name), block);
-    }
+    public static final Block TRAPPED_SKELETON_SKULL = registerBlockWithoutBlockItem("trapped_skeleton_skull",
+            new TrappedSkullBlock(SkullBlock.Type.SKELETON,
+                    AbstractBlock.Settings.create().instrument(NoteBlockInstrument.SKELETON).strength(1.0F).pistonBehavior(PistonBehavior.DESTROY)));
+
+    public static final Block TRAPPED_SKELETON_WALL_SKULL = registerBlockWithoutBlockItem("trapped_skeleton_wall_skull",
+            new TrappedWallSkullBlock(SkullBlock.Type.SKELETON,
+                    AbstractBlock.Settings.create().strength(1.0F).dropsLike(TRAPPED_SKELETON_SKULL).pistonBehavior(PistonBehavior.DESTROY)));
+
+    public static final Block TRAPPED_ZOMBIE_HEAD = registerBlockWithoutBlockItem("trapped_zombie_head",
+            new TrappedSkullBlock(SkullBlock.Type.ZOMBIE,
+                    AbstractBlock.Settings.create().instrument(NoteBlockInstrument.ZOMBIE).strength(1.0F).pistonBehavior(PistonBehavior.DESTROY)));
+
+    public static final Block TRAPPED_ZOMBIE_WALL_HEAD = registerBlockWithoutBlockItem("trapped_zombie_wall_head",
+            new TrappedWallSkullBlock(SkullBlock.Type.ZOMBIE,
+                    AbstractBlock.Settings.create().strength(1.0F).dropsLike(TRAPPED_ZOMBIE_HEAD).pistonBehavior(PistonBehavior.DESTROY)));
+
+// creeper and dragon follow the same pattern
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(TutorialMod.MOD_ID, name), block);

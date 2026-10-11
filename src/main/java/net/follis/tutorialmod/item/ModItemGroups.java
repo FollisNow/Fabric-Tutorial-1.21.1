@@ -85,6 +85,8 @@ public class ModItemGroups {
                         entries.add(ModItems.LARVAE_ITEM);
 
                         entries.add(ModItems.CHITIN);
+                        entries.add(ModItems.TRAPPED_SKELETON_SKULL);
+                        entries.add(ModItems.TRAPPED_ZOMBIE_HEAD);
 
                         entries.add(ModItems.MANTIS_SPAWN_EGG);
                         entries.add(ModItems.BEETLE_SPAWN_EGG);
@@ -207,6 +209,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLDEN_PEDESTAL);
                         entries.add(ModBlocks.GOLDEN_HOTEL);
                         entries.add(ModBlocks.GOLD_REPULSOR);
+
 
                         //INFESTED GOLD
                         entries.add(ModBlocks.INFESTED_GOLDEN_BRICKS);
