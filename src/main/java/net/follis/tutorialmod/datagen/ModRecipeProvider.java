@@ -262,6 +262,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
                 .offerTo(exporter);
 
+        //Components
         ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.TRAPPED_SKELETON_SKULL, 1)
                 .input(Blocks.DISPENSER)
                 .input(Blocks.SKELETON_SKULL)
