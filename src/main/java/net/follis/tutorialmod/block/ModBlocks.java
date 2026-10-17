@@ -110,7 +110,7 @@ public class ModBlocks {
     public static final Block GOLDEN_PLANKS = registerBlock("golden_planks",
             new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)));
     public static final Block GOLDEN_STAIRS = registerBlock("golden_stairs",
-            new SittableStairsBlock(ModBlocks.GOLDEN_PLANKS.getDefaultState(), AbstractBlock.Settings.create().strength(2f)));
+            new StairsBlock(ModBlocks.GOLDEN_PLANKS.getDefaultState(), AbstractBlock.Settings.create().strength(2f)));
     public static final Block GOLDEN_SLAB = registerBlock("golden_slab",
             new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f)));
     public static final Block GOLDEN_FENCE = registerBlock("golden_fence",
@@ -120,7 +120,7 @@ public class ModBlocks {
 
     //GOLD
     public static final Block GOLD_STAIRS = registerBlock("gold_stairs",
-            new SittableStairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
+            new StairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_SLAB = registerBlock("gold_slab",
             new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
@@ -137,7 +137,7 @@ public class ModBlocks {
     public static final Block GOLDEN_BRICKS = registerBlock("golden_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
     public static final Block GOLDEN_BRICK_STAIRS = registerBlock("golden_brick_stairs",
-            new SittableStairsBlock(ModBlocks.GOLDEN_BRICKS.getDefaultState(),
+            new StairsBlock(ModBlocks.GOLDEN_BRICKS.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLDEN_BRICK_SLAB = registerBlock("golden_brick_slab",
             new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
@@ -148,10 +148,10 @@ public class ModBlocks {
     public static final Block GOLD_BRICKS = registerBlock("gold_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.BRICKS).strength(4).requiresTool()));
     public static final Block GOLD_BRICK_STAIRS = registerBlock("gold_brick_stairs",
-            new SittableStairsBlock(ModBlocks.GOLD_BRICKS.getDefaultState(),
+            new StairsBlock(ModBlocks.GOLD_BRICKS.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_BRICK_SLAB = registerBlock("gold_brick_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_BRICK_WALL = registerBlock("gold_brick_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
@@ -159,10 +159,10 @@ public class ModBlocks {
     public static final Block COBBLED_GOLD = registerBlock("cobbled_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.COBBLESTONE).strength(4).requiresTool()));
     public static final Block COBBLED_GOLD_STAIRS = registerBlock("cobbled_gold_stairs",
-            new SittableStairsBlock(ModBlocks.COBBLED_GOLD.getDefaultState(),
+            new StairsBlock(ModBlocks.COBBLED_GOLD.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block COBBLED_GOLD_SLAB = registerBlock("cobbled_gold_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block COBBLED_GOLD_WALL = registerBlock("cobbled_gold_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
@@ -170,10 +170,10 @@ public class ModBlocks {
     public static final Block CUT_GOLD = registerBlock("cut_gold",
             new Block(AbstractBlock.Settings.copy(Blocks.CUT_COPPER).strength(4).requiresTool()));
     public static final Block CUT_GOLD_STAIRS = registerBlock("cut_gold_stairs",
-            new SittableStairsBlock(ModBlocks.CUT_GOLD.getDefaultState(),
+            new StairsBlock(ModBlocks.CUT_GOLD.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block CUT_GOLD_SLAB = registerBlock("cut_gold_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block CUT_GOLD_WALL = registerBlock("cut_gold_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
@@ -181,10 +181,10 @@ public class ModBlocks {
     public static final Block GOLD_LARGE_BRICKS = registerBlock("gold_large_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
     public static final Block GOLD_LARGE_BRICK_STAIRS = registerBlock("gold_large_brick_stairs",
-            new SittableStairsBlock(ModBlocks.GOLD_LARGE_BRICKS.getDefaultState(),
+            new StairsBlock(ModBlocks.GOLD_LARGE_BRICKS.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_LARGE_BRICK_SLAB = registerBlock("gold_large_brick_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_LARGE_BRICK_WALL = registerBlock("gold_large_brick_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
