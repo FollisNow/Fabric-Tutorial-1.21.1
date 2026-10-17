@@ -220,6 +220,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.ZAMPONA, Models.GENERATED);
         itemModelGenerator.register(ModItems.BUG_NET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.LORD_OF_THE_FLIES_STAFF, Models.GENERATED);
         // itemModelGenerator.register(ModItems.CHISEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.STARLIGHT_ASHES, Models.GENERATED);
 
