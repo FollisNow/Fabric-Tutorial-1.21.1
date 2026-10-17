@@ -95,6 +95,8 @@
   "item.tutorialmod.dart": "Dart",
   "item.tutorialmod.dart_shooter": "Dart Shooter",
   "item.tutorialmod.spectre_staff": "Spectre Staff",
+  "item.tutorialmod.lord_of_the_flies_staff": "Lord Of The Flies Staff",
+  "tooltip.tutorialmod.fly_staff.charges": "Charges: %1$s/%2$s",
   "item.tutorialmod.vision_monocle": "Vision Monocle",
   "item.tutorialmod.zampona": "Zampoña",
   "item.tutorialmod.bug_net": "Bug Net",
