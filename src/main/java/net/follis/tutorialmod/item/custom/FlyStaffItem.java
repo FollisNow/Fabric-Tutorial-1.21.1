@@ -25,9 +25,9 @@ public class FlyStaffItem extends Item {
     /** Charges the staff holds when full. */
     public static final int MAX_CHARGES = 5;
     /** Ticks to regenerate one charge (200 ticks = 10 seconds). */
-    public static final int REGEN_TICKS = 200;
+    public static final int REGEN_TICKS = 100;
     /** Ticks between two uses. */
-    private static final int USE_COOLDOWN = 20;
+    private static final int USE_COOLDOWN = 10;
 
     private static final String NEXT_CHARGE_KEY = "NextCharge";
 
@@ -90,8 +90,10 @@ public class FlyStaffItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.translatable("tooltip.tutorialmod.fly_staff.charges", charges(stack), stack.getMaxDamage())
-                .formatted(Formatting.GRAY));
+        if (!type.isAdvanced()) {
+            tooltip.add(Text.translatable("tooltip.tutorialmod.fly_staff.charges", charges(stack), stack.getMaxDamage())
+                    .formatted(Formatting.GRAY));
+        }
         super.appendTooltip(stack, context, tooltip, type);
     }
 
