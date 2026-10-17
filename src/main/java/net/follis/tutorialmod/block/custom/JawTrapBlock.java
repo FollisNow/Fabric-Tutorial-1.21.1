@@ -58,10 +58,4 @@ public class JawTrapBlock extends Block {
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         world.setBlockState(pos, state.with(ARMED, true), Block.NOTIFY_LISTENERS);
     }
-
-    @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        tooltip.add(Text.translatable("tooltip.tutorialmod.jaw_trap_block.tooltip"));
-        super.appendTooltip(stack, context, tooltip, options);
-    }
 }
