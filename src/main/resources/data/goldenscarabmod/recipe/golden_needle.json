@@ -1,0 +1,7 @@
+{
+  "type": "goldenscarabmod:golden_hotel",
+  "catalyst": { "item": "minecraft:stick" },
+  "ingredient1": { "item": "goldenscarabmod:gold_chain" },
+  "ingredient2": { "item": "goldenscarabmod:gold_chain" },
+  "result": { "id": "goldenscarabmod:golden_needle", "count": 1 }
+}

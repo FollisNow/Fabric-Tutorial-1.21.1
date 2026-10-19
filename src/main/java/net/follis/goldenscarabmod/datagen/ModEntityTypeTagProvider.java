@@ -1,0 +1,32 @@
+package net.follis.goldenscarabmod.datagen;
+
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.follis.goldenscarabmod.entity.ModEntities;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.EntityTypeTags;
+
+import java.util.concurrent.CompletableFuture;
+
+public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagProvider {
+    public ModEntityTypeTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, registriesFuture);
+    }
+
+    @Override
+    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        getOrCreateTagBuilder(EntityTypeTags.BEEHIVE_INHABITORS)
+                .add(ModEntities.AMETHYST_BEE);
+
+        getOrCreateTagBuilder(EntityTypeTags.ARTHROPOD)
+                .add(ModEntities.AMETHYST_BEE)
+                .add(ModEntities.BEETLE)
+                .add(ModEntities.SPIDERLING)
+                .add(ModEntities.LOCUST)
+                .add(ModEntities.LARVAE)
+                .add(ModEntities.MANTIS)
+                .add(ModEntities.MOTH)
+                .add(ModEntities.SCORPION)
+                .add(ModEntities.GOLDEN_SILVERFISH);
+    }
+}

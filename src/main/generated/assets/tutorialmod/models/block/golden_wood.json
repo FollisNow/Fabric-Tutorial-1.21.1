@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "tutorialmod:block/golden_log",
-    "side": "tutorialmod:block/golden_log"
-  }
-}

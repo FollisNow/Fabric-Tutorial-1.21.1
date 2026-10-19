@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#minecraft:incorrect_for_diamond_tool"
+  ],
+  "remove": [
+    "#goldenscarabmod:needs_golden_tool"
+  ]
+}

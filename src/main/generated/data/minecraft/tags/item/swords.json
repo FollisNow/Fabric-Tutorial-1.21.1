@@ -1,8 +1,8 @@
 {
   "values": [
-    "tutorialmod:golden_needle",
-    "tutorialmod:wooden_macuahuitl",
-    "tutorialmod:golden_macuahuitl",
-    "tutorialmod:golden_knife"
+    "goldenscarabmod:golden_needle",
+    "goldenscarabmod:wooden_macuahuitl",
+    "goldenscarabmod:golden_macuahuitl",
+    "goldenscarabmod:golden_knife"
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "clicked=false": {
+      "model": "goldenscarabmod:block/pink_garnet_lamp"
+    },
+    "clicked=true": {
+      "model": "goldenscarabmod:block/pink_garnet_lamp_on"
+    }
+  }
+}

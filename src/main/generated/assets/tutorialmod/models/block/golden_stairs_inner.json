@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "tutorialmod:block/golden_planks",
-    "side": "tutorialmod:block/golden_planks",
-    "top": "tutorialmod:block/golden_planks"
-  }
-}

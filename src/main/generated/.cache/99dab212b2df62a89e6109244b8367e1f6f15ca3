@@ -1,6 +1,0 @@
-// 1.21.1	2026-10-17T22:16:54.9379603	Tutorial Mod/minecraft:chest Loot Table
-a9bb025ef70e5e3ecf6a6bb9b21ced7ae5d0c121 data\tutorialmod\loot_table\chests\temple_common.json
-ebcd2f31afe4fda6c1ed54a65055c7c1d92a95ae data\tutorialmod\loot_table\chests\temple_miniboss.json
-ad4ccd747baaee575f79837d7a19dac70eb7b0dc data\tutorialmod\loot_table\chests\temple_super_rare.json
-ad4ccd747baaee575f79837d7a19dac70eb7b0dc data\tutorialmod\loot_table\chests\temple_ultra_rare.json
-bd70d9dbbcb23b50a61aef8045556d512fb50a1c data\tutorialmod\loot_table\chests\temple_rare.json

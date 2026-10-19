@@ -1,0 +1,6 @@
+{
+    "parent": "goldenscarabmod:item/kaupen_bow",
+    "textures": {
+        "layer0": "goldenscarabmod:item/kaupen_bow_pulling_0"
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "asset_id": "goldenscarabmod:kaupen",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.goldenscarabmod.kaupen"
+  },
+  "template_item": "goldenscarabmod:kaupen_armor_trim_smithing_template"
+}

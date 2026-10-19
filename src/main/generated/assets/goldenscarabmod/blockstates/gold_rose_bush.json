@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "goldenscarabmod:block/gold_rose_bush_bottom"
+    },
+    "half=upper": {
+      "model": "goldenscarabmod:block/gold_rose_bush_top"
+    }
+  }
+}

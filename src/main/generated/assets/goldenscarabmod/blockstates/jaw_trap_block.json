@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "armed=false": {
+      "model": "goldenscarabmod:block/jaw_trap_block_disarmed"
+    },
+    "armed=true": {
+      "model": "goldenscarabmod:block/jaw_trap_block"
+    }
+  }
+}

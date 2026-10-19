@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_nugget"
+    },
+    "^": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#^#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "goldenscarabmod:vision_monocle"
+  }
+}

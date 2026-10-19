@@ -1,0 +1,9 @@
+{
+  "asset_name": "pink_garnet",
+  "description": {
+    "color": "#B03FE0",
+    "translate": "trim_material.goldenscarabmod.pink_garnet"
+  },
+  "ingredient": "goldenscarabmod:pink_garnet",
+  "item_model_index": 1.0
+}

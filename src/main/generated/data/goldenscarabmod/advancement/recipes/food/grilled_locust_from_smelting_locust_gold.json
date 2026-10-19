@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_locust_gold": {
+      "conditions": {
+        "items": [
+          {
+            "items": "goldenscarabmod:locust_gold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:grilled_locust_from_smelting_locust_gold"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_locust_gold"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:grilled_locust_from_smelting_locust_gold"
+    ]
+  }
+}

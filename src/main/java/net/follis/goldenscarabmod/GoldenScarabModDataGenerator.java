@@ -1,0 +1,42 @@
+package net.follis.goldenscarabmod;
+
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.follis.goldenscarabmod.datagen.*;
+import net.follis.goldenscarabmod.enchantment.ModEnchantments;
+import net.follis.goldenscarabmod.trim.ModTrimMaterials;
+import net.follis.goldenscarabmod.trim.ModTrimPatterns;
+import net.follis.goldenscarabmod.world.ModConfiguredFeatures;
+import net.follis.goldenscarabmod.world.ModPlacedFeatures;
+import net.minecraft.registry.RegistryBuilder;
+import net.minecraft.registry.RegistryKeys;
+
+public class GoldenScarabModDataGenerator implements DataGeneratorEntrypoint {
+	@Override
+	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+
+		pack.addProvider(ModBlockTagProvider::new);
+		pack.addProvider(ModItemTagProvider::new);
+		pack.addProvider(ModBlockLootTableProvider::new);
+		pack.addProvider(ModChestLootTableProvider::new);
+		pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModRecipeProvider::new);
+		pack.addProvider(ModRegistryDataGenerator::new);
+
+		pack.addProvider(ModEntityTypeTagProvider::new);
+
+		pack.addProvider((FabricDataOutput output) -> new ModPointOfInterestTypeTagProvider(output, RegistryKeys.POINT_OF_INTEREST_TYPE, fabricDataGenerator.getRegistries()));
+	}
+
+	@Override
+	public void buildRegistry(RegistryBuilder registryBuilder) {
+		registryBuilder.addRegistry(RegistryKeys.TRIM_MATERIAL, ModTrimMaterials::bootstrap);
+		registryBuilder.addRegistry(RegistryKeys.TRIM_PATTERN, ModTrimPatterns::bootstrap);
+		registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, ModEnchantments::bootstrap);
+
+		registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+		registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
+	}
+}

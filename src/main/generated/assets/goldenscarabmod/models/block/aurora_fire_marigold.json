@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "goldenscarabmod:block/aurora_fire_marigold"
+  }
+}

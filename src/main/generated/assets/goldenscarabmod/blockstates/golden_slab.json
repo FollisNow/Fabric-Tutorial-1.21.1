@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "goldenscarabmod:block/golden_slab"
+    },
+    "type=double": {
+      "model": "goldenscarabmod:block/golden_planks"
+    },
+    "type=top": {
+      "model": "goldenscarabmod:block/golden_slab_top"
+    }
+  }
+}

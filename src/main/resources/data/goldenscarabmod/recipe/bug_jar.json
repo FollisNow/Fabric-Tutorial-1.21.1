@@ -1,0 +1,7 @@
+{
+  "type": "goldenscarabmod:golden_hotel",
+  "catalyst": { "item": "minecraft:decorated_pot" },
+  "ingredient1": { "item": "minecraft:gold_block" },
+  "ingredient2": { "item": "goldenscarabmod:gold_fence_gate" },
+  "result": { "id": "goldenscarabmod:bug_jar", "count": 1 }
+}

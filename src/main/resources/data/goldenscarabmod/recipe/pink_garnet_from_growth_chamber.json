@@ -1,0 +1,10 @@
+{
+  "type": "goldenscarabmod:growth_chamber",
+  "ingredient": {
+    "item": "goldenscarabmod:raw_pink_garnet"
+  },
+  "result": {
+    "count": 16,
+    "id": "goldenscarabmod:pink_garnet"
+  }
+}

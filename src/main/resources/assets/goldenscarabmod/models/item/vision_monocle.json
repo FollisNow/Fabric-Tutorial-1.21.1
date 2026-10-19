@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "goldenscarabmod:item/vision_monocle"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "goldenscarabmod:used": 1
+      },
+      "model": "goldenscarabmod:item/vision_monocle_used"
+    }
+  ]
+}

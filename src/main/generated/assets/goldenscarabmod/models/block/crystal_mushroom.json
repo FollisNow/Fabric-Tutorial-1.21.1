@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "goldenscarabmod:block/crystal_mushroom"
+  }
+}

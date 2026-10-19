@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "goldenscarabmod:block/golden_leaves"
+  }
+}

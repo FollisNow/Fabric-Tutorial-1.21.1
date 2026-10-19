@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "goldenscarabmod:block/honey_berry_bush_stage3"
+  }
+}

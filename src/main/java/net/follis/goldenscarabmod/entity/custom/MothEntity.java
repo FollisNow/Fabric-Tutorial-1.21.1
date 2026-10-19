@@ -1,0 +1,757 @@
+package net.follis.goldenscarabmod.entity.custom;
+
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.follis.goldenscarabmod.entity.ModEntities;
+import net.follis.goldenscarabmod.network.MesmerizeManager;
+import net.follis.goldenscarabmod.network.MesmerizePayload;
+import net.follis.goldenscarabmod.particle.ModParticles;
+import net.minecraft.block.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.FuzzyTargeting;
+import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.BirdNavigation;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.*;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.*;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
+import java.util.function.Predicate;
+
+public class MothEntity extends AngerableBugEntity implements Flutterer {
+    public final AnimationState flyingAnimationState = new AnimationState();
+    public final AnimationState roostingAnimationState = new AnimationState();
+
+    public static final int field_28638 = MathHelper.ceil(1.4959966F);
+    public float flapProgress;
+    public float maxWingDeviation;
+    public float prevMaxWingDeviation;
+    public float prevFlapProgress;
+    private float flapSpeed = 1.0F;
+
+    private final Set<UUID> mesmerizedPlayers = new HashSet<>();
+
+    private static final double MESMERIZE_RANGE = 24.0D;
+    private static final double MESMERIZE_RANGE_SQ = MESMERIZE_RANGE * MESMERIZE_RANGE;
+    private static final float MESMERIZE_CONE_THRESHOLD = 0.6F;     // wide cone (~84°) allowed before you break free
+    private static final float MESMERIZE_INCONSEQUENTIAL_THRESHOLD = 0.995F;     // small cone (~5°) deviation allowed
+    private static final int TRIGGER_SCAN_INTERVAL = 5;        // only look for NEW stares 4x/sec
+    private static final float MESMERIZE_TURN_SPEED_DEGREES = 3F; // tweak this — degrees turned per tick
+
+    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT;
+    private static final TrackedData<Boolean> IS_ROOSTING;
+
+
+    public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+        super(entityType, world);
+        this.moveControl = new FlightMoveControl(this, 10, true);
+    }
+
+    protected EntityNavigation createNavigation(World world) {
+        BirdNavigation birdNavigation = new BirdNavigation(this, world);
+        birdNavigation.setCanPathThroughDoors(false);
+        birdNavigation.setCanSwim(true);
+        birdNavigation.setCanEnterOpenDoors(true);
+        return birdNavigation;
+    }
+
+
+    @Override
+    protected void initGoals() {
+        this.goalSelector.add(0, new MothBiteGoal(this, 1.4F, true));
+
+        this.goalSelector.add(1, new MothMateGoal(this, 1.15D));
+        this.goalSelector.add(2, new MothTemptGoal(this, 1.25D, this::foodSelector, false));
+
+        this.goalSelector.add(4, new LatchGoal(this));
+        this.goalSelector.add(5, new FlyToTreeGoal(this, 1.4F, 8, 6));
+        this.goalSelector.add(6, new SwimGoal(this));
+
+        this.targetSelector.add(1, (new MothRevengeGoal(this)).setGroupRevenge());
+        this.targetSelector.add(2, new BiteTargetGoal(this));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 10, false, false, (entity) -> entity instanceof Monster && !(entity instanceof CreeperEntity) && !isWearingGoldOrImmune(entity)));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 5, false, false, this::shouldAngerAt));
+    }
+
+    private boolean foodSelector(ItemStack stack) {
+        return stack.isIn(ItemTags.BEE_FOOD);
+    }
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return foodSelector(stack);
+    }
+
+    public static DefaultAttributeContainer.Builder createAttributes() {
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0F).add(EntityAttributes.GENERIC_FLYING_SPEED, 1F).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2F).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0F);
+    }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                 @Nullable EntityData entityData) {
+
+        Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
+        MothVariant variant;
+        if (currentBiomeKey.isPresent() && biomeMap.containsKey(currentBiomeKey.get())){
+            variant = biomeMap.get(currentBiomeKey.get());
+        } else {
+            variant = MothVariant.OAK;
+        }
+
+        if (random.nextInt(100) == 0) {
+            switch (variant) {
+                case OAK -> this.setVariant(MothVariant.OAK_CRACKED);
+                case BIRCH -> this.setVariant(MothVariant.BIRCH_RADIANT);
+                case SPRUCE -> this.setVariant(MothVariant.SPRUCE_RUBY);
+                case DARK_OAK -> this.setVariant(MothVariant.DARK_OAK_EMERALD);
+                case CHERRY -> this.setVariant(MothVariant.CHERRY_BLOOM);
+                case MANGROVE -> this.setVariant(MothVariant.MANGROVE_TANGLED);
+                case JUNGLE -> this.setVariant(MothVariant.JUNGLE_SPIDER);
+                case ACACIA -> this.setVariant(MothVariant.ACACIA_SAPPHIRE);
+                default -> this.setVariant(variant);
+            }
+        } else {
+            this.setVariant(variant);
+        }
+        return super.initialize(world, difficulty, spawnReason, entityData);
+    }
+
+    private static final Map<RegistryKey<Biome>, MothVariant> biomeMap = new HashMap<>() {{
+        put(BiomeKeys.FOREST, MothVariant.OAK);
+        put(BiomeKeys.FLOWER_FOREST, MothVariant.OAK);
+        put(BiomeKeys.WINDSWEPT_FOREST, MothVariant.OAK);
+        put(BiomeKeys.BIRCH_FOREST, MothVariant.BIRCH);
+        put(BiomeKeys.OLD_GROWTH_BIRCH_FOREST, MothVariant.BIRCH);
+        put(BiomeKeys.TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.SNOWY_TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.OLD_GROWTH_PINE_TAIGA, MothVariant.SPRUCE);
+        put(BiomeKeys.DARK_FOREST, MothVariant.DARK_OAK);
+        put(BiomeKeys.CHERRY_GROVE, MothVariant.CHERRY);
+        put(BiomeKeys.MANGROVE_SWAMP, MothVariant.MANGROVE);
+        put(BiomeKeys.JUNGLE, MothVariant.JUNGLE);
+        put(BiomeKeys.BAMBOO_JUNGLE, MothVariant.JUNGLE);
+        put(BiomeKeys.SPARSE_JUNGLE, MothVariant.JUNGLE);
+        put(BiomeKeys.SAVANNA, MothVariant.ACACIA);
+        put(BiomeKeys.SAVANNA_PLATEAU, MothVariant.ACACIA);
+        put(BiomeKeys.WINDSWEPT_SAVANNA, MothVariant.ACACIA);
+    }};
+
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        MothEntity baby = ModEntities.MOTH.create(world);
+        if (baby != null && entity instanceof MothEntity moth) {
+
+            if (this.getVariant() == moth.getVariant()) {
+
+                baby.setVariant(this.getVariant());
+
+                if (random.nextInt(100) == 0) {
+                    switch (this.getVariant()) {
+                        case OAK -> baby.setVariant(MothVariant.OAK_CRACKED);
+                        case BIRCH -> baby.setVariant(MothVariant.BIRCH_RADIANT);
+                        case SPRUCE -> baby.setVariant(MothVariant.SPRUCE_RUBY);
+                        case DARK_OAK -> baby.setVariant(MothVariant.DARK_OAK_EMERALD);
+                        case CHERRY -> baby.setVariant(MothVariant.CHERRY_BLOOM);
+                        case MANGROVE -> baby.setVariant(MothVariant.MANGROVE_TANGLED);
+                        case JUNGLE -> baby.setVariant(MothVariant.JUNGLE_SPIDER);
+                        case ACACIA -> baby.setVariant(MothVariant.ACACIA_SAPPHIRE);
+                        default -> baby.setVariant(this.getVariant());
+                    }
+                }
+            } else if (random.nextInt(1) == 1) {
+                baby.setVariant(moth.getVariant());
+            } else {
+                baby.setVariant(this.getVariant());
+            }
+        }
+        return baby;
+    }
+    @Override
+    public void breed(ServerWorld world, AnimalEntity other) {
+        super.breed(world, other);
+        this.setBreedingAge(1200);
+        other.setBreedingAge(1200);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        //spawnParticlesAtTarget();
+        this.updateAnimations();
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            this.updateMesmerizedPlayers();
+            if (this.age % TRIGGER_SCAN_INTERVAL == 0) {
+                this.scanForNewStares();
+                if (this.isRoosting() && !isValidTreeStructure(serverWorld, this.getBlockPos()))
+                    this.setRoosting(false);
+            }
+        }
+    }
+
+    private void updateMesmerizedPlayers() {
+        if (this.getVariant().isNotMesmerizing() || this.mesmerizedPlayers.isEmpty()) return;
+
+
+        Iterator<UUID> it = this.mesmerizedPlayers.iterator();
+        while (it.hasNext()) {
+            PlayerEntity player = this.getWorld().getPlayerByUuid(it.next());
+
+            if (!(player instanceof ServerPlayerEntity serverPlayer) || player.isRemoved()
+                    || player.squaredDistanceTo(this) > MESMERIZE_RANGE_SQ
+                    || !player.canSee(this)) {
+                if (player instanceof ServerPlayerEntity sp) {
+                    MesmerizeManager.release(sp, this);
+                    sendMesmerizeState(sp, false);
+                }
+                it.remove();
+                continue;
+            }
+
+            if (!isTowardsMoth(serverPlayer)) {
+                MesmerizeManager.release(serverPlayer, this);
+                sendMesmerizeState(serverPlayer, false);
+                it.remove();
+                continue;
+            }
+            if (isDirectlyLookingAtMoth(serverPlayer)) {
+                MesmerizeManager.release(serverPlayer, this);
+                sendMesmerizeState(serverPlayer, false);
+                it.remove();
+                continue;
+            }
+
+            // client handles the actual rotating now — just keep it informed
+            sendMesmerizeState(serverPlayer, true);
+        }
+    }
+
+    private void sendMesmerizeState(ServerPlayerEntity player, boolean active) {
+        ServerPlayNetworking.send(player,
+                new MesmerizePayload(this.getId(), active, MESMERIZE_TURN_SPEED_DEGREES * 20)); // convert deg/tick to deg/sec
+    }
+
+    private void scanForNewStares() {
+        if (this.getVariant().isNotMesmerizing()) return;
+
+        List<PlayerEntity> nearby = this.getWorld().getEntitiesByClass(PlayerEntity.class,
+                this.getBoundingBox().expand(MESMERIZE_RANGE),
+                player -> !player.isSpectator() && !player.isCreative()
+                        && !this.mesmerizedPlayers.contains(player.getUuid()));
+
+        for (PlayerEntity player : nearby) {
+            if (player instanceof ServerPlayerEntity serverPlayer
+                    && isTowardsMoth(player) && this.canSee(player)
+                    && MesmerizeManager.tryClaim(serverPlayer, this)) {
+                this.mesmerizedPlayers.add(player.getUuid());
+            }
+        }
+    }
+    private boolean isTowardsMoth(PlayerEntity player) {
+        Vec3d lookVec = player.getRotationVec(1.0F).normalize();
+        Vec3d toMoth = this.getPos().subtract(player.getEyePos()).normalize();
+        return lookVec.dotProduct(toMoth) > MESMERIZE_CONE_THRESHOLD;
+    }
+    private boolean isDirectlyLookingAtMoth(PlayerEntity player) {
+        Vec3d lookVec = player.getRotationVec(1.0F).normalize();
+        Vec3d toMoth = this.getPos().subtract(player.getEyePos()).normalize();
+        return lookVec.dotProduct(toMoth) > MESMERIZE_INCONSEQUENTIAL_THRESHOLD;
+    }
+
+    private void spawnParticlesAtTarget() {
+        if (this.getNavigation().getTargetPos() != null && this.getWorld() instanceof ServerWorld serverWorld) {
+            Vec3d target = this.getNavigation().getTargetPos().toBottomCenterPos();
+
+            serverWorld.spawnParticles(ModParticles.PINK_GARNET_PARTICLE,
+                    target.x, target.y,
+                    target.z, 1, 0, 0, 0, 0);
+        }
+    }
+    private void spawnParticlesAtPos(BlockPos pos) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            Vec3d target = pos.toBottomCenterPos();
+
+            serverWorld.spawnParticles(ModParticles.GOLDEN_CHAIN_PARTICLE,
+                    target.x, target.y,
+                    target.z, 1, 0, 0, 0, 0);
+        }
+    }
+
+    @Override
+    public void tickMovement() {
+        super.tickMovement();
+        this.flapWings();
+    }
+
+    public boolean damage(DamageSource source, float amount) {
+        if (this.isInvulnerableTo(source)) {
+            return false;
+        } else {
+            if (!this.getWorld().isClient && this.isRoosting()) {
+                this.setRoosting(false);
+            }
+
+            return super.damage(source, amount);
+        }
+    }
+    @Override
+    public void remove(RemovalReason reason) {
+        for (UUID uuid : this.mesmerizedPlayers) {
+            PlayerEntity player = this.getWorld().getPlayerByUuid(uuid);
+            if (player instanceof ServerPlayerEntity serverPlayer) {
+                MesmerizeManager.release(serverPlayer, this);
+                sendMesmerizeState(serverPlayer, false);
+            }
+        }
+        super.remove(reason);
+    }
+
+
+    /* VARIANT*/
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
+        builder.add(IS_ROOSTING, false);
+    }
+
+    public MothVariant getVariant() {
+        return MothVariant.byId(this.getTypeVariant() & 255);
+    }
+
+    @Override
+    public int getTypeVariant() {
+        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
+    }
+
+    private void setVariant(MothVariant variant) {
+        this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
+
+    }
+
+    public boolean isRoosting() {
+        return this.dataTracker.get(IS_ROOSTING);
+    }
+
+    public void setRoosting(boolean bl) {
+        this.dataTracker.set(IS_ROOSTING, bl);
+
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("Variant", this.getTypeVariant());
+        nbt.putBoolean("Roosting", this.isRoosting());
+
+        this.writeAngerToNbt(nbt);
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        this.dataTracker.set(IS_ROOSTING, nbt.getBoolean("Roosting"));
+        this.readAngerFromNbt(this.getWorld(), nbt);
+    }
+
+
+    /* SOUNDS */
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_ALLAY_DEATH;
+    }
+
+    @Override
+    public SoundCategory getSoundCategory() {
+        return SoundCategory.NEUTRAL;
+    }
+
+    @Override
+    protected void playHurtSound(DamageSource damageSource) {
+        super.playHurtSound(damageSource);
+        this.playSound(SoundEvents.ENTITY_ALLAY_HURT, 0.5F, 0.5F);
+    }
+
+    @Override
+    protected void addFlapEffects() {
+        this.playSound(SoundEvents.ENTITY_PARROT_FLY, 0.1F, 1.0F);
+    }
+
+    private void updateAnimations() {
+        if (this.isRoosting()) {
+            this.flyingAnimationState.stop();
+            this.roostingAnimationState.startIfNotRunning(this.age);
+        } else {
+            this.roostingAnimationState.stop();
+            this.flyingAnimationState.startIfNotRunning(this.age);
+        }
+    }
+
+    public boolean isFlappingWings() {
+        return this.isInAir() && this.age % field_28638 == 0 && !this.isRoosting();
+    }
+
+
+    @Override
+    public boolean isInAir() {
+        return !this.isOnGround();
+    }
+
+    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {}
+
+    private void flapWings() {
+        this.prevFlapProgress = this.flapProgress;
+        this.prevMaxWingDeviation = this.maxWingDeviation;
+        this.maxWingDeviation += (float)(!this.isOnGround() && !this.hasVehicle() ? 4 : -1) * 0.3F;
+        this.maxWingDeviation = MathHelper.clamp(this.maxWingDeviation, 0.0F, 1.0F);
+        if (!this.isOnGround() && this.flapSpeed < 1.0F) {
+            this.flapSpeed = 1.0F;
+        }
+
+        this.flapSpeed *= 0.9F;
+        Vec3d vec3d = this.getVelocity();
+        if (!this.isOnGround() && vec3d.y < (double)0.0F) {
+            this.setVelocity(vec3d.multiply(1.0F, 0.6, 1.0F));
+        }
+
+        this.flapProgress += this.flapSpeed * 2.0F;
+    }
+
+
+
+    private static boolean isValidTreeStructure(ServerWorld world, BlockPos pos) {
+        if (!world.getBlockState(pos).isAir() || !world.getBlockState(pos.up()).isAir()) return false;
+        Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
+
+        int validTreeSides = 0;
+        for (Direction direction : Direction.Type.HORIZONTAL) {
+            BlockPos entry = pos.offset(direction);
+            if (!isTreeBlock.test(world.getBlockState(entry))) {
+                continue;
+            }
+//            if (!isTreeBlock.test(world.getBlockState(entry.up()))) {
+//                continue;
+//            }
+//            if (!isTreeBlock.test(world.getBlockState(entry.down()))) {
+//                continue;
+//            }
+            validTreeSides++;
+        }
+        return validTreeSides > 0 && validTreeSides < 4;
+    }
+    class MothBiteGoal extends MeleeAttackGoal {
+        MothBiteGoal(final MothEntity mob, final double speed, final boolean pauseWhenMobIdle) {
+            super(mob, speed, pauseWhenMobIdle);
+        }
+
+        public boolean canStart() {
+            return super.canStart() && MothEntity.this.hasAngerTime();
+        }
+
+        public boolean shouldContinue() {
+            return super.shouldContinue() && MothEntity.this.hasAngerTime();
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            if (MothEntity.this.isRoosting())
+                MothEntity.this.setRoosting(false);
+        }
+    }
+
+    class MothRevengeGoal extends RevengeGoal {
+        MothRevengeGoal(final MothEntity Moth) {
+            super(Moth);
+        }
+
+        public boolean shouldContinue() {
+            return MothEntity.this.hasAngerTime() && super.shouldContinue();
+        }
+
+        protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
+            if (mob instanceof MothEntity && this.mob.canSee(target) && !((MothEntity) mob).isWearingGoldOrImmune(target)) {
+                mob.setTarget(target);
+            } else {
+                mob.setTarget(null);
+            }
+
+        }
+    }
+
+    static class BiteTargetGoal extends ActiveTargetGoal<PlayerEntity> {
+        public BiteTargetGoal(MothEntity Moth) {
+            super(Moth, PlayerEntity.class, 10, true, false, Moth::shouldAngerAt);
+        }
+
+        public boolean canStart() {
+            return this.canBite() && super.canStart();
+        }
+
+        public boolean shouldContinue() {
+            boolean bl = this.canBite();
+            if (this.mob.getTarget() != null && mob instanceof MothEntity Moth && !Moth.isWearingGoldOrImmune(Moth.getTarget())) {
+                this.target = null;
+                return false;
+            } else if (bl && this.mob.getTarget() != null ) {
+                return super.shouldContinue();
+            } else {
+                this.target = null;
+                return false;
+            }
+        }
+
+        private boolean canBite() {
+            MothEntity MothEntity = (MothEntity)this.mob;
+            return MothEntity.hasAngerTime();
+        }
+    }
+
+    static class FlyToTreeGoal extends Goal {
+        protected final MothEntity mob;
+        protected double targetX;
+        protected double targetY;
+        protected double targetZ;
+        protected final double speed;
+        protected final int horizontalRange;
+        protected final int verticalRange;
+
+        public FlyToTreeGoal(MothEntity entity, double speed, int horizontalRange, int verticalRange) {
+            this.mob = entity;
+            this.speed = speed;
+            this.horizontalRange = horizontalRange;
+            this.verticalRange = verticalRange;
+            this.setControls(EnumSet.of(Control.MOVE));
+        }
+        public boolean canStart() {
+            if (!this.mob.hasControllingPassenger()
+                    && (this.mob.random.nextInt(1200) == 0
+                    || (!this.mob.isRoosting() && this.mob.random.nextInt(15) == 0))) {
+                Vec3d vec3d = this.getWanderTarget();
+                if (vec3d == null) {
+                    return false;
+                } else {
+                    this.targetX = vec3d.x;
+                    this.targetY = vec3d.y;
+                    this.targetZ = vec3d.z;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public boolean shouldContinue() {
+            return !this.mob.getNavigation().isIdle() && !this.mob.hasControllingPassenger();
+        }
+        public void start() {
+            this.mob.getNavigation().startMovingTo(this.targetX, this.targetY, this.targetZ, this.speed);
+            if (this.mob.isRoosting())
+                this.mob.setRoosting(false);
+        }
+        public void stop() {
+            this.mob.getNavigation().stop();
+            super.stop();
+        }
+
+        @Nullable
+        protected Vec3d getWanderTarget() {
+            Vec3d vec3d = null;
+            if (this.mob.isTouchingWater()) {
+                vec3d = FuzzyTargeting.find(this.mob, this.horizontalRange, this.verticalRange);
+            } else {
+                if (this.mob.getWorld() instanceof ServerWorld serverWorld) {
+                    vec3d = getRandomValidTreePos(serverWorld, this.mob.getBlockPos());
+                }
+            }
+            return vec3d == null ? RandomPosition(this.mob) : vec3d;
+        }
+
+        @Nullable
+        private Vec3d getRandomValidTreePos(ServerWorld world, BlockPos originalPos) {
+            HashSet<BlockPos> validPositions = new HashSet<>();
+
+            for (BlockPos targetPos : BlockPos.iterate(originalPos.add(-this.horizontalRange / 2, -this.verticalRange / 2, -this.horizontalRange / 2 ), originalPos.add(this.horizontalRange / 2, this.verticalRange / 2, this.horizontalRange / 2 ))) {
+                if (!isValidTreeStructure(world, targetPos)) continue;
+                validPositions.add(targetPos.toImmutable());
+            }
+            if (!validPositions.isEmpty()) {
+                if (validPositions.size() > 1) {
+                    return new ArrayList<>(validPositions).get(world.random.nextInt(validPositions.size())).toImmutable().toBottomCenterPos();
+                } else
+                {
+                    return new ArrayList<>(validPositions).getFirst().toImmutable().toBottomCenterPos();
+                }
+            } else {
+                return null;
+            }
+        }
+        private Vec3d RandomPosition(MothEntity moth) {
+            return BlockPos.ofFloored(
+                    moth.getX() + (double)moth.random.nextInt(7) - (double)moth.random.nextInt(7),
+                    moth.getY() - (double)moth.random.nextInt(6) + (double)2.0F,
+                    moth.getZ() + (double)moth.random.nextInt(7) - (double)moth.random.nextInt(7)).toBottomCenterPos();
+        }
+    }
+
+    @Override
+    public void pushAwayFrom(Entity entity) {
+        super.pushAwayFrom(entity);
+        if (!(entity instanceof MothEntity))
+            this.setRoosting(false);
+    }
+
+    static class LatchGoal extends Goal {
+        protected final MothEntity mob;
+        protected Direction latchDirection;
+
+        LatchGoal(MothEntity mob) {
+            this.mob = mob;
+        }
+
+        @Override
+        public boolean canStart() {
+            if (this.mob.getWorld() instanceof ServerWorld serverWorld && isValidTreeStructure(serverWorld, this.mob.getBlockPos())){
+                return this.mob.random.nextInt(10) == 0 && !this.mob.isRoosting() ;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            boolean bl = false;
+            if (this.mob.getWorld() instanceof ServerWorld serverWorld){
+                 bl = this.mob.getRandom().nextInt(6000) != 0 && !serverWorld.getBlockState(this.mob.getBlockPos().offset(this.latchDirection)).isAir()
+                         && !this.mob.hasControllingPassenger() && this.mob.getVelocity().length() < 0.05f;
+            }
+            if (!bl) {
+                this.mob.setRoosting(false);
+            }
+            return bl;
+        }
+
+        @Override
+        public void start() {
+            this.mob.setRoosting(true);
+            this.mob.getNavigation().stop();
+
+            if (this.mob.getWorld() instanceof ServerWorld serverWorld) {
+                this.latchDirection = getLatchPos(serverWorld);
+                Vec3d offset;
+                if (this.mob.isBaby()) {
+                    offset = new Vec3d(this.latchDirection.getOffsetX() * 0.4f, 0, this.latchDirection.getOffsetZ() * 0.4f);
+                } else {
+                    offset = new Vec3d(this.latchDirection.getOffsetX() * 0.3f, 0, this.latchDirection.getOffsetZ() * 0.3f);
+                }
+                this.mob.setPosition(this.mob.getBlockPos().toBottomCenterPos().add(offset));
+                alignForwardToDirection(this.latchDirection, this.mob);
+            }
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+            this.mob.setVelocity(Vec3d.ZERO);
+            alignForwardToDirection(this.latchDirection, this.mob); // the wiggle
+
+        }
+
+        private Direction getLatchPos(ServerWorld serverWorld) {
+            Predicate<BlockState> isTreeBlock = blockState -> blockState.isIn(BlockTags.LEAVES) || blockState.isIn(BlockTags.LOGS);
+            for (Direction direction : Direction.Type.HORIZONTAL) {
+                BlockPos entry = this.mob.getBlockPos().offset(direction);
+                if (isTreeBlock.test(serverWorld.getBlockState(entry))) {
+                    return direction;
+                }
+            }
+            return Direction.DOWN;
+        }
+
+        private void alignForwardToDirection(Direction direction, MothEntity moth) {
+            switch (direction) {
+                case NORTH:
+                    moth.setHeadYaw(180.0F);
+                    moth.setYaw(180.0F);
+                    break;
+                case SOUTH:
+                    moth.setHeadYaw(0.0F);
+                    moth.setYaw(0.0F);
+                    break;
+                case WEST:
+                    moth.setHeadYaw(90.0F);
+                    moth.setYaw(90.0F);
+                    break;
+                case EAST:
+                    moth.setHeadYaw(-90.0F);
+                    moth.setYaw(-90.0F);
+                    break;
+                default:
+                    // Handle invalid direction if needed
+                    break;
+            }
+            mob.setPitch(0.0F); // Set pitch to level (0 degrees)
+        }
+    }
+
+    class MothMateGoal extends AnimalMateGoal {
+        public MothMateGoal(MothEntity animal, double speed) {
+            super(animal, speed);
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            if (MothEntity.this.isRoosting())
+                MothEntity.this.setRoosting(false);
+        }
+    }
+
+    class MothTemptGoal extends TemptGoal {
+        public MothTemptGoal(PathAwareEntity entity, double speed, Predicate<ItemStack> foodPredicate, boolean canBeScared) {
+            super(entity, speed, foodPredicate, canBeScared);
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            if (MothEntity.this.isRoosting())
+                MothEntity.this.setRoosting(false);
+        }
+    }
+
+    static {
+        DATA_ID_TYPE_VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
+        IS_ROOSTING = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    }
+}

@@ -1,0 +1,332 @@
+package net.follis.goldenscarabmod.datagen;
+
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.follis.goldenscarabmod.GoldenScarabMod;
+import net.follis.goldenscarabmod.block.ModBlocks;
+import net.follis.goldenscarabmod.item.ModItems;
+import net.follis.goldenscarabmod.recipe.CaddisflyFluteRecipe;
+import net.follis.goldenscarabmod.util.ModTags;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.server.recipe.*;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
+import net.minecraft.recipe.*;
+import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.util.Identifier;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+public class ModRecipeProvider extends FabricRecipeProvider {
+    public ModRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, registriesFuture);
+    }
+
+    @Override
+    public void generate(RecipeExporter exporter) {
+        List<ItemConvertible> PINK_GARNET_SMELTABLES = List.of(ModItems.RAW_PINK_GARNET, ModBlocks.PINK_GARNET_ORE,
+                ModBlocks.PINK_GARNET_DEEPSLATE_ORE);
+
+        offerSmelting(exporter, PINK_GARNET_SMELTABLES, RecipeCategory.MISC, ModItems.PINK_GARNET, 0.25f, 200, "pink_garnet");
+        offerBlasting(exporter, PINK_GARNET_SMELTABLES, RecipeCategory.MISC, ModItems.PINK_GARNET, 0.25f, 100, "pink_garnet");
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PINK_GARNET, RecipeCategory.DECORATIONS, ModBlocks.PINK_GARNET_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.RAW_PINK_GARNET, RecipeCategory.DECORATIONS, ModBlocks.RAW_PINK_GARNET_BLOCK);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.RAW_PINK_GARNET, 32)
+                .input(ModBlocks.MAGIC_BLOCK)
+                .criterion(hasItem(ModBlocks.MAGIC_BLOCK), conditionsFromItem(ModBlocks.MAGIC_BLOCK))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "raw_pink_garnet_from_magic_block"));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Blocks.COBWEB)
+                .pattern("# #")
+                .pattern(" # ")
+                .pattern("# #")
+                .input('#', Items.STRING)
+                .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
+                .offerTo(exporter);
+
+        ComplexRecipeJsonBuilder.create(CaddisflyFluteRecipe::new).offerTo(exporter, "crafting_special_caddisfly_flute");
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Items.STRING, 5)
+                .input(Blocks.COBWEB)
+                .criterion(hasItem(Blocks.COBWEB), conditionsFromItem(Blocks.COBWEB))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BAMBOO_TRAP)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.BAMBOO)
+                .input('^', Items.IRON_NUGGET)
+                .criterion(hasItem(Items.BAMBOO), conditionsFromItem(Items.BAMBOO))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BUG_NET)
+                .pattern(" ~#")
+                .pattern(" ^~")
+                .pattern("^  ")
+                .input('#', Items.WHITE_WOOL)
+                .input('^', Items.STICK)
+                .input('~', Items.STRING)
+                .criterion(hasItem(Items.BAMBOO), conditionsFromItem(Items.BAMBOO))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.VISION_MONOCLE)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.AMETHYST_SHARD)
+                .criterion(hasItem(Items.AMETHYST_SHARD), conditionsFromItem(Items.AMETHYST_SHARD))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.WOODEN_MACUAHUITL)
+                .pattern(" ~^")
+                .pattern("~^~")
+                .pattern("#~ ")
+                .input('#', Items.STICK)
+                .input('^', ItemTags.PLANKS)
+                .input('~', Items.OBSIDIAN)
+                .criterion(hasItem(Items.OBSIDIAN), conditionsFromItem(Items.OBSIDIAN))
+                .offerTo(exporter);
+
+        // LOCUSTS
+        Ingredient locustIngredients = Ingredient.fromTag(ModTags.Items.LOCUST_ITEMS);
+        List<ItemConvertible> locusts = List.of(ModItems.LOCUST_GOLD, ModItems.LOCUST_DREAM, ModItems.LOCUST_GRASSHOPPER, ModItems.LOCUST_RED);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.SLIME_BALL, 2)
+                .input(ModItems.LOCUST_DREAM)
+                .criterion(hasItem(ModItems.LOCUST_DREAM), conditionsFromItem(ModItems.LOCUST_DREAM))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "slime_ball_from_locust_dream"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.SLIME_BALL, 1)
+                .input(ModItems.LOCUST_GRASSHOPPER)
+                .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "slime_ball_from_locust_grasshopper"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.RED_DYE, 1)
+                .input(ModItems.LOCUST_RED)
+                .criterion(hasItem(ModItems.LOCUST_RED), conditionsFromItem(ModItems.LOCUST_RED))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "red_dye_from_locust_red"));
+
+        offerSmelting(exporter, locusts, RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.25f, 200, "food");
+        CookingRecipeJsonBuilder locustSmoker = CookingRecipeJsonBuilder.create(
+                        locustIngredients, RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.2f, 100, RecipeSerializer.SMOKING, SmokingRecipe::new)
+                .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER));
+        locustSmoker.offerTo(exporter, getItemPath(ModItems.GRILLED_LOCUST) + "_from_" + "smoking");
+        CookingRecipeJsonBuilder locustCampfire = CookingRecipeJsonBuilder.create(
+                        locustIngredients, RecipeCategory.FOOD, ModItems.GRILLED_LOCUST, 0.2f, 100, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new)
+                .criterion(hasItem(ModItems.LOCUST_GRASSHOPPER), conditionsFromItem(ModItems.LOCUST_GRASSHOPPER));
+        locustCampfire.offerTo(exporter, getItemPath(ModItems.GRILLED_LOCUST) + "_from_" + "campfire_cooking");
+
+        // GOLDEN FOOD
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_GLOW_BERRIES)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.GLOW_BERRIES)
+                .criterion(hasItem(Items.GLOW_BERRIES), conditionsFromItem(Items.GLOW_BERRIES))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_SWEET_BERRIES)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.SWEET_BERRIES)
+                .criterion(hasItem(Items.SWEET_BERRIES), conditionsFromItem(Items.SWEET_BERRIES))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.GOLDEN_SPIDER_EYE)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.SPIDER_EYE)
+                .criterion(hasItem(Items.SPIDER_EYE), conditionsFromItem(Items.SPIDER_EYE))
+                .offerTo(exporter);
+
+
+
+
+        // GOLDEN WOOD
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.GOLDEN_LOG)
+                .criterion(hasItem(ModBlocks.GOLDEN_LOG), conditionsFromItem(ModBlocks.GOLDEN_LOG))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "golden_planks_from_golden_log"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.GOLDEN_WOOD)
+                .criterion(hasItem(ModBlocks.GOLDEN_WOOD), conditionsFromItem(ModBlocks.GOLDEN_WOOD))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "golden_planks_from_golden_wood"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.STRIPPED_GOLDEN_LOG)
+                .criterion(hasItem(ModBlocks.STRIPPED_GOLDEN_LOG), conditionsFromItem(ModBlocks.STRIPPED_GOLDEN_LOG))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "golden_planks_from_stripped_golden_log"));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_PLANKS, 4)
+                .input(ModBlocks.STRIPPED_GOLDEN_WOOD)
+                .criterion(hasItem(ModBlocks.STRIPPED_GOLDEN_WOOD), conditionsFromItem(ModBlocks.STRIPPED_GOLDEN_WOOD))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "golden_planks_from_stripped_golden_wood"));
+
+        offerBarkBlockRecipe(exporter, ModBlocks.STRIPPED_GOLDEN_WOOD, ModBlocks.STRIPPED_GOLDEN_LOG);
+        offerBarkBlockRecipe(exporter, ModBlocks.GOLDEN_WOOD, ModBlocks.GOLDEN_LOG);
+
+        offerStairsRecipe(exporter, ModBlocks.GOLDEN_STAIRS, ModBlocks.GOLDEN_PLANKS);
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_SLAB, ModBlocks.GOLDEN_PLANKS);
+        offerFenceRecipe(exporter, ModBlocks.GOLDEN_FENCE, ModBlocks.GOLDEN_PLANKS);
+        offerFenceGateRecipe(exporter, ModBlocks.GOLDEN_FENCE_GATE, ModBlocks.GOLDEN_PLANKS);
+
+        // GOLDEN
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_DIRT)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.DIRT)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_SAND)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.SAND)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+
+        // GOLDEN BRICKS
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLDEN_BRICKS)
+                .pattern(" # ")
+                .pattern("#^#")
+                .pattern(" # ")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.STONE_BRICKS)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+        registerBlockRecipes(exporter, "GOLDEN_BRICKS");
+
+        // GOLD BRICKS
+        offer2x2CompactingRecipe(exporter,RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BRICKS, Items.GOLD_INGOT);
+        registerBlockRecipes(exporter, "GOLD_BRICKS");
+
+        // COBBLED GOLD
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_GOLD, Items.GOLD_BLOCK);
+        registerBlockRecipes(exporter, "COBBLED_GOLD");
+
+        // CUT GOLD
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Items.GOLD_BLOCK, 4);
+        registerBlockRecipes(exporter, "CUT_GOLD");
+
+        // GOLD LARGE BRICKS
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_LARGE_BRICKS, Items.GOLD_BLOCK);
+        registerBlockRecipes(exporter, "GOLD_LARGE_BRICKS");
+
+        // GOLD MISC
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRUMBLED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_GOLD_BRICKS, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORNED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CONNECTED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHAPED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ENGRAVED_GOLD, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCULPTED_GOLD, Items.GOLD_BLOCK);
+
+        // GOLD
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_STAIRS, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_SLAB, Items.GOLD_BLOCK, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_BUTTON, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE_GATE, Items.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
+
+        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
+        offerCutCopperRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Blocks.GOLD_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_CHAIN, Items.GOLD_BLOCK, 8);
+        offerStairsRecipe(exporter, ModBlocks.GOLD_STAIRS, Blocks.GOLD_BLOCK);
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_SLAB, Blocks.GOLD_BLOCK);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_CHAIN)
+                .pattern("#")
+                .pattern("^")
+                .pattern("#")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.GOLD_INGOT)
+                .criterion(hasItem(Items.GOLD_INGOT), conditionsFromItem(Items.GOLD_INGOT))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_LANTERN)
+                .pattern("###")
+                .pattern("#^#")
+                .pattern("###")
+                .input('#', Items.GOLD_NUGGET)
+                .input('^', Items.TORCH)
+                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
+                .offerTo(exporter);
+
+        //Components
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.TRAPPED_SKELETON_SKULL, 1)
+                .input(Blocks.DISPENSER)
+                .input(Blocks.SKELETON_SKULL)
+                .criterion(hasItem(Blocks.DISPENSER), conditionsFromItem(Blocks.DISPENSER))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "trapped_skeleton_skull"));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.TRAPPED_ZOMBIE_HEAD, 1)
+                .input(Blocks.DISPENSER)
+                .input(Blocks.ZOMBIE_HEAD)
+                .criterion(hasItem(Blocks.DISPENSER), conditionsFromItem(Blocks.DISPENSER))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "trapped_zombie_head"));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.JAW_TRAP_BLOCK, 1)
+                .input(Blocks.GOLD_BLOCK)
+                .input(Blocks.TRIPWIRE_HOOK)
+                .criterion(hasItem(Blocks.TRIPWIRE_HOOK), conditionsFromItem(Blocks.TRIPWIRE_HOOK))
+                .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "jaw_trap_block"));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.DART, 6).input('#', Items.GOLD_NUGGET).input('@', Items.FEATHER).pattern("##@");
+
+        offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(GoldenScarabMod.MOD_ID, "kaupen"));
+    }
+
+    public void registerBlockRecipes(RecipeExporter exporter, String inputName) {
+        String singularName = inputName.endsWith("S") ? inputName.substring(0, inputName.length() - 1) : inputName;
+
+        Block inputBlock = getBlockByName(inputName);
+
+        // Deriving block names based on plurality
+        Block stairsBlock = getBlockByName(singularName + "_STAIRS"); // For singular
+        Block slabBlock = getBlockByName(singularName + "_SLAB");
+        Block wallBlock = getBlockByName(singularName + "_WALL");
+
+        // Offer recipes for stairs
+        offerStairsRecipe(exporter, stairsBlock, inputBlock);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stairsBlock, inputBlock);
+
+        // Offer recipes for slabs
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, slabBlock, inputBlock);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, slabBlock, inputBlock, 2);
+
+        // Offer recipes for walls
+        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, wallBlock, inputBlock);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, wallBlock, inputBlock);
+    }
+
+    private Block getBlockByName(String name) {
+        // Return the corresponding block from ModBlocks using reflection or a mapping strategy
+        // This example assumes you have a static way to retrieve blocks by name, adjust as necessary
+        try {
+            Field field = ModBlocks.class.getField(name);
+            return (Block) field.get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Block not found: " + name, e);
+        }
+    }
+
+    public static void offerStairsRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
+        createStairsRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter);
+    }
+    public static void offerFenceRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
+        createFenceRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter);
+    }
+    public static void offerFenceGateRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
+        createFenceGateRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter);
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "goldenscarabmod:temple",
+  "biomes": "#goldenscarabmod:has_structure/temple",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_box"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "goldenscarabmod:block/gold_rose_bush_top"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "goldenscarabmod:block/gold_large_bricks"
+  }
+}

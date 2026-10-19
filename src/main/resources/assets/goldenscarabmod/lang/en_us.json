@@ -1,0 +1,339 @@
+{
+  "item.goldenscarabmod.pink_garnet": "Pink Garnet",
+  "item.goldenscarabmod.raw_pink_garnet": "Raw Pink Garnet",
+  "item.goldenscarabmod.chisel": "Chisel",
+  "item.goldenscarabmod.caddisfly_cocoon": "Caddisfly Cocoon",
+  "item.goldenscarabmod.caddisfly_flute": "Caddisfly Flute",
+  "item.goldenscarabmod.moth_item": "Moth",
+  "item.goldenscarabmod.beetle_item": "Beetle",
+  "item.goldenscarabmod.locust_item": "Locust",
+  "item.goldenscarabmod.scorpion_item": "Scorpion",
+  "item.goldenscarabmod.mantis": "Mantis",
+  "item.goldenscarabmod.spiderling_item": "Spiderling",
+  "item.goldenscarabmod.larvae_item": "Larvae",
+  "item.goldenscarabmod.cauliflower": "Cauliflower",
+  "item.goldenscarabmod.golden_carat": "Golden Carat",
+  "item.goldenscarabmod.starlight_ashes": "Starlight Ashes",
+
+  "item.goldenscarabmod.pink_garnet_sword": "Pink Garnet Sword",
+  "item.goldenscarabmod.pink_garnet_pickaxe": "Pink Garnet Pickaxe",
+  "item.goldenscarabmod.pink_garnet_shovel": "Pink Garnet Shovel",
+  "item.goldenscarabmod.pink_garnet_axe": "Pink Garnet Axe",
+  "item.goldenscarabmod.pink_garnet_hoe": "Pink Garnet Hoe",
+
+  "item.goldenscarabmod.pink_garnet_hammer": "Pink Garnet Hammer",
+
+  "item.goldenscarabmod.pink_garnet_helmet": "Pink Garnet Helmet",
+  "item.goldenscarabmod.pink_garnet_chestplate": "Pink Garnet Chestplate",
+  "item.goldenscarabmod.pink_garnet_leggings": "Pink Garnet Leggings",
+  "item.goldenscarabmod.pink_garnet_boots": "Pink Garnet Boots",
+
+  "item.goldenscarabmod.pink_garnet_horse_armor": "Pink Garnet Horse Armor",
+  "item.goldenscarabmod.kaupen_armor_trim_smithing_template": "Kaupen Smithing Template",
+
+  "item.goldenscarabmod.kaupen_bow": "Kaupen Bow",
+  "item.goldenscarabmod.heatstroke_cursed_eye": "Heatstroke Cursed Eye",
+  "item.goldenscarabmod.phantasmal_cursed_eye": "Phantasmal Cursed Eye",
+
+  "item.goldenscarabmod.bar_brawl_music_disc": "Bar Brawl Music Disc",
+  "item.goldenscarabmod.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
+
+  "item.goldenscarabmod.cauliflower_seeds": "Cauliflower Seeds",
+  "item.goldenscarabmod.honey_berries": "Honey Berries",
+  "item.goldenscarabmod.locust_gold": "Gold Locust",
+  "item.goldenscarabmod.locust_dream": "Dream Locust",
+  "item.goldenscarabmod.locust_grasshopper": "Grasshopper Locust",
+  "item.goldenscarabmod.locust_red": "Red Locust",
+  "item.goldenscarabmod.grilled_locust": "Grilled Locust",
+
+  "item.goldenscarabmod.golden_glow_berries": "Golden Glow Berries",
+  "item.goldenscarabmod.golden_sweet_berries": "Golden Sweet Berries",
+  "item.goldenscarabmod.golden_spider_eye": "Golden Spider Eye",
+
+  "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
+  "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
+  "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.slimey_potion": "Slimey Arrow",
+
+  "item.minecraft.potion.effect.attraction_potion": "Potion of Attraction",
+  "item.minecraft.splash_potion.effect.attraction_potion": "Splash Potion of Attraction",
+  "item.minecraft.lingering_potion.effect.attraction_potion": "Lingering Potion of Attraction",
+  "item.minecraft.tipped_arrow.effect.attraction_potion": "Arrow of Attraction",
+
+  "item.minecraft.potion.effect.rejuvenation_potion": "Potion of Rejuvenation",
+  "item.minecraft.splash_potion.effect.rejuvenation_potion": "Splash Potion of Rejuvenation",
+  "item.minecraft.lingering_potion.effect.rejuvenation_potion": "Lingering Potion of Rejuvenation",
+  "item.minecraft.tipped_arrow.effect.rejuvenation_potion": "Arrow of Rejuvenation",
+
+  "item.minecraft.potion.effect.hatred_potion": "Potion of Hatred",
+  "item.minecraft.splash_potion.effect.hatred_potion": "Splash Potion of Hatred",
+  "item.minecraft.lingering_potion.effect.hatred_potion": "Lingering Potion of Hatred",
+  "item.minecraft.tipped_arrow.effect.hatred_potion": "Arrow of Hatred",
+
+  "item.minecraft.potion.effect.love_potion": "Potion of Love",
+  "item.minecraft.splash_potion.effect.love_potion": "Splash Potion of Love",
+  "item.minecraft.lingering_potion.effect.love_potion": "Lingering Potion of Love",
+  "item.minecraft.tipped_arrow.effect.love_potion": "Arrow of Love",
+
+  "item.minecraft.potion.effect.sporulation_potion": "Potion of Sporulation",
+  "item.minecraft.splash_potion.effect.sporulation_potion": "Splash Potion of Sporulation",
+  "item.minecraft.lingering_potion.effect.sporulation_potion": "Lingering Potion of Sporulation",
+  "item.minecraft.tipped_arrow.effect.sporulation_potion": "Arrow of Sporulation",
+
+  "item.goldenscarabmod.amethyst_bee_spawn_egg": "Amethyst Bee Spawn Egg",
+  "item.goldenscarabmod.beetle_spawn_egg": "Beetle Spawn Egg",
+  "item.goldenscarabmod.larvae_spawn_egg": "Larvae Spawn Egg",
+  "item.goldenscarabmod.locust_spawn_egg": "Locust Spawn Egg",
+  "item.goldenscarabmod.mantis_spawn_egg": "Mantis Spawn Egg",
+  "item.goldenscarabmod.moth_spawn_egg": "Moth Spawn Egg",
+  "item.goldenscarabmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
+  "item.goldenscarabmod.scorpion_spawn_egg": "Scorpion Spawn Egg",
+  "item.goldenscarabmod.gold_carver_spawn_egg": "Gold Carver Spawn Egg",
+  "item.goldenscarabmod.gold_panner_spawn_egg": "Gold Panner Spawn Egg",
+
+  "item.goldenscarabmod.tomahawk": "Tomahawk",
+  "item.goldenscarabmod.dart": "Dart",
+  "item.goldenscarabmod.dart_shooter": "Dart Shooter",
+  "item.goldenscarabmod.spectre_staff": "Spectre Staff",
+  "item.goldenscarabmod.lord_of_the_flies_staff": "Lord Of The Flies Staff",
+  "tooltip.goldenscarabmod.fly_staff.charges": "Charges: %1$s/%2$s",
+  "item.goldenscarabmod.vision_monocle": "Vision Monocle",
+  "item.goldenscarabmod.zampona": "Zampoña",
+  "item.goldenscarabmod.bug_net": "Bug Net",
+
+
+  "block.goldenscarabmod.pink_garnet_block": "Block of Pink Garnet",
+  "block.goldenscarabmod.raw_pink_garnet_block": "Block of Raw Pink Garnet",
+
+  "block.goldenscarabmod.pink_garnet_ore": "Pink Garnet Ore",
+  "block.goldenscarabmod.pink_garnet_deepslate_ore": "Pink Garnet Deepslate Ore",
+
+  "block.goldenscarabmod.pink_garnet_end_ore": "Pink Garnet End Ore",
+  "block.goldenscarabmod.pink_garnet_nether_ore": "Pink Garnet Nether Ore",
+
+
+  "block.goldenscarabmod.magic_block": "Magic Block",
+
+  "block.goldenscarabmod.pink_garnet_stairs": "Pink Garnet Stairs",
+  "block.goldenscarabmod.pink_garnet_slab": "Pink Garnet Slab",
+
+  "block.goldenscarabmod.pink_garnet_button": "Pink Garnet Button",
+  "block.goldenscarabmod.pink_garnet_pressure_plate": "Pink Garnet Pressure Plate",
+
+  "block.goldenscarabmod.pink_garnet_fence": "Pink Garnet Fence",
+  "block.goldenscarabmod.pink_garnet_fence_gate": "Pink Garnet Fence Gate",
+  "block.goldenscarabmod.pink_garnet_wall": "Pink Garnet Wall",
+
+  "block.goldenscarabmod.pink_garnet_door": "Pink Garnet Door",
+  "block.goldenscarabmod.pink_garnet_trapdoor": "Pink Garnet Trapdoor",
+
+  "block.goldenscarabmod.pink_garnet_lamp": "Pink Garnet Lamp",
+
+  "block.goldenscarabmod.cauliflower_crop": "Cauliflower Crop",
+  "block.goldenscarabmod.golden_carat_crop": "Golden Carat Crop",
+  "block.goldenscarabmod.honey_berry_bush": "Honey Berry Bush",
+  "block.goldenscarabmod.crystal_mushroom": "Crystal Mushroom",
+
+  "block.goldenscarabmod.gold_rose_bush": "Gold Rose Bush",
+
+  "block.goldenscarabmod.yellow_marigold": "Yellow Marigold",
+  "block.goldenscarabmod.potted_yellow_marigold": "Potted Yellow Marigold",
+  "block.goldenscarabmod.aurora_fire_marigold": "Aurora Fire Marigold",
+  "block.goldenscarabmod.potted_aurora_fire_marigold": "Potted Aurora Fire Marigold",
+  "block.goldenscarabmod.blue_marigold": "Blue Marigold",
+  "block.goldenscarabmod.potted_blue_marigold": "Potted Blue Marigold",
+
+  "block.goldenscarabmod.folly_dianthus": "Folly Dianthus",
+  "block.goldenscarabmod.potted_folly_dianthus": "Potted Folly Dianthus",
+  "block.goldenscarabmod.pink_dianthus": "Pink Dianthus",
+  "block.goldenscarabmod.potted_pink_dianthus": "Potted Pink Dianthus",
+
+  "block.goldenscarabmod.golden_dirt": "Golden Dirt",
+  "block.goldenscarabmod.golden_sand": "Golden Sand",
+  "block.goldenscarabmod.golden_sapling": "Golden Sapling",
+  "block.goldenscarabmod.golden_leaves": "Golden Leaves",
+  "block.goldenscarabmod.golden_log": "Golden Log",
+  "block.goldenscarabmod.golden_wood": "Golden Wood",
+  "block.goldenscarabmod.stripped_golden_log": "Stripped Golden Log",
+  "block.goldenscarabmod.stripped_golden_wood": "Stripped Golden Wood",
+  "block.goldenscarabmod.golden_planks": "Golden Planks",
+  "block.goldenscarabmod.golden_stairs": "Golden Stairs",
+  "block.goldenscarabmod.golden_slab": "Golden Slab",
+  "block.goldenscarabmod.golden_fence": "Golden Fence",
+  "block.goldenscarabmod.golden_fence_gate": "Golden Fence Gate",
+
+  "block.goldenscarabmod.gold_stairs": "Gold Stairs",
+  "block.goldenscarabmod.gold_slab": "Gold Slab",
+  "block.goldenscarabmod.gold_button": "Gold Button",
+  "block.goldenscarabmod.gold_fence": "Gold Fence",
+  "block.goldenscarabmod.gold_fence_gate": "Gold Gate",
+  "block.goldenscarabmod.gold_wall": "Gold Wall",
+
+  "block.goldenscarabmod.golden_bricks": "Golden Bricks",
+  "block.goldenscarabmod.golden_brick_stairs": "Golden Brick Stairs",
+  "block.goldenscarabmod.golden_brick_slab": "Golden Brick Slab",
+  "block.goldenscarabmod.golden_brick_wall": "Golden Brick Wall",
+
+  "block.goldenscarabmod.gold_bricks": "Gold Bricks",
+  "block.goldenscarabmod.gold_brick_stairs": "Gold Brick Stairs",
+  "block.goldenscarabmod.gold_brick_slab": "Gold Brick Slab",
+  "block.goldenscarabmod.gold_brick_wall": "Gold Brick Wall",
+
+  "block.goldenscarabmod.cobbled_gold": "Cobbled Gold",
+  "block.goldenscarabmod.cobbled_gold_stairs": "Cobbled Gold Stairs",
+  "block.goldenscarabmod.cobbled_gold_slab": "Cobbled Gold Slab",
+  "block.goldenscarabmod.cobbled_gold_wall": "Cobbled Gold Wall",
+
+  "block.goldenscarabmod.cut_gold": "Cut Gold",
+  "block.goldenscarabmod.cut_gold_stairs": "Cut Gold Stairs",
+  "block.goldenscarabmod.cut_gold_slab": "Cut Gold Slab",
+  "block.goldenscarabmod.cut_gold_wall": "Cut Gold Wall",
+
+  "block.goldenscarabmod.gold_large_bricks": "Gold Large Bricks",
+  "block.goldenscarabmod.gold_large_brick_stairs": "Gold Large Brick Stairs",
+  "block.goldenscarabmod.gold_large_brick_slab": "Gold Large Brick Slab",
+  "block.goldenscarabmod.gold_large_brick_wall": "Gold Large Brick Wall",
+
+
+  "block.goldenscarabmod.crumbled_gold": "Crumbled Gold",
+  "block.goldenscarabmod.chiseled_gold": "Chiseled Gold",
+  "block.goldenscarabmod.chiseled_gold_bricks": "Chiseled Gold Bricks",
+  "block.goldenscarabmod.orned_gold": "Orned Gold",
+  "block.goldenscarabmod.connected_gold": "Connected Gold",
+  "block.goldenscarabmod.shaped_gold": "Shaped Gold",
+  "block.goldenscarabmod.engraved_gold": "Engraved Gold",
+  "block.goldenscarabmod.sculpted_gold": "Sculpted Gold",
+
+  "block.goldenscarabmod.infested_golden_bricks": "Infested Golden Bricks",
+  "block.goldenscarabmod.infested_gold_bricks": "Infested Gold Bricks",
+  "block.goldenscarabmod.infested_cobbled_gold": "Infested Cobbled Gold",
+  "block.goldenscarabmod.infested_cut_gold": "Infested Cut Gold",
+  "block.goldenscarabmod.infested_gold_large_bricks": "Infested Gold Large Bricks",
+  "block.goldenscarabmod.infested_crumbled_gold": "Infested Crumbled Gold",
+  "block.goldenscarabmod.infested_chiseled_gold": "Infested Chiseled Gold",
+  "block.goldenscarabmod.infested_chiseled_gold_bricks": "Infested Chiseled Gold Bricks",
+  "block.goldenscarabmod.infested_orned_gold": "Infested Orned Gold",
+  "block.goldenscarabmod.infested_connected_gold": "Infested Connected Gold",
+  "block.goldenscarabmod.infested_shaped_gold": "Infested Shaped Gold",
+  "block.goldenscarabmod.infested_engraved_gold": "Infested Engraved Gold",
+  "block.goldenscarabmod.infested_sculpted_gold": "Infested Sculpted Gold",
+
+
+  "item.goldenscarabmod.gold_chain": "Gold Chain",
+  "block.goldenscarabmod.gold_chain": "Gold Chain",
+
+  "item.goldenscarabmod.gold_lantern": "Gold Lantern",
+  "block.goldenscarabmod.gold_lantern": "Gold Lantern",
+
+  "block.goldenscarabmod.gold_pile": "Gold Pile",
+  "block.goldenscarabmod.gold_pile_block": "Gold Pile Block",
+
+  "block.goldenscarabmod.trapped_skeleton_skull": "Trapped Skeleton Skull",
+  "block.goldenscarabmod.trapped_skeleton_wall_skull": "Trapped Skeleton Skull",
+  "block.goldenscarabmod.trapped_zombie_head": "Trapped Zombie Head",
+  "block.goldenscarabmod.trapped_zombie_wall_head": "Trapped Zombie Head",
+  "block.goldenscarabmod.jaw_trap_block": "Jaw Trap Block",
+
+
+  "item.goldenscarabmod.golden_needle": "Golden Needle",
+  "item.goldenscarabmod.wooden_macuahuitl": "Wooden Macuahuitl",
+  "item.goldenscarabmod.golden_macuahuitl": "Golden Macuahuitl",
+  "item.goldenscarabmod.golden_knife": "Golden Knife",
+
+  "tooltip.goldenscarabmod.golden_macuahuitl.shift_down": "§7Apply §4Bleeding§r §7on strong hits",
+  "tooltip.goldenscarabmod.golden_macuahuitl": "§6Cover me in obsidian glass shanks§r",
+
+  "tooltip.goldenscarabmod.wooden_macuahuitl.shift_down": "§7Apply §4Bleeding§r §7on strong hits",
+  "tooltip.goldenscarabmod.wooden_macuahuitl": "§7Cover me in obsidian glass shanks§r",
+
+  "tooltip.goldenscarabmod.golden_knife.shift_down": "§7Life from §4death§r",
+  "tooltip.goldenscarabmod.golden_knife": "§6Used for rituals§r",
+
+  "tooltip.goldenscarabmod.shift_info": "§7Press §r§eShift§r§7 for info",
+
+  "item.goldenscarabmod.mini_sun": "Mini Sun",
+
+
+  "block.goldenscarabmod.chair": "Chair",
+  "block.goldenscarabmod.golden_pedestal": "Golden Pedestal",
+  "block.goldenscarabmod.golden_hotel": "Golden Hotel",
+  "block.goldenscarabmod.gold_repulsor": "Gold Repulsor",
+  "block.goldenscarabmod.growth_chamber": "Growth Chamber",
+  "block.goldenscarabmod.amethyst_bee_hive": "Amethyst Bee Hive",
+
+
+  "entity.minecraft.villager.kaupenger": "Kaupenger",
+  "entity.minecraft.villager.collector": "Collector",
+
+
+  "effect.goldenscarabmod.slimey": "Slimey",
+  "effect.goldenscarabmod.strange_attractor": "Strange Attractor",
+  "effect.goldenscarabmod.rejuvenation": "Rejuvenation",
+  "effect.goldenscarabmod.hatred": "Hatred",
+  "effect.goldenscarabmod.love": "Love",
+  "effect.goldenscarabmod.sporulation": "Sporulation",
+  "effect.goldenscarabmod.bleeding": "Bleeding",
+  "effect.goldenscarabmod.instant_bleeding": "Bleeding",
+
+  "painting.goldenscarabmod.world.title": "World",
+  "painting.goldenscarabmod.world.author": "NanoAttack",
+  "painting.goldenscarabmod.shrimp.title": "Shrimp",
+  "painting.goldenscarabmod.shrimp.author": "NanoAttack",
+  "painting.goldenscarabmod.saw_them.title": "Saw Them",
+  "painting.goldenscarabmod.saw_them.author": "NanoAttack",
+
+
+  "enchantment.goldenscarabmod.lightning_striker": "Lightning Striker",
+  "enchantment.goldenscarabmod.lord_of_the_flies": "Lord of the Flies",
+
+  "itemgroup.goldenscarabmod.pink_garnet_items": "Pink Garnet Items",
+  "itemgroup.goldenscarabmod.pink_garnet_blocks": "Pink Garnet Blocks",
+
+  "tooltip.goldenscarabmod.magic_block.tooltip": "This block is very, very §9MAGICAL§r",
+
+  "tooltip.goldenscarabmod.chisel.shift_down": "This item chisels blocks into Bricks!",
+  "tooltip.goldenscarabmod.chisel": "Press §eShift§r for more Information!",
+
+
+  "item.goldenscarabmod.bug_jar": "Bug Jar",
+  "item.goldenscarabmod.cursed_jar": "Cursed Jar",
+
+  "item.goldenscarabmod.bamboo_trap": "Bamboo Trap",
+  "item.goldenscarabmod.chitin": "Chitin",
+
+
+  "tooltip.goldenscarabmod.bug_jar.shift_down": "This item helps you catch fancy bugs!",
+  "tooltip.goldenscarabmod.bug_jar": "§6Press §eShift§r§6 for content",
+
+  "tooltip.goldenscarabmod.cursed_jar.shift_down": "Not all knowledge should be given to everyone...",
+  "tooltip.goldenscarabmod.cursed_jar": "§6Press §eShift§r§6 for content",
+
+  "tooltip.goldenscarabmod.vision_monocle": "Press §eShift§r for more Information!",
+  "tooltip.goldenscarabmod.entity_of": "Entity type is of",
+
+  "tooltip.goldenscarabmod.cauliflower.tooltip": "This is delicious!",
+  "tooltip.goldenscarabmod.golden_carat.tooltip": "§6Infinitely more valuable",
+
+  "tooltip.goldenscarabmod.locust_gold.tooltip": "§8Maybe the key?..",
+  "tooltip.goldenscarabmod.locust_dream.tooltip": "§8By night one way, \n§8By day another",
+  "tooltip.goldenscarabmod.locust_grasshopper.tooltip": "§8Taste better than it looks",
+  "tooltip.goldenscarabmod.locust_red.tooltip": "§8Don't even try",
+  "tooltip.goldenscarabmod.grilled_locust.tooltip": "Taste even better than it looks",
+
+  "trim_material.goldenscarabmod.pink_garnet": "Pink Garnet Material",
+  "trim_pattern.goldenscarabmod.kaupen": "Kaupen Armor Pattern",
+
+  "entity.goldenscarabmod.amethyst_bee": "Amethyst Bee",
+  "entity.goldenscarabmod.beetle": "Beetle",
+  "entity.goldenscarabmod.larvae": "Larvae",
+  "entity.goldenscarabmod.locust": "Locust",
+  "entity.goldenscarabmod.mantis": "Mantis",
+  "entity.goldenscarabmod.moth": "Moth",
+  "entity.goldenscarabmod.spiderling": "Spiderling",
+  "entity.goldenscarabmod.scorpion": "Scorpion",
+  "entity.goldenscarabmod.tomahawk": "Tomahawk",
+  "entity.goldenscarabmod.dart": "Dart",
+  "entity.goldenscarabmod.bamboo_trap": "Bamboo Trap",
+  "entity.goldenscarabmod.gold_carver": "Gold Carver",
+  "entity.goldenscarabmod.gold_panner": "Gold Panner"
+}

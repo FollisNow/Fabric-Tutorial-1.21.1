@@ -1,11 +1,11 @@
 {
   "values": [
-    "tutorialmod:gold_wall",
-    "tutorialmod:golden_brick_wall",
-    "tutorialmod:gold_brick_wall",
-    "tutorialmod:cobbled_gold_wall",
-    "tutorialmod:cut_gold_wall",
-    "tutorialmod:gold_large_brick_wall",
-    "tutorialmod:pink_garnet_wall"
+    "goldenscarabmod:gold_wall",
+    "goldenscarabmod:golden_brick_wall",
+    "goldenscarabmod:gold_brick_wall",
+    "goldenscarabmod:cobbled_gold_wall",
+    "goldenscarabmod:cut_gold_wall",
+    "goldenscarabmod:gold_large_brick_wall",
+    "goldenscarabmod:pink_garnet_wall"
   ]
 }

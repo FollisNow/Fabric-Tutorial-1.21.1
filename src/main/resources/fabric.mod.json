@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "tutorialmod",
+	"id": "goldenscarabmod",
 	"version": "${version}",
-	"name": "Tutorial Mod",
+	"name": "Golden Scarab Mod",
 	"description": "Tutorial Mod by Kaupenjoe for YouTube followed by Follis",
 	"authors": [
 		"Kaupenjoe!"
@@ -12,24 +12,24 @@
 		"sources": "https://github.com/Tutorials-By-Kaupenjoe/Fabric-Tutorial-1.21.X"
 	},
 	"license": "MIT",
-	"icon": "assets/tutorialmod/icon.png",
+	"icon": "assets/goldenscarabmod/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.follis.tutorialmod.TutorialMod"
+			"net.follis.goldenscarabmod.GoldenScarabMod"
 		],
 		"fabric-datagen": [
-			"net.follis.tutorialmod.TutorialModDataGenerator"
+			"net.follis.goldenscarabmod.GoldenScarabModDataGenerator"
 		],
 		"client": [
-			"net.follis.tutorialmod.TutorialModClient"
+			"net.follis.goldenscarabmod.GoldenScarabModClient"
 		],
 		"rei_client": [
-			"net.follis.tutorialmod.compat.TutorialModREIClient"
+			"net.follis.goldenscarabmod.compat.GoldenScarabModREIClient"
 		]
 	},
 	"mixins": [
-		"tutorialmod.mixins.json"
+		"goldenscarabmod.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.11",

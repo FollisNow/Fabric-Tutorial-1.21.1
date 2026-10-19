@@ -2,11 +2,11 @@
   "replace": false,
   "values": [
     {
-      "id": "tutorialmod:kaupen_poi",
+      "id": "goldenscarabmod:kaupen_poi",
       "required": false
     },
     {
-      "id": "tutorialmod:collector_poi",
+      "id": "goldenscarabmod:collector_poi",
       "required": false
     }
   ]

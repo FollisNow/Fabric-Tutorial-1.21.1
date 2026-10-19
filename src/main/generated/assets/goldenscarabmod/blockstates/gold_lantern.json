@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "goldenscarabmod:block/gold_lantern"
+    },
+    "hanging=true": {
+      "model": "goldenscarabmod:block/gold_lantern_hanging"
+    }
+  }
+}

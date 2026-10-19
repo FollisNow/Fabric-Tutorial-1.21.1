@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "goldenscarabmod:block/gold_large_bricks",
+    "side": "goldenscarabmod:block/gold_large_bricks",
+    "top": "goldenscarabmod:block/gold_large_bricks"
+  }
+}

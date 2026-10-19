@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_nugget"
+    },
+    "^": {
+      "item": "minecraft:sand"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#^#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "goldenscarabmod:golden_sand"
+  }
+}

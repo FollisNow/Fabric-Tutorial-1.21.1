@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "goldenscarabmod:block/pink_garnet_slab"
+    },
+    "type=double": {
+      "model": "goldenscarabmod:block/pink_garnet_block"
+    },
+    "type=top": {
+      "model": "goldenscarabmod:block/pink_garnet_slab_top"
+    }
+  }
+}

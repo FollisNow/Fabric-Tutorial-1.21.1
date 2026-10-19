@@ -1,0 +1,4 @@
+{
+  "structures": [ { "structure": "goldenscarabmod:temple", "weight": 1 } ],
+  "placement": { "type": "minecraft:random_spread", "spacing": 40, "separation": 12, "salt": 1234567 }
+}

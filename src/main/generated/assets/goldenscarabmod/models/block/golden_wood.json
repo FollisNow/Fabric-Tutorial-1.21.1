@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "goldenscarabmod:block/golden_log",
+    "side": "goldenscarabmod:block/golden_log"
+  }
+}

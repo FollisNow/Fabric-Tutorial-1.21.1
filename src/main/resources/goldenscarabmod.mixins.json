@@ -1,0 +1,21 @@
+{
+	"required": true,
+	"package": "net.follis.goldenscarabmod.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"ExampleMixin",
+		"WardenEntityMixin",
+		"PlayerEntityMixin",
+		"PotionEntityMixin"
+	],
+	"client": [
+		"ItemRendererMixin",
+		"ModelLoaderMixin",
+		"MouseMixin",
+		"MinecraftClientMixin",
+		"EntityRenderDispatcherAccessorMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

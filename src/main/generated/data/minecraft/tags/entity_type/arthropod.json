@@ -1,13 +1,13 @@
 {
   "values": [
-    "tutorialmod:amethyst_bee",
-    "tutorialmod:beetle",
-    "tutorialmod:spiderling",
-    "tutorialmod:locust",
-    "tutorialmod:larvae",
-    "tutorialmod:mantis",
-    "tutorialmod:moth",
-    "tutorialmod:scorpion",
-    "tutorialmod:golden_silverfish"
+    "goldenscarabmod:amethyst_bee",
+    "goldenscarabmod:beetle",
+    "goldenscarabmod:spiderling",
+    "goldenscarabmod:locust",
+    "goldenscarabmod:larvae",
+    "goldenscarabmod:mantis",
+    "goldenscarabmod:moth",
+    "goldenscarabmod:scorpion",
+    "goldenscarabmod:golden_silverfish"
   ]
 }

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "tutorialmod:block/cobbled_gold",
-    "side": "tutorialmod:block/cobbled_gold",
-    "top": "tutorialmod:block/cobbled_gold"
-  }
-}

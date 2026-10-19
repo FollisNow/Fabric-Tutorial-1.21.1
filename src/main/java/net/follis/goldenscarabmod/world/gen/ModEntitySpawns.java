@@ -1,0 +1,62 @@
+package net.follis.goldenscarabmod.world.gen;
+
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.follis.goldenscarabmod.entity.ModEntities;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnLocationTypes;
+import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.biome.BiomeKeys;
+
+public class ModEntitySpawns {
+    public static void addSpawns() {
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.CHERRY_GROVE),
+                SpawnGroup.CREATURE, ModEntities.MANTIS, 30, 1, 2);
+        SpawnRestriction.register(ModEntities.MANTIS, SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
+
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS, BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FLOWER_FOREST,
+                BiomeKeys.CHERRY_GROVE, BiomeKeys.FOREST, BiomeKeys.GROVE, BiomeKeys.MEADOW),
+                SpawnGroup.CREATURE, ModEntities.BEETLE, 30, 2, 4);
+        SpawnRestriction.register(ModEntities.BEETLE, SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
+
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS, BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FLOWER_FOREST,
+                BiomeKeys.DESERT, BiomeKeys.CHERRY_GROVE, BiomeKeys.FOREST, BiomeKeys.GROVE,
+                BiomeKeys.MEADOW),
+                SpawnGroup.CREATURE, ModEntities.LOCUST, 30, 1, 3);
+        SpawnRestriction.register(ModEntities.LOCUST, SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                        BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST, BiomeKeys.WINDSWEPT_FOREST,
+                        BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST,
+                        BiomeKeys.TAIGA, BiomeKeys.SNOWY_TAIGA, BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, BiomeKeys.OLD_GROWTH_PINE_TAIGA,
+                        BiomeKeys.DARK_FOREST,
+                        BiomeKeys.CHERRY_GROVE,
+                        BiomeKeys.MANGROVE_SWAMP,
+                        BiomeKeys.JUNGLE, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.SPARSE_JUNGLE,
+                        BiomeKeys.SAVANNA, BiomeKeys.SAVANNA_PLATEAU, BiomeKeys.WINDSWEPT_SAVANNA),
+                SpawnGroup.CREATURE, ModEntities.MOTH, 100, 1, 1);
+
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                        BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST, BiomeKeys.WINDSWEPT_FOREST,
+                        BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST,
+                        BiomeKeys.TAIGA, BiomeKeys.SNOWY_TAIGA, BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, BiomeKeys.OLD_GROWTH_PINE_TAIGA,
+                        BiomeKeys.DARK_FOREST,
+                        BiomeKeys.CHERRY_GROVE,
+                        BiomeKeys.MANGROVE_SWAMP,
+                        BiomeKeys.JUNGLE, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.SPARSE_JUNGLE,
+                        BiomeKeys.SAVANNA, BiomeKeys.SAVANNA_PLATEAU, BiomeKeys.WINDSWEPT_SAVANNA),
+                SpawnGroup.CREATURE, ModEntities.MOTH, 5, 10, 30);
+
+        SpawnRestriction.register(ModEntities.MOTH, SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING, AnimalEntity::isValidNaturalSpawn);
+    }
+}

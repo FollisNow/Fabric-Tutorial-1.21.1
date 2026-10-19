@@ -56,7 +56,7 @@
         "gold_darker": "trims/color_palettes/gold_darker",
         "diamond_darker": "trims/color_palettes/diamond_darker",
         "netherite_darker": "trims/color_palettes/netherite_darker",
-        "pink_garnet": "tutorialmod:trims/color_palettes/pink_garnet"
+        "pink_garnet": "goldenscarabmod:trims/color_palettes/pink_garnet"
       }
     }
   ]

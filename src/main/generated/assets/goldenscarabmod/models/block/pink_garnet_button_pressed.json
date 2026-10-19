@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "goldenscarabmod:block/pink_garnet_block"
+  }
+}

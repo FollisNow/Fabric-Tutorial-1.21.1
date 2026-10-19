@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "goldenscarabmod:block/golden_bricks",
+    "side": "goldenscarabmod:block/golden_bricks",
+    "top": "goldenscarabmod:block/golden_bricks"
+  }
+}

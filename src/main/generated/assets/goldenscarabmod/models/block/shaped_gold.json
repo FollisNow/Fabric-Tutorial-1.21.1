@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "goldenscarabmod:block/shaped_gold_bottom",
+    "side": "goldenscarabmod:block/shaped_gold_side",
+    "top": "goldenscarabmod:block/shaped_gold_top"
+  }
+}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "tutorialmod:block/gold_rose_bush_top"
-  }
-}
