@@ -148,7 +148,12 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         addDropWithSilkTouch(ModBlocks.INFESTED_CONNECTED_GOLD, ModBlocks.CONNECTED_GOLD);
         addDropWithSilkTouch(ModBlocks.INFESTED_GOLD_LARGE_BRICKS, ModBlocks.GOLD_LARGE_BRICKS);
 
-
+        addDrop(ModBlocks.LAPIS_STAIRS);
+        addDrop(ModBlocks.LAPIS_SLAB, slabDrops(ModBlocks.LAPIS_SLAB));
+        addDrop(ModBlocks.LAPIS_BUTTON);
+        addDrop(ModBlocks.LAPIS_WALL);
+        addDrop(ModBlocks.LAPIS_FENCE);
+        addDrop(ModBlocks.LAPIS_FENCE_GATE);
 
         addDrop(ModBlocks.GOLD_STAIRS);
         addDrop(ModBlocks.GOLD_SLAB, slabDrops(ModBlocks.GOLD_SLAB));

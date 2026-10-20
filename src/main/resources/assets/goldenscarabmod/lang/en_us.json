@@ -169,6 +169,13 @@
   "block.goldenscarabmod.gold_fence_gate": "Gold Gate",
   "block.goldenscarabmod.gold_wall": "Gold Wall",
 
+  "block.goldenscarabmod.lapis_stairs": "Lapis Stairs",
+  "block.goldenscarabmod.lapis_slab": "Lapis Slab",
+  "block.goldenscarabmod.lapis_button": "Lapis Button",
+  "block.goldenscarabmod.lapis_fence": "Lapis Fence",
+  "block.goldenscarabmod.lapis_fence_gate": "Lapis Gate",
+  "block.goldenscarabmod.lapis_wall": "Lapis Wall",
+
   "block.goldenscarabmod.golden_bricks": "Golden Bricks",
   "block.goldenscarabmod.golden_brick_stairs": "Golden Brick Stairs",
   "block.goldenscarabmod.golden_brick_slab": "Golden Brick Slab",

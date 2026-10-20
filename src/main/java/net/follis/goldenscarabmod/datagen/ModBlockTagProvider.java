@@ -32,6 +32,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.GOLD_CHAIN)
                 .add(ModBlocks.GOLD_LANTERN)
 
+                .add(ModBlocks.LAPIS_STAIRS)
+                .add(ModBlocks.LAPIS_SLAB)
+                .add(ModBlocks.LAPIS_WALL)
+
                 .add(ModBlocks.GOLD_STAIRS)
                 .add(ModBlocks.GOLD_SLAB)
                 .add(ModBlocks.GOLD_WALL)
@@ -90,6 +94,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(ModBlocks.GOLD_WALL)
+                .add(ModBlocks.LAPIS_WALL)
                 .add(ModBlocks.GOLDEN_BRICK_WALL)
                 .add(ModBlocks.GOLD_BRICK_WALL)
                 .add(ModBlocks.COBBLED_GOLD_WALL)
@@ -99,10 +104,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.FENCES)
                 .add(ModBlocks.GOLD_FENCE)
+                .add(ModBlocks.GOLDEN_FENCE)
+                .add(ModBlocks.LAPIS_FENCE)
         ;
 
         getOrCreateTagBuilder(BlockTags.FENCE_GATES)
                 .add(ModBlocks.GOLD_FENCE_GATE)
+                .add(ModBlocks.GOLDEN_FENCE_GATE)
+                .add(ModBlocks.LAPIS_FENCE_GATE)
         ;
 
         getOrCreateTagBuilder(ModTags.Blocks.NEEDS_GOLDEN_TOOL)

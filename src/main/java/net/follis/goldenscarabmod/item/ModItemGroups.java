@@ -162,6 +162,14 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_FENCE_GATE);
                         entries.add(ModBlocks.GOLD_WALL);
 
+                        //GOLD
+                        entries.add(ModBlocks.LAPIS_STAIRS);
+                        entries.add(ModBlocks.LAPIS_SLAB);
+                        entries.add(ModBlocks.LAPIS_BUTTON);
+                        entries.add(ModBlocks.LAPIS_FENCE);
+                        entries.add(ModBlocks.LAPIS_FENCE_GATE);
+                        entries.add(ModBlocks.LAPIS_WALL);
+
                         //GOLDEN BRICKS
                         entries.add(ModBlocks.GOLDEN_BRICKS);
                         entries.add(ModBlocks.GOLDEN_BRICK_STAIRS);

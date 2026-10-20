@@ -1,6 +1,8 @@
 {
   "values": [
     "goldenscarabmod:gold_fence",
+    "goldenscarabmod:golden_fence",
+    "goldenscarabmod:lapis_fence",
     "goldenscarabmod:pink_garnet_fence"
   ]
 }

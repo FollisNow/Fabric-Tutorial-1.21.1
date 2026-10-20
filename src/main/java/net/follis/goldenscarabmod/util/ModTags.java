@@ -37,6 +37,8 @@ public class ModTags {
 
         public static final TagKey<Item> GOLD_BLOCKS = createTag("gold_blocks");
 
+        public static final TagKey<Item> LAPIS_BLOCKS = createTag("lapis_blocks");
+
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(GoldenScarabMod.MOD_ID, name));
         }

@@ -237,6 +237,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_FENCE_GATE, Items.GOLD_BLOCK);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
+        // LAPIS
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_STAIRS, Items.LAPIS_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_SLAB, Items.LAPIS_BLOCK, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_BUTTON, Items.LAPIS_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_FENCE, Items.LAPIS_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_FENCE_GATE, Items.LAPIS_BLOCK);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_WALL, Items.LAPIS_BLOCK);
+
+        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_WALL, Items.LAPIS_BLOCK);
+        offerStairsRecipe(exporter, ModBlocks.LAPIS_STAIRS, Blocks.LAPIS_BLOCK);
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIS_SLAB, Blocks.LAPIS_BLOCK);
 
         offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GOLD_WALL, Items.GOLD_BLOCK);
         offerCutCopperRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_GOLD, Blocks.GOLD_BLOCK);

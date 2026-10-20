@@ -122,6 +122,14 @@ public class ModModelProvider extends FabricModelProvider {
         goldPool.fenceGate(ModBlocks.GOLD_FENCE_GATE);
         goldPool.wall(ModBlocks.GOLD_WALL);
 
+        BlockStateModelGenerator.BlockTexturePool lapisPool = blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.LAPIS_BLOCK);
+        lapisPool.stairs(ModBlocks.LAPIS_STAIRS);
+        lapisPool.slab(ModBlocks.LAPIS_SLAB);
+        lapisPool.button(ModBlocks.LAPIS_BUTTON);
+        lapisPool.fence(ModBlocks.LAPIS_FENCE);
+        lapisPool.fenceGate(ModBlocks.LAPIS_FENCE_GATE);
+        lapisPool.wall(ModBlocks.LAPIS_WALL);
+
         BlockStateModelGenerator.BlockTexturePool goldenWoodPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.GOLDEN_PLANKS);
         goldenWoodPool.stairs(ModBlocks.GOLDEN_STAIRS);
         goldenWoodPool.slab(ModBlocks.GOLDEN_SLAB);

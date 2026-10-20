@@ -112,7 +112,7 @@ public class ModBlocks {
     public static final Block GOLDEN_STAIRS = registerBlock("golden_stairs",
             new StairsBlock(ModBlocks.GOLDEN_PLANKS.getDefaultState(), AbstractBlock.Settings.create().strength(2f)));
     public static final Block GOLDEN_SLAB = registerBlock("golden_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f)));
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f)));
     public static final Block GOLDEN_FENCE = registerBlock("golden_fence",
             new FenceBlock(AbstractBlock.Settings.create().strength(2f)));
     public static final Block GOLDEN_FENCE_GATE = registerBlock("golden_fence_gate",
@@ -123,7 +123,7 @@ public class ModBlocks {
             new StairsBlock(Blocks.GOLD_BLOCK.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_SLAB = registerBlock("gold_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLD_BUTTON = registerBlock("gold_button",
             new ButtonBlock(BlockSetType.IRON, 2, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
     public static final Block GOLD_FENCE = registerBlock("gold_fence",
@@ -133,6 +133,21 @@ public class ModBlocks {
     public static final Block GOLD_WALL = registerBlock("gold_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
+    //LAPIS
+    public static final Block LAPIS_STAIRS = registerBlock("lapis_stairs",
+            new StairsBlock(Blocks.LAPIS_BLOCK.getDefaultState(),
+                    AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block LAPIS_SLAB = registerBlock("lapis_slab",
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block LAPIS_BUTTON = registerBlock("lapis_button",
+            new ButtonBlock(BlockSetType.IRON, 100, AbstractBlock.Settings.create().strength(2f).requiresTool().noCollision()));
+    public static final Block LAPIS_FENCE = registerBlock("lapis_fence",
+            new FenceBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block LAPIS_FENCE_GATE = registerBlock("lapis_fence_gate",
+            new FenceGateBlock(WoodType.ACACIA, AbstractBlock.Settings.create().strength(2f).requiresTool()));
+    public static final Block LAPIS_WALL = registerBlock("lapis_wall",
+            new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+
     // GOLDEN BRICKS
     public static final Block GOLDEN_BRICKS = registerBlock("golden_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.STONE_BRICKS).strength(4).requiresTool()));
@@ -140,7 +155,7 @@ public class ModBlocks {
             new StairsBlock(ModBlocks.GOLDEN_BRICKS.getDefaultState(),
                     AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLDEN_BRICK_SLAB = registerBlock("golden_brick_slab",
-            new SittableSlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
+            new SlabBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
     public static final Block GOLDEN_BRICK_WALL = registerBlock("golden_brick_wall",
             new WallBlock(AbstractBlock.Settings.create().strength(2f).requiresTool()));
 
