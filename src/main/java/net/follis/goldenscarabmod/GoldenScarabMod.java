@@ -24,6 +24,7 @@ import net.follis.goldenscarabmod.entity.misc.FlySwarmManager;
 import net.follis.goldenscarabmod.item.ModItemGroups;
 import net.follis.goldenscarabmod.item.ModItems;
 import net.follis.goldenscarabmod.item.custom.CaddisflyCocoonItem;
+import net.follis.goldenscarabmod.network.FlashPayload;
 import net.follis.goldenscarabmod.network.MesmerizePayload;
 import net.follis.goldenscarabmod.particle.ModParticles;
 import net.follis.goldenscarabmod.potion.ModPotions;
@@ -92,6 +93,7 @@ public class GoldenScarabMod implements ModInitializer {
 		FlySwarmManager.register();
 
 		PayloadTypeRegistry.playS2C().register(MesmerizePayload.ID, MesmerizePayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(FlashPayload.ID, FlashPayload.CODEC);
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 

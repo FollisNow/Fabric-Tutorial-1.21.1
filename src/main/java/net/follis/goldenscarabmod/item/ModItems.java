@@ -202,6 +202,9 @@ public class ModItems {
     public static final Item LORD_OF_THE_FLIES_STAFF = registerItem("lord_of_the_flies_staff",
             new FlyStaffItem(new Item.Settings().maxDamage(FlyStaffItem.MAX_CHARGES)));
 
+    public static final Item LIGHT_STAFF = registerItem("light_staff",
+            new LightStaffItem(new Item.Settings().maxCount(1)));
+
     public static final Item BUG_NET = registerItem("bug_net",
             new Item(new Item.Settings().maxCount(1)){
                 @Override

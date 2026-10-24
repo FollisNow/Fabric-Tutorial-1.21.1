@@ -14,6 +14,7 @@ import net.follis.goldenscarabmod.block.entity.ModBlockEntities;
 import net.follis.goldenscarabmod.block.entity.renderer.GoldenHotelBlockEntityRenderer;
 import net.follis.goldenscarabmod.block.entity.renderer.GoldenPedestalBlockEntityRenderer;
 import net.follis.goldenscarabmod.block.entity.renderer.TrappedSkullBlockEntityRenderer;
+import net.follis.goldenscarabmod.client.FlashOverlay;
 import net.follis.goldenscarabmod.client.MesmerizeClientState;
 import net.follis.goldenscarabmod.component.ModDataComponentTypes;
 import net.follis.goldenscarabmod.entity.ModEntities;
@@ -132,6 +133,7 @@ public class GoldenScarabModClient implements ClientModInitializer {
 
         HandledScreens.register(ModScreenHandlers.GROWTH_CHAMBER_SCREEN_HANDLER, GrowthChamberScreen::new);
 
+        FlashOverlay.register();
         ClientPlayNetworking.registerGlobalReceiver(MesmerizePayload.ID, (payload, context) -> {
             context.client().execute(() -> {
                 MesmerizeClientState.active = payload.active();
