@@ -39,6 +39,10 @@ public class ModBlockEntities {
                     ModBlocks.TRAPPED_ZOMBIE_HEAD, ModBlocks.TRAPPED_ZOMBIE_WALL_HEAD
                     /* , ...every other trapped block */).build(null));
 
+    public static final BlockEntityType<CrownBlockEntity> CROWN_BE =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(GoldenScarabMod.MOD_ID, "crown_block_be"),   // use your own mod-id constant here
+                    BlockEntityType.Builder.create(CrownBlockEntity::new, ModBlocks.CROWN_BLOCK).build(null));
+
     public static final BlockEntityType<GrowthChamberBlockEntity> GROWTH_CHAMBER_BE =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(GoldenScarabMod.MOD_ID, "growth_chamber_be"),
                     BlockEntityType.Builder.create(GrowthChamberBlockEntity::new, ModBlocks.GROWTH_CHAMBER).build(null));

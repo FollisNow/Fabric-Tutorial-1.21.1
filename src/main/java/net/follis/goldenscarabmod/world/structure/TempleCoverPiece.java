@@ -2,10 +2,7 @@ package net.follis.goldenscarabmod.world.structure;
 
 import net.follis.goldenscarabmod.world.gen.ModStructures;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.structure.SimpleStructurePiece;
-import net.minecraft.structure.StructureContext;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.StructureTemplateManager;
+import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -29,6 +26,7 @@ public class TempleCoverPiece extends SimpleStructurePiece {
 
     private static StructurePlacementData placement(BlockRotation rotation) {
         return new StructurePlacementData().setRotation(rotation).setMirror(BlockMirror.NONE)
+                .setLiquidSettings(StructureLiquidSettings.IGNORE_WATERLOGGING)
                 .addProcessor(BlockIgnoreStructureProcessor.IGNORE_AIR_AND_STRUCTURE_BLOCKS);
     }
 

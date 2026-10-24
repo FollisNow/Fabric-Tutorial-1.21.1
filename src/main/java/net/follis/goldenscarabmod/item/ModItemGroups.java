@@ -136,7 +136,6 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.PINK_GARNET_LAMP);
 
-                        entries.add(Blocks.GOLD_BLOCK);
                         //GOLDEN NATURE
                         entries.add(ModBlocks.GOLDEN_DIRT);
                         entries.add(ModBlocks.GOLDEN_SAND);
@@ -155,6 +154,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLDEN_FENCE_GATE);
 
                         //GOLD
+                        entries.add(Blocks.GOLD_BLOCK);
                         entries.add(ModBlocks.GOLD_STAIRS);
                         entries.add(ModBlocks.GOLD_SLAB);
                         entries.add(ModBlocks.GOLD_BUTTON);
@@ -163,6 +163,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_WALL);
 
                         //GOLD
+                        entries.add(Blocks.LAPIS_BLOCK);
                         entries.add(ModBlocks.LAPIS_STAIRS);
                         entries.add(ModBlocks.LAPIS_SLAB);
                         entries.add(ModBlocks.LAPIS_BUTTON);
@@ -219,7 +220,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLDEN_HOTEL);
                         entries.add(ModBlocks.GOLD_REPULSOR);
                         entries.add(ModBlocks.JAW_TRAP_BLOCK);
-
+                        entries.add(ModBlocks.CROWN_BLOCK);
 
                         //INFESTED GOLD
                         entries.add(ModBlocks.INFESTED_GOLDEN_BRICKS);

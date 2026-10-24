@@ -1,6 +1,8 @@
 package net.follis.goldenscarabmod.world.structure;
 
 import net.follis.goldenscarabmod.GoldenScarabMod;
+import net.follis.goldenscarabmod.block.ModBlocks;
+import net.follis.goldenscarabmod.block.entity.custom.CrownBlockEntity;
 import net.follis.goldenscarabmod.world.gen.ModStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -14,10 +16,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.structure.SimpleStructurePiece;
-import net.minecraft.structure.StructureContext;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.StructureTemplateManager;
+import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -46,7 +45,7 @@ public class TempleRoomPiece extends SimpleStructurePiece {
     }
 
     private static StructurePlacementData placement(BlockRotation rotation) {
-        return new StructurePlacementData().setRotation(rotation).setMirror(BlockMirror.NONE)
+        return new StructurePlacementData().setRotation(rotation).setMirror(BlockMirror.NONE).setLiquidSettings(StructureLiquidSettings.IGNORE_WATERLOGGING)
                 .addProcessor(BlockIgnoreStructureProcessor.IGNORE_STRUCTURE_BLOCKS);   // markers aren't placed as blocks
     }
 
@@ -74,7 +73,10 @@ public class TempleRoomPiece extends SimpleStructurePiece {
                 world.spawnEntityAndPassengers(e);
             }
         } else if (metadata.equals("teleporter") && tpTarget != null) {
-            // place your teleport block/entity at `pos` and give it tpTarget
+            world.setBlockState(pos, ModBlocks.CROWN_BLOCK.getDefaultState(), Block.NOTIFY_LISTENERS);
+            if (world.getBlockEntity(pos) instanceof CrownBlockEntity crown) {
+                crown.setTarget(tpTarget);
+            }
         }
     }
 }

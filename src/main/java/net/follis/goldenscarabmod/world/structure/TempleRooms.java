@@ -26,13 +26,13 @@ public final class TempleRooms {
     public static final RoomDef DEAD_END = new RoomDef(ids("dead_end", 0, 1), 1, 1,
             List.of(p(0, 0, Dir.S)), 3);
 
-    public static final RoomDef STRAIGHT = new RoomDef(ids("straight", 0), 1, 1,
-            List.of(p(0, 0, Dir.N), p(0, 0, Dir.S)), 4);
+    public static final RoomDef STRAIGHT = new RoomDef(ids("straight", 0, 1, 2, 3), 1, 1,
+            List.of(p(0, 0, Dir.N), p(0, 0, Dir.S)), 4, treasure("straight", 3));
 
     public static final RoomDef CORNER = new RoomDef(ids("corner", 0), 1, 1,
             List.of(p(0, 0, Dir.S), p(0, 0, Dir.E)), 3);
 
-    public static final RoomDef TEE = new RoomDef(ids("tee", 0), 1, 1,
+    public static final RoomDef TEE = new RoomDef(ids("tee", 0, 1, 2, 3), 1, 1,
             List.of(p(0, 0, Dir.N), p(0, 0, Dir.E), p(0, 0, Dir.S)), 2);
 
     public static final RoomDef CROSS = new RoomDef(ids("cross", 0, 1), 1, 1,
@@ -42,13 +42,13 @@ public final class TempleRooms {
     public static final RoomDef HALL = new RoomDef(ids("hall",  1, 2, 3, 4, 5, 7, 8), 1, 2,
             List.of(p(0, 0, Dir.N), p(0, 1, Dir.S)), 3);
 
-    public static final RoomDef HALL_SIDE_END = new RoomDef(ids("hall_side_end",  0), 1, 2,
+    public static final RoomDef HALL_SIDE_END = new RoomDef(ids("hall_side_end",  0, 1, 2, 3), 1, 2,
             List.of(p(0,1,Dir.S), p(0,0,Dir.E), p(0,1,Dir.E)), 3);
 
-    public static final RoomDef HALL_SIDES = new RoomDef(ids("hall_sides",  0), 1, 2,
-            List.of(p(0,0,Dir.E), p(0,1,Dir.E)), 3);
+    public static final RoomDef HALL_SIDES = new RoomDef(ids("hall_sides",  0, 1, 2, 3), 1, 2,
+            List.of(p(0,0,Dir.E), p(0,1,Dir.E)), 3, treasure("hall_sides", 3));
 
-    public static final RoomDef HALL_BEND = new RoomDef(ids("hall_bend",  0), 1, 2,
+    public static final RoomDef HALL_BEND = new RoomDef(ids("hall_bend",  0, 1, 2, 3), 1, 2,
             List.of(p(0,0,Dir.N), p(0,1,Dir.E)), 3);
 
     public static final RoomDef HALL_DEAD_END = new RoomDef(ids("hall_dead_end", 0, 1), 1, 2,
@@ -62,19 +62,19 @@ public final class TempleRooms {
             p(1, 0, Dir.E), p(1, 1, Dir.E)), 1, treasure("great_hall", 4));
 
     // ---- vertical ----
-    public static final RoomDef STAIRS = new RoomDef(ids("stairs", 0, 1), 1, 1,
+    public static final RoomDef STAIRS = new RoomDef(ids("stairs", 0, 1, 2), 1, 1,
             List.of(p(0, 0, Dir.S), p(0, 0, Dir.UP)), 2);
 
-    public static final RoomDef STAIRS_STRAIGHT = new RoomDef(ids("stairs_straight", 0, 1), 1, 1,
+    public static final RoomDef STAIRS_STRAIGHT = new RoomDef(ids("stairs_straight", 0, 1, 2), 1, 1,
             List.of(p(0, 0, Dir.N), p(0, 0, Dir.S), p(0, 0, Dir.UP)), 2);
 
-    public static final RoomDef STAIRS_CORNER = new RoomDef(ids("stairs_corner", 0, 1), 1, 1,
+    public static final RoomDef STAIRS_CORNER = new RoomDef(ids("stairs_corner", 0, 1, 2), 1, 1,
             List.of(p(0, 0, Dir.S), p(0, 0, Dir.E), p(0, 0, Dir.UP)), 2);
 
-    public static final RoomDef STAIRS_TEE = new RoomDef(ids("stairs_tee", 0, 1), 1, 1,
+    public static final RoomDef STAIRS_TEE = new RoomDef(ids("stairs_tee", 0, 1, 2), 1, 1,
             List.of(p(0, 0, Dir.N), p(0, 0, Dir.E), p(0, 0, Dir.S), p(0, 0, Dir.UP)), 2);
 
-    public static final RoomDef STAIRS_CROSS = new RoomDef(ids("stairs_cross", 0, 1), 1, 1,
+    public static final RoomDef STAIRS_CROSS = new RoomDef(ids("stairs_cross", 0, 1, 2), 1, 1,
             List.of(p(0, 0, Dir.N), p(0, 0, Dir.E), p(0, 0, Dir.S), p(0, 0, Dir.W), p(0, 0, Dir.UP)), 2);
 
 

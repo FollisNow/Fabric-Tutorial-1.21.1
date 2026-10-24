@@ -148,18 +148,23 @@ public class TrappedSkullBlockEntity extends BlockEntity
     // --- client sync ---
     @Override
     public BlockEntityUpdateS2CPacket toUpdatePacket() { return BlockEntityUpdateS2CPacket.create(this); }
+    /** Sent to clients when the chunk loads or the head turns. Never written to disk or to structure templates. */
     @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup l) { return createNbt(l); }
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup l) {
+        NbtCompound nbt = createNbt(l);
+        nbt.putFloat("SyncYaw", targetYaw);
+        return nbt;
+    }
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup l) {
         super.writeNbt(nbt, l);
-        nbt.putFloat("TargetYaw", targetYaw);
-        // also persist listenerData like SculkSensorBlockEntity does, if you want in-flight vibrations to survive reloads
+        // the yaw is deliberately not saved: it follows from the block state, which rotates with the room
     }
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup l) {
         super.readNbt(nbt, l);
-        targetYaw = nbt.getFloat("TargetYaw");
+        // an old "TargetYaw" in a template or save is ignored on purpose
+        targetYaw = nbt.contains("SyncYaw") ? nbt.getFloat("SyncYaw") : baseYaw(getCachedState());
     }
 
     public float getRenderYaw(float tickDelta) { return MathHelper.lerpAngleDegrees(tickDelta, prevYaw, yaw); }

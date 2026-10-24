@@ -36,11 +36,23 @@ public class TempleCommand {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
                 dispatcher.register(CommandManager.literal("temple")
                         .requires(src -> src.hasPermissionLevel(2))
+                        .then(CommandManager.literal("cover")
+                                .then(CommandManager.argument("number", IntegerArgumentType.integer(1))
+                                        .suggests((ctx, b) -> CommandSource.suggestMatching(List.of("6", "8", "10", "12"), b))
+                                        .executes(ctx -> TempleCoverTest.run(ctx.getSource(),
+                                                IntegerArgumentType.getInteger(ctx, "number"), 0))
+                                        .then(CommandManager.argument("turns", IntegerArgumentType.integer(0, 3))
+                                                .executes(ctx -> TempleCoverTest.run(ctx.getSource(),
+                                                        IntegerArgumentType.getInteger(ctx, "number"),
+                                                        IntegerArgumentType.getInteger(ctx, "turns"))))))
                         .then(CommandManager.literal("room")
+                                .then(CommandManager.literal("test")
+                                        .executes(ctx -> TempleRoomTest.run(ctx.getSource())))
                                 .then(CommandManager.argument("name", StringArgumentType.word())
                                         .then(CommandManager.argument("turns", IntegerArgumentType.integer(0, 3))
                                                 .executes(ctx -> placeRoom(ctx.getSource(),
-                                                        StringArgumentType.getString(ctx, "name"), IntegerArgumentType.getInteger(ctx, "turns"))))))
+                                                        StringArgumentType.getString(ctx, "name"),
+                                                        IntegerArgumentType.getInteger(ctx, "turns"))))))
                         .then(CommandManager.argument("size", IntegerArgumentType.integer(6, 12))
                                 .suggests((ctx, b) -> CommandSource.suggestMatching(List.of("6", "8", "10", "12"), b))
                                 .executes(ctx -> run(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "size"), true))

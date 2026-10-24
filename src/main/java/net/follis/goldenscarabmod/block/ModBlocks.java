@@ -315,7 +315,7 @@ public class ModBlocks {
     public static final Block AMETHYST_BEE_HIVE = registerBlock("amethyst_bee_hive",
             new AmethystBeeHiveBlock(AbstractBlock.Settings.create().strength(4f).requiresTool()));
 
-    // Gold Components
+    // Temple Components
     public static final Block GOLD_REPULSOR = registerBlock("gold_repulsor",
             new GoldRepulsorBlock(AbstractBlock.Settings.copy(Blocks.STONE).requiresTool()));
 
@@ -337,6 +337,9 @@ public class ModBlocks {
     public static final Block TRAPPED_ZOMBIE_WALL_HEAD = registerBlockWithoutBlockItem("trapped_zombie_wall_head",
             new TrappedWallSkullBlock(SkullBlock.Type.ZOMBIE,
                     AbstractBlock.Settings.create().strength(1.0F).dropsLike(TRAPPED_ZOMBIE_HEAD).pistonBehavior(PistonBehavior.DESTROY)));
+
+    public static final Block CROWN_BLOCK = registerBlock("crown_block",
+            new CrownBlock(AbstractBlock.Settings.copy(Blocks.STONE).strength(-1.0F, 3600000.0F).dropsNothing().allowsSpawning(Blocks::never)));
 
 // creeper and dragon follow the same pattern
 

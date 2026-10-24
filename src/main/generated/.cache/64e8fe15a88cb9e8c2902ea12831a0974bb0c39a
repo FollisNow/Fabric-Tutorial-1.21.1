@@ -1,6 +1,6 @@
-// 1.21.1	2026-10-19T22:46:25.4740413	Golden Scarab Mod/Tags for minecraft:item
+// 1.21.1	2026-10-22T21:22:46.1368538	Golden Scarab Mod/Tags for minecraft:item
 6a5c9304ab089d53eaefeeb10e9219373f625870 data\minecraft\tags\item\trim_templates.json
-ef3843260915ddc8969cefd49fed6aac5d9ce2ab data\goldenscarabmod\tags\item\gold_blocks.json
+6929ccb237539e59378e5015460adcfd67716eed data\goldenscarabmod\tags\item\gold_blocks.json
 4a86b6a6b50a249765e637a8e93fd0e09c01b1a7 data\goldenscarabmod\tags\item\golden_items.json
 2d71ac1f378a0dfbd1052e652a7f8ea10260a50d data\goldenscarabmod\tags\item\golden_vegetal_food.json
 79fa77e328bbb628c712e5a0edbeb0884e080a8b data\goldenscarabmod\tags\item\macuahuitl.json
@@ -8,7 +8,7 @@ ef3843260915ddc8969cefd49fed6aac5d9ce2ab data\goldenscarabmod\tags\item\gold_blo
 5e63f51a28f612e28feb78f208daf274c3b8d6a8 data\minecraft\tags\item\logs_that_burn.json
 4d6df791138a155621dc399cce757deb3844ce5f data\minecraft\tags\item\meat.json
 b76c151abf4d52852c393efc199e2ab7768d58db data\minecraft\tags\item\trim_materials.json
-83cf38fb1276fbcd6b1c62fdfb6a332b761952c5 data\goldenscarabmod\tags\item\lapis_blocks.json
+94fab21b59b945115805f6ad84c447690999ce6a data\goldenscarabmod\tags\item\lapis_blocks.json
 035ff7ade395a8a79da79aa6261b2811d3a529f8 data\goldenscarabmod\tags\item\locust_items.json
 b29ecfa02bc095fb4c3ecf2f9ddf9d89d6227ac4 data\minecraft\tags\item\trimmable_armor.json
 b061f9f9cc52f01c6b0e053ffaf4d47d0ba3da79 data\goldenscarabmod\tags\item\golden_food.json

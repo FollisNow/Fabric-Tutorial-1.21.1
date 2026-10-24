@@ -54,15 +54,6 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.PLANKS)
                 .add(ModBlocks.GOLDEN_PLANKS.asItem());
 
-        getOrCreateTagBuilder(ModTags.Items.GOLD_BLOCKS)
-                .add(Blocks.GOLD_BLOCK.asItem())
-                .add(ModBlocks.GOLD_STAIRS.asItem())
-                .add(ModBlocks.GOLD_SLAB.asItem())
-                .add(ModBlocks.GOLD_BUTTON.asItem())
-                .add(ModBlocks.GOLD_FENCE.asItem())
-                .add(ModBlocks.GOLD_FENCE_GATE.asItem())
-                .add(ModBlocks.GOLD_WALL.asItem());
-
         getOrCreateTagBuilder(ModTags.Items.LAPIS_BLOCKS)
                 .add(Blocks.LAPIS_BLOCK.asItem())
                 .add(ModBlocks.LAPIS_STAIRS.asItem())
@@ -70,7 +61,16 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModBlocks.LAPIS_BUTTON.asItem())
                 .add(ModBlocks.LAPIS_FENCE.asItem())
                 .add(ModBlocks.LAPIS_FENCE_GATE.asItem())
-                .add(ModBlocks.LAPIS_WALL.asItem())
+                .add(ModBlocks.LAPIS_WALL.asItem());
+
+    getOrCreateTagBuilder(ModTags.Items.GOLD_BLOCKS)
+                .add(Blocks.GOLD_BLOCK.asItem())
+                .add(ModBlocks.GOLD_STAIRS.asItem())
+                .add(ModBlocks.GOLD_SLAB.asItem())
+                .add(ModBlocks.GOLD_BUTTON.asItem())
+                .add(ModBlocks.GOLD_FENCE.asItem())
+                .add(ModBlocks.GOLD_FENCE_GATE.asItem())
+                .add(ModBlocks.GOLD_WALL.asItem())
 
                 .add(ModBlocks.GOLDEN_BRICKS.asItem())
                 .add(ModBlocks.GOLDEN_BRICK_STAIRS.asItem())

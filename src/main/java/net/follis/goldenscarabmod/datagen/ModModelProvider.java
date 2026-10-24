@@ -93,6 +93,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerItemModel(ModItems.GOLD_CHAIN);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.GOLD_CHAIN, ModelIds.getBlockModelId(ModBlocks.GOLD_CHAIN));
         blockStateModelGenerator.registerLantern(ModBlocks.GOLD_LANTERN);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CROWN_BLOCK);
 
         Identifier armedModel = TexturedModel.CUBE_ALL.upload(ModBlocks.JAW_TRAP_BLOCK, blockStateModelGenerator.modelCollector);
         Identifier disarmedModel = blockStateModelGenerator.createSubModel(ModBlocks.JAW_TRAP_BLOCK, "_disarmed", Models.CUBE_ALL, TextureMap::all);

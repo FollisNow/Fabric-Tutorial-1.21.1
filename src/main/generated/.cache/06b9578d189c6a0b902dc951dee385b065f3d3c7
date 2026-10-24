@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-19T22:46:25.4730416	Golden Scarab Mod/Block Loot Tables
+// 1.21.1	2026-10-22T21:22:46.1358541	Golden Scarab Mod/Block Loot Tables
 ab506e5c1379a258326db03921ea13e20267b8f7 data\goldenscarabmod\loot_table\blocks\orned_gold.json
 a347d492f4de937b4c4091994bfcf406b03e5037 data\goldenscarabmod\loot_table\blocks\pink_dianthus.json
 cb7e1b9aef6291625778374d58b876efda221215 data\goldenscarabmod\loot_table\blocks\infested_golden_bricks.json
@@ -56,8 +56,8 @@ abc2141e73595bb15e6830a47e64ac563feaf8b7 data\goldenscarabmod\loot_table\blocks\
 d97d07601958e22e6bf6eb2ff72035bbf02d696a data\goldenscarabmod\loot_table\blocks\pink_garnet_button.json
 3fa4a8021522554af9b1941c2df15274e26faa6a data\goldenscarabmod\loot_table\blocks\cobbled_gold.json
 b9118850dbaa1977b9e581a7e8184ae77f7cf890 data\goldenscarabmod\loot_table\blocks\infested_chiseled_gold.json
-4931ec4a835108f31141fc3330d3ada7ecd66523 data\goldenscarabmod\loot_table\blocks\pink_garnet_door.json
 1f0216fbabf5e76642c35c1a90cc4c714bc17b79 data\goldenscarabmod\loot_table\blocks\infested_engraved_gold.json
+4931ec4a835108f31141fc3330d3ada7ecd66523 data\goldenscarabmod\loot_table\blocks\pink_garnet_door.json
 bbd69e731a5232171bbbd9c5fbf402ad139feff8 data\goldenscarabmod\loot_table\blocks\golden_slab.json
 8938633baace26c4934c5ef0d7839f132fde74e2 data\goldenscarabmod\loot_table\blocks\blue_marigold.json
 fa8c8eba1b2a9615f24c1bdcde7eb4a3e8d48aae data\goldenscarabmod\loot_table\blocks\golden_sapling.json
@@ -65,8 +65,8 @@ a005f185a670c8c4f2d206080c587cd193e1818e data\goldenscarabmod\loot_table\blocks\
 a62d430596213074584975c6794b7823af21b7f4 data\goldenscarabmod\loot_table\blocks\lapis_button.json
 4a867d04fb6d12a569aae084f4e0e77c6d69f96a data\goldenscarabmod\loot_table\blocks\gold_repulsor.json
 82a9a12ee262f1f2e593430079c00944761c3e81 data\goldenscarabmod\loot_table\blocks\pink_garnet_ore.json
-54786e7544e8e6454ee3727e20a8d25783aab2f1 data\goldenscarabmod\loot_table\blocks\golden_bricks.json
 879f4652bf85e721a1cde57adb3ef7506260e670 data\goldenscarabmod\loot_table\blocks\golden_planks.json
+54786e7544e8e6454ee3727e20a8d25783aab2f1 data\goldenscarabmod\loot_table\blocks\golden_bricks.json
 bd96420859118aef0cc69afe3e9ce9929a0ac067 data\goldenscarabmod\loot_table\blocks\pink_garnet_fence.json
 93dd633e3492dcfe0732292e0ca4663bb4c7b952 data\goldenscarabmod\loot_table\blocks\gold_brick_stairs.json
 e815c2a965532a315efed067c05dc8d03266e61c data\goldenscarabmod\loot_table\blocks\infested_shaped_gold.json
