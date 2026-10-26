@@ -72,6 +72,14 @@ public class ModEntities {
             EntityType.Builder.<TomahawkProjectileEntity>create(TomahawkProjectileEntity::new, SpawnGroup.MISC)
                     .dimensions(0.5f, 1.15f).build());
 
+    public static final EntityType<GoldenSwordProjectileEntity> GOLDEN_SWORD = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoldenScarabMod.MOD_ID, "golden_sword"),
+            EntityType.Builder.create(GoldenSwordProjectileEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.1875f, 1.1875f)
+                    .maxTrackingRange(64)
+                    .trackingTickInterval(1)
+                    .disableSaving().build());
+
     public static final EntityType<BambooTrapEntity> BAMBOO_TRAP = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoldenScarabMod.MOD_ID, "bamboo_trap"),
             EntityType.Builder.<BambooTrapEntity>create(BambooTrapEntity::new, SpawnGroup.MISC)

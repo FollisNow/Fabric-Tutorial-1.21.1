@@ -71,6 +71,7 @@ public class ModItemGroups {
                         entries.add(ModItems.BUG_NET);
                         entries.add(ModItems.LORD_OF_THE_FLIES_STAFF);
                         entries.add(ModItems.LIGHT_STAFF);
+                        entries.add(ModItems.GOLDEN_SWORDS_STAFF);
 
                         entries.add(ModItems.BUG_JAR);
                         entries.add(ModItems.CURSED_JAR);

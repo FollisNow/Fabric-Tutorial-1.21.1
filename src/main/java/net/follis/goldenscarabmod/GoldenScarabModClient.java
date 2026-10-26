@@ -113,6 +113,9 @@ public class GoldenScarabModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GoldenNeedleProjectileModel.GOLDEN_NEEDLE, GoldenNeedleProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLDEN_NEEDLE, GoldenNeedleProjectileRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(GoldenSwordProjectileModel.GOLDEN_SWORD, GoldenSwordProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GOLDEN_SWORD, GoldenSwordProjectileRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(MiniSunProjectileModel.MINI_SUN, MiniSunProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MINI_SUN, MiniSunProjectileRenderer::new);
 
