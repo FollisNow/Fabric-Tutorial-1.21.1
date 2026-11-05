@@ -12,7 +12,7 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 
-public class GoldPannerModel<T extends GoldPannerEntity> extends SinglePartEntityModel<T> implements ModelWithArms {
+public class GoldPannerModel<T extends GoldPannerEntity> extends SinglePartEntityModel<T> {
     public static final EntityModelLayer GOLD_PANNER = new EntityModelLayer(Identifier.of(GoldenScarabMod.MOD_ID, "gold_panner"), "main");
     private final ModelPart root;
     private final ModelPart pan;
@@ -70,24 +70,8 @@ public class GoldPannerModel<T extends GoldPannerEntity> extends SinglePartEntit
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
-        root.render(matrices, vertexConsumer, light, overlay, color);
-    }
-
-    @Override
     public ModelPart getPart() {
         return root;
     }
 
-    @Override
-    public void setArmAngle(Arm arm, MatrixStack matrices) {
-        float f = 1.0F;
-        float g = 3.0F;
-        this.root.rotate(matrices);
-        this.body.rotate(matrices);
-        matrices.translate(0.0F, 0.0625F, 0.1875F);
-        matrices.multiply(RotationAxis.NEGATIVE_X.rotation(this.right_arm.pitch));
-        matrices.scale(0.7F, 0.7F, 0.7F);
-        matrices.translate(0.0625F, 0.0F, 0.0F);
-    }
 }

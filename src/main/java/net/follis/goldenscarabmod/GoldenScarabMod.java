@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -34,6 +35,7 @@ import net.follis.goldenscarabmod.potion.ModPotions;
 import net.follis.goldenscarabmod.recipe.ModRecipes;
 import net.follis.goldenscarabmod.screen.ModScreenHandlers;
 import net.follis.goldenscarabmod.sound.ModSounds;
+import net.follis.goldenscarabmod.util.GoldBlockValues;
 import net.follis.goldenscarabmod.util.HammerUsageEvent;
 import net.follis.goldenscarabmod.loot.ModLootTableModifiers;
 import net.follis.goldenscarabmod.util.DreamLocustEvent;
@@ -88,6 +90,8 @@ public class GoldenScarabMod implements ModInitializer {
 		ModScreenHandlers.registerScreenHandlers();
 
 		ModRecipes.registerRecipes();
+		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, rm, ok) -> GoldBlockValues.invalidate());
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> GoldBlockValues.invalidate());
 		ModDispenserBehaviourProvider.registerDispenserBehaviour();
 
 		ModStructures.registerStructures();

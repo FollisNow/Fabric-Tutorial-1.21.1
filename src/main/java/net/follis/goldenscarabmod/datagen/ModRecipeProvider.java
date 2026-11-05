@@ -72,7 +72,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('#', Items.WHITE_WOOL)
                 .input('^', Items.STICK)
                 .input('~', Items.STRING)
-                .criterion(hasItem(Items.BAMBOO), conditionsFromItem(Items.BAMBOO))
+                .criterion(hasItem(Items.WHITE_WOOL), conditionsFromItem(Items.WHITE_WOOL))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.VISION_MONOCLE)
@@ -293,7 +293,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter, Identifier.of(GoldenScarabMod.MOD_ID, "jaw_trap_block"));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.DART, 6).input('#', Items.GOLD_NUGGET).input('@', Items.FEATHER).pattern("##@");
-
         offerSmithingTrimRecipe(exporter, ModItems.KAUPEN_SMITHING_TEMPLATE, Identifier.of(GoldenScarabMod.MOD_ID, "kaupen"));
     }
 

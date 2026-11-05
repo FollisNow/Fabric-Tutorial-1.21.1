@@ -104,7 +104,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModBlocks.CONNECTED_GOLD.asItem())
                 .add(ModBlocks.SHAPED_GOLD.asItem())
                 .add(ModBlocks.ENGRAVED_GOLD.asItem())
-                .add(ModBlocks.SCULPTED_GOLD.asItem());
+                .add(ModBlocks.SCULPTED_GOLD.asItem())
+                .add(ModBlocks.GOLD_CHAIN.asItem());
 
         getOrCreateTagBuilder(ModTags.Items.GOLDEN_ITEMS)
                 .add(Items.GOLDEN_HELMET)

@@ -10,9 +10,10 @@ import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
-public class GoldCarverModel<T extends GoldCarverEntity> extends SinglePartEntityModel<T> implements ModelWithArms {
+public class GoldCarverModel<T extends GoldCarverEntity> extends SinglePartEntityModel<T> {
     public static final EntityModelLayer GOLD_CARVER = new EntityModelLayer(Identifier.of(GoldenScarabMod.MOD_ID, "gold_carver"), "main");
     private final ModelPart root;
     private final ModelPart body;
@@ -74,16 +75,13 @@ public class GoldCarverModel<T extends GoldCarverEntity> extends SinglePartEntit
     @Override
     public void setAngles(GoldCarverEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
+        this.head.yaw = netHeadYaw * MathHelper.RADIANS_PER_DEGREE;
+        this.head.pitch = headPitch * MathHelper.RADIANS_PER_DEGREE;
 
         this.animateMovement(GoldCarverAnimations.GOLD_CARVER_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
         this.updateAnimation(entity.idleAnimationState, GoldCarverAnimations.GOLD_CARVER_IDLE, ageInTicks, 1f);
         this.updateAnimation(entity.pickupAnimationState, GoldCarverAnimations.GOLD_CARVER_PICKUP, ageInTicks, 1f);
         this.updateAnimation(entity.craftAnimationState, GoldCarverAnimations.GOLD_CARVER_CRAFT, ageInTicks, 1f);
-    }
-
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
-        root.render(matrices, vertexConsumer, light, overlay, color);
     }
 
     @Override
@@ -93,15 +91,5 @@ public class GoldCarverModel<T extends GoldCarverEntity> extends SinglePartEntit
 
     public ModelPart getBodyPart() {return body;}
 
-    @Override
-    public void setArmAngle(Arm arm, MatrixStack matrices) {
-        float f = 1.0F;
-        float g = 3.0F;
-        this.root.rotate(matrices);
-        this.body.rotate(matrices);
-        matrices.translate(0.0F, 0.0625F, 0.1875F);
-        matrices.multiply(RotationAxis.NEGATIVE_X.rotation(this.right_arm.pitch));
-        matrices.scale(0.7F, 0.7F, 0.7F);
-        matrices.translate(0.0625F, 0.0F, 0.0F);
-    }
+
 }
