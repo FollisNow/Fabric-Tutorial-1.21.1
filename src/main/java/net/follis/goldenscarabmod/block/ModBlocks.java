@@ -227,13 +227,13 @@ public class ModBlocks {
             new LanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN)));
 
     public static final Block GOLD_PILE = registerBlock("gold_pile",
-            new GoldPileBlock(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).notSolid().sounds(BlockSoundGroup.CHAIN)
+            new GoldPileBlock(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).notSolid().sounds(ModSounds.GOLD_PILE_SOUNDS)
                     .strength(0.1F).blockVision((state, world, pos) ->
                             state.get(GoldPileBlock.LAYERS) >= 8).pistonBehavior(PistonBehavior.DESTROY)
             )
     );
     public static final Block GOLD_PILE_BLOCK = registerBlock("gold_pile_block",
-            new Block(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).strength(0.2F).sounds(BlockSoundGroup.CHAIN))
+            new Block(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).strength(0.2F).sounds(ModSounds.GOLD_PILE_SOUNDS))
     );
 
     //Golden Infested Blocks

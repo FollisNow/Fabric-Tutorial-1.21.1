@@ -65,7 +65,18 @@ public class ModEntities {
             EntityType.Builder.create(GoldPannerEntity::new, SpawnGroup.CREATURE)
                     .dimensions(1f, 1.1f).build());
 
+    public static final EntityType<GoldenSwarmEntity> GOLDEN_SWARM = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoldenScarabMod.MOD_ID, "golden_swarm"),
+            EntityType.Builder.create(GoldenSwarmEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(1.0f, 2.6f)
+                    .eyeHeight(2.35f)
+                    .maxTrackingRange(10)
+                    .build());
 
+    public static final EntityType<KingInYellowEntity> KING_IN_YELLOW = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoldenScarabMod.MOD_ID, "king_in_yellow"),
+            EntityType.Builder.create(KingInYellowEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(2f, 5f).build());
 
     public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoldenScarabMod.MOD_ID, "tomahawk"),

@@ -13,7 +13,8 @@
 		"ModelLoaderMixin",
 		"MouseMixin",
 		"MinecraftClientMixin",
-		"EntityRenderDispatcherAccessorMixin"
+		"EntityRenderDispatcherAccessorMixin",
+		"CameraShakeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

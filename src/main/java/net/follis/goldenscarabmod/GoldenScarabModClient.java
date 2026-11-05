@@ -14,6 +14,7 @@ import net.follis.goldenscarabmod.block.entity.ModBlockEntities;
 import net.follis.goldenscarabmod.block.entity.renderer.GoldenHotelBlockEntityRenderer;
 import net.follis.goldenscarabmod.block.entity.renderer.GoldenPedestalBlockEntityRenderer;
 import net.follis.goldenscarabmod.block.entity.renderer.TrappedSkullBlockEntityRenderer;
+import net.follis.goldenscarabmod.client.FireWaveClient;
 import net.follis.goldenscarabmod.client.FlashOverlay;
 import net.follis.goldenscarabmod.client.MesmerizeClientState;
 import net.follis.goldenscarabmod.component.ModDataComponentTypes;
@@ -101,6 +102,9 @@ public class GoldenScarabModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GoldPannerModel.GOLD_PANNER, GoldPannerModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLD_PANNER, GoldPannerRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(KingInYellowModel.KING_IN_YELLOW, KingInYellowModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.KING_IN_YELLOW, KingInYellowRenderer::new);
+
 
         EntityModelLayerRegistry.registerModelLayer(TomahawkProjectileModel.TOMAHAWK, TomahawkProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TOMAHAWK, TomahawkProjectileRenderer::new);
@@ -115,6 +119,8 @@ public class GoldenScarabModClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(GoldenSwordProjectileModel.GOLDEN_SWORD, GoldenSwordProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLDEN_SWORD, GoldenSwordProjectileRenderer::new);
+
+        EntityRendererRegistry.register(ModEntities.GOLDEN_SWARM, GoldenSwarmRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(MiniSunProjectileModel.MINI_SUN, MiniSunProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MINI_SUN, MiniSunProjectileRenderer::new);
@@ -137,6 +143,7 @@ public class GoldenScarabModClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.GROWTH_CHAMBER_SCREEN_HANDLER, GrowthChamberScreen::new);
 
         FlashOverlay.register();
+        FireWaveClient.register();
         ClientPlayNetworking.registerGlobalReceiver(MesmerizePayload.ID, (payload, context) -> {
             context.client().execute(() -> {
                 MesmerizeClientState.active = payload.active();
@@ -144,7 +151,6 @@ public class GoldenScarabModClient implements ClientModInitializer {
                 MesmerizeClientState.degreesPerSecond = payload.degreesPerSecond();
             });
         });
-
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             CaddisflyCocoonItem.CocoonData data = stack.get(ModDataComponentTypes.COCOON);
             if (tintIndex <= 0) {

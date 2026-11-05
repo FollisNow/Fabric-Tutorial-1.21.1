@@ -33,6 +33,19 @@ public class ModSounds {
     public static final BlockSoundGroup GOLD_PILE_SOUNDS = new BlockSoundGroup(1f, 1f,
             GOLD_PILE_BREAK, GOLD_PILE_STEP, GOLD_PILE_PLACE, GOLD_PILE_HIT, GOLD_PILE_FALL);
 
+    //Boss
+    public static final SoundEvent KING_IN_YELLOW_QUESTION = registerSoundEvent("king_in_yellow_question");
+    public static final SoundEvent KING_IN_YELLOW_SUMMON = registerSoundEvent("king_in_yellow_summon");
+    public static final SoundEvent KING_IN_YELLOW_CAST = registerSoundEvent("king_in_yellow_cast");
+    public static final SoundEvent KING_IN_YELLOW_BELL = registerSoundEvent("king_in_yellow_bell");
+    public static final SoundEvent KING_IN_YELLOW_DEATH = registerSoundEvent("king_in_yellow_death");
+    public static final SoundEvent KING_IN_YELLOW_STEP = registerSoundEvent("king_in_yellow_step");
+
+    public static final SoundEvent GOLDEN_SWARM_CLONE = registerSoundEvent("golden_swarm_clone");
+    public static final SoundEvent GOLDEN_SWARM_RECOMBINE = registerSoundEvent("golden_swarm_recombine");
+    public static final SoundEvent GOLDEN_SWARM_STEP = registerSoundEvent("golden_swarm_step");
+    public static final SoundEvent GOLDEN_SWARM_WINDUP_BURST = registerSoundEvent("golden_swarm_windup_burst");
+    public static final SoundEvent GOLDEN_SWARM_SHAPE = registerSoundEvent("golden_swarm_shape");
 
     public static final SoundEvent BAR_BRAWL = registerSoundEvent("bar_brawl");
     public static final RegistryKey<JukeboxSong> BAR_BRAWL_KEY =

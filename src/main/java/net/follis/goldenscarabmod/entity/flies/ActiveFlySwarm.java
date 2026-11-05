@@ -1,4 +1,4 @@
-package net.follis.goldenscarabmod.entity.misc;
+package net.follis.goldenscarabmod.entity.flies;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;

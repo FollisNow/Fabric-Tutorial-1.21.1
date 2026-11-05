@@ -208,6 +208,9 @@ public class ModItems {
     public static final Item GOLDEN_SWORDS_STAFF = registerItem("golden_swords_staff",
             new GoldenSwordsStaffItem(new Item.Settings().maxCount(1)));
 
+    public static final Item FIRE_RING_STAFF = registerItem("fire_ring_staff",
+            new FireRingStaffItem(new Item.Settings().maxCount(1)));
+
     public static final Item BUG_NET = registerItem("bug_net",
             new Item(new Item.Settings().maxCount(1)){
                 @Override

@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.*;
 import net.follis.goldenscarabmod.block.ModBlocks;
 import net.follis.goldenscarabmod.block.entity.ModBlockEntities;
+import net.follis.goldenscarabmod.command.GoldenSwarmCommands;
 import net.follis.goldenscarabmod.component.ModAttachments;
 import net.follis.goldenscarabmod.component.ModDataComponentTypes;
 import net.follis.goldenscarabmod.datagen.ModDispenserBehaviourProvider;
@@ -20,13 +21,15 @@ import net.follis.goldenscarabmod.effect.ModEffects;
 import net.follis.goldenscarabmod.enchantment.ModEnchantmentEffects;
 import net.follis.goldenscarabmod.entity.ModEntities;
 import net.follis.goldenscarabmod.entity.custom.*;
-import net.follis.goldenscarabmod.entity.misc.FlySwarmManager;
+import net.follis.goldenscarabmod.entity.flies.FlySwarmManager;
 import net.follis.goldenscarabmod.item.ModItemGroups;
 import net.follis.goldenscarabmod.item.ModItems;
 import net.follis.goldenscarabmod.item.custom.CaddisflyCocoonItem;
+import net.follis.goldenscarabmod.network.FireWavePayload;
 import net.follis.goldenscarabmod.network.FlashPayload;
 import net.follis.goldenscarabmod.network.MesmerizePayload;
 import net.follis.goldenscarabmod.particle.ModParticles;
+import net.follis.goldenscarabmod.pattern.FireRingPattern;
 import net.follis.goldenscarabmod.potion.ModPotions;
 import net.follis.goldenscarabmod.recipe.ModRecipes;
 import net.follis.goldenscarabmod.screen.ModScreenHandlers;
@@ -89,11 +92,14 @@ public class GoldenScarabMod implements ModInitializer {
 
 		ModStructures.registerStructures();
 		TempleCommand.register();
+		GoldenSwarmCommands.register();
 
 		FlySwarmManager.register();
+		FireRingPattern.register();
 
 		PayloadTypeRegistry.playS2C().register(MesmerizePayload.ID, MesmerizePayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(FlashPayload.ID, FlashPayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(FireWavePayload.ID, FireWavePayload.CODEC);
 
 		FuelRegistry.INSTANCE.add(ModItems.STARLIGHT_ASHES, 600);
 
@@ -169,7 +175,8 @@ public class GoldenScarabMod implements ModInitializer {
 		//Golden
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_CARVER, GoldCarverEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_PANNER, GoldPannerEntity.createAttributes());
-
+		FabricDefaultAttributeRegistry.register(ModEntities.GOLDEN_SWARM, GoldenSwarmEntity.createGoldenSwarmAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.KING_IN_YELLOW, KingInYellowEntity.createAttributes());
 
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {
 			factories.add((entity, random) -> new TradeOffer(

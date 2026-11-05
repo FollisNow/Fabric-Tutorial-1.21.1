@@ -42,5 +42,133 @@
         "stream": true
       }
     ]
+  },
+  "gold_pile_break": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:gold_pile_break",
+        "stream": true
+      }
+    ]
+  },
+  "gold_pile_step": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:gold_pile_step",
+        "stream": true
+      }
+    ]
+  },
+  "gold_pile_place": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:gold_pile_place",
+        "stream": true
+      }
+    ]
+  },
+  "gold_pile_hit": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:gold_pile_hit",
+        "stream": true
+      }
+    ]
+  },
+  "gold_pile_fall": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:gold_pile_fall",
+        "stream": true
+      }
+    ]
+  },
+  "king_in_yellow_question": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:king_in_yellow_question",
+        "stream": true
+      }
+    ]
+  },
+  "king_in_yellow_summon": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:king_in_yellow_summon",
+        "stream": true
+      }
+    ]
+  },
+  "king_in_yellow_cast": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:king_in_yellow_cast",
+        "stream": true
+      }
+    ]
+  },
+  "king_in_yellow_bell": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:king_in_yellow_bell",
+        "stream": true
+      }
+    ]
+  },
+  "king_in_yellow_death": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:king_in_yellow_death",
+        "stream": true
+      }
+    ]
+  },
+  "king_in_yellow_step": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:king_in_yellow_step",
+        "stream": true
+      }
+    ]
+  },
+  "golden_swarm_clone": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:golden_swarm_clone",
+        "stream": true
+      }
+    ]
+  },
+  "golden_swarm_recombine": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:golden_swarm_recombine",
+        "stream": true
+      }
+    ]
+  },
+  "golden_swarm_step": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:golden_swarm_step",
+        "stream": true
+      }
+    ]
+  },
+  "golden_swarm_windup_burst": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:golden_swarm_windup_burst",
+        "stream": true
+      }
+    ]
+  },
+  "golden_swarm_shape": {
+    "sounds": [
+      {
+        "name": "goldenscarabmod:golden_swarm_shape",
+        "stream": true
+      }
+    ]
   }
 }
