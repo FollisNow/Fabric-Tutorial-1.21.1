@@ -102,6 +102,9 @@ public class GoldenScarabModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GoldPannerModel.GOLD_PANNER, GoldPannerModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLD_PANNER, GoldPannerRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(GoldChannelerModel.GOLD_CHANNELER, GoldChannelerModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GOLD_CHANNELER, GoldChannelerRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(KingInYellowModel.KING_IN_YELLOW, KingInYellowModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.KING_IN_YELLOW, KingInYellowRenderer::new);
 

@@ -179,6 +179,8 @@ public class GoldenScarabMod implements ModInitializer {
 		//Golden
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_CARVER, GoldCarverEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_PANNER, GoldPannerEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_CHANNELER, GoldChannelerEntity.createAttributes());
+
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLDEN_SWARM, GoldenSwarmEntity.createGoldenSwarmAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.KING_IN_YELLOW, KingInYellowEntity.createAttributes());
 

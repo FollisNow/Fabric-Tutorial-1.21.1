@@ -17,7 +17,8 @@ public final class GolemRecipes {
         if (goldGolemMap == null) {
             goldGolemMap = Map.of(
                     new IMakeGolems.GolemBlockPair(ModBlocks.GOLDEN_PEDESTAL, ModBlocks.ENGRAVED_GOLD), ModEntities.GOLD_PANNER,
-                    new IMakeGolems.GolemBlockPair(ModBlocks.ENGRAVED_GOLD, Blocks.GOLD_BLOCK), ModEntities.GOLD_CARVER
+                    new IMakeGolems.GolemBlockPair(ModBlocks.ENGRAVED_GOLD, Blocks.GOLD_BLOCK), ModEntities.GOLD_CARVER,
+                    new IMakeGolems.GolemBlockPair(ModBlocks.GOLD_FENCE_GATE, ModBlocks.ENGRAVED_GOLD), ModEntities.GOLD_CHANNELER
             );
         }
         return goldGolemMap;
