@@ -1,22 +1,23 @@
 package net.follis.goldenscarabmod.util;
 
 import net.follis.goldenscarabmod.enchantment.ModEnchantments;
-import net.follis.goldenscarabmod.entity.ModEntities;
-import net.follis.goldenscarabmod.entity.custom.*;
-import net.follis.goldenscarabmod.item.ModItems;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Shared bug behaviour: variant id, variant colors and the gold / enchantment immunity checks.
+ *
+ * <p>This interface must NOT touch ModEntities / ModItems in its static fields: interface fields are
+ * initialized when the first implementing class loads, which can happen before registration is done.
+ * The entity-keyed lookups (colors, variant classes, items) live in {@link BugRegistry}, which is lazy.
+ */
 public interface IBugVariants {
     int getTypeVariant();
 
@@ -67,34 +68,8 @@ public interface IBugVariants {
             TextColor.fromRgb(0x4a3321)
     );
 
-
-    Map<String, List<TextColor>> BugColors = Map.of(
-            ModEntities.BEETLE.getName().getString(), BeetleColors,
-            ModEntities.LOCUST.getName().getString(), LocustColors,
-            ModEntities.MANTIS.getName().getString(), MantisColors,
-            ModEntities.MOTH.getName().getString(), MothColors,
-            ModEntities.SPIDERLING.getName().getString(), SpiderlingColors
-    );
-
-    Map<String, Class<?>> bugVariants = Map.of(
-            ModEntities.BEETLE.getName().getString(), BeetleVariant.class,
-            ModEntities.LOCUST.getName().getString(), LocustVariant.class,
-            ModEntities.MANTIS.getName().getString(), MantisVariant.class,
-            ModEntities.MOTH.getName().getString(), MothVariant.class,
-            ModEntities.SPIDERLING.getName().getString(), SpiderlingVariant.class,
-            ModEntities.SCORPION.getName().getString(), ScorpionVariant.class
-    );
-    Map<EntityType<?>, Item> bugItems = Map.ofEntries(
-            Map.entry(ModEntities.MOTH, ModItems.MOTH_ITEM),
-            Map.entry(ModEntities.BEETLE, ModItems.BEETLE_ITEM),
-            Map.entry(ModEntities.LOCUST, ModItems.LOCUST_ITEM),
-            Map.entry(ModEntities.MANTIS, ModItems.MANTIS_ITEM),
-            Map.entry(ModEntities.SPIDERLING, ModItems.SPIDERLING_ITEM),
-            Map.entry(ModEntities.SCORPION, ModItems.SCORPION_ITEM),
-            Map.entry(ModEntities.LARVAE, ModItems.LARVAE_ITEM)
-    );
     /**
-     * List equivalent of Map.getOrDefault — returns the color at `index`,
+     * List equivalent of Map.getOrDefault: returns the color at `index`,
      * or `fallback` if the index is out of bounds (negative or unassigned variant id).
      */
     static TextColor getColorOrDefault(List<TextColor> colors, int index, TextColor fallback) {
@@ -126,5 +101,4 @@ public interface IBugVariants {
         }
         return false;
     }
-
 }

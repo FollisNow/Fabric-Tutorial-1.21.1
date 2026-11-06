@@ -29,6 +29,7 @@ import net.follis.goldenscarabmod.screen.ModScreenHandlers;
 import net.follis.goldenscarabmod.screen.custom.GoldenHotelScreen;
 import net.follis.goldenscarabmod.screen.custom.GrowthChamberScreen;
 import net.follis.goldenscarabmod.screen.custom.GoldenPedestalScreen;
+import net.follis.goldenscarabmod.util.BugRegistry;
 import net.follis.goldenscarabmod.util.IBugVariants;
 import net.follis.goldenscarabmod.util.ModModelPredicates;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
@@ -176,10 +177,9 @@ public class GoldenScarabModClient implements ClientModInitializer {
             return data.segments().get(tintIndex - 1).getColor() | 0xFF000000;
         }, ModItems.CADDISFLY_FLUTE);
 
-
         GenericBugFigurineRenderer figurineRenderer = new GenericBugFigurineRenderer();
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.GENERIC_ARTHROPOD_FIGURINE, figurineRenderer);
-        for (Item item : IBugVariants.bugItems.values()) {
+        for (Item item : BugRegistry.items()) {
             BuiltinItemRendererRegistry.INSTANCE.register(item, figurineRenderer);
         }
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->

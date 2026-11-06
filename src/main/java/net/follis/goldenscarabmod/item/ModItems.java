@@ -7,6 +7,7 @@ import net.follis.goldenscarabmod.component.ModDataComponentTypes;
 import net.follis.goldenscarabmod.entity.ModEntities;
 import net.follis.goldenscarabmod.item.custom.*;
 import net.follis.goldenscarabmod.sound.ModSounds;
+import net.follis.goldenscarabmod.util.BugRegistry;
 import net.follis.goldenscarabmod.util.IBugVariants;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.ItemEntity;
@@ -220,7 +221,7 @@ public class ModItems {
                         return super.useOnEntity(stack, user, entity, hand);
                     }
 
-                    Item bugItem = IBugVariants.bugItems.get(entity.getType());
+                    Item bugItem = BugRegistry.item(entity.getType());
                     if (bugItem == null && entity.getType().isIn(EntityTypeTags.ARTHROPOD)) {
                         bugItem = GENERIC_ARTHROPOD_FIGURINE;
                     }
