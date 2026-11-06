@@ -3,7 +3,7 @@ package net.follis.goldenscarabmod.entity.custom;
 import net.follis.goldenscarabmod.entity.ModEntities;
 import net.follis.goldenscarabmod.item.ModItems;
 import net.follis.goldenscarabmod.item.custom.BugItem;
-import net.follis.goldenscarabmod.util.IBugVariants;
+import net.follis.goldenscarabmod.util.BugRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -55,7 +55,7 @@ public class DartEntity extends PersistentProjectileEntity {
         Entity hitEntity = entityHitResult.getEntity();
 
         if (!this.getWorld().isClient && hitEntity instanceof LivingEntity target) {
-            Item bugItem = IBugVariants.bugItems.get(target.getType());
+            Item bugItem = BugRegistry.item(target.getType());
             if (bugItem == null && target.getType().isIn(EntityTypeTags.ARTHROPOD)) {
                 bugItem = GENERIC_ARTHROPOD_FIGURINE;
             }
