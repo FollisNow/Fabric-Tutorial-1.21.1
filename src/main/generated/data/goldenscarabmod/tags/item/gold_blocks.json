@@ -34,6 +34,7 @@
     "goldenscarabmod:connected_gold",
     "goldenscarabmod:shaped_gold",
     "goldenscarabmod:engraved_gold",
-    "goldenscarabmod:sculpted_gold"
+    "goldenscarabmod:sculpted_gold",
+    "goldenscarabmod:gold_chain"
   ]
 }

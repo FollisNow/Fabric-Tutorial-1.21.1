@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:stone_bricks"
+          "name": "goldenscarabmod:golden_bricks"
         }
       ],
       "rolls": 1.0

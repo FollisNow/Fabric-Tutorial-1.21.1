@@ -14,6 +14,7 @@ import net.fabricmc.fabric.api.registry.*;
 import net.follis.goldenscarabmod.block.ModBlocks;
 import net.follis.goldenscarabmod.block.entity.ModBlockEntities;
 import net.follis.goldenscarabmod.command.GoldenSwarmCommands;
+import net.follis.goldenscarabmod.command.SwordsTestCommand;
 import net.follis.goldenscarabmod.component.ModAttachments;
 import net.follis.goldenscarabmod.component.ModDataComponentTypes;
 import net.follis.goldenscarabmod.datagen.ModDispenserBehaviourProvider;
@@ -97,6 +98,7 @@ public class GoldenScarabMod implements ModInitializer {
 		ModStructures.registerStructures();
 		TempleCommand.register();
 		GoldenSwarmCommands.register();
+		SwordsTestCommand.register();
 
 		FlySwarmManager.register();
 		FireRingPattern.register();

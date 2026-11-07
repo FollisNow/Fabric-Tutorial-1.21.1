@@ -3,6 +3,7 @@ package net.follis.goldenscarabmod.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.follis.goldenscarabmod.entity.ModEntities;
+import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.EntityTypeTags;
 
@@ -19,6 +20,7 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
                 .add(ModEntities.AMETHYST_BEE);
 
         getOrCreateTagBuilder(EntityTypeTags.ARTHROPOD)
+                .add(EntityType.BLAZE)
                 .add(ModEntities.AMETHYST_BEE)
                 .add(ModEntities.BEETLE)
                 .add(ModEntities.SPIDERLING)

@@ -1,6 +1,6 @@
-// 1.21.1	2026-10-31T22:16:34.9918944	Golden Scarab Mod/Tags for minecraft:item
+// 1.21.1	2026-11-07T03:12:01.3471392	Golden Scarab Mod/Tags for minecraft:item
 6a5c9304ab089d53eaefeeb10e9219373f625870 data\minecraft\tags\item\trim_templates.json
-6929ccb237539e59378e5015460adcfd67716eed data\goldenscarabmod\tags\item\gold_blocks.json
+dd7f01ca5e0465e653295de80eaba716a99e4e4d data\goldenscarabmod\tags\item\gold_blocks.json
 4a86b6a6b50a249765e637a8e93fd0e09c01b1a7 data\goldenscarabmod\tags\item\golden_items.json
 2d71ac1f378a0dfbd1052e652a7f8ea10260a50d data\goldenscarabmod\tags\item\golden_vegetal_food.json
 79fa77e328bbb628c712e5a0edbeb0884e080a8b data\goldenscarabmod\tags\item\macuahuitl.json

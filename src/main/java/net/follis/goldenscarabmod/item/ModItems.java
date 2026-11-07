@@ -160,6 +160,9 @@ public class ModItems {
     public static final Item LARVAE_SPAWN_EGG = registerItem("larvae_spawn_egg",
             new SpawnEggItem(ModEntities.LARVAE, 0xf7c431, 0x855b00, new Item.Settings()));
 
+    public static final Item GOLDEN_SILVERFISH_SPAWN_EGG = registerItem("golden_silverfish_spawn_egg",
+            new SpawnEggItem(ModEntities.GOLDEN_SILVERFISH, 0xab7f00, 0xfeffbd, new Item.Settings()));
+
     public static final Item AMETHYST_BEE_SPAWN_EGG = registerItem("amethyst_bee_spawn_egg",
             new SpawnEggItem(ModEntities.AMETHYST_BEE, 0xc844be, 0x97278e, new Item.Settings()));
 
@@ -168,6 +171,9 @@ public class ModItems {
 
     public static final Item GOLD_PANNER_SPAWN_EGG = registerItem("gold_panner_spawn_egg",
             new SpawnEggItem(ModEntities.GOLD_PANNER, 0xffec4f, 0x96f923, new Item.Settings()));
+
+    public static final Item GOLD_CHANNELER_SPAWN_EGG = registerItem("gold_channeler_spawn_egg",
+            new SpawnEggItem(ModEntities.GOLD_CHANNELER, 0xfeffbd, 0x96f923, new Item.Settings()));
 
     public static final Item TOMAHAWK = registerItem("tomahawk",
             new TomahawkItem(new Item.Settings().maxCount(16)));

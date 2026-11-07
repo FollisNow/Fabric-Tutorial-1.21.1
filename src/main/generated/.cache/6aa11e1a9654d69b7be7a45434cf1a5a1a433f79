@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-31T22:16:34.9888941	Golden Scarab Mod/Recipes
+// 1.21.1	2026-11-07T03:12:01.3221386	Golden Scarab Mod/Recipes
 950003a92bac10193d93d4f45852320cf635f0cd data\goldenscarabmod\recipe\gold_brick_slab.json
 0e06d66c731932494cad9f077dea33ce7a7fa160 data\goldenscarabmod\recipe\golden_spider_eye.json
 ed6e1134cf44f130c5cf43ed3ace02d970e8ea13 data\goldenscarabmod\recipe\connected_gold_from_gold_block_stonecutting.json
@@ -197,7 +197,7 @@ a5de0cfe8bc8a3d16977d79928f54c49b7b4c56c data\goldenscarabmod\recipe\slime_ball_
 0c7fe778895a2c83883f9947ce104e7730927512 data\goldenscarabmod\advancement\recipes\combat\bamboo_trap.json
 bece7a4fcf3887cb30315ade5b6a03a08eb6f567 data\goldenscarabmod\recipe\chiseled_gold_from_gold_block_stonecutting.json
 55a1abafc7ba348e7cbc54a1eb5fa99e0523d923 data\goldenscarabmod\recipe\slime_ball_from_locust_grasshopper.json
-3d3c9b1771cd0c679d7e9ca7ddf7c365e18d21dd data\goldenscarabmod\advancement\recipes\combat\bug_net.json
+1aaee27062524212587a2e8089e3c5a0fff0a243 data\goldenscarabmod\advancement\recipes\combat\bug_net.json
 db93da62b39a31d1d9a8aa2c3521990b4f9598ce data\goldenscarabmod\recipe\golden_bricks.json
 378ad9a5b90e66140c0360e4c6e57ac5a184157a data\goldenscarabmod\advancement\recipes\building_blocks\cut_gold_slab_from_cut_gold_stonecutting.json
 8e615e2e8b097da7c60b2ac6ee78cd10be2174b4 data\goldenscarabmod\advancement\recipes\building_blocks\gold_chain.json

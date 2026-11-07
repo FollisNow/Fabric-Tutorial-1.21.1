@@ -99,9 +99,11 @@ public class ModItemGroups {
                         entries.add(ModItems.MOTH_SPAWN_EGG);
                         entries.add(ModItems.LOCUST_SPAWN_EGG);
                         entries.add(ModItems.LARVAE_SPAWN_EGG);
+                        entries.add(ModItems.GOLDEN_SILVERFISH_SPAWN_EGG);
                         entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
                         entries.add(ModItems.GOLD_CARVER_SPAWN_EGG);
                         entries.add(ModItems.GOLD_PANNER_SPAWN_EGG);
+                        entries.add(ModItems.GOLD_CHANNELER_SPAWN_EGG);
 
                         entries.add(ModItems.GOLDEN_NEEDLE);
                         entries.add(ModItems.MINI_SUN);

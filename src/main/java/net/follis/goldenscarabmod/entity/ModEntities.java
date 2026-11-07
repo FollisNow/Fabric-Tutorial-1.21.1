@@ -96,6 +96,23 @@ public class ModEntities {
                     .maxTrackingRange(64)
                     .trackingTickInterval(1)
                     .disableSaving().build());
+    public static final EntityType<FlyingSwordEntity> FLYING_SWORD = Registry.register(
+            Registries.ENTITY_TYPE, Identifier.of(GoldenScarabMod.MOD_ID, "flying_sword"),
+            EntityType.Builder.<FlyingSwordEntity>create(FlyingSwordEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.5F, 0.5F)
+                    .maxTrackingRange(64)
+                    .trackingTickInterval(1)
+                    .disableSaving()
+                    .build("flying_sword"));
+
+    public static final EntityType<GroundSwordEntity> GROUND_SWORD = Registry.register(
+            Registries.ENTITY_TYPE, Identifier.of(GoldenScarabMod.MOD_ID, "ground_sword"),
+            EntityType.Builder.<GroundSwordEntity>create(GroundSwordEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.8F, 0.8F)
+                    .maxTrackingRange(64)
+                    .trackingTickInterval(20)
+                    .disableSaving()
+                    .build("ground_sword"));
 
     public static final EntityType<BambooTrapEntity> BAMBOO_TRAP = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoldenScarabMod.MOD_ID, "bamboo_trap"),

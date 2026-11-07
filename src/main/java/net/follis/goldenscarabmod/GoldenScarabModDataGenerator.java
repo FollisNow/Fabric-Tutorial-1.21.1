@@ -26,6 +26,7 @@ public class GoldenScarabModDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModRegistryDataGenerator::new);
 
 		pack.addProvider(ModEntityTypeTagProvider::new);
+		pack.addProvider(ModEntityLootTableProvider::new);
 
 		pack.addProvider((FabricDataOutput output) -> new ModPointOfInterestTypeTagProvider(output, RegistryKeys.POINT_OF_INTEREST_TYPE, fabricDataGenerator.getRegistries()));
 	}
