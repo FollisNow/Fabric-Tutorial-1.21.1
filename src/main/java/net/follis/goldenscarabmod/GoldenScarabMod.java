@@ -14,6 +14,7 @@ import net.fabricmc.fabric.api.registry.*;
 import net.follis.goldenscarabmod.block.ModBlocks;
 import net.follis.goldenscarabmod.block.entity.ModBlockEntities;
 import net.follis.goldenscarabmod.command.GoldenSwarmCommands;
+import net.follis.goldenscarabmod.command.ShapeCommands;
 import net.follis.goldenscarabmod.command.SwordsTestCommand;
 import net.follis.goldenscarabmod.component.ModAttachments;
 import net.follis.goldenscarabmod.component.ModDataComponentTypes;
@@ -27,11 +28,13 @@ import net.follis.goldenscarabmod.entity.flies.FlySwarmManager;
 import net.follis.goldenscarabmod.item.ModItemGroups;
 import net.follis.goldenscarabmod.item.ModItems;
 import net.follis.goldenscarabmod.item.custom.CaddisflyCocoonItem;
+import net.follis.goldenscarabmod.liquid.LiquidRegistry;
 import net.follis.goldenscarabmod.network.FireWavePayload;
 import net.follis.goldenscarabmod.network.FlashPayload;
+import net.follis.goldenscarabmod.network.ItemFrameMesmerizer;
 import net.follis.goldenscarabmod.network.MesmerizePayload;
 import net.follis.goldenscarabmod.particle.ModParticles;
-import net.follis.goldenscarabmod.pattern.FireRingPattern;
+import net.follis.goldenscarabmod.pattern.*;
 import net.follis.goldenscarabmod.potion.ModPotions;
 import net.follis.goldenscarabmod.recipe.ModRecipes;
 import net.follis.goldenscarabmod.screen.ModScreenHandlers;
@@ -99,9 +102,16 @@ public class GoldenScarabMod implements ModInitializer {
 		TempleCommand.register();
 		GoldenSwarmCommands.register();
 		SwordsTestCommand.register();
+		ShapeCommands.register();
 
 		FlySwarmManager.register();
+		ItemFrameMesmerizer.register();
 		FireRingPattern.register();
+		SwordFlock.register();
+		SwordShield.register();
+		GoldenSwordsPattern.register();
+		SwordStarPattern.register();
+		LiquidRegistry.register();
 
 		PayloadTypeRegistry.playS2C().register(MesmerizePayload.ID, MesmerizePayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(FlashPayload.ID, FlashPayload.CODEC);
@@ -182,9 +192,12 @@ public class GoldenScarabMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_CARVER, GoldCarverEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_PANNER, GoldPannerEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_CHANNELER, GoldChannelerEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_BREEDER, GoldBreederEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.GOLD_STALKER, GoldStalkerEntity.createAttributes());
 
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLDEN_SWARM, GoldenSwarmEntity.createGoldenSwarmAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.KING_IN_YELLOW, KingInYellowEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.DOMINION, DominionEntity.createAttributes());
 
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {
 			factories.add((entity, random) -> new TradeOffer(

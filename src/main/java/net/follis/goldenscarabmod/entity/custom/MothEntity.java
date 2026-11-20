@@ -92,14 +92,14 @@ public class MothEntity extends AngerableBugEntity implements Flutterer {
     );
 
     // ---- mesmerize tuning ----
-    private static final double MESMERIZE_RANGE = 24.0D;
-    private static final double MESMERIZE_RANGE_SQ = MESMERIZE_RANGE * MESMERIZE_RANGE;
+    public static final double MESMERIZE_RANGE = 24.0D;
+    public static final double MESMERIZE_RANGE_SQ = MESMERIZE_RANGE * MESMERIZE_RANGE;
     /** dot(look, toMoth) above this = inside the cone. 0.6 is about 53 degrees from the view direction. */
-    private static final float MESMERIZE_CONE_THRESHOLD = 0.6F;
+    public static final float MESMERIZE_CONE_THRESHOLD = 0.6F;
     /** dot above this = "directly looking at it" (about 5.7 degrees): the player breaks free. */
-    private static final float MESMERIZE_INCONSEQUENTIAL_THRESHOLD = 0.995F;
-    private static final int TRIGGER_SCAN_INTERVAL = 5;           // only look for NEW stares 4x/sec
-    private static final float MESMERIZE_TURN_SPEED_DEGREES = 3F; // degrees turned per tick
+    public static final float MESMERIZE_INCONSEQUENTIAL_THRESHOLD = 0.995F;
+    public static final int TRIGGER_SCAN_INTERVAL = 5;           // only look for NEW stares 4x/sec
+    public static final float MESMERIZE_TURN_SPEED_DEGREES = 3F; // degrees turned per tick
 
     private final Set<UUID> mesmerizedPlayers = new HashSet<>();
 

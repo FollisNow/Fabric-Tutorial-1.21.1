@@ -75,6 +75,11 @@ public class ModEntities {
             EntityType.Builder.create(GoldBreederEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.7f, 1.5f).build());
 
+    public static final EntityType<GoldStalkerEntity> GOLD_STALKER = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoldenScarabMod.MOD_ID, "gold_stalker"),
+            EntityType.Builder.create(GoldStalkerEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.7f, 1.3f).build());
+
 
     public static final EntityType<GoldenSwarmEntity> GOLDEN_SWARM = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoldenScarabMod.MOD_ID, "golden_swarm"),

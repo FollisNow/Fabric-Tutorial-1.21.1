@@ -23,6 +23,7 @@ import net.follis.goldenscarabmod.entity.client.*;
 import net.follis.goldenscarabmod.item.ModItems;
 import net.follis.goldenscarabmod.item.custom.CaddisflyCocoonItem;
 import net.follis.goldenscarabmod.item.render.*;
+import net.follis.goldenscarabmod.liquid.LiquidRegistry;
 import net.follis.goldenscarabmod.network.MesmerizePayload;
 import net.follis.goldenscarabmod.particle.*;
 import net.follis.goldenscarabmod.screen.ModScreenHandlers;
@@ -30,7 +31,6 @@ import net.follis.goldenscarabmod.screen.custom.GoldenHotelScreen;
 import net.follis.goldenscarabmod.screen.custom.GrowthChamberScreen;
 import net.follis.goldenscarabmod.screen.custom.GoldenPedestalScreen;
 import net.follis.goldenscarabmod.util.BugRegistry;
-import net.follis.goldenscarabmod.util.IBugVariants;
 import net.follis.goldenscarabmod.util.ModModelPredicates;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
@@ -106,9 +106,17 @@ public class GoldenScarabModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GoldChannelerModel.GOLD_CHANNELER, GoldChannelerModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLD_CHANNELER, GoldChannelerRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(GoldBreederModel.GOLD_BREEDER, GoldBreederModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GOLD_BREEDER, GoldBreederRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(GoldStalkerModel.GOLD_STALKER, GoldStalkerModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.GOLD_STALKER, GoldStalkerRenderer::new);
+
         EntityModelLayerRegistry.registerModelLayer(KingInYellowModel.KING_IN_YELLOW, KingInYellowModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.KING_IN_YELLOW, KingInYellowRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(DominionModel.DOMINION, DominionModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.DOMINION, DominionRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(TomahawkProjectileModel.TOMAHAWK, TomahawkProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TOMAHAWK, TomahawkProjectileRenderer::new);
@@ -121,11 +129,14 @@ public class GoldenScarabModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(GoldenNeedleProjectileModel.GOLDEN_NEEDLE, GoldenNeedleProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOLDEN_NEEDLE, GoldenNeedleProjectileRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(GoldenSwordProjectileModel.GOLDEN_SWORD, GoldenSwordProjectileModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.GOLDEN_SWORD, GoldenSwordProjectileRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(GoldenSwordModel.GOLDEN_SWORD, GoldenSwordModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.FLYING_SWORD, FlyingSwordRenderer::new);
         EntityRendererRegistry.register(ModEntities.GROUND_SWORD, GroundSwordRenderer::new);
         EntityRendererRegistry.register(ModEntities.GOLDEN_SWARM, GoldenSwarmRenderer::new);
+
+        EntityRendererRegistry.register(ModEntities.SHAPE, ShapeRenderer::new);
+        ShapeRenderer.initWorldRenderer();
+        BlockRenderLayerMap.INSTANCE.putBlock(LiquidRegistry.INK, RenderLayer.getCutout());
 
         EntityModelLayerRegistry.registerModelLayer(MiniSunProjectileModel.MINI_SUN, MiniSunProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MINI_SUN, MiniSunProjectileRenderer::new);
