@@ -167,6 +167,12 @@ public class GoldenScarabModClient implements ClientModInitializer {
                 MesmerizeClientState.degreesPerSecond = payload.degreesPerSecond();
             });
         });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            GenericBugFigurineRenderer.clearCache();
+            MesmerizeClientState.active = false;
+            MesmerizeClientState.targetEntityId = -1;
+            MesmerizeClientState.lastFrameTimeNanos = -1;
+        });
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             CaddisflyCocoonItem.CocoonData data = stack.get(ModDataComponentTypes.COCOON);
             if (tintIndex <= 0) {
