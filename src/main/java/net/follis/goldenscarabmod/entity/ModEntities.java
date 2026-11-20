@@ -70,6 +70,11 @@ public class ModEntities {
             EntityType.Builder.create(GoldChannelerEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.7f, 1.3f).build());
 
+    public static final EntityType<GoldBreederEntity> GOLD_BREEDER = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoldenScarabMod.MOD_ID, "gold_breeder"),
+            EntityType.Builder.create(GoldBreederEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(0.7f, 1.5f).build());
+
 
     public static final EntityType<GoldenSwarmEntity> GOLDEN_SWARM = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoldenScarabMod.MOD_ID, "golden_swarm"),
@@ -84,18 +89,24 @@ public class ModEntities {
             EntityType.Builder.create(KingInYellowEntity::new, SpawnGroup.CREATURE)
                     .dimensions(2f, 5f).build());
 
+    public static final EntityType<DominionEntity> DOMINION = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoldenScarabMod.MOD_ID, "dominion"),
+            EntityType.Builder.create(DominionEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(3f, 3.5f).build());
+
+    public static final EntityType<ShapeEntity> SHAPE = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoldenScarabMod.MOD_ID, "shape"),
+            EntityType.Builder.create(ShapeEntity::new, SpawnGroup.MISC)
+                    .dimensions(1, 1)
+                    .maxTrackingRange(16)        // chunks: ~256 blocks, so long flights stay visible
+                    .trackingTickInterval(1)
+                    .build());
+
     public static final EntityType<TomahawkProjectileEntity> TOMAHAWK = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoldenScarabMod.MOD_ID, "tomahawk"),
             EntityType.Builder.<TomahawkProjectileEntity>create(TomahawkProjectileEntity::new, SpawnGroup.MISC)
                     .dimensions(0.5f, 1.15f).build());
 
-    public static final EntityType<GoldenSwordProjectileEntity> GOLDEN_SWORD = Registry.register(Registries.ENTITY_TYPE,
-            Identifier.of(GoldenScarabMod.MOD_ID, "golden_sword"),
-            EntityType.Builder.create(GoldenSwordProjectileEntity::new, SpawnGroup.MISC)
-                    .dimensions(0.1875f, 1.1875f)
-                    .maxTrackingRange(64)
-                    .trackingTickInterval(1)
-                    .disableSaving().build());
     public static final EntityType<FlyingSwordEntity> FLYING_SWORD = Registry.register(
             Registries.ENTITY_TYPE, Identifier.of(GoldenScarabMod.MOD_ID, "flying_sword"),
             EntityType.Builder.<FlyingSwordEntity>create(FlyingSwordEntity::new, SpawnGroup.MISC)

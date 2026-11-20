@@ -7,6 +7,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.AnimationState;
 import net.minecraft.util.Identifier;
 
 public class LocustModel<T extends LocustEntity> extends SinglePartEntityModel<T> {
@@ -71,7 +72,12 @@ public class LocustModel<T extends LocustEntity> extends SinglePartEntityModel<T
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
         locust.render(matrices, vertexConsumer, light, overlay, color);
     }
-
+    /** For decorative use without a LocustEntity (the locust in the gold breeder's bottle). */
+    public void setDecorativeAngles(AnimationState idle, float limbSwing, float limbSwingAmount, float ageInTicks) {
+        this.getPart().traverse().forEach(ModelPart::resetTransform);
+        this.animateMovement(LocustAnimations.ANIM_LOCUST_JUMP, limbSwing, limbSwingAmount, 2f, 2.5f);
+        this.updateAnimation(idle, LocustAnimations.ANIM_LOCUST_IDLE, ageInTicks, 1f);
+    }
     @Override
     public ModelPart getPart() {
         return locust;

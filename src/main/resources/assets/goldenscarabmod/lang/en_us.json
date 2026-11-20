@@ -88,8 +88,11 @@
   "item.goldenscarabmod.moth_spawn_egg": "Moth Spawn Egg",
   "item.goldenscarabmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
   "item.goldenscarabmod.scorpion_spawn_egg": "Scorpion Spawn Egg",
+  "item.goldenscarabmod.golden_silverfish_spawn_egg": "Goldenfish Spawn Egg",
   "item.goldenscarabmod.gold_carver_spawn_egg": "Gold Carver Spawn Egg",
   "item.goldenscarabmod.gold_panner_spawn_egg": "Gold Panner Spawn Egg",
+  "item.goldenscarabmod.gold_channeler_spawn_egg": "Gold Channeler Spawn Egg",
+  "item.goldenscarabmod.gold_breeder_spawn_egg": "Gold Breeder Spawn Egg",
 
   "item.goldenscarabmod.tomahawk": "Tomahawk",
   "item.goldenscarabmod.dart": "Dart",
@@ -272,6 +275,8 @@
   "block.goldenscarabmod.growth_chamber": "Growth Chamber",
   "block.goldenscarabmod.amethyst_bee_hive": "Amethyst Bee Hive",
 
+  "block.goldenscarabmod.ink": "Ink",
+  "effect.goldenscarabmod.inked": "Inked",
 
   "entity.minecraft.villager.kaupenger": "Kaupenger",
   "entity.minecraft.villager.collector": "Collector",
@@ -342,9 +347,12 @@
   "entity.goldenscarabmod.moth": "Moth",
   "entity.goldenscarabmod.spiderling": "Spiderling",
   "entity.goldenscarabmod.scorpion": "Scorpion",
+  "entity.goldenscarabmod.golden_silverfish": "Goldenfish",
   "entity.goldenscarabmod.tomahawk": "Tomahawk",
   "entity.goldenscarabmod.dart": "Dart",
   "entity.goldenscarabmod.bamboo_trap": "Bamboo Trap",
   "entity.goldenscarabmod.gold_carver": "Gold Carver",
-  "entity.goldenscarabmod.gold_panner": "Gold Panner"
+  "entity.goldenscarabmod.gold_panner": "Gold Panner",
+  "entity.goldenscarabmod.gold_channeler": "Gold Channeler",
+  "entity.goldenscarabmod.gold_breeder": "Gold Breeder"
 }

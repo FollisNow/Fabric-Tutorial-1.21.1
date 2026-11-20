@@ -104,6 +104,7 @@ public class ModItemGroups {
                         entries.add(ModItems.GOLD_CARVER_SPAWN_EGG);
                         entries.add(ModItems.GOLD_PANNER_SPAWN_EGG);
                         entries.add(ModItems.GOLD_CHANNELER_SPAWN_EGG);
+                        entries.add(ModItems.GOLD_BREEDER_SPAWN_EGG);
 
                         entries.add(ModItems.GOLDEN_NEEDLE);
                         entries.add(ModItems.MINI_SUN);

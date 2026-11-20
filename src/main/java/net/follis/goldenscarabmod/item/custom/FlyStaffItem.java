@@ -1,6 +1,6 @@
 package net.follis.goldenscarabmod.item.custom;
 
-import net.follis.goldenscarabmod.entity.misc.FlySwarmManager;
+import net.follis.goldenscarabmod.entity.flies.FlySwarmManager;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;

@@ -1,6 +1,6 @@
 package net.follis.goldenscarabmod.particle;
 
-import net.follis.goldenscarabmod.entity.misc.ActiveFlySwarm;
+import net.follis.goldenscarabmod.entity.flies.ActiveFlySwarm;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;

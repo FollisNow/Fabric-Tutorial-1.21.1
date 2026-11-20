@@ -1,6 +1,5 @@
 package net.follis.goldenscarabmod.entity.ai;
 
-import net.follis.goldenscarabmod.entity.custom.GoldenSwarmEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.PathAwareEntity;

@@ -2,6 +2,7 @@ package net.follis.goldenscarabmod.world.structure;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
+import net.follis.goldenscarabmod.world.structure.TempleRooms.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package net.follis.goldenscarabmod.entity.misc;
+package net.follis.goldenscarabmod.entity.flies;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.follis.goldenscarabmod.particle.ModParticles;
