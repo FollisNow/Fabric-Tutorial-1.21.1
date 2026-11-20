@@ -1,7 +1,7 @@
 package net.follis.goldenscarabmod.entity.client;
 
 import net.follis.goldenscarabmod.GoldenScarabMod;
-import net.follis.goldenscarabmod.entity.custom.GoldenSwordProjectileEntity;
+import net.follis.goldenscarabmod.entity.custom.FlyingSwordEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -9,11 +9,11 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public class GoldenSwordProjectileModel extends EntityModel<GoldenSwordProjectileEntity> {
+public class GoldenSwordModel extends EntityModel<FlyingSwordEntity> {
     public static final EntityModelLayer GOLDEN_SWORD = new EntityModelLayer(Identifier.of(GoldenScarabMod.MOD_ID, "golden_sword"), "main");
     private final ModelPart golden_sword;
 
-    public GoldenSwordProjectileModel(ModelPart root) {
+    public GoldenSwordModel(ModelPart root) {
         this.golden_sword = root.getChild("golden_sword");
     }
     public static TexturedModelData getTexturedModelData() {
@@ -30,7 +30,7 @@ public class GoldenSwordProjectileModel extends EntityModel<GoldenSwordProjectil
         return TexturedModelData.of(modelData, 32, 32);
     }
     @Override
-    public void setAngles(GoldenSwordProjectileEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setAngles(FlyingSwordEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
     }
 
