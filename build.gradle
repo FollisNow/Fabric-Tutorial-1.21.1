@@ -35,7 +35,9 @@ dependencies {
 	modApi "me.shedaniel.cloth:cloth-config-fabric:15.0.140"
 
 	// Patchouli (guide book)
-	modRuntimeOnly "vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FABRIC"
+	modRuntimeOnly("vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}-FABRIC") {
+		exclude group: "net.fabricmc.fabric-api"
+	}
 }
 
 processResources {
