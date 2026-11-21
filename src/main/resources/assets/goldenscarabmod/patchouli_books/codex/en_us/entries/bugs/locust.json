@@ -1,0 +1,18 @@
+{
+  "name": "Locust",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:locust_item",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Locusts eat grass and crops, then wait before eating again. Most wait minutes between meals."
+    },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:locust{Variant:2}", "name": "Grasshopper", "text": "Plains and forests. Grass, wheat, carrots within 8 blocks." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:locust{Variant:3}", "name": "Red", "text": "Deserts. Grass and beetroots within 8 blocks." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:locust{Variant:1}", "name": "Dream", "text": "Also eats potatoes, within 16 blocks. Not seen in the wild." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:locust{Variant:0}", "name": "Golden", "text": "One in a hundred. Any mature crop within 32 blocks, and it hardly waits." },
+    {
+      "type": "patchouli:text",
+      "text": "Two golden parents always have a golden child, and any other pair may, one time in a hundred, do so too.$(br2)Golden locusts eat golden vegetables. All the others breed on flowers.$(br2)An adult drops a snack when killed, and the Collector villager buys grasshopper, red and dream snacks for emeralds."    }
+  ]
+}

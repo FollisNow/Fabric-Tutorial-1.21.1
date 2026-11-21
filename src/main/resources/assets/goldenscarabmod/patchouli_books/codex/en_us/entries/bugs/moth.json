@@ -1,0 +1,21 @@
+{
+  "name": "Moth",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:moth_item",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Moths roost on trunks and leaves, and bite back if angered. Wear gold and they will not bite.$(br2)Their colour follows the forest they were born in."   },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:0}", "name": "Oak", "text": "Forests, flower forests, windswept forests." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:2}", "name": "Birch", "text": "Birch forests, old growth or not." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:5}", "name": "Spruce", "text": "Taigas, snowy taigas, old growth spruce and pine taigas." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:7}", "name": "Dark Oak", "text": "Dark forests." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:9}", "name": "Cherry", "text": "Cherry groves." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:11}", "name": "Mangrove", "text": "Mangrove swamps." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:13}", "name": "Jungle", "text": "Jungles, bamboo jungles, sparse jungles." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:15}", "name": "Acacia", "text": "Savannas, plateaus, windswept savannas." },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Breeding$()$(br)Flowers breed moths. Two of the same colour may, one time in a hundred, have a rare child. Two of different colours have a child of either parent's colour.$(br2)Rare moths have their own entry."    }
+  ]
+}

@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -27,8 +28,10 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.ServerConfigHandler;
@@ -607,7 +610,7 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
             variation += random.nextFloat();
         }
         variation /= iterations;
-        variation = variation * percentage - percentage;
+        variation = variation * 2 * percentage - percentage;
         return 1 + variation/100;
     }
 
@@ -629,7 +632,8 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     @Override
     public boolean addStatusEffect(StatusEffectInstance effect, @Nullable Entity source) {
         StatusEffectCategory category = effect.getEffectType().value().getCategory();
-        boolean isBeneficial = category == StatusEffectCategory.NEUTRAL || category == StatusEffectCategory.BENEFICIAL;
+        boolean isBeneficial = (category == StatusEffectCategory.NEUTRAL || category == StatusEffectCategory.BENEFICIAL)
+                && !AbstractEntityJarItem.exceptions.contains(effect.getEffectType().value());
 
         if (isBeneficial) {
             StatusEffectInstance infiniteEffect = new StatusEffectInstance(effect.getEffectType(), StatusEffectInstance.INFINITE, effect.getAmplifier(), effect.isAmbient(), effect.shouldShowParticles());
@@ -746,10 +750,14 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
-        this.dataTracker.set(GROWTH_SIZE, nbt.getFloat("GrowthSize"));
-        this.dataTracker.set(MAX_HEALTH, nbt.getFloat("MaxHealth"));
-        this.dataTracker.set(MOVEMENT_SPEED, nbt.getFloat("MovementSpeed"));
-        this.dataTracker.set(JUMP_STRENGTH, nbt.getFloat("JumpStrength"));
+
+        // keep the defaults when a key is missing (default figurines, /summon, old saves)
+        if (nbt.contains("GrowthSize", NbtElement.NUMBER_TYPE)) {
+            this.setGrowthSize(Math.clamp(nbt.getFloat("GrowthSize"), MINIMUM_SIZE, MAXIMUM_SIZE));
+        }
+        this.readStat(nbt, "MaxHealth", EntityAttributes.GENERIC_MAX_HEALTH, MINIMUM_HEALTH, MAXIMUM_HEALTH);
+        this.readStat(nbt, "MovementSpeed", EntityAttributes.GENERIC_MOVEMENT_SPEED, MINIMUM_SPEED, MAXIMUM_SPEED);
+        this.readStat(nbt, "JumpStrength", EntityAttributes.GENERIC_JUMP_STRENGTH, MINIMUM_JUMP, MAXIMUM_JUMP);
 
         UUID uUID;
         if (nbt.containsUuid("Owner")) {
@@ -758,13 +766,17 @@ public class SpiderlingEntity extends TameableEntity implements Angerable, IBugV
             String string = nbt.getString("Owner");
             uUID = ServerConfigHandler.getPlayerUuidByName(this.getServer(), string);
         }
-
         if (uUID != null) {
             this.setOwnerUuid(uUID);
         }
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
 
+    private void readStat(NbtCompound nbt, String key, RegistryEntry<EntityAttribute> attribute, float min, float max) {
+        if (nbt.contains(key, NbtElement.NUMBER_TYPE)) {
+            this.getAttributeInstance(attribute).setBaseValue(Math.clamp(nbt.getFloat(key), min, max));
+        }
+    }
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0F)

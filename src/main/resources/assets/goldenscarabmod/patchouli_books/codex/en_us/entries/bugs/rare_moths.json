@@ -1,0 +1,19 @@
+{
+  "name": "Rare Moths",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:moth_item",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Mesmerize$()$(br)Only the rare forms hold your gaze, and gold gives no protection. Within 24 blocks, looking near one slowly turns your view toward it. Look straight at it to break free.$(br2)One moth holds you at a time. A rare moth specimen mounted in a frame does the same."
+    },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:1}", "name": "Cracked Oak", "text": "One in a hundred oak moths." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:3}", "name": "Radiant Birch", "text": "One in a hundred birch moths." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:6}", "name": "Ruby Spruce", "text": "One in a hundred spruce moths." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:8}", "name": "Dark Oak Emerald", "text": "One in a hundred dark oak moths." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:10}", "name": "Bloom Cherry", "text": "One in a hundred cherry moths." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:12}", "name": "Tangled Mangrove", "text": "One in a hundred mangrove moths." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:14}", "name": "Spider Jungle", "text": "One in a hundred jungle moths." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:moth{Variant:16}", "name": "Sapphire Acacia", "text": "One in a hundred acacia moths." }
+  ]
+}

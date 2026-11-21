@@ -21,11 +21,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -42,8 +45,8 @@ public class ScorpionEntity extends AngerableBugEntity {
     public int attackAnimationTimeout = 0;
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(ScorpionEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> DATA_SHARD = DataTracker.registerData(ScorpionEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Byte> SCORPION_FLAGS;
-
 
 
     public ScorpionEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -70,11 +73,10 @@ public class ScorpionEntity extends AngerableBugEntity {
     }
 
     private boolean foodSelector(ItemStack stack) {
-        if(this.getVariant() == ScorpionVariant.DEF3) {
+        if (this.getVariant() == ScorpionVariant.GOLD) {
             return stack.isOf(ModItems.GOLDEN_SPIDER_EYE);
-        } else {
-            return stack.isIn(ItemTags.MEAT);
         }
+        return stack.isIn(ItemTags.MEAT);
     }
 
     @Override
@@ -99,8 +101,8 @@ public class ScorpionEntity extends AngerableBugEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         ScorpionEntity baby = ModEntities.SCORPION.create(world);
-        if (baby != null && entity instanceof ScorpionEntity) {
-            baby.setVariant(ScorpionVariant.DESERT);
+        if (baby != null && entity instanceof ScorpionEntity other) {
+            baby.setVariant(this.random.nextBoolean() ? this.getVariant() : other.getVariant());
         }
         return baby;
     }
@@ -161,6 +163,7 @@ public class ScorpionEntity extends AngerableBugEntity {
     public boolean tryAttack(Entity target) {
         boolean bl = super.tryAttack(target);
         if (bl && target instanceof LivingEntity livingEntity) {
+            this.getShard().applyTo(livingEntity, this);
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 5 * 20), this);
             this.onAttacking(target);
             return true;
@@ -180,12 +183,28 @@ public class ScorpionEntity extends AngerableBugEntity {
             return super.damage(source, amount);
         }
     }
-
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
+        ScorpionShard shard = ScorpionShard.fromStack(stack);
+        if (shard != null && !this.isBaby() && this.getShard() == ScorpionShard.NONE) {
+            if (this.getWorld() instanceof ServerWorld serverWorld) {
+                this.setShard(shard);
+                stack.decrementUnlessCreative(1, player);
+                this.playSound(SoundEvents.BLOCK_DECORATED_POT_INSERT, 1.0F, 1.0F);
+                serverWorld.spawnParticles(ParticleTypes.HAPPY_VILLAGER,
+                        this.getX(), this.getBodyY(0.5), this.getZ(), 8, 0.3, 0.3, 0.3, 0.0);
+            }
+            return ActionResult.success(this.getWorld().isClient);
+        }
+        return super.interactMob(player, hand);
+    }
     /* VARIANT & POTION EFFECT*/
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(DATA_ID_TYPE_VARIANT, 0);
+        builder.add(DATA_SHARD, 0);
         builder.add(SCORPION_FLAGS, (byte)0);
     }
     @Override
@@ -209,6 +228,14 @@ public class ScorpionEntity extends AngerableBugEntity {
     private void setVariant(ScorpionVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
+    public ScorpionShard getShard() {
+        return ScorpionShard.byId(this.dataTracker.get(DATA_SHARD));
+    }
+
+    public void setShard(ScorpionShard shard) {
+        this.dataTracker.set(DATA_SHARD, shard.getId());
+    }
+
     private void setScorpionFlag(int bit, boolean value) {
         if (value) {
             this.dataTracker.set(SCORPION_FLAGS, (byte)(this.dataTracker.get(SCORPION_FLAGS) | bit));
@@ -225,6 +252,7 @@ public class ScorpionEntity extends AngerableBugEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Variant", this.getTypeVariant());
+        nbt.putString("Shard", this.getShard().asString());
         this.writeAngerToNbt(nbt);
     }
 
@@ -232,21 +260,30 @@ public class ScorpionEntity extends AngerableBugEntity {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        this.setShard(ScorpionShard.byName(nbt.getString("Shard")));
         this.readAngerFromNbt(this.getWorld(), nbt);
     }
+
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  @Nullable EntityData entityData) {
-
-        Optional<RegistryKey<Biome>> currentBiomeKey = world.getBiome(this.getBlockPos()).getKey();
-        ScorpionVariant variant = ScorpionVariant.DESERT;
+        RegistryKey<Biome> biome = world.getBiome(this.getBlockPos()).getKey().orElse(null);
+        ScorpionVariant variant;
+        if (this.random.nextInt(100) == 0) {
+            variant = ScorpionVariant.GOLD;
+        } else if (biome != null && biomeMap.containsKey(biome) && this.random.nextFloat() < 0.7F) {
+            variant = biomeMap.get(biome);
+        } else {
+            variant = ScorpionVariant.byId(this.random.nextBetween(1, 3));
+        }
         this.setVariant(variant);
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     private static final Map<RegistryKey<Biome>, ScorpionVariant> biomeMap = new HashMap<>() {{
-        put(BiomeKeys.DESERT, ScorpionVariant.DESERT);
+        put(BiomeKeys.DESERT, ScorpionVariant.RED);
+        put(BiomeKeys.BADLANDS, ScorpionVariant.RED);
     }};
 
     /* SOUNDS */
@@ -275,7 +312,7 @@ public class ScorpionEntity extends AngerableBugEntity {
         }
 
         public boolean shouldContinue() {
-            return ScorpionEntity.this.hasAngerTime() && super.shouldContinue() && ScorpionEntity.this.getVariant() == ScorpionVariant.DESERT;
+            return ScorpionEntity.this.hasAngerTime() && super.shouldContinue() && ScorpionEntity.this.getVariant() == ScorpionVariant.GOLD;
         }
 
         protected void setMobEntityTarget(MobEntity mob, LivingEntity target) {
@@ -298,16 +335,13 @@ public class ScorpionEntity extends AngerableBugEntity {
         }
 
         public boolean shouldContinue() {
-            boolean bl = this.canBite();
-            if (this.mob.getTarget() != null && mob instanceof ScorpionEntity scorpion && !scorpion.isWearingGoldOrImmune(scorpion.getTarget())) {
-                this.target = null;
-                return false;
-            } else if (bl && this.mob.getTarget() != null ) {
-                return super.shouldContinue();
-            } else {
+            LivingEntity target = this.mob.getTarget();
+            if (target == null || !this.canBite()
+                    || ((ScorpionEntity) this.mob).isWearingGoldOrImmune(target)) {
                 this.target = null;
                 return false;
             }
+            return super.shouldContinue();
         }
 
         private boolean canBite() {

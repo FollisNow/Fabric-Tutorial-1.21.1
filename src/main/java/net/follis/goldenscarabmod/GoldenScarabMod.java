@@ -21,6 +21,8 @@ import net.follis.goldenscarabmod.component.ModDataComponentTypes;
 import net.follis.goldenscarabmod.datagen.ModDispenserBehaviourProvider;
 import net.follis.goldenscarabmod.component.ModPointOfInterestTypes;
 import net.follis.goldenscarabmod.effect.ModEffects;
+import net.follis.goldenscarabmod.effect.VenomEffects;
+import net.follis.goldenscarabmod.effect.VenomEvents;
 import net.follis.goldenscarabmod.enchantment.ModEnchantmentEffects;
 import net.follis.goldenscarabmod.entity.ModEntities;
 import net.follis.goldenscarabmod.entity.custom.*;
@@ -78,6 +80,8 @@ public class GoldenScarabMod implements ModInitializer {
 		ModSounds.registerSounds();
 
 		ModEffects.registerEffects();
+		VenomEffects.register();
+		VenomEvents.register();
 		ModPotions.registerPotions();
 
 		ModEnchantmentEffects.registerEnchantmentEffects();

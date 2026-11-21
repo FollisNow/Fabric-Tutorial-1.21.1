@@ -1,0 +1,15 @@
+{
+  "name": "Catching Bugs",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:bug_net",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(item)Bug Net$() turns any arthropod you strike into a specimen. Spiders and other common arthropods become plain specimens.$(br2)A specimen shows the living bug, and keeps its colour and markings."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The $(item)Bug Jar$() holds many bugs at once.$(br2)Hold it up to an arthropod to capture it. Press it against a block to let the last bug go, or crouch while doing so to free them all."
+    }
+  ]
+}

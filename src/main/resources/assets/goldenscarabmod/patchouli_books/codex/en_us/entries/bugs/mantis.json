@@ -1,0 +1,13 @@
+{
+  "name": "Mantis",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:mantis_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:mantis",
+      "name": "Mantis",
+      "text": "The tallest of the bugs."
+    }
+  ]
+}

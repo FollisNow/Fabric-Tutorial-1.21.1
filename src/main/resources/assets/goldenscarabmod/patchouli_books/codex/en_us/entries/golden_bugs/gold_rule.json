@@ -1,0 +1,15 @@
+{
+  "name": "The Gold Rule",
+  "category": "goldenscarabmod:golden_bugs",
+  "icon": "minecraft:gold_ingot",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Bugs that hunt will not hunt anyone wearing gold. They never take offence at a gold wearer, and a chase ends the moment gold goes on."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Bound by the rule$()$(br)Golden silverfish$(br)Scorpions, of every colour$(br)Omen beetles$(br)Moths, of every variant, rare or not$(br2)Only aggression is covered. Gold does not break the gaze of a rare moth."
+    }
+  ]
+}

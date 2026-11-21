@@ -1,0 +1,37 @@
+{
+  "name": "Spiderling",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:spiderling_spawn_egg",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:spiderling{Variant:0}",
+      "name": "Spiderling",
+      "text": "Tame it, and it follows you everywhere."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Taming$()$(br)Offer meat to a wild spiderling. Not every try works. A tamed spiderling follows you, fights for you, and sits when told to.$(br2)Wild ones hunt sheep, rabbits, foxes, baby turtles and skeletons, and flee llamas."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Climber$()$(br)It climbs walls, shrugs off cobwebs and takes no harm from falls. It slowly mends on its own.$(br2)Once it has grown big enough, it will carry a rider, and a rider can make it leap."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Traits$()$(br)Size, health, speed and leaping strength differ from one spiderling to the next.$(br2)Two tamed spiderlings in the mood have a child near the average of their traits, give or take some chance. Choose your parents well."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Feeding$()$(br)Meat mends a spiderling. Locust snacks mend it far better and put a rested, tamed, adult pair in the mood. A golden locust snack mends the most and grows a young one fastest."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Potion effects$()$(br)A spiderling treats potions differently. Every helpful or neutral effect it receives lasts forever, at the same strength.$(br2)Harmful effects wear off as usual."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Washing$()$(br)Washing a spiderling strips every effect off it at once, good or bad, with the hiss of a doused fire.$(br2)Choose its potions carefully before you make them permanent."
+    }
+  ]
+}

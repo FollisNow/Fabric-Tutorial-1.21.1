@@ -1,0 +1,24 @@
+{
+  "name": "Scorpion",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:scorpion_item",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Scorpions come in red, black, blue and, rarely, gold. Their sting poisons for a few seconds, and they eat meat. Wear gold and they leave you alone.$(br2)Feed one a pottery sherd and its sting changes. See the last pages." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:scorpion{Variant:1,Shard:'burn'}", "name": "Red", "text": "Deserts and badlands. A burn sherd shows on its back." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:scorpion{Variant:2}", "name": "Black", "text": "Found anywhere." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:scorpion{Variant:3}", "name": "Blue", "text": "Found anywhere." },
+    { "type": "patchouli:entity", "entity": "goldenscarabmod:scorpion{Variant:0}", "name": "Gold", "text": "One in a hundred. It holds a grudge and eats golden spider eyes." },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Assimilating a sherd$()$(br)Offer an adult scorpion a pottery sherd. It absorbs it, and the sherd shows on its back.$(br2)Its sting now carries a venom for about two minutes. A scorpion holds one sherd, and keeps it when caught."    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Venoms (1/2)$()$(br)Angler: glowing$(br)Archer: arrows hurt more$(br)Arms Up: no critical blows$(br)Blade: no sweeping$(br)Brewer: purges effects$(br)Burn: on fire$(br)Danger: blasts hurt more$(br)Explorer: no sprinting$(br)Flow: no swimming$(br)Friend: Hatred$(br)Guster: huge knockback$(br)Heart: no natural healing"    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Venoms (2/2)$()$(br)Heartbreak: creatures flee$(br)Howl: wild wolves attack$(br)Miner: cannot mine$(br)Mourner: cannot kill$(br)Plenty: cannot open chests$(br)Prize: Fortune ignored$(br)Scrape: no axe scraping$(br)Sheaf: no bone meal$(br)Shelter: no placing blocks$(br)Skull: 3 fewer hearts$(br)Snort: cannot hide"
+    }
+  ]
+}

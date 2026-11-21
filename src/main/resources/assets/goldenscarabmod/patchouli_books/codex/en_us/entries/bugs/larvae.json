@@ -1,0 +1,25 @@
+{
+  "name": "Larvae",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:larvae_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:larvae{MaterialSlot0:'DIAMOND',MaterialSlot1:'EMERALD',MaterialSlot2:'GLOWSTONE'}",
+      "name": "Larvae",
+      "text": "It builds its cocoon from what it finds."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A larva picks up materials lying within a block and a half, one every few seconds, up to four.$(br2)Each material colours a segment of its cocoon."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)It collects$()$(br)Diamond, glowstone dust, lapis lazuli, emerald, iron nugget, redstone, obsidian, netherite scrap, prismarine shard, copper ingot, echo shard."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An adult larva drops a caddisfly cocoon with its materials when killed, and keeps them when caught.$(br2)Flowers breed larvae. The Collector villager deals in cocoons."
+    }
+  ]
+}

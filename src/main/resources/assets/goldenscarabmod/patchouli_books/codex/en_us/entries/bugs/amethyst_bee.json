@@ -1,0 +1,13 @@
+{
+  "name": "Amethyst Bee",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:amethyst_bee_spawn_egg",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:amethyst_bee",
+      "name": "Amethyst Bee",
+      "text": "A small crystal-winged bee."
+    }
+  ]
+}

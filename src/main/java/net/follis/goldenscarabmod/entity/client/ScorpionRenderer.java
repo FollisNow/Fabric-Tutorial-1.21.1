@@ -16,18 +16,15 @@ import java.util.Map;
 public class ScorpionRenderer extends MobEntityRenderer<ScorpionEntity, ScorpionModel<ScorpionEntity>> {
     private static final Map<ScorpionVariant, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(ScorpionVariant.class), map -> {
-                map.put(ScorpionVariant.DESERT,
-                        Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_desert.png"));
-                map.put(ScorpionVariant.DEF1,
-                        Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_desert.png"));
-                map.put(ScorpionVariant.DEF2,
-                        Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_desert.png"));
-                map.put(ScorpionVariant.DEF3,
-                        Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_desert.png"));
+                map.put(ScorpionVariant.GOLD,  Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_gold.png"));
+                map.put(ScorpionVariant.RED,   Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_red.png"));
+                map.put(ScorpionVariant.BLACK, Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_black.png"));
+                map.put(ScorpionVariant.BLUE,  Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/scorpion/scorpion_blue.png"));
             });
 
     public ScorpionRenderer(EntityRendererFactory.Context context) {
         super(context, new ScorpionModel<>(context.getPart(ScorpionModel.SCORPION)), 0.4f);
+        this.addFeature(new ScorpionShardFeatureRenderer(this, context.getItemRenderer()));
     }
 
     @Override

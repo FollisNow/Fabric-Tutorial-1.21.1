@@ -68,6 +68,13 @@ public interface IBugVariants {
             TextColor.fromRgb(0x4a3321)
     );
 
+    List<TextColor> ScorpionColors = List.of(
+            TextColor.fromRgb(0xFFB921),  // GOLD
+            TextColor.fromRgb(0xD94B3B),  // RED
+            TextColor.fromRgb(0x6B6B7A),  // BLACK (lightened so it stays readable on the dark tooltip)
+            TextColor.fromRgb(0x4B7BE5)   // BLUE
+    );
+
     /**
      * List equivalent of Map.getOrDefault: returns the color at `index`,
      * or `fallback` if the index is out of bounds (negative or unassigned variant id).

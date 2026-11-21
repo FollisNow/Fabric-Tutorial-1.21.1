@@ -1,0 +1,17 @@
+{
+  "name": "Golden Silverfish",
+  "category": "goldenscarabmod:golden_bugs",
+  "icon": "goldenscarabmod:golden_silverfish_spawn_egg",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:golden_silverfish",
+      "name": "Golden Silverfish",
+      "text": "It hides in gold, and not in stone."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A golden silverfish slips into golden blocks. Breaking one of these infested blocks lets another out.$(br2)Hurt one, and it calls to infested gold within 10 blocks, waking them one after another.$(br2)Wear gold, and it leaves you alone."
+    }
+  ]
+}

@@ -6,7 +6,13 @@
 		"ExampleMixin",
 		"WardenEntityMixin",
 		"PlayerEntityMixin",
-		"PotionEntityMixin"
+		"PotionEntityMixin",
+		"LivingEntityVenomMixin",
+		"EntityVenomMixin",
+		"PlayerEntityVenomMixin",
+		"HungerManagerVenomMixin",
+		"BlockItemVenomMixin",
+		"BlockVenomMixin"
 	],
 	"client": [
 		"ItemRendererMixin",

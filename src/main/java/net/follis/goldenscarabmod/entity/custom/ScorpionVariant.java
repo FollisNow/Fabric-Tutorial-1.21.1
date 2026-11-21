@@ -4,10 +4,10 @@ import net.follis.goldenscarabmod.util.IVariant;
 import net.minecraft.util.StringIdentifiable;
 
 public enum ScorpionVariant implements IVariant, StringIdentifiable {
-    DESERT(0, "Desert"),
-    DEF1(1, "Def1"),
-    DEF2(2, "Def2"),
-    DEF3(3, "Def3");
+    GOLD(0, "Gold"),
+    RED(1, "Red"),
+    BLACK(2, "Black"),
+    BLUE(3, "Blue");
 
     private final int id;
     private final String name; // Associated name

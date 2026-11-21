@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.follis.goldenscarabmod.component.ModDataComponentTypes;
 import net.follis.goldenscarabmod.effect.ModEffects;
-import net.follis.goldenscarabmod.entity.ModEntities;
 import net.follis.goldenscarabmod.entity.custom.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.screen.Screen;
@@ -27,9 +26,7 @@ import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -49,7 +46,7 @@ import static net.follis.goldenscarabmod.util.IBugVariants.*;
 
 public abstract class AbstractEntityJarItem extends Item {
     protected World world;
-    protected static final List<StatusEffect> exceptions = List.of(
+    public static final List<StatusEffect> exceptions = List.of(
             StatusEffects.HERO_OF_THE_VILLAGE.value(),
             StatusEffects.RAID_OMEN.value(),
             StatusEffects.TRIAL_OMEN.value(),
@@ -95,67 +92,17 @@ public abstract class AbstractEntityJarItem extends Item {
     }
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        if(Screen.hasShiftDown()) {
+        if (Screen.hasShiftDown()) {
             tooltip.add(Text.translatable("tooltip.goldenscarabmod.bug_jar.shift_down").withColor(darkGold.getRgb()));
-            Formatting[] formatting = new Formatting[]{Formatting.GRAY};
             List<BugData> bugDataList = new ArrayList<>(stack.getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
-            if(!bugDataList.isEmpty()) {
-                List<BugData> reversedList = bugDataList.reversed();
-                for (BugData bugData: reversedList) {
-                    if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.BEETLE) {
-                        var potionId = bugData.getNbt().getString("PotionGene");
-                        var statusEffect = Registries.STATUS_EFFECT.get(Identifier.of(potionId));
-                        if (statusEffect != null) {
-                            tooltip.add(Text.translatable(bugData.convertToKey()).withColor(BeetleColors.getFirst().getRgb())
-                                    .append(" ")
-                                    .append(Text.literal(Text.translatable(statusEffect.getTranslationKey()).getString().toLowerCase())
-                                            .setStyle(Style.EMPTY)
-                                            .withColor(statusEffect.getColor())));
-                        } else {
-                            TextColor color = getColorOrDefault(BeetleColors, bugData.getNbt().getInt("Variant"));
-                            tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()));
-                        }
-
-                    } else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.MOTH) {
-                        TextColor color = getColorOrDefault(MothColors, bugData.getNbt().getInt("Variant"));
-                        tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()).append(" ").append(Text.literal(MothVariant.byId(bugData.getNbt().getInt("Variant")).getName())));
-
-                    }
-                    else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.LOCUST) {
-                        TextColor color = getColorOrDefault(LocustColors, bugData.getNbt().getInt("Variant"));
-                        tooltip.add(Text.translatable(bugData.convertToKey()).withColor(color.getRgb()));
-
-                    } else if (Registries.ENTITY_TYPE.get(bugData.getIdentifier()) == ModEntities.SPIDERLING) {
-                        String formattedGrowthSize = String.format("%.2f", bugData.getNbt().getFloat("GrowthSize")); // Format to 3 decimal places
-                        int growthSizeColor = interpolateColor(bugData.getNbt().getFloat("GrowthSize"), SpiderlingEntity.MINIMUM_SIZE, SpiderlingEntity.MAXIMUM_SIZE);
-
-                        String formattedMaxHealth = String.format("%.2f", bugData.getNbt().getFloat("MaxHealth")); // Format to 3 decimal places
-                        int maxHealthColor = interpolateColor(bugData.getNbt().getFloat("MaxHealth"), SpiderlingEntity.MINIMUM_HEALTH, SpiderlingEntity.MAXIMUM_HEALTH);
-
-                        String formattedSpeed = String.format("%.2f", bugData.getNbt().getFloat("MovementSpeed")); // Format to 3 decimal places
-                        int speedColor = interpolateColor(bugData.getNbt().getFloat("MovementSpeed"), SpiderlingEntity.MINIMUM_SPEED, SpiderlingEntity.MAXIMUM_SPEED);
-
-                        String formattedJumpStrength = String.format("%.2f", bugData.getNbt().getFloat("JumpStrength")); // Format to 3 decimal places
-                        int jumpStrengthColor = interpolateColor(bugData.getNbt().getFloat("JumpStrength"), SpiderlingEntity.MINIMUM_JUMP, SpiderlingEntity.MAXIMUM_JUMP);
-
-                        tooltip.add(Text.translatable(bugData.convertToKey())
-                                .append(" ")
-                                .append(Text.literal("⇵" + formattedGrowthSize + "⇵  ").withColor(growthSizeColor))
-                                .append(Text.literal("♥" + formattedMaxHealth + "♥  ").withColor(maxHealthColor))
-                                .append(Text.literal("»" + formattedSpeed + "»  ").withColor(speedColor))
-                                .append(Text.literal("⏶" + formattedJumpStrength + "⏶").withColor(jumpStrengthColor))
-                        );
-                    } else {
-                        tooltip.add(Text.translatable(bugData.convertToKey()).formatted(formatting));
-                    }
-                }
+            for (BugData bugData : bugDataList.reversed()) {
+                BugTooltips.appendJarEntry(tooltip, bugData);
             }
         } else {
             tooltip.add(Text.translatable("tooltip.goldenscarabmod.bug_jar"));
         }
         super.appendTooltip(stack, context, tooltip, type);
     }
-
     protected List<BugData> getMutableBugDataList(PlayerEntity player, int slot) {
         return new ArrayList<>(player.getInventory().getStack(slot).getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
     }
