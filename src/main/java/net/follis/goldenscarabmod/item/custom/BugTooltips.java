@@ -114,7 +114,9 @@ public final class BugTooltips {
         TextColor color = getColorOrDefault(ScorpionColors, variantId);
         MutableText line = Text.translatable(bugData.convertToKey()).withColor(color.getRgb())
                 .append(" ").append(Text.literal(ScorpionVariant.byId(variantId).getName()));
-        ScorpionShard shard = ScorpionShard.byName(nbt.getString("Shard"));
+        ScorpionShard shard = variantId == ScorpionVariant.GOLD.getId()
+                ? ScorpionShard.byName(nbt.getString("Shard"))
+                : ScorpionShard.NONE;
         Text shardName = Text.translatable(shard.getTooltipKey()).withColor(shard.getColor());
 
         if (compact) {

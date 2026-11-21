@@ -1,6 +1,6 @@
 {
   "name": "Golden Bugs",
-  "description": "Creatures with gold in their shells.",
-  "icon": "goldenscarabmod:golden_silverfish_spawn_egg",
+  "description": "The gold-touched kinds, and the rule they obey.",
+  "icon": "goldenscarabmod:locust_gold",
   "sortnum": 1
 }

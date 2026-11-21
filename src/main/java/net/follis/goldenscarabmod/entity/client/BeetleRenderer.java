@@ -16,7 +16,7 @@ import java.util.Map;
 public class BeetleRenderer extends MobEntityRenderer<BeetleEntity, BeetleModel<BeetleEntity>> {
     private static final Map<BeetleVariant, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(BeetleVariant.class), map -> {
-                map.put(BeetleVariant.OMEN,
+                map.put(BeetleVariant.GOLD,
                         Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/beetle/beetle_omen.png"));
                 map.put(BeetleVariant.ROSE_CHAFER,
                         Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/beetle/beetle_rose_chafer.png"));

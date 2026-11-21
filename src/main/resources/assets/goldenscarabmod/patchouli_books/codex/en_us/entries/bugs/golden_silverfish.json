@@ -1,7 +1,7 @@
 {
   "name": "Golden Silverfish",
-  "category": "goldenscarabmod:golden_bugs",
-  "icon": "goldenscarabmod:golden_silverfish_spawn_egg",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:golden_silverfish_item",
   "pages": [
     {
       "type": "patchouli:entity",

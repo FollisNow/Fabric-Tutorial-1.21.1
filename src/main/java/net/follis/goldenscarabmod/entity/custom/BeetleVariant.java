@@ -4,7 +4,7 @@ import net.follis.goldenscarabmod.util.IVariant;
 import net.minecraft.util.StringIdentifiable;
 
 public enum BeetleVariant implements IVariant, StringIdentifiable {
-    OMEN(0, "Omen"),
+    GOLD(0, "Gold"),
     ROSE_CHAFER(1, "Rose Chafer"),
     LADYBUG(2, "Ladybug"),
     BARK(3, "Bark"),

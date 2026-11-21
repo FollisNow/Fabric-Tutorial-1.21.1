@@ -9,7 +9,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(item)Bound by the rule$()$(br)Golden silverfish$(br)Scorpions, of every colour$(br)Omen beetles$(br)Moths, of every variant, rare or not$(br2)Only aggression is covered. Gold does not break the gaze of a rare moth."
+      "text": "$(item)Bound by the rule$()$(br)Golden silverfish$(br)Scorpions, of every colour$(br)Gold beetles$(br)Moths, of every variant, rare or not$(br2)Only aggression is covered. Gold does not break the gaze of a rare moth."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Gold kinds$()$(br)$(item)Gold scorpion$(): holds a grudge, and alone takes pottery sherds into its sting.$(br2)$(item)Gold locust$(): strips any mature crop for 32 blocks around.$(br2)$(item)Gold beetle$(): the only beetle that fights, and may carry a potion gene."
     }
   ]
 }

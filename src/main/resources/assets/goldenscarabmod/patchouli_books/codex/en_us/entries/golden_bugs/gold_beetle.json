@@ -1,0 +1,25 @@
+{
+  "name": "Gold Beetle",
+  "category": "goldenscarabmod:golden_bugs",
+  "icon": "goldenscarabmod:beetle_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:beetle{Variant:0}",
+      "name": "Gold Beetle",
+      "text": "Common in mushroom fields. Aggressive, except toward gold wearers."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "One beetle in twenty is gold, and it is the only beetle that fights. Its cousins are harmless.$(br2)Wear gold and it will not bite."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Potion gene$()$(br)A gold beetle can carry a potion effect. Its sting passes the effect on for a few seconds, and the beetle itself becomes immune to potion effects."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Breeding$()$(br)Gold beetles like golden food and meat, and ignore flowers.$(br2)Two gold beetles have a gold child, and any beetle pair may, one time in a hundred, have one too.$(br2)If both parents share a gene, the child inherits it. Otherwise dose both parents with the same potion, and the child may take one of the effects they share."
+    }
+  ]
+}

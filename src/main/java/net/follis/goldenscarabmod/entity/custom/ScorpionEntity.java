@@ -187,7 +187,7 @@ public class ScorpionEntity extends AngerableBugEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
         ScorpionShard shard = ScorpionShard.fromStack(stack);
-        if (shard != null && !this.isBaby() && this.getShard() == ScorpionShard.NONE) {
+        if (shard != null && this.canHoldShard() && !this.isBaby() && this.getShard() == ScorpionShard.NONE) {
             if (this.getWorld() instanceof ServerWorld serverWorld) {
                 this.setShard(shard);
                 stack.decrementUnlessCreative(1, player);
@@ -229,7 +229,9 @@ public class ScorpionEntity extends AngerableBugEntity {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
     public ScorpionShard getShard() {
-        return ScorpionShard.byId(this.dataTracker.get(DATA_SHARD));
+        return this.canHoldShard()
+                ? ScorpionShard.byId(this.dataTracker.get(DATA_SHARD))
+                : ScorpionShard.NONE;
     }
 
     public void setShard(ScorpionShard shard) {
@@ -247,6 +249,9 @@ public class ScorpionEntity extends AngerableBugEntity {
         return (this.dataTracker.get(SCORPION_FLAGS) & location) != 0;
     }
 
+    private boolean canHoldShard() {
+        return this.getVariant() == ScorpionVariant.GOLD;
+    }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {

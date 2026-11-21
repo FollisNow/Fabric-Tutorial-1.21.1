@@ -1,0 +1,21 @@
+{
+  "name": "Gold Locust",
+  "category": "goldenscarabmod:golden_bugs",
+  "icon": "goldenscarabmod:locust_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:locust{Variant:0}",
+      "name": "Gold Locust",
+      "text": "One locust in a hundred."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The gold locust eats any mature crop within 32 blocks, and it hardly waits between meals. A field does not last long.$(br2)An adult drops a gold locust snack when killed."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Breeding$()$(br)Gold locusts eat golden vegetables, and ignore flowers.$(br2)Two gold parents always have a gold child. Any other pair may, one time in a hundred, have one too."
+    }
+  ]
+}

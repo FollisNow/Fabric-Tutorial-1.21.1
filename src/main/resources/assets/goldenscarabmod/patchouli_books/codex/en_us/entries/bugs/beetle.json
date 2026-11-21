@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Beetles buzz around crops and help them grow. All but one kind are harmless.$(br2)One beetle in twenty is an $(item)omen$(), the only aggressive variant."
+      "text": "Beetles buzz around crops and help them grow, and they are harmless."
     },
     { "type": "patchouli:entity", "entity": "goldenscarabmod:beetle{Variant:0}", "name": "Omen", "text": "Common in mushroom fields. Aggressive, except toward gold wearers." },
     { "type": "patchouli:entity", "entity": "goldenscarabmod:beetle{Variant:1}", "name": "Rose Chafer", "text": "Plains and meadows." },
@@ -17,6 +17,6 @@
       "text": "$(item)Potion gene$()$(br)An omen beetle can carry a potion effect. Its sting passes the effect on for a few seconds, and the beetle itself becomes immune to potion effects."    },
     {
       "type": "patchouli:text",
-      "text": "$(item)Breeding$()$(br)Most beetles like flowers. Omens like golden food and meat.$(br2)Two omens breed an omen, and any pair may, one time in a hundred, produce one.$(br2)If both parents share a gene, the child inherits it. Otherwise dose both parents with the same potion, and the child may take one of the effects they share."    }
+      "text": "$(item)Breeding$()$(br)Flowers breed beetles. A child takes the colour of either parent."    }
   ]
 }

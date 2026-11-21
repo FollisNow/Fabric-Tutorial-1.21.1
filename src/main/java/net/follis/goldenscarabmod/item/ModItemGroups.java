@@ -87,6 +87,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SPIDERLING_ITEM);
                         entries.add(ModItems.SCORPION_ITEM);
                         entries.add(ModItems.LARVAE_ITEM);
+                        entries.add(ModItems.GOLDEN_SILVERFISH_ITEM);
 
                         entries.add(ModItems.CHITIN);
                         entries.add(ModItems.TRAPPED_SKELETON_SKULL);
@@ -143,7 +144,7 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.PINK_GARNET_LAMP);
 
-                        //GOLDEN NATURE
+                        //GOLD NATURE
                         entries.add(ModBlocks.GOLDEN_DIRT);
                         entries.add(ModBlocks.GOLDEN_SAND);
                         entries.add(ModBlocks.GOLDEN_SAPLING);
@@ -153,7 +154,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.STRIPPED_GOLDEN_LOG);
                         entries.add(ModBlocks.STRIPPED_GOLDEN_WOOD);
 
-                        //GOLDEN WOOD
+                        //GOLD WOOD
                         entries.add(ModBlocks.GOLDEN_PLANKS);
                         entries.add(ModBlocks.GOLDEN_STAIRS);
                         entries.add(ModBlocks.GOLDEN_SLAB);
@@ -178,7 +179,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.LAPIS_FENCE_GATE);
                         entries.add(ModBlocks.LAPIS_WALL);
 
-                        //GOLDEN BRICKS
+                        //GOLD BRICKS
                         entries.add(ModBlocks.GOLDEN_BRICKS);
                         entries.add(ModBlocks.GOLDEN_BRICK_STAIRS);
                         entries.add(ModBlocks.GOLDEN_BRICK_SLAB);

@@ -79,7 +79,8 @@ public final class BugRegistry {
                 Map.entry(ModEntities.MANTIS, ModItems.MANTIS_ITEM),
                 Map.entry(ModEntities.SPIDERLING, ModItems.SPIDERLING_ITEM),
                 Map.entry(ModEntities.SCORPION, ModItems.SCORPION_ITEM),
-                Map.entry(ModEntities.LARVAE, ModItems.LARVAE_ITEM)
+                Map.entry(ModEntities.LARVAE, ModItems.LARVAE_ITEM),
+                Map.entry(ModEntities.GOLDEN_SILVERFISH, ModItems.GOLDEN_SILVERFISH_ITEM)
         );
     }
 }

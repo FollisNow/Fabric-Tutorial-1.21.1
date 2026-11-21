@@ -84,7 +84,7 @@ public class BeetleEntity extends AngerableBugEntity implements Flutterer {
             Map.entry(BiomeKeys.CHERRY_GROVE, BeetleVariant.LADYBUG),
             Map.entry(BiomeKeys.FOREST, BeetleVariant.BARK),
             Map.entry(BiomeKeys.DARK_FOREST, BeetleVariant.RHINOCEROS),
-            Map.entry(BiomeKeys.MUSHROOM_FIELDS, BeetleVariant.OMEN),
+            Map.entry(BiomeKeys.MUSHROOM_FIELDS, BeetleVariant.GOLD),
             Map.entry(BiomeKeys.GROVE, BeetleVariant.BARK),
             Map.entry(BiomeKeys.MEADOW, BeetleVariant.ROSE_CHAFER)
     );
@@ -104,7 +104,7 @@ public class BeetleEntity extends AngerableBugEntity implements Flutterer {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new BugMeleeGoal(this, 1.4F, true)); // gated by canFight() (OMEN only)
+        this.goalSelector.add(0, new BugMeleeGoal(this, 1.4F, true)); // gated by canFight() (GOLD only)
 
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
         this.goalSelector.add(2, new TemptGoal(this, 1.25D, this::foodSelector, false));
@@ -118,14 +118,14 @@ public class BeetleEntity extends AngerableBugEntity implements Flutterer {
         this.addCombatTargetGoals();
     }
 
-    /** Only OMEN beetles are aggressive. */
+    /** Only GOLD beetles are aggressive. */
     @Override
     public boolean canFight() {
-        return this.getVariant() == BeetleVariant.OMEN;
+        return this.getVariant() == BeetleVariant.GOLD;
     }
 
     private boolean foodSelector(ItemStack stack) {
-        if (this.getVariant() == BeetleVariant.OMEN) {
+        if (this.getVariant() == BeetleVariant.GOLD) {
             return stack.isIn(ModTags.Items.GOLDEN_FOOD) || stack.isIn(ItemTags.MEAT);
         }
         return stack.isIn(ItemTags.BEE_FOOD);
@@ -160,16 +160,16 @@ public class BeetleEntity extends AngerableBugEntity implements Flutterer {
         BeetleVariant mine = this.getVariant();
         BeetleVariant theirs = other.getVariant();
         BeetleVariant result;
-        if (mine == BeetleVariant.OMEN && theirs == BeetleVariant.OMEN) {
-            result = BeetleVariant.OMEN;
+        if (mine == BeetleVariant.GOLD && theirs == BeetleVariant.GOLD) {
+            result = BeetleVariant.GOLD;
         } else if (this.random.nextInt(100) == 0) {
-            result = BeetleVariant.OMEN; // rare mutation
+            result = BeetleVariant.GOLD; // rare mutation
         } else {
             result = this.random.nextBoolean() ? mine : theirs;
         }
         baby.setVariant(result);
 
-        if (result == BeetleVariant.OMEN) {
+        if (result == BeetleVariant.GOLD) {
             StatusEffect myGene = this.getPotionGene();
             if (myGene != null && myGene == other.getPotionGene()) {
                 baby.setPotionGene(myGene);
@@ -308,14 +308,14 @@ public class BeetleEntity extends AngerableBugEntity implements Flutterer {
                                  @Nullable EntityData entityData) {
         BeetleVariant variant;
         if (this.random.nextInt(100) < 5) {
-            variant = BeetleVariant.OMEN;
+            variant = BeetleVariant.GOLD;
         } else {
             RegistryKey<Biome> biome = world.getBiome(this.getBlockPos()).getKey().orElse(null);
             BeetleVariant biomeVariant = biome == null ? null : BIOME_VARIANTS.get(biome);
             if (biomeVariant != null && this.random.nextFloat() < 0.5F) {
                 variant = biomeVariant;
             } else {
-                // id 0 is OMEN, so it is excluded here
+                // id 0 is GOLD, so it is excluded here
                 variant = BeetleVariant.byId(this.random.nextBetween(1, BeetleVariant.values().length - 1));
             }
         }

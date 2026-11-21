@@ -49,7 +49,7 @@ public abstract class AngerableBugEntity extends AnimalEntity implements Angerab
     }
 
     /**
-     * Whether this bug is currently allowed to fight at all (e.g. only OMEN beetles).
+     * Whether this bug is currently allowed to fight at all (e.g. only GOLD beetles).
      * When false it never gets angry, never targets anything and never attacks.
      */
     public boolean canFight() {

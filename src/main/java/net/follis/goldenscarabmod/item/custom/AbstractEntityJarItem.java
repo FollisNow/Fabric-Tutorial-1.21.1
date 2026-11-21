@@ -207,7 +207,7 @@ public abstract class AbstractEntityJarItem extends Item {
             if (entity instanceof SpiderlingEntity spiderlingEntity) {
                 spiderlingEntity.increaseAllStats();
                 newList.add(spiderlingEntity);
-            } else if (entity instanceof BeetleEntity beetle && beetle.getVariant().equals(BeetleVariant.OMEN)) {
+            } else if (entity instanceof BeetleEntity beetle && beetle.getVariant().equals(BeetleVariant.GOLD)) {
                 if (beetle.getPotionGene() == null) {
                     List<StatusEffect> filteredEffects = Registries.STATUS_EFFECT.stream().filter(statusEffect -> !(statusEffect.isInstant() || exceptions.contains(statusEffect))).toList();
                     if (!filteredEffects.isEmpty()) {

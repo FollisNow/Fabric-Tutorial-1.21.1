@@ -206,6 +206,8 @@ public class ModItems {
             new BugItem(bugSettings(GoldenScarabMod.MOD_ID + ":scorpion", 0)));
     public static final Item LARVAE_ITEM = registerItem("larvae_item",
             new BugItem(bugSettings(GoldenScarabMod.MOD_ID + ":larvae", 0)));
+    public static final Item GOLDEN_SILVERFISH_ITEM = registerItem("golden_silverfish_item",
+            new BugItem(bugSettings(GoldenScarabMod.MOD_ID + ":golden_silverfish", 0)));
     public static final Item GENERIC_ARTHROPOD_FIGURINE = registerItem("generic_arthropod_figurine",
             new BugItem(bugSettings("minecraft:spider", 0)));
 

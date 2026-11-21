@@ -34,7 +34,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 /**
- * Golden silverfish: hides inside GOLDEN blocks only (see {@link InfestedGoldenBlocks}) and wakes
+ * Golden silverfish: hides inside GOLD blocks only (see {@link InfestedGoldenBlocks}) and wakes
  * infested golden blocks when hurt.
  *
  * <p>Still extends SilverfishEntity so your vanilla-style model/renderer, sounds, arthropod tags and
@@ -134,7 +134,7 @@ public class GoldenSilverfishEntity extends SilverfishEntity implements IBugVari
     // Goals
     // =====================================================================
 
-    /** When hurt, wakes nearby infested GOLDEN blocks (closest first, 50% chance to stop after each). */
+    /** When hurt, wakes nearby infested GOLD blocks (closest first, 50% chance to stop after each). */
     static class CallForHelpGoal extends Goal {
         private static final int RANGE_XZ = 10;
         private static final int RANGE_Y = 5;

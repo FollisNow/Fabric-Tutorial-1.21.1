@@ -1,0 +1,29 @@
+{
+  "name": "Gold Scorpion",
+  "category": "goldenscarabmod:golden_bugs",
+  "icon": "goldenscarabmod:scorpion_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:scorpion{Variant:0,Shard:'burn'}",
+      "name": "Gold Scorpion",
+      "text": "One scorpion in a hundred. A burn sherd shows on its back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Unlike its cousins, the gold scorpion holds a grudge: once angered, it keeps coming.$(br2)It eats golden spider eyes instead of meat, and its sting poisons for a few seconds.$(br2)Wear gold and it leaves you alone."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Assimilating a sherd$()$(br)Offer an adult gold scorpion a pottery sherd. It absorbs it, and the sherd shows on its back.$(br2)Its sting now carries a venom for about two minutes. It holds one sherd, and keeps it when caught.$(br2)No other scorpion can do this."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Venoms (1/2)$()$(br)Angler: glowing$(br)Archer: arrows hurt more$(br)Arms Up: no critical blows$(br)Blade: no sweeping$(br)Brewer: purges effects$(br)Burn: on fire$(br)Danger: blasts hurt more$(br)Explorer: no sprinting$(br)Flow: no swimming$(br)Friend: Hatred$(br)Guster: huge knockback$(br)Heart: no natural healing"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Venoms (2/2)$()$(br)Heartbreak: creatures flee$(br)Howl: wild wolves attack$(br)Miner: cannot mine$(br)Mourner: cannot kill$(br)Plenty: cannot open chests$(br)Prize: Fortune ignored$(br)Scrape: no axe scraping$(br)Sheaf: no bone meal$(br)Shelter: no placing blocks$(br)Skull: 3 fewer hearts$(br)Snort: cannot hide"
+    }
+  ]
+}
