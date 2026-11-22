@@ -44,24 +44,25 @@ public interface IBugVariants {
     );
 
     List<TextColor> MothColors = List.of(
-            TextColor.fromRgb(0x917142),
-            TextColor.fromRgb(0xF5CC27),
-            TextColor.fromRgb(0xF0EEEB),
-            TextColor.fromRgb(0xBBEC3C),
-            TextColor.fromRgb(0x195157),
-            TextColor.fromRgb(0x2E1C0A),
-            TextColor.fromRgb(0xFF1B1E),
-            TextColor.fromRgb(0x3F311D),
-            TextColor.fromRgb(0x004D18),
-            TextColor.fromRgb(0xFFC0FF),
-            TextColor.fromRgb(0xFF78FF),
-            TextColor.fromRgb(0x54B257),
-            TextColor.fromRgb(0x5CD160),
-            TextColor.fromRgb(0xA7AC1D),
-            TextColor.fromRgb(0x006B00),
-            TextColor.fromRgb(0x7B7368),
-            TextColor.fromRgb(0x0718FB),
-            darkGold
+            darkGold,                       // GOLD
+            TextColor.fromRgb(0x917142),    // OAK
+            TextColor.fromRgb(0xF5CC27),    // OAK_CRACKED
+            TextColor.fromRgb(0xF0EEEB),    // BIRCH
+            TextColor.fromRgb(0xBBEC3C),    // BIRCH_RADIANT
+            TextColor.fromRgb(0x195157),    // BIRCH_NEGATIVE
+            TextColor.fromRgb(0x2E1C0A),    // SPRUCE
+            TextColor.fromRgb(0xFF1B1E),    // SPRUCE_RUBY
+            TextColor.fromRgb(0x3F311D),    // DARK_OAK
+            TextColor.fromRgb(0x004D18),    // DARK_OAK_EMERALD
+            TextColor.fromRgb(0xFFC0FF),    // CHERRY
+            TextColor.fromRgb(0xFF78FF),    // CHERRY_BLOOM
+            TextColor.fromRgb(0x54B257),    // MANGROVE
+            TextColor.fromRgb(0x5CD160),    // MANGROVE_TANGLED
+            TextColor.fromRgb(0xA7AC1D),    // JUNGLE
+            TextColor.fromRgb(0x006B00),    // JUNGLE_SPIDER
+            TextColor.fromRgb(0x7B7368),    // ACACIA
+            TextColor.fromRgb(0x0718FB),    // ACACIA_SAPPHIRE
+            darkGold                        // EYE
     );
 
     List<TextColor> SpiderlingColors = List.of(

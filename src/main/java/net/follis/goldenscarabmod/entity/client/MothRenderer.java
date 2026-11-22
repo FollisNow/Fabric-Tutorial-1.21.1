@@ -16,6 +16,8 @@ import java.util.Map;
 public class MothRenderer extends MobEntityRenderer<MothEntity, MothModel<MothEntity>> {
     private static final Map<MothVariant, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(MothVariant.class), map -> {
+                map.put(MothVariant.GOLD,
+                        Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/moth/moth_gold.png"));
                 map.put(MothVariant.OAK,
                         Identifier.of(GoldenScarabMod.MOD_ID, "textures/entity/moth/moth_oak.png"));
                 map.put(MothVariant.OAK_CRACKED,

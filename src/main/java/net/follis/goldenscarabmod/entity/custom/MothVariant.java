@@ -4,24 +4,26 @@ import net.follis.goldenscarabmod.util.IVariant;
 import net.minecraft.util.StringIdentifiable;
 
 public enum MothVariant implements IVariant, StringIdentifiable {
-    OAK(0, "Oak"),
-    OAK_CRACKED(1, "Cracked Oak"),
-    BIRCH(2, "Birch"),
-    BIRCH_RADIANT(3, "Radiant Birch"),
-    BIRCH_NEGATIVE(4, "Anti Birch"),
-    SPRUCE(5, "Spruce"),
-    SPRUCE_RUBY(6, "Ruby Spruce"),
-    DARK_OAK(7, "Dark Oak"),
-    DARK_OAK_EMERALD(8, "Dark Oak Emerald"),
-    CHERRY(9, "Cherry"),
-    CHERRY_BLOOM(10, "Bloom Cherry"),
-    MANGROVE(11, "Mangrove"),
-    MANGROVE_TANGLED(12, "Tangled Mangrove"),
-    JUNGLE(13, "Jungle"),
-    JUNGLE_SPIDER(14, "Spider Jungle"),
-    ACACIA(15, "Acacia"),
-    ACACIA_SAPPHIRE(16, "Sapphire Acacia"),
-    EYE(17, "Eye");
+    GOLD(0, "Gold"),
+    OAK(1, "Oak"),
+    OAK_CRACKED(2, "Cracked Oak"),
+    BIRCH(3, "Birch"),
+    BIRCH_RADIANT(4, "Radiant Birch"),
+    BIRCH_NEGATIVE(5, "Anti Birch"),
+    SPRUCE(6, "Spruce"),
+    SPRUCE_RUBY(7, "Ruby Spruce"),
+    DARK_OAK(8, "Dark Oak"),
+    DARK_OAK_EMERALD(9, "Dark Oak Emerald"),
+    CHERRY(10, "Cherry"),
+    CHERRY_BLOOM(11, "Bloom Cherry"),
+    MANGROVE(12, "Mangrove"),
+    MANGROVE_TANGLED(13, "Tangled Mangrove"),
+    JUNGLE(14, "Jungle"),
+    JUNGLE_SPIDER(15, "Spider Jungle"),
+    ACACIA(16, "Acacia"),
+    ACACIA_SAPPHIRE(17, "Sapphire Acacia"),
+    EYE(18, "Eye");
+
 
     private final int id;
     private final String name; // Associated name
@@ -52,7 +54,7 @@ public enum MothVariant implements IVariant, StringIdentifiable {
 
     public boolean isNotMesmerizing() {
         return !switch (this) {
-            case OAK_CRACKED, BIRCH_RADIANT, BIRCH_NEGATIVE, SPRUCE_RUBY, DARK_OAK_EMERALD,
+            case GOLD, OAK_CRACKED, BIRCH_RADIANT, BIRCH_NEGATIVE, SPRUCE_RUBY, DARK_OAK_EMERALD,
                  CHERRY_BLOOM, MANGROVE_TANGLED, JUNGLE_SPIDER, ACACIA_SAPPHIRE -> true;
             default -> false;
         };

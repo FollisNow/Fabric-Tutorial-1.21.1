@@ -1,0 +1,21 @@
+{
+  "name": "Gold Moth",
+  "category": "goldenscarabmod:golden_bugs",
+  "icon": "goldenscarabmod:moth_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:moth{Variant:0}",
+      "name": "Gold Moth",
+      "text": "It holds your gaze."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Like every moth, it roosts on trunks and leaves, and bites back if angered. Wear gold and it will not bite."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Mesmerize$()$(br)Within 24 blocks, looking near a gold moth slowly turns your view toward it. Look straight at it to break free, and gold gives no protection.$(br2)One moth holds you at a time. A gold moth specimen mounted in a frame does the same."
+    }
+  ]
+}
