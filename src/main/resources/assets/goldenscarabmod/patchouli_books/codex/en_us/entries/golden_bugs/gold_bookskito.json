@@ -1,0 +1,33 @@
+{
+  "name": "Gold Bookskito",
+  "category": "goldenscarabmod:golden_bugs",
+  "icon": "goldenscarabmod:bookskito_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:bookskito{Variant:0}",
+      "name": "Gold Bookskito",
+      "text": "Bound in gold, and shimmering like an enchanted book."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "One bookskito in a hundred is bound in gold. It lives like its cousins, perching on bookshelves and resting on the floor, and it will not bite anyone wearing gold.$(br2)It also does something none of them can: it learns."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Learning$()$(br)Offer a gold bookskito an enchanted book and it takes in the enchantments written inside. A new one is taken unless it clashes with one it already holds.$(br2)Of two levels of the same enchantment the higher wins, and two equal levels make one level more, up to the most it allows."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An enchantment that teaches it nothing is lost with the book, and a book with nothing to teach is left alone.$(br2)There is no end to how many different enchantments it can hold."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)As armor$()$(br)Armor enchantments protect it as if it wore a single piece: protection, feather falling, thorns, even respiration under water.$(br2)$(item)As a weapon$()$(br)Its bite takes on the weapon enchantments: sharpness, smite, fire aspect, knockback."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Mending$()$(br)A hurt bookskito that holds mending mends itself on the experience orbs it catches.$(br2)$(item)Glyphs$()$(br)Enchanting glyphs drift in its wake as it flies. The more enchantments it holds, the thicker they come."
+    }
+  ]
+}

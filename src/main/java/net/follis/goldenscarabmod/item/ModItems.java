@@ -166,6 +166,9 @@ public class ModItems {
     public static final Item AMETHYST_BEE_SPAWN_EGG = registerItem("amethyst_bee_spawn_egg",
             new SpawnEggItem(ModEntities.AMETHYST_BEE, 0xc844be, 0x97278e, new Item.Settings()));
 
+    public static final Item BOOKSKITO_SPAWN_EGG = registerItem("bookskito_spawn_egg",
+            new SpawnEggItem(ModEntities.BOOKSKITO, 0xc844be, 0x97278e, new Item.Settings()));
+
     public static final Item GOLD_CARVER_SPAWN_EGG = registerItem("gold_carver_spawn_egg",
             new SpawnEggItem(ModEntities.GOLD_CARVER, 0xf9bd23, 0x96f923, new Item.Settings()));
 
@@ -208,6 +211,8 @@ public class ModItems {
             new BugItem(bugSettings(GoldenScarabMod.MOD_ID + ":larvae", 0)));
     public static final Item GOLDEN_SILVERFISH_ITEM = registerItem("golden_silverfish_item",
             new BugItem(bugSettings(GoldenScarabMod.MOD_ID + ":golden_silverfish", 0)));
+    public static final Item BOOKSKITO_ITEM = registerItem("bookskito_item",
+            new BugItem(bugSettings(GoldenScarabMod.MOD_ID + ":bookskito", 0)));
     public static final Item GENERIC_ARTHROPOD_FIGURINE = registerItem("generic_arthropod_figurine",
             new BugItem(bugSettings("minecraft:spider", 0)));
 

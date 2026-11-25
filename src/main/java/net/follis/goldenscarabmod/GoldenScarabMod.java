@@ -190,6 +190,7 @@ public class GoldenScarabMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.LOCUST, LocustEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AMETHYST_BEE, AmethystBeeEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLDEN_SILVERFISH, GoldenSilverfishEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.BOOKSKITO, BookskitoEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.BAMBOO_TRAP, BambooTrapEntity.setAttributes());
 
 		//Golden

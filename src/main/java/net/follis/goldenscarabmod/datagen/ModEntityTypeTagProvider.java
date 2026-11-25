@@ -29,6 +29,7 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
                 .add(ModEntities.MANTIS)
                 .add(ModEntities.MOTH)
                 .add(ModEntities.SCORPION)
-                .add(ModEntities.GOLDEN_SILVERFISH);
+                .add(ModEntities.GOLDEN_SILVERFISH)
+                .add(ModEntities.BOOKSKITO);
     }
 }

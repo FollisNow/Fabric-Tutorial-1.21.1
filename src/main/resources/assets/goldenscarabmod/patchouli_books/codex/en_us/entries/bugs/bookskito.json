@@ -1,0 +1,21 @@
+{
+  "name": "Bookskito",
+  "category": "goldenscarabmod:bugs",
+  "icon": "goldenscarabmod:bookskito_item",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "goldenscarabmod:bookskito{Variant:1}",
+      "name": "Bookskito",
+      "text": "It beats its covers like wings."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The bookskito flies on its covers, and settles flat against shelves of books to rest. Sometimes it drops to the floor instead, covers propped open like a tent.$(br2)It bites back if angered. Wear gold and it will not bite."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Diet$()$(br)Bookskitoes eat what books are made of: paper, leather, rabbit hide, ink sacs and glow ink sacs, and any dye. Books themselves, blank or written, are a feast.$(br2)Fed in pairs, they have young that take the look of either parent."
+    }
+  ]
+}

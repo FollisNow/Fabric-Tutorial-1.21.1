@@ -1,6 +1,6 @@
-// 1.21.1	2026-11-21T20:34:47.8187928	Golden Scarab Mod/
-6d877568086f16cce35d2a0e6cd801bdb1aa2fbe data\goldenscarabmod\worldgen\configured_feature\pink_garnet_ore.json
+// 1.21.1	2026-11-25T00:04:03.1862505	Golden Scarab Mod/
 f86a7712a734100da3784e0dbec2ce3d7f88de32 data\goldenscarabmod\worldgen\placed_feature\golden_tree_placed.json
+6d877568086f16cce35d2a0e6cd801bdb1aa2fbe data\goldenscarabmod\worldgen\configured_feature\pink_garnet_ore.json
 c3bddedc65169e1db88cdb2377d1d6197f0e100b data\goldenscarabmod\worldgen\placed_feature\nether_pink_garnet_ore_placed.json
 8cecaa5d24e895030ea72fa8a5da8c9c34623d36 data\goldenscarabmod\worldgen\configured_feature\honey_berry_bush.json
 d14bd1ea0fbc61f58de58991dcdb2165d94ff182 data\goldenscarabmod\worldgen\configured_feature\golden_tree.json

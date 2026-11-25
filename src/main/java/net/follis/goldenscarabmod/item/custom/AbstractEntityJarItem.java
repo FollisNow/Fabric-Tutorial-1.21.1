@@ -96,7 +96,7 @@ public abstract class AbstractEntityJarItem extends Item {
             tooltip.add(Text.translatable("tooltip.goldenscarabmod.bug_jar.shift_down").withColor(darkGold.getRgb()));
             List<BugData> bugDataList = new ArrayList<>(stack.getOrDefault(ModDataComponentTypes.BUGS, new ArrayList<>()));
             for (BugData bugData : bugDataList.reversed()) {
-                BugTooltips.appendJarEntry(tooltip, bugData);
+                BugTooltips.appendJarEntry(tooltip, bugData, context.getRegistryLookup());
             }
         } else {
             tooltip.add(Text.translatable("tooltip.goldenscarabmod.bug_jar"));

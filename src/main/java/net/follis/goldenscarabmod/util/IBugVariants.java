@@ -76,6 +76,11 @@ public interface IBugVariants {
             TextColor.fromRgb(0x4B7BE5)   // BLUE
     );
 
+    List<TextColor> BookskitoColors = List.of(
+            darkGold,                        // GOLD
+            TextColor.fromRgb(0x8B5A2B)      // REGULAR (brown)
+    );
+
     /**
      * List equivalent of Map.getOrDefault: returns the color at `index`,
      * or `fallback` if the index is out of bounds (negative or unassigned variant id).

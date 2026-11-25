@@ -88,6 +88,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SCORPION_ITEM);
                         entries.add(ModItems.LARVAE_ITEM);
                         entries.add(ModItems.GOLDEN_SILVERFISH_ITEM);
+                        entries.add(ModItems.BOOKSKITO_ITEM);
 
                         entries.add(ModItems.CHITIN);
                         entries.add(ModItems.TRAPPED_SKELETON_SKULL);
@@ -102,6 +103,7 @@ public class ModItemGroups {
                         entries.add(ModItems.LARVAE_SPAWN_EGG);
                         entries.add(ModItems.GOLDEN_SILVERFISH_SPAWN_EGG);
                         entries.add(ModItems.AMETHYST_BEE_SPAWN_EGG);
+                        entries.add(ModItems.BOOKSKITO_SPAWN_EGG);
                         entries.add(ModItems.GOLD_CARVER_SPAWN_EGG);
                         entries.add(ModItems.GOLD_PANNER_SPAWN_EGG);
                         entries.add(ModItems.GOLD_CHANNELER_SPAWN_EGG);

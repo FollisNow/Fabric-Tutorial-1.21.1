@@ -43,7 +43,7 @@ public class BugItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        BugTooltips.appendFigurine(tooltip, stack);
+        BugTooltips.appendFigurine(tooltip, stack, context.getRegistryLookup());
         super.appendTooltip(stack, context, tooltip, type);
     }
 

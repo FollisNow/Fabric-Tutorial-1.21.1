@@ -48,6 +48,7 @@
   "entity.goldenscarabmod.spiderling": "Spiderling",
   "entity.goldenscarabmod.scorpion": "Scorpion",
   "entity.goldenscarabmod.golden_silverfish": "Golden Silverfish",
+  "entity.goldenscarabmod.bookskito": "Bookskito",
 
   "_section.gold_creatures": "===== CREATURES: GOLD =====",
   "entity.goldenscarabmod.gold_carver": "Gold Carver",
@@ -66,6 +67,7 @@
   "item.goldenscarabmod.spiderling_spawn_egg": "Spiderling Spawn Egg",
   "item.goldenscarabmod.scorpion_spawn_egg": "Scorpion Spawn Egg",
   "item.goldenscarabmod.golden_silverfish_spawn_egg": "Golden Silverfish Spawn Egg",
+  "item.goldenscarabmod.bookskito_spawn_egg": "Bookskito Spawn Egg",
   "item.goldenscarabmod.gold_carver_spawn_egg": "Gold Carver Spawn Egg",
   "item.goldenscarabmod.gold_panner_spawn_egg": "Gold Panner Spawn Egg",
   "item.goldenscarabmod.gold_channeler_spawn_egg": "Gold Channeler Spawn Egg",
@@ -75,6 +77,7 @@
 
   "_section.bug_gear": "===== BUG CATCHING: SPECIMENS, NET, JARS, TRAPS =====",
   "item.goldenscarabmod.specimen": "%s Specimen",
+  "tooltip.goldenscarabmod.more": "+%s more",
   "item.goldenscarabmod.moth_item": "Moth",
   "item.goldenscarabmod.beetle_item": "Beetle",
   "item.goldenscarabmod.locust_item": "Locust",

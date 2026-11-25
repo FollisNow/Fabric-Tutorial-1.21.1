@@ -9,15 +9,19 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(item)Bound by the rule$()$(br)Golden silverfish$(br)Scorpions, of every colour$(br)Gold beetles$(br)Moths, of every variant, rare or not$(br2)Only aggression is covered. Gold does not break the gaze of the moths that hold it."
+      "text": "$(item)Bound by the rule$()$(br)Golden silverfish$(br)Scorpions, of every colour$(br)Gold beetles$(br)Moths, of every variant, rare or not$(br)Bookyflies, of both kinds$(br2)Only aggression is covered. Gold does not break the gaze of the moths that hold it."
     },
     {
       "type": "patchouli:text",
-      "text": "$(item)Gold kinds (1/2)$()$(br)$(item)Gold scorpion$(): holds a grudge, and alone takes pottery sherds into its sting.$(br2)$(item)Gold locust$(): strips any mature crop for 32 blocks around."
+      "text": "$(item)Gold kinds (1/3)$()$(br)$(item)Gold scorpion$(): holds a grudge, and alone takes pottery sherds into its sting.$(br2)$(item)Gold locust$(): strips any mature crop for 32 blocks around."
     },
     {
       "type": "patchouli:text",
-      "text": "$(item)Gold kinds (2/2)$()$(br)$(item)Gold beetle$(): the only beetle that fights, and may carry a potion gene.$(br2)$(item)Gold moth$(): holds your gaze, like the rare moths."
+      "text": "$(item)Gold kinds (2/3)$()$(br)$(item)Gold beetle$(): the only beetle that fights, and may carry a potion gene.$(br2)$(item)Gold moth$(): holds your gaze, like the rare moths."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Gold kinds (3/3)$()$(br)$(item)Gold bookskito$(): shimmers like an enchanted book, and learns the enchantments it is fed."
     }
   ]
 }
