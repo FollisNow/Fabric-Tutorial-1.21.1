@@ -15,7 +15,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(item)Learning$()$(br)Offer a gold bookskito an enchanted book and it takes in the enchantments written inside. A new one is taken unless it clashes with one it already holds.$(br2)Of two levels of the same enchantment the higher wins, and two equal levels make one level more, up to the most it allows."
+      "text": "$(item)Learning$()$(br)Offer a gold bookskito an enchanted book and it takes in the enchantments written inside. It holds them all, even ones that could never share a tool.$(br2)Of two levels of the same enchantment the higher wins, and two equal levels make one level more, up to the most it allows."
     },
     {
       "type": "patchouli:text",

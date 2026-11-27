@@ -294,26 +294,19 @@ public class BookskitoEntity extends AngerableBugEntity implements Flutterer {
     private boolean absorbBook(ItemStack book, boolean simulate) {
         ItemEnchantmentsComponent incoming = book.getOrDefault(
                 DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
+        ItemEnchantmentsComponent current = this.getStoredEnchantments();
         boolean gained = false;
 
         for (Object2IntMap.Entry<RegistryEntry<Enchantment>> entry : incoming.getEnchantmentEntries()) {
             RegistryEntry<Enchantment> enchantment = entry.getKey();
             int level = entry.getIntValue();
-            ItemEnchantmentsComponent current = this.getStoredEnchantments();
             int have = current.getLevel(enchantment);
 
             int result;
             if (have > 0) {
+                // same enchantment: higher level wins, two equal levels make one more (anvil style)
                 result = have == level ? Math.min(level + 1, enchantment.value().getMaxLevel()) : Math.max(have, level);
             } else {
-                boolean conflict = false;
-                for (RegistryEntry<Enchantment> existing : current.getEnchantments()) {
-                    if (!Enchantment.canBeCombined(existing, enchantment)) {
-                        conflict = true;
-                        break;
-                    }
-                }
-                if (conflict) continue;
                 result = level;
             }
 
@@ -326,7 +319,6 @@ public class BookskitoEntity extends AngerableBugEntity implements Flutterer {
         }
         return gained;
     }
-
     /** Writes the enchantment into the hidden stack of the slot it belongs to. */
     private void storeEnchantment(RegistryEntry<Enchantment> enchantment, int level) {
         EquipmentSlot target = EquipmentSlot.MAINHAND;
