@@ -90,6 +90,8 @@ public class BookskitoEntity extends AngerableBugEntity implements Flutterer {
     private static final float ENCHANT_PARTICLES_PER_ENCHANT = 0.25F;
     private static final float MAX_ENCHANT_PARTICLES_PER_TICK = 4.0F;
     private int enchantCount; // client-side cache, refreshed twice a second
+    /** XP dropped per enchantment level held (Sharpness V = 10), on top of the usual animal drop. */
+    private static final int XP_PER_ENCHANT_LEVEL = 22;
 
     public BookskitoEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -285,7 +287,16 @@ public class BookskitoEntity extends AngerableBugEntity implements Flutterer {
         }
         return builder.build();
     }
-
+    @Override
+    protected int getXpToDrop() {
+        int xp = super.getXpToDrop(); // the usual 1-3 an animal gives
+        if (this.isEnchanted()) {
+            for (Object2IntMap.Entry<RegistryEntry<Enchantment>> entry : this.getStoredEnchantments().getEnchantmentEntries()) {
+                xp += entry.getIntValue() * XP_PER_ENCHANT_LEVEL;
+            }
+        }
+        return xp;
+    }
     /**
      * Takes what it can from an enchanted book, anvil style: a new enchantment is added unless it conflicts with one
      * it already has, a higher level replaces a lower one and two equal levels make one level more.

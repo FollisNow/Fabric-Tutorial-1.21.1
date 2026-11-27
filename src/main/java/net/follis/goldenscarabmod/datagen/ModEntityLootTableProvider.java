@@ -40,6 +40,7 @@ public class ModEntityLootTableProvider extends SimpleFabricLootTableProvider {
             ModEntities.GOLD_CHANNELER,
             ModEntities.GOLD_BREEDER,
             ModEntities.GOLD_STALKER,
+            ModEntities.GOLD_STATUE,
             // Bosses
             ModEntities.GOLDEN_SWARM,
             ModEntities.KING_IN_YELLOW,

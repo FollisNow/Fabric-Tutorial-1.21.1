@@ -184,6 +184,7 @@ public class ModItems {
     public static final Item GOLD_STALKER_SPAWN_EGG = registerItem("gold_stalker_spawn_egg",
             new SpawnEggItem(ModEntities.GOLD_STALKER, 0xd39632, 0x96f923, new Item.Settings()));
 
+
     public static final Item TOMAHAWK = registerItem("tomahawk",
             new TomahawkItem(new Item.Settings().maxCount(16)));
 
